@@ -1,0 +1,22 @@
+# Babel compiled files #
+########################
+lib/*
+
+# VS Code files #
+#################
+.vs/*
+
+# Linting files #
+#################
+server/coverage/*
+server/.sonarlint/*
+
+# Node modules #
+################
+server/node_modules/*
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
