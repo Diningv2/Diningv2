@@ -9,14 +9,10 @@ router.get("/", async (req, res) => {
         const menus = await getMenus(req.query);
         res.send(menus);
     } catch (e) {
-        if (e.message == "Empty object returned from YaleDining API") {
-            console.warn(e);
-            res.sendStatus(424);
-        } else if (e.message == "Invalid menu request") {
-            console.warn(e);
+        console.warn(e);
+        if (e.message == "Invalid menu request") {
             res.sendStatus(400);
         } else {
-            console.warn(e);
             res.sendStatus(500);
         }
     }

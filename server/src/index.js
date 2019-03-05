@@ -1,9 +1,9 @@
 import express from "express";
 const server = express();
 
-import LocationsRouter from "./routers/LocationsRouter";
+import LocationsRouter from "./routers/LocationsRouter/LocationsRouter";
 import MenusRouter from "./routers/MenusRouter/MenusRouter";
-import MenuItemsRouter from "./routers/MenuItemsRouter";
+import MenuItemsRouter from "./routers/MenuItemsRouter/MenuItemsRouter";
 
 const PORT = process.env.PORT || 5000;
 

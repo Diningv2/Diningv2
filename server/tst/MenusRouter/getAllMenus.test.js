@@ -1,6 +1,6 @@
 import getAllMenus from "../../src/routers/MenusRouter/getAllMenus";
 import getOneMenu from "../../src/routers/MenusRouter/getOneMenu";
-import * as responses from "../config/responses";
+import * as responses from "./responses";
 import locations from "../../src/config/locations";
 
 jest.mock("../../src/routers/MenusRouter/getOneMenu");

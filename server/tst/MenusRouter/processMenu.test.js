@@ -1,6 +1,6 @@
 import getMenuItemList from "../../src/routers/MenusRouter/getMenuItemList";
 import processMenu from "../../src/routers/MenusRouter/processMenu";
-import * as responses from "../config/responses";
+import * as responses from "./responses";
 
 jest.mock("../../src/routers/MenusRouter/getMenuItemList");
 
