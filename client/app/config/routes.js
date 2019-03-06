@@ -1,17 +1,17 @@
 import HomeView from '../views/HomeView';
-import TestView from '../views/TestView';
+import DiningHallsView from '../views/DiningHallsView';
+
 import TabBarView from '../views/TabBarView';
 import TemplateView from '../views/TemplateView';
 
 const TabBarRoutes = {
     FriendsView: TemplateView,
-    DiningHallsView: TestView,
+    DiningHallsView: DiningHallsView,
     FavoritesView: TemplateView
 }
 
 const Routes = {
     HomeView: { screen: HomeView },
-    TestView: { screen: TestView },
     TabBarView: { screen: TabBarView(TabBarRoutes) }
 };
 
