@@ -1,23 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
-import { myCustomTransitionFunction } from '../config/transitions';
-
 import connectToRedux from '../redux/lib/connectToRedux';
-import sp from '../redux/lib/stateProperties';
-
 
 class HomeView extends Component {
-
-    // This component lies within the
-    // StackNavigator component from the
-    // 'react-navigation' library.
-    // Now we get header bars and can
-    // customize various options with navigation!
-    static navigationOptions = {
-        header: null
-    };
-
     constructor(props) {
         super(props);
     }

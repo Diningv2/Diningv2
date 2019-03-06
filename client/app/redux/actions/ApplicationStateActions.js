@@ -1,3 +1,6 @@
+
+// TODO: Delete this whole file later
+// just used for testing out Redux
 import * as types from './types';
 
 export function startLoading(message) {

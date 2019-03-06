@@ -2,23 +2,32 @@ import { createMaterialTopTabNavigator } from 'react-navigation';
 import React from 'react';
 import { SimpleLineIcons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import styles, { colors } from '../config/styles';
-import { View } from 'react-native';
-import { Transition } from 'react-navigation-fluid-transitions';
 
 export default createTabBarView = (routes) => createMaterialTopTabNavigator(routes, {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         let IconComponent, iconName;
-        if (routeName === 'FriendsView') {
+
+        switch (routeName) {
+          case 'FriendsView':
             IconComponent = SimpleLineIcons;
             iconName = 'people';
-        } else if (routeName === 'DiningHallsView') {
+            break;
+
+          case 'DiningHallsView':
             IconComponent = MaterialCommunityIcons;
             iconName = 'food';
-        } else if (routeName === 'FavoritesView') {
+            break;
+
+          case 'FavoritesView':
             IconComponent = MaterialIcons;
             iconName = 'favorite';
+            break;
+          
+          default:
+            IconComponent = MaterialIcons;
+            iconName = 'block';
         }
         
         // You can return any component that you like here!
