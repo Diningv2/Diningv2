@@ -1,6 +1,6 @@
 # Babel compiled files #
 ########################
-lib/*
+server/lib/*
 
 # VS Code files #
 #################

@@ -1,27 +1,21 @@
-import express from 'express';
+import express from "express";
 
-import getOneMenu from './getOneMenu';
-import getAllMenus from './getAllMenus';
+import getMenus from "./getMenus";
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    if (!('location' in req.query) || req.query.location == 'all') {
-        try {
-            const menus = await getAllMenus(req.query);
-            res.send(menus);
-        }
-        catch (e) {
+router.get("/", async (req, res) => {
+    try {
+        const menus = await getMenus(req.query);
+        res.send(menus);
+    } catch (e) {
+        if (e.message == "Empty object returned from YaleDining API") {
             console.warn(e);
-            res.sendStatus(500);
-        }
-    }
-    else {
-        try {
-            const menu = await getOneMenu(req.query);
-            res.send(menu);
-        }
-        catch (e) {
+            res.sendStatus(424);
+        } else if (e.message == "Invalid menu request") {
+            console.warn(e);
+            res.sendStatus(400);
+        } else {
             console.warn(e);
             res.sendStatus(500);
         }
