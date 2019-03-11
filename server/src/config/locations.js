@@ -10,11 +10,9 @@ const diningLocations = {
     7: 'Pierson',
     23: 'Saybrook',
     8: 'Silliman',
-    24: 'Ezra Stiles',
+    24: 'Stiles',
     9: 'Timothy Dwight',
-    10: 'Trumbull',
-    29: 'Pauli Murray',
-    28: 'Benjamin Franklin'
+    10: 'Trumbull'
 };
 
 export default diningLocations;
