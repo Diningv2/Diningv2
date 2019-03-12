@@ -2,8 +2,8 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://cv-hrz.anonymous.client.exp.direct",
   "packagerNgrokUrl": "https://packager.cv-hrz.anonymous.client.exp.direct",
-  "ngrokPid": 28604,
+  "ngrokPid": 22616,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 29988
+  "packagerPid": 7976
 }

@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from 'react-navigation';
 import React from 'react';
 import { SimpleLineIcons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import styles, { colors } from '../config/styles';
+import { colors } from '../config/styles';
 
 export default createTabBarView = (routes) => createMaterialTopTabNavigator(routes, {
     defaultNavigationOptions: ({ navigation }) => ({
