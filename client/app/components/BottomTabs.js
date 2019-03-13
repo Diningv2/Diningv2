@@ -14,8 +14,25 @@ class BottomTabs extends Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props.navigation)
     }
+
+    tabButtons = [
+        {
+          viewName: 'FriendsView',
+          IconComponent: SimpleLineIcons,
+          iconName: 'people',
+        },
+        {
+          viewName: 'DiningHallsView',
+          IconComponent: MaterialCommunityIcons,
+          iconName: 'food',
+        },
+        {
+          viewName: 'FavoritesView',
+          IconComponent: MaterialIcons,
+          iconName: 'favorite',
+        }
+    ]
 
     render() {
         return (
@@ -24,33 +41,19 @@ class BottomTabs extends Component {
                     ...styles.container.backgroundColorPrimary, 
                     ...tabStyles.bottomTabs,
                 }}>
-                    <TouchableOpacity onPress={
-                        () => this.props.navigation.navigate('FriendsView')
-                    }>
-                        <SimpleLineIcons 
-                            name={'people'} 
-                            size={25} 
-                            color={colors.secondary} 
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={
-                        () => this.props.navigation.navigate('DiningHallsView')
-                    }>
-                        <MaterialCommunityIcons 
-                            name={'food'}
-                            size={25}
-                            color={colors.secondary}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={
-                        () => this.props.navigation.navigate('FavoritesView')
-                    }>
-                        <MaterialIcons
-                            name={'favorite'}
-                            size={25}
-                            color={colors.secondary}
-                        />
-                    </TouchableOpacity>
+                    {this.tabButtons.map(tabButton => { return (
+                        <TouchableOpacity 
+                            key={tabButton.viewName} 
+                            style={tabStyles.touchables}
+                            onPress={() => this.props.navigation.navigate(tabButton.viewName)}
+                        >
+                            <tabButton.IconComponent 
+                                name={tabButton.iconName} 
+                                size={25} 
+                                color={colors.secondary} 
+                            />
+                        </TouchableOpacity>
+                    )})}
                 </View>
             </View>
         );
@@ -66,9 +69,13 @@ const tabStyles = StyleSheet.create({
     bottomTabs: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        paddingTop: 10,
-        paddingBottom: 10,
     },
+    touchables: {
+        width: '33.3%', 
+        alignItems: 'center', 
+        paddingTop: 10, 
+        paddingBottom: 10,
+    }
 })
 
 export default connectToRedux(withNavigation(BottomTabs), [sp.nav]);
