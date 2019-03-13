@@ -21,19 +21,19 @@ class BottomTabs extends Component {
           viewName: 'FriendsView',
           IconComponent: SimpleLineIcons,
           iconName: 'people',
-          opacity: this.props.viewName == 'FriendsView' ? .3 : 1,
+          opacity: this.props.viewName == 'FriendsView' ? 1 : .3,
         },
         {
           viewName: 'DiningHallsView',
           IconComponent: MaterialCommunityIcons,
           iconName: 'food',
-          opacity: this.props.viewName == 'DiningHallsView' ? .3 : 1,
+          opacity: this.props.viewName == 'DiningHallsView' ? 1 : .3,
         },
         {
           viewName: 'FavoritesView',
           IconComponent: MaterialIcons,
           iconName: 'favorite',
-          opacity: this.props.viewName == 'FavoritesView' ? .3 : 1,
+          opacity: this.props.viewName == 'FavoritesView' ? 1 : .3,
         }
     ]
 
