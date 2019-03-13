@@ -23,7 +23,7 @@ class TemplateView extends Component {
         return (
             <View style={{flex: 1}}>
                 <Header title="Template View" />
-                <BottomTabs />
+                <BottomTabs viewName={'TemplateView'}/>
             </View>
         )
     }

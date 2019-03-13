@@ -21,16 +21,19 @@ class BottomTabs extends Component {
           viewName: 'FriendsView',
           IconComponent: SimpleLineIcons,
           iconName: 'people',
+          opacity: this.props.viewName == 'FriendsView' ? .3 : 1,
         },
         {
           viewName: 'DiningHallsView',
           IconComponent: MaterialCommunityIcons,
           iconName: 'food',
+          opacity: this.props.viewName == 'DiningHallsView' ? .3 : 1,
         },
         {
           viewName: 'FavoritesView',
           IconComponent: MaterialIcons,
           iconName: 'favorite',
+          opacity: this.props.viewName == 'FavoritesView' ? .3 : 1,
         }
     ]
 
@@ -44,7 +47,8 @@ class BottomTabs extends Component {
                     {this.tabButtons.map(tabButton => { return (
                         <TouchableOpacity 
                             key={tabButton.viewName} 
-                            style={tabStyles.touchables}
+                            activeOpacity={.3}
+                            style={{...tabStyles.touchables, opacity: tabButton.opacity}}
                             onPress={() => this.props.navigation.navigate(tabButton.viewName)}
                         >
                             <tabButton.IconComponent 

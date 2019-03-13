@@ -33,7 +33,7 @@ class DiningHallsView extends Component {
                         </TouchableOpacity>
                     </View>
                 </Transition>
-                <BottomTabs />
+                <BottomTabs viewName={'DiningHallsView'}/>
             </View>
         )
     }
