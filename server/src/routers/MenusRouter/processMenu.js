@@ -49,7 +49,7 @@ export default function processMenu(data, query) {
                 entry[data.COLUMNS.indexOf("MENUDATE")] == today
         );
         const menuItemList = getMenuItemList(data.COLUMNS, filteredData);
-        if (menuItemList == null) {
+        if (menuItemList == undefined) {
             throw new Error("Invalid menu request");
         } else {
             return menuItemList;

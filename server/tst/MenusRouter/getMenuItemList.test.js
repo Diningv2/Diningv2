@@ -8,7 +8,7 @@ test("getMenuItemList() -- normal function", () => {
 });
 
 test("getMenuItemList() -- empty data array", () => {
-    expect(getMenuItemList(responses.columns, [])).toBeNull();
+    expect(getMenuItemList(responses.columns, [])).toBeUndefined();
 });
 
 test("getMenuItemList() -- some empty entries", () => {

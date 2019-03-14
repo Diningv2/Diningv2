@@ -108,18 +108,18 @@ export const emptyExpectedResponse = [
     {
         location: "Morse",
         today: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         },
         tomorrow: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         }
     }
 ];
@@ -128,18 +128,18 @@ export const morseMenu = [
     {
         location: "Morse",
         today: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
             hotBreakfast: [{ itemID: 4822535, name: "Multigrain Pancakes" }],
             lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
         },
         tomorrow: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         }
     }
 ];
@@ -152,18 +152,18 @@ export const hopperMenu = [
     {
         location: "Hopper",
         today: {
-            brunch: null,
-            contBreakfast: null,
+            brunch: undefined,
+            contBreakfast: undefined,
             dinner: [{ itemID: 3579035, name: "Naples Style Beef Chuck" }],
-            hotBreakfast: null,
+            hotBreakfast: undefined,
             lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
         },
         tomorrow: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         }
     }
 ];
@@ -175,18 +175,18 @@ export const davenportMenu = [
     {
         location: "Davenport",
         today: {
-            brunch: null,
-            contBreakfast: null,
+            brunch: undefined,
+            contBreakfast: undefined,
             dinner: [{ itemID: 5366094, name: "Lemon Raspberry Sheet Cake" }],
-            hotBreakfast: null,
-            lunch: null
+            hotBreakfast: undefined,
+            lunch: undefined
         },
         tomorrow: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         }
     }
 ];
@@ -211,18 +211,18 @@ export const fullMenuExpectedResponse = [
     {
         location: "Morse",
         today: {
-            brunch: null,
-            contBreakfast: null,
+            brunch: undefined,
+            contBreakfast: undefined,
             dinner: [{ itemID: 3579035, name: "Naples Style Beef Chuck" }],
             hotBreakfast: [{ itemID: 4822535, name: "Multigrain Pancakes" }],
             lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
         },
         tomorrow: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         }
     }
 ];
@@ -231,52 +231,52 @@ export const multiMenuExpectedResponse = [
     {
         location: "Hopper",
         today: {
-            brunch: null,
-            contBreakfast: null,
+            brunch: undefined,
+            contBreakfast: undefined,
             dinner: [{ itemID: 3579035, name: "Naples Style Beef Chuck" }],
-            hotBreakfast: null,
+            hotBreakfast: undefined,
             lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
         },
         tomorrow: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         }
     },
     {
         location: "Davenport",
         today: {
-            brunch: null,
-            contBreakfast: null,
+            brunch: undefined,
+            contBreakfast: undefined,
             dinner: [{ itemID: 5366094, name: "Lemon Raspberry Sheet Cake" }],
-            hotBreakfast: null,
-            lunch: null
+            hotBreakfast: undefined,
+            lunch: undefined
         },
         tomorrow: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         }
     },
     {
         location: "Morse",
         today: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
             hotBreakfast: [{ itemID: 4822535, name: "Multigrain Pancakes" }],
             lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
         },
         tomorrow: {
-            brunch: null,
-            contBreakfast: null,
-            dinner: null,
-            hotBreakfast: null,
-            lunch: null
+            brunch: undefined,
+            contBreakfast: undefined,
+            dinner: undefined,
+            hotBreakfast: undefined,
+            lunch: undefined
         }
     }
 ];

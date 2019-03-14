@@ -9,21 +9,21 @@
  *       data - an array of arrays of dining hall data returned from the Yale Dining API, each corresponding to a menu item
  *
  *   Return Value:
- *       an array of MenuItem objects, or null if no items were extracted
+ *       an array of MenuItem objects, or undefined if no items were extracted
  */
 export default function getMenuItemList(columns, data) {
     // map API response to new format
     const menu = data.map(entry => {
         return !entry || !entry.length
-            ? null
+            ? undefined
             : {
                   name: entry[columns.indexOf("MENUITEM")],
                   itemID: entry[columns.indexOf("MENUITEMID")]
               };
     });
-    // filter out null and duplicate entries
+    // filter out undefined and duplicate entries
     const filteredMenu = menu
-        .filter(entry => entry != null)
+        .filter(entry => entry != undefined)
         .filter(
             (entry, index, self) =>
                 index ===
@@ -33,5 +33,5 @@ export default function getMenuItemList(columns, data) {
                         otherEntry.itemID === entry.itemID
                 )
         );
-    return filteredMenu.length ? filteredMenu : null;
+    return filteredMenu.length ? filteredMenu : undefined;
 }

@@ -25,16 +25,16 @@ test("processMenu() -- normal function with meal query", () => {
 
 test("processMenu() -- normal function without meal query", () => {
     getMenuItemList
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
         .mockImplementationOnce(() => responses.hotBreakfastMenu)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
         .mockImplementationOnce(() => responses.lunchMenu)
-        .mockImplementationOnce(() => null)
+        .mockImplementationOnce(() => undefined)
         .mockImplementationOnce(() => responses.dinnerMenu)
-        .mockImplementationOnce(() => null);
+        .mockImplementationOnce(() => undefined);
     expect(processMenu(responses.singleMenu, {})).toEqual(
         responses.fullMenuExpectedResponse
     );
@@ -56,32 +56,32 @@ test("processMenu() -- normal function without meal query", () => {
     expect(getMenuItemList).toHaveBeenNthCalledWith(10, responses.columns, []);
 });
 
-test("processMenu() -- null data", () => {
+test("processMenu() -- undefined data", () => {
     expect(() => processMenu(responses.emptyMenu, {})).toThrow(
         "Empty object returned from YaleDining API"
     );
 });
 
-test("processMenu() -- null response from getMenuItemList() with meal query", () => {
-    getMenuItemList.mockImplementationOnce(() => null);
+test("processMenu() -- undefined response from getMenuItemList() with meal query", () => {
+    getMenuItemList.mockImplementationOnce(() => undefined);
     expect(() => processMenu(responses.singleMenu, { meal: "brunch" })).toThrow(
         "Invalid menu request"
     );
     expect(getMenuItemList).toHaveBeenCalled();
 });
 
-test("processMenu() -- null response from getMenuItemList() without meal query", () => {
+test("processMenu() -- undefined response from getMenuItemList() without meal query", () => {
     getMenuItemList
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null)
-        .mockImplementationOnce(() => null);
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => undefined);
     expect(processMenu(responses.singleMenu, {})).toEqual(
         responses.emptyExpectedResponse
     );
