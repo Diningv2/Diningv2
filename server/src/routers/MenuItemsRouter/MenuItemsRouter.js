@@ -7,7 +7,7 @@ export default router;
 router.get('/', async (req, res) => {
     if (!('menuitemid' in req.query)) {
         console.warn("menuitemid is an essential parameter");
-        res.sendStatus(500);
+        res.sendStatus(400);
     }
     else {
         try{

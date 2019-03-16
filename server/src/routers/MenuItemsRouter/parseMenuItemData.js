@@ -30,24 +30,21 @@ export default function parseMenuItemData(nutritionData, filterData, ingredientD
 
     // Process ingredient list
 	var ingredientList = [];
-	for (var i = 0; i < ingredientData.DATA.length; i++){
-		ingredientList.push(ingredientData.DATA[i][1]);
+	for (var ingredient of ingredientData.DATA){
+		ingredientList.push(ingredient[1]);
 	}
 	
 
 	// Process filters 
 	var filterList = []; // list of applicable filters
-	for(var i = 0; i < filters.length; i++){
-		if(filterData.DATA[0][i+2] == 1) {
-			filterList.push(filters[i]);
-		}
-	}
+	var boolFilters = filterData.DATA[0].slice(2, filters.length+2);
+    filters.map(function(filter, i) {if(boolFilters[i] == 1) filterList.push(filter)}.bind(this));
+
     return {
     	name : nutritionData.DATA[0][1], 
     	nutrition: parseNutritionInfo(nutritionData.DATA[0]), 
     	ingredients: ingredientList,
     	filterProperties: filterList,
-    	rating: 5 // this line is temporarily hard coded
-
+    	rating: 5 // TODO : this line is temporarily hard coded
     };
 }
