@@ -38,7 +38,7 @@ export default function parseMenuItemData(nutritionData, filterData, ingredientD
 	// Process filters 
 	var filterList = []; // list of applicable filters
 	var boolFilters = filterData.DATA[0].slice(2, filters.length+2);
-    filters.map(function(filter, i) {if(boolFilters[i] == 1) filterList.push(filter)}.bind(this));
+    filters.map((filter, i) => {if(boolFilters[i] == 1) filterList.push(filter)});
 
     return {
     	name : nutritionData.DATA[0][1], 
