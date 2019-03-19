@@ -589,37 +589,37 @@ export const emptyMenu = { COLUMNS: mealColumns, DATA: [] };
 /* Expected Responses */
 
 export const singleLocationToday = {
-    contBreakfast: null,
+    contBreakfast: undefined,
     hotBreakfast: {
         openingTime: "07:30 AM",
         closingTime: "10:30 AM",
-        transferTime: null
+        transferTime: undefined
     },
-    brunch: null,
+    brunch: undefined,
     lunch: {
         openingTime: "11:30 AM",
         closingTime: "01:30 PM",
-        transferTime: null
+        transferTime: undefined
     },
     dinner: {
         openingTime: "05:00 PM",
         closingTime: "07:00 PM",
-        transferTime: null
+        transferTime: undefined
         // TODO: Hardcode in transfer times in ../../config/DiningHallHours
         // transferTime: "06:00 PM"
     }
 };
 
 export const singleLocationTomorrow = {
-    contBreakfast: null,
+    contBreakfast: undefined,
     hotBreakfast: {
         openingTime: "07:30 AM",
         closingTime: "10:30 AM",
-        transferTime: null
+        transferTime: undefined
     },
-    brunch: null,
-    lunch: null,
-    dinner: null
+    brunch: undefined,
+    lunch: undefined,
+    dinner: undefined
 };
 
 export const morseExpectedResponse = {

@@ -2,7 +2,7 @@ const berkeleyHours = {
     contBreakfast: {
         openingTime: "08:00 AM",
         closingTime: "11:00 AM",
-        transferTime: null
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "",
@@ -28,14 +28,14 @@ const berkeleyHours = {
 
 const branfordHours = {
     contBreakfast: {
-        openingTime: null,
-        closingTime: null,
-        transferTime: null
+        openingTime: undefined,
+        closingTime: undefined,
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "07:30 AM",
         closingTime: "10:30 AM",
-        transferTime: null
+        transferTime: undefined
     },
     brunch: {
         openingTime: "",
@@ -58,7 +58,7 @@ const hopperHours = {
     contBreakfast: {
         openingTime: "08:00 AM",
         closingTime: "11:00 AM",
-        transferTime: null
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "",
@@ -114,7 +114,7 @@ const davenportHours = {
     contBreakfast: {
         openingTime: "08:00 AM",
         closingTime: "11:00 AM",
-        transferTime: null
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "",
@@ -170,7 +170,7 @@ const jeHours = {
     contBreakfast: {
         openingTime: "08:00 AM",
         closingTime: "11:00 AM",
-        transferTime: null
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "",
@@ -196,24 +196,24 @@ const jeHours = {
 
 const morseHours = {
     contBreakfast: {
-        openingTime: null,
-        closingTime: null,
-        transferTime: null
+        openingTime: undefined,
+        closingTime: undefined,
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "07:30 AM",
         closingTime: "10:30 AM",
-        transferTime: null
+        transferTime: undefined
     },
     brunch: {
         openingTime: "",
         closingTime: "",
-        transferTime: null
+        transferTime: undefined
     },
     lunch: {
         openingTime: "",
         closingTime: "",
-        transferTime: null
+        transferTime: undefined
     },
     dinner: {
         openingTime: "",
@@ -226,7 +226,7 @@ const piersonHours = {
     contBreakfast: {
         openingTime: "08:00 AM",
         closingTime: "11:00 AM",
-        transferTime: null
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "",
@@ -252,14 +252,14 @@ const piersonHours = {
 
 const saybrookHours = {
     contBreakfast: {
-        openingTime: null,
-        closingTime: null,
-        transferTime: null
+        openingTime: undefined,
+        closingTime: undefined,
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "07:30 AM",
         closingTime: "10:30 AM",
-        transferTime: null
+        transferTime: undefined
     },
     brunch: {
         openingTime: "",
@@ -280,14 +280,14 @@ const saybrookHours = {
 
 const sillimanHours = {
     contBreakfast: {
-        openingTime: null,
-        closingTime: null,
-        transferTime: null
+        openingTime: undefined,
+        closingTime: undefined,
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "07:30 AM",
         closingTime: "10:30 AM",
-        transferTime: null
+        transferTime: undefined
     },
     brunch: {
         openingTime: "",
@@ -308,14 +308,14 @@ const sillimanHours = {
 
 const stilesHours = {
     contBreakfast: {
-        openingTime: null,
-        closingTime: null,
-        transferTime: null
+        openingTime: undefined,
+        closingTime: undefined,
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "07:30 AM",
         closingTime: "10:30 AM",
-        transferTime: null
+        transferTime: undefined
     },
     brunch: {
         openingTime: "",
@@ -338,7 +338,7 @@ const tdHours = {
     contBreakfast: {
         openingTime: "08:00 AM",
         closingTime: "11:00 AM",
-        transferTime: null
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "",
@@ -366,7 +366,7 @@ const trumbullHours = {
     contBreakfast: {
         openingTime: "08:00 AM",
         closingTime: "11:00 AM",
-        transferTime: null
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "",
@@ -392,14 +392,14 @@ const trumbullHours = {
 
 const murrayHours = {
     contBreakfast: {
-        openingTime: null,
-        closingTime: null,
-        transferTime: null
+        openingTime: undefined,
+        closingTime: undefined,
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "07:30 AM",
         closingTime: "10:30 AM",
-        transferTime: null
+        transferTime: undefined
     },
     brunch: {
         openingTime: "",
@@ -422,7 +422,7 @@ const franklinHours = {
     contBreakfast: {
         openingTime: "08:00 AM",
         closingTime: "11:00 AM",
-        transferTime: null
+        transferTime: undefined
     },
     hotBreakfast: {
         openingTime: "",

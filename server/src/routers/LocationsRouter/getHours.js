@@ -39,11 +39,11 @@ export default async function getHours(location, offset) {
                       mealFilteredData[0][data.COLUMNS.indexOf("MEALOPENS")],
                   closingTime:
                       mealFilteredData[0][data.COLUMNS.indexOf("MEALCLOSES")],
-                  transferTime: null
+                  transferTime: undefined
                   // TODO: Hardcode in transfer times in ../../config/DiningHallHours
                   // diningHallHours[locations[location]][mealNames[mealName]].transferTime
               }
-            : null;
+            : undefined;
     }
     return locationHours;
 }
