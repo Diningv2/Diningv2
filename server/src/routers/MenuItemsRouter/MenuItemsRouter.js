@@ -1,11 +1,22 @@
 import express from 'express';
-import axios from 'axios';
-
-import locations from '../../config/locations';
-import mealNames from '../../config/mealNames';
-import monthName from '../../config/monthName';
-
-const MENU_ITEMS_URI = 'http://www.yaledining.org/fasttrack/menus.cfm?version=3';
+import getMenuIdInfo from './getMenuIdInfo';
 
 const router = express.Router();
 export default router;
+
+router.get('/', async (req, res) => {
+    if (!('menuitemid' in req.query)) {
+        console.warn("menuitemid is an essential parameter");
+        res.sendStatus(400);
+    }
+    else {
+        try{
+            const menu = await getMenuIdInfo(req.query.menuitemid);
+            res.send(menu);
+        } 
+        catch (e) {
+            console.warn(e);
+            res.sendStatus(500);
+        }
+    }
+});
