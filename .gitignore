@@ -20,3 +20,12 @@ server/node_modules/*
 *.log
 *.sql
 *.sqlite
+
+# Front end files #
+###################
+node_modules/
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
