@@ -2,7 +2,7 @@ import axios from "axios";
 
 import getOneMenu from "../../src/routers/MenusRouter/getOneMenu";
 import processMenu from "../../src/routers/MenusRouter/processMenu";
-import * as responses from "../config/responses";
+import * as responses from "./responses";
 
 jest.mock("axios");
 jest.mock("../../src/routers/MenusRouter/processMenu");
