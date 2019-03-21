@@ -4,10 +4,13 @@ import DiningHallsView from '../views/DiningHallsView';
 import TabBarView from '../views/TabBarView';
 import TemplateView from '../views/TemplateView';
 
+import MenuItemsView from '../views/MenuItemsView';
+
 const TabBarRoutes = {
     FriendsView: TemplateView,
     DiningHallsView: DiningHallsView,
-    FavoritesView: TemplateView
+    FavoritesView: TemplateView, 
+    MenuItemsView: MenuItemsView
 }
 
 const Routes = {
