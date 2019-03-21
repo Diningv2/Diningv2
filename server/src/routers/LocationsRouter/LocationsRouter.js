@@ -1,11 +1,21 @@
-import express from 'express';
-import axios from 'axios';
+import express from "express";
 
-import locations from '../../config/locations';
-import mealNames from '../../config/mealNames';
-import monthName from '../../config/monthName';
-
-const LOCATIONS_URI = 'http://www.yaledining.org/fasttrack/menus.cfm?version=3';
+import getLocations from "./getLocations";
 
 const router = express.Router();
+
+router.get("/", async (req, res) => {
+    try {
+        const location = await getLocations(req.query);
+        res.send(location);
+    } catch (e) {
+        console.warn(e);
+        if (e.message == "Invalid location request") {
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(500);
+        }
+    }
+});
+
 export default router;

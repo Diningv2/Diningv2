@@ -1,5 +1,5 @@
 import getMenuItemList from "../../src/routers/MenusRouter/getMenuItemList";
-import * as responses from "../config/responses";
+import * as responses from "./responses";
 
 test("getMenuItemList() -- normal function", () => {
     expect(

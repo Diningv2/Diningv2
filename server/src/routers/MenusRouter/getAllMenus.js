@@ -27,7 +27,14 @@ export default async function getAllMenus(query) {
             menus.forEach(menu => allMenus.push(menu));
         } catch (e) {
             nErrors++;
-            console.warn(e.message + " (total: " + nErrors + ")");
+            console.warn(
+                e.message +
+                    ": " +
+                    locations[location] +
+                    " (total: " +
+                    nErrors +
+                    ")"
+            );
             if (nErrors >= maxErrors) {
                 throw new Error("Empty object returned for all locations");
             }
