@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 
 // Basic Redux imports
 import { Provider, connect } from 'react-redux';
@@ -7,8 +7,7 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 // Redux Navigation imports
-import { createStackNavigator } from 'react-navigation';
-import { FluidNavigator, Transition } from 'react-navigation-fluid-transitions';
+import { FluidNavigator } from 'react-navigation-fluid-transitions';
 
 import Routes from './app/config/routes'
 import {
@@ -21,7 +20,7 @@ import {
 import reducers from './app/redux/reducers';
 
 // Expo-related functions, will help us import fonts
-import { Font, AppLoading } from 'expo';
+import { Font } from 'expo';
 
 // Configuring logger for the state of our app
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });

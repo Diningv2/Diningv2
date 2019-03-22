@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 import connectToRedux from '../redux/lib/connectToRedux';
 
