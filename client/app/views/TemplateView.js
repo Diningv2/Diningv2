@@ -11,6 +11,7 @@ import Header from '../components/Header';
 
 // Style library import
 import styles from '../config/styles';
+import BottomTabs from '../components/BottomTabs';
 
 class TemplateView extends Component {
 
@@ -20,8 +21,9 @@ class TemplateView extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex: 1}}>
                 <Header title="Template View" />
+                <BottomTabs viewName={'TemplateView'}/>
             </View>
         )
     }
