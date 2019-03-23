@@ -22,6 +22,10 @@ class DiningHallsView extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.getAllDiningHallsInformation();
+    }
+
     render() {
         return (
             <View style={{flex: 1}}>
@@ -39,4 +43,4 @@ class DiningHallsView extends Component {
     }
 }
 
-export default connectToRedux(DiningHallsView, [sp.incrementingValues]);
+export default connectToRedux(DiningHallsView, ['diningHallsList']);
