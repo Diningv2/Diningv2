@@ -50,4 +50,4 @@ class AllergensView extends Component {
     }
 }
 
-export default connectToRedux(MenuItemView, ['menuItem']);
+export default connectToRedux(AllergensView, ['Allergens']);

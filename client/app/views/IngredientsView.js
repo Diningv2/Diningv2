@@ -19,7 +19,7 @@ class IngredientsView extends Component {
 
     componentDidMount() {
         // TODO: make sure that this is the appropriate interface to get the itemID
-        this.props.getMenuItemInformation(this.props.menu.data.itemID);
+        this.props.getMenuItemInformation(5612805);
     }
 
     render() {
@@ -50,4 +50,4 @@ class IngredientsView extends Component {
     }
 }
 
-export default connectToRedux(MenuItemView, ['menuItem']);
+export default connectToRedux(IngredientsView, ['Ingredients']);

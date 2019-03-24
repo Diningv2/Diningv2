@@ -51,4 +51,4 @@ class NutritionInfoView extends Component {
     }
 }
 
-export default connectToRedux(MenuItemView, ['menuItem']);
+export default connectToRedux(NutritionInfoView, ['NutritionInfo']);
