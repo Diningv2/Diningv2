@@ -37,7 +37,7 @@ export default styles = {
             primaryBold: {
                 fontFamily: fonts.type.primary.bold
             },
-            primaryRegular: {
+            secondaryRegular: {
                 fontFamily: fonts.type.secondary.regular
             },
         }),
