@@ -30,7 +30,7 @@ class NutritionInfoView extends Component {
                                         // TODO: Implement this component
                                         <NutritionInfoField
                                             key={field}
-                                            title={field}
+                                            field={field}
                                             value={this.props.menuItem.data.nutritionInfo[field]}
                                         />
                                     )
