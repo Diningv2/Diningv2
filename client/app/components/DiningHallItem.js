@@ -20,6 +20,9 @@ class Gauge extends Component {
 
     gaugeWidth = () => {
         const MARGINAL_WIDTH = '5%';
+        if (!this.props.isOpen) {
+            return '0%';
+        }
         if (this.props.busyness) {
             return (this.props.busyness / this.MAX_BUSYNESS) * 100 + '%';
         } else {
@@ -66,7 +69,7 @@ class Gauge extends Component {
 
 export default class DiningHallItem extends Component {
 
-    isOpenStyle = () => this.props.isOpen ? { opacity: 1 } : { opacity : 0.5}
+    isOpenStyle = () => this.props.isOpen ? { opacity: 1 } : { opacity : 0.9}
 
     render() {
         return (
