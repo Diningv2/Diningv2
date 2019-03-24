@@ -27,11 +27,10 @@ export const menusList = createReducer(initialState, {
     },
     [types.GET_MENU_INFORMATION_SUCCESS](state, action) {
         const menusObject = action.payload.menus;
-        const menusArray = Object.values(menusObject);
 
         return {
             ...state,
-            data: menusArray[0],
+            data: menusObject[0],
             isLoading: false // set isLoading to false so UI shows the data
         }
     },

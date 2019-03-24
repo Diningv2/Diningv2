@@ -30,15 +30,21 @@ class MenuView extends Component {
                 <Header title={this.props.menusList.data.location} /> 
                 <Transition appear="bottom">
                     <View style={{...styles.container.withPadding}}>
-                        {/* {this.showMenus()} */}
-                        <TouchableOpacity>
-                            <ListItem title="Cheesecake" subtitle="Open from 5:00pm to 7:00pm" />
-                        </TouchableOpacity>
+                        <Text>BREAKFST</Text>
+                        {this.showBreakfastToday()}
                     </View>
                 </Transition>
                 <BottomTabs viewName={'MenuView'}/>
             </View>
         )
+    }
+
+    showBreakfastToday() {
+        return this.props.menusList.data.today.breakfast == undefined
+            ? this.props.menusList.data.today.breakfast.map(item => {
+                <MenuItem itemName={item.name} itemID={item.itemID}/>
+            })
+            : <Text>Nothing to show</Text>
     }
 }
 
