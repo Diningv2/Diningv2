@@ -6,7 +6,7 @@ import connectToRedux from '../redux/lib/connectToRedux';
 import sp from '../redux/lib/stateProperties';
 
 import Header from '../components/Header';
-import ListItem from '../components/ListItem';
+import MenuItem from '../components/MenuItem';
 import BottomTabs from '../components/BottomTabs';
 
 import styles from '../config/styles';
@@ -29,17 +29,18 @@ class MenuItemView extends Component {
                 <Transition appear="bottom">
                     <View style={{ ...styles.container.withPadding, maxHeight: 500 }}>
                         <ScrollView>
-                            {!this.props.menuItem.isLoading &&
-                                Object.keys(this.props.menuItem.data).forEach(field => {
+                            {this.props.menuItem.isLoading
+                                ? <Text>Loading...</Text>
+                                : Object.keys(this.props.menuItem.data).forEach(field => {
                                     return (
-                                        <ListItem
+                                        <MenuItem
                                             key={field}
                                             title={field}
-                                            subtitle={this.props.menuItem.data[field]}
+                                            value={this.props.menuItem.data[field]}
                                         />
                                     )
-                                })}
-                            {this.props.menuItem.isLoading && <Text>Loading...</Text>}
+                                })
+                            }
                         </ScrollView>
                     </View>
                 </Transition>

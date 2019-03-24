@@ -8,6 +8,7 @@ const Routes = {
     FriendsView: { screen: TemplateView },
     DiningHallsView: { screen: DiningHallsView },
     FavoritesView: { screen: TemplateView },
+    MenuItemView: { screen: MenuItemView }
 };
 
 export default Routes;
