@@ -1,6 +1,6 @@
 // React/React Native imports
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 
 // Redux imports
@@ -16,27 +16,38 @@ import BottomTabs from '../components/BottomTabs';
 import styles from '../config/styles';
 
 
+
 class DiningHallsView extends Component {
 
     constructor(props) {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.getAllDiningHallsInformation();
+    }
+
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <Header title="Dining Halls" />
                 <Transition appear="bottom">
-                    <View style={{...styles.container.withPadding}}>
-                        <TouchableOpacity>
-                            <ListItem title="Berkeley" subtitle="Open from 5:00pm to 7:00pm" />
-                        </TouchableOpacity>
+                    <View style={{...styles.container.withPadding, maxHeight: 500}}>
+                        <ScrollView>
+                            {!this.props.diningHallsList.isLoading &&
+                                this.props.diningHallsList.data.map(diningHall => {
+                                    return (
+                                        <ListItem key={diningHall.name} title={diningHall.name} />
+                                    )
+                                })}
+                            {this.props.diningHallsList.isLoading && <Text>Loading...</Text>}
+                        </ScrollView>
                     </View>
                 </Transition>
-                <BottomTabs viewName={'DiningHallsView'}/>
+                <BottomTabs viewName={'DiningHallsView'} />
             </View>
         )
     }
 }
 
-export default connectToRedux(DiningHallsView, [sp.incrementingValues]);
+export default connectToRedux(DiningHallsView, ['diningHallsList']);
