@@ -9,7 +9,7 @@ export function getMenuItemInformation(itemID) {
 
     const success = (menuItem) => {
         return {
-            type: types.GET_ALL_DINING_HALLS_INFORMATION_SUCCESS,
+            type: types.GET_MENU_ITEM_INFORMATION_SUCCESS,
             payload: {
                 menuItem: menuItem
             }
@@ -23,7 +23,7 @@ export function getMenuItemInformation(itemID) {
         }
     }
 
-    return async (dispatch, itemID) => {
+    return async (dispatch) => {
         dispatch(request());
         try {
             const menuItem = await get("/api/menuItems", { menuitemid: itemID });

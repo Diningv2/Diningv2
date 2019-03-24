@@ -6,12 +6,12 @@ import connectToRedux from '../redux/lib/connectToRedux';
 import sp from '../redux/lib/stateProperties';
 
 import Header from '../components/Header';
-import MenuItem from '../components/MenuItem';
+import Allergen from '../components/Allergen';
 import BottomTabs from '../components/BottomTabs';
 
 import styles from '../config/styles';
 
-class MenuItemView extends Component {
+class AllergensView extends Component {
 
     constructor(props) {
         super(props);
@@ -31,12 +31,12 @@ class MenuItemView extends Component {
                         <ScrollView>
                             {this.props.menuItem.isLoading
                                 ? <Text>Loading...</Text>
-                                : Object.keys(this.props.menuItem.data).forEach(field => {
+                                : Object.keys(this.props.menuItem.data.filterProperties).forEach(allergen => {
                                     return (
-                                        <MenuItem
-                                            key={field}
-                                            title={field}
-                                            value={this.props.menuItem.data[field]}
+                                        // TODO: Implement this component
+                                        <Allergen
+                                            key={allergen}
+                                            title={allergen}
                                         />
                                     )
                                 })
