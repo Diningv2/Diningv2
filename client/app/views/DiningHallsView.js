@@ -34,13 +34,10 @@ class DiningHallsView extends Component {
                 <Transition appear="bottom">
                     <View style={{...styles.container.withPadding, maxHeight: 500}}>
                         <ScrollView>
-                            {!this.props.diningHallsList.isLoading &&
-                                this.props.diningHallsList.data.map(diningHall => {
-                                    return (
-                                        <ListItem key={diningHall.name} title={diningHall.name} />
-                                    )
-                                })}
-                            {this.props.diningHallsList.isLoading && <Text>Loading...</Text>}
+                            {this.props.diningHallsList.isLoading 
+                                ? <Text>Loading...</Text>
+                                : this.getDHallList() 
+                            }
                         </ScrollView>
                     </View>
                 </Transition>
@@ -48,6 +45,25 @@ class DiningHallsView extends Component {
             </View>
         )
     }
+
+    getDHallList() {
+        return this.props.diningHallsList.data.map(diningHall => {
+            return (
+                <TouchableOpacity 
+                    key={diningHall.name}
+                    onPress={() => {
+                        // TODO: Set redux state with menu for this dHall
+                        // TODO: Set redux state that we're viewing dHall.dHallName (or index?)
+
+                        this.props.navigation.navigate('MenuView');
+                    }} 
+                >
+                    <ListItem title={diningHall.name} />
+                </TouchableOpacity>
+            )
+        })
+    }
+
 }
 
 export default connectToRedux(DiningHallsView, ['diningHallsList']);

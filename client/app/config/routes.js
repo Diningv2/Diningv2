@@ -1,5 +1,6 @@
 import HomeView from '../views/HomeView';
 import DiningHallsView from '../views/DiningHallsView';
+import MenuView from '../views/MenuView';
 
 import TemplateView from '../views/TemplateView';
 
@@ -8,6 +9,7 @@ const Routes = {
     FriendsView: { screen: TemplateView },
     DiningHallsView: { screen: DiningHallsView },
     FavoritesView: { screen: TemplateView },
+    MenuView: { screen: MenuView },
 };
 
 export default Routes;
