@@ -17,11 +17,6 @@ class NutritionInfoView extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        // TODO: make sure that this is the appropriate interface to get the itemID
-        this.props.getMenuItemInformation(this.props.menu.data.itemID);
-    }
-
     render() {
         return (
             <View style={{ flex: 1 }}>
@@ -51,4 +46,4 @@ class NutritionInfoView extends Component {
     }
 }
 
-export default connectToRedux(MenuItemView, ['menuItem']);
+export default connectToRedux(NutritionInfoView, ['menuItem']);

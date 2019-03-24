@@ -17,11 +17,6 @@ class IngredientsView extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        // TODO: make sure that this is the appropriate interface to get the itemID
-        this.props.getMenuItemInformation(this.props.menu.data.itemID);
-    }
-
     render() {
         return (
             <View style={{ flex: 1 }}>
@@ -31,7 +26,7 @@ class IngredientsView extends Component {
                         <ScrollView>
                             {this.props.menuItem.isLoading
                                 ? <Text>Loading...</Text>
-                                : Object.keys(this.props.menuItem.data.ingredients).forEach(ingredient => {
+                                : this.props.menuItem.data.ingredients.forEach(ingredient => {
                                     return (
                                         // TODO: Implement this component
                                         <Ingredient
@@ -50,4 +45,4 @@ class IngredientsView extends Component {
     }
 }
 
-export default connectToRedux(MenuItemView, ['menuItem']);
+export default connectToRedux(IngredientsView, ['menuItem']);
