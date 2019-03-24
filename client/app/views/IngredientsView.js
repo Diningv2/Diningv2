@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 
 import connectToRedux from '../redux/lib/connectToRedux';
-import sp from '../redux/lib/stateProperties';
 
 import Header from '../components/Header';
 import Ingredient from '../components/Ingredient';
