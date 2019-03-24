@@ -11,5 +11,5 @@ export default Object.assign({},
     ApplicationStateReducers, // TODO: Remove later, after we get acquainted with using Redux
     DiningHallsInformationReducers,
     MenuItemInformationReducers,
-    MenuReducers
+    MenuReducers,
 )

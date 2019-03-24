@@ -33,7 +33,7 @@ class MenuView extends Component {
             
             { !this.props.menusList.isLoading && 
                 <View>
-                <Header title={this.props.menusList.data.location} /> 
+                <Header canGoBack title={this.props.menusList.data.location} /> 
 
                 <Transition appear="bottom">
                     <ScrollView>

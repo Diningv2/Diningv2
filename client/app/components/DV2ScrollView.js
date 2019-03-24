@@ -13,8 +13,8 @@ export class DV2ScrollView extends React.Component {
                         paddingBottom: 20
                     }}
                     showsVerticalScrollIndicator={false}>
-                    {this.props.array.map(element => {
-                        return this.props.render(element)
+                    {this.props.array.map((element, index) => {
+                        return this.props.render(element, index)
                     })}
                 </ScrollView>
             </View>

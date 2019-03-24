@@ -25,18 +25,37 @@ class DiningHallsView extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        if (this.props.diningHallsList.isLoading) this.props.getAllDiningHallsInformation();
+    locationIndices = {
+        'Berkeley': 1,
+        'Branford': 2,
+        'Grace Hopper': 3,
+        'Davenport': 4,
+        'Morse': 5,
+        
     }
 
-    renderDiningHall = (diningHall) => {
+    componentDidMount() {
+        if (this.props.diningHallsList.isLoading) {
+            this.props.getAllDiningHallsInformation();
+        }
+    }
+
+    renderDiningHall = (diningHall, index) => {
         return (
-            <DiningHallItem
+            <TouchableOpacity 
                 key={diningHall.name}
-                name={diningHall.name} 
-                isOpen={diningHall.isOpen}
-                busyness={diningHall.busyness}                        
-            />
+                onPress={() => {
+                    this.props.getMenus(index+1); // Set redux state with menu for this dHall
+                    this.props.navigation.navigate('MenuView');
+                    console.log("Sanity");
+                }}  
+            >
+                <DiningHallItem
+                    name={diningHall.name} 
+                    isOpen={diningHall.isOpen}
+                    busyness={diningHall.busyness}                       
+                />
+            </TouchableOpacity>
         )
     }
 
@@ -48,7 +67,7 @@ class DiningHallsView extends Component {
                 <Transition appear="bottom">
                     <DV2ScrollView style={{flex: 1}}
                         array={this.props.diningHallsList.data}
-                        render={(element) => this.renderDiningHall(element)} 
+                        render={(element, index) => this.renderDiningHall(element, index)} 
                     />
                 </Transition>
                 }
