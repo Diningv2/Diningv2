@@ -14,6 +14,8 @@ import BottomTabs from '../components/BottomTabs';
 
 // Style library import
 import styles from '../config/styles';
+import DiningHallItem from '../components/DiningHallItem';
+import { DV2ScrollView } from '../components/DV2ScrollView';
 
 
 
@@ -24,27 +26,37 @@ class DiningHallsView extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllDiningHallsInformation();
+        if (this.props.diningHallsList.isLoading) this.props.getAllDiningHallsInformation();
+    }
+
+    renderDiningHall = (diningHall) => {
+        return (
+            <DiningHallItem
+                key={diningHall.name}
+                name={diningHall.name} 
+                isOpen={diningHall.isOpen}
+                busyness={diningHall.busyness}                        
+            />
+        )
     }
 
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <Header title="Dining Halls" />
+                {!this.props.diningHallsList.isLoading &&
                 <Transition appear="bottom">
-                    <View style={{...styles.container.withPadding, maxHeight: 500}}>
-                        <ScrollView>
-                            {!this.props.diningHallsList.isLoading &&
-                                this.props.diningHallsList.data.map(diningHall => {
-                                    return (
-                                        <ListItem key={diningHall.name} title={diningHall.name} />
-                                    )
-                                })}
-                            {this.props.diningHallsList.isLoading && <Text>Loading...</Text>}
-                        </ScrollView>
-                    </View>
+                    <DV2ScrollView style={{flex: 1}}
+                        array={this.props.diningHallsList.data}
+                        render={(element) => this.renderDiningHall(element)} 
+                    />
                 </Transition>
-                <BottomTabs viewName={'DiningHallsView'} />
+                }
+                {this.props.diningHallsList.isLoading && 
+                    <Transition appear="top">
+                        <Text>Loading...</Text>
+                    </Transition>
+                }
             </View>
         )
     }
