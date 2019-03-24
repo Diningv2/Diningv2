@@ -11,14 +11,21 @@ class MenuItem extends Component {
         super(props);
     }
 
-    // Contact redux to get the menus for this dining hall
-
     render() {
         return (
-            <View>
-                
-            </View>
+            <TouchableOpacity 
+                key={this.props.itemID}
+                onPress={() => {
+                    // TODO: Set redux state that we're viewing this item (or itemID?) ?
+                    // TODO: this.props.getMenuItemInfo(this.props.ItemID) 
+                    // TODO: this.props.navigation.navigate('MenuItemView')
+                }} 
+            >
+                <ListItem title={this.props.itemName} />
+            </TouchableOpacity>
         );
     }
 
 }
+
+// TODO: export default connectToRedux(??)

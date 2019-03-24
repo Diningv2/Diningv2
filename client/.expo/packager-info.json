@@ -1,9 +1,9 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": "https://uh-hpj.anonymous.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.uh-hpj.anonymous.client.exp.direct",
-  "ngrokPid": 14845,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://ig-gj7.anonymous.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.ig-gj7.anonymous.client.exp.direct",
+  "ngrokPid": 18558,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "packagerPid": null
+  "packagerPort": 19001,
+  "packagerPid": 18529
 }

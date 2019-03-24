@@ -31,7 +31,7 @@ export const menusList = createReducer(initialState, {
 
         return {
             ...state,
-            data: menusArray,
+            data: menusArray[0],
             isLoading: false // set isLoading to false so UI shows the data
         }
     },

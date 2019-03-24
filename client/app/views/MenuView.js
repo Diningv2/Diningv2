@@ -20,15 +20,17 @@ class MenuView extends Component {
     componentDidMount() {
         // TODO: Check which dhall you're in from Redux state and 
         // pass in appropriate location ID - maybe have global mapping
-        this.props.getMenus(1); 
+        // this.props.getMenus(1); 
+        // Maybe nothing here if taken care of on the onPress before
     }
 
     render() {
         return (
             <View style={{flex: 1}}>
-                <Header title="Dining Halls" /> 
+                <Header title={this.props.menusList.data.location} /> 
                 <Transition appear="bottom">
                     <View style={{...styles.container.withPadding}}>
+                        {/* {this.showMenus()} */}
                         <TouchableOpacity>
                             <ListItem title="Cheesecake" subtitle="Open from 5:00pm to 7:00pm" />
                         </TouchableOpacity>

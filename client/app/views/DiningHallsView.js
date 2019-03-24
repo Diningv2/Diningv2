@@ -47,14 +47,13 @@ class DiningHallsView extends Component {
     }
 
     getDHallList() {
-        return this.props.diningHallsList.data.map(diningHall => {
+        return this.props.diningHallsList.data.map((diningHall, index) => {
             return (
                 <TouchableOpacity 
                     key={diningHall.name}
                     onPress={() => {
-                        // TODO: Set redux state with menu for this dHall
                         // TODO: Set redux state that we're viewing dHall.dHallName (or index?)
-
+                        this.props.getMenus(index+1); // Set redux state with menu for this dHall
                         this.props.navigation.navigate('MenuView');
                     }} 
                 >
