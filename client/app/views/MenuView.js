@@ -26,37 +26,7 @@ class MenuView extends Component {
         // Maybe nothing here if taken care of on the onPress before
     }
 
-    handleAlert(title, msg){
-        // Works on both iOS and Android
-        Alert.alert(
-          title,
-          msg,
-          [
-            {text: 'OK', onPress: () => console.log(title+' Pressed')}
-          ],
-          {cancelable: false},
-        );
-    }
-
-    f1 = ()=>this.handleAlert('f1', 'Pressed f1');
-    f2 = ()=>this.handleAlert('f2', 'Pressed f2');
-    f3 = ()=>this.handleAlert('f3', 'Pressed f3');
-
-
-    tabButtons = [
-        {
-          tabName: 'Tab1',
-          function: this.f1
-        },
-        {
-          tabName: 'Tab2',
-          function: this.f2
-        },
-        {
-          tabName: 'Tab3',
-          function: this.f3
-        }
-    ]
+ 
 
     render() {
         return (
@@ -65,7 +35,6 @@ class MenuView extends Component {
             { !this.props.menusList.isLoading && 
                 <View>
                 <Header title={this.props.menusList.data.location} /> 
-                <TopTabs tabButtons={this.tabButtons}/>
 
                 <Transition appear="bottom">
                     <ScrollView>
