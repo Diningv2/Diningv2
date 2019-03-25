@@ -29,7 +29,7 @@ class TopTabs extends Component {
                 <View style={{
                     ...tabStyles.topTabs,
                     borderColor: colors.primary, 
-                    borderWidth:0.5
+                    borderWidth: 0.5
                 }}>
                     {this.props.tabButtons.map(tabButton => { return (
                         <TouchableOpacity 
@@ -69,4 +69,4 @@ const tabStyles = StyleSheet.create({
     }
 })
 
-export default connectToRedux(withNavigation(TopTabs), [sp.nav]);
+export default connectToRedux(TopTabs, [sp.nav]);
