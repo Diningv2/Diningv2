@@ -12,7 +12,7 @@ class Header extends Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props.navigation)
+        console.log(this.props.navigation);
     }
 
     // Can go back is enabled if you set the canGoBack prop to true AND

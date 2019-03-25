@@ -30,7 +30,6 @@ class DiningHallsView extends Component {
                 onPress={() => {
                     this.props.getMenus(dHallIDs[diningHall.name]); // Set redux state with menu for this dHall
                     this.props.navigation.navigate('MenuView');
-                    console.log("Sanity");
                 }}
             >
                 <DiningHallItem
