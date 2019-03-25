@@ -69,4 +69,4 @@ const tabStyles = StyleSheet.create({
     }
 })
 
-export default connectToRedux(withNavigation(TopTabs), [sp.nav]);
+export default connectToRedux(TopTabs, [sp.nav]);

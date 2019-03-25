@@ -25,15 +25,6 @@ class DiningHallsView extends Component {
         super(props);
     }
 
-    locationIndices = {
-        'Berkeley': 1,
-        'Branford': 2,
-        'Grace Hopper': 3,
-        'Davenport': 4,
-        'Morse': 5,
-        
-    }
-
     componentDidMount() {
         if (this.props.diningHallsList.isLoading) {
             this.props.getAllDiningHallsInformation();
@@ -41,6 +32,7 @@ class DiningHallsView extends Component {
     }
 
     renderDiningHall = (diningHall, index) => {
+        console.log(diningHall.name);
         return (
             <TouchableOpacity 
                 key={diningHall.name}
