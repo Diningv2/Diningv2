@@ -20,32 +20,31 @@ class MenuView extends Component {
     }
 
     state = {
-        // TODO: This should be based on time of day. Also, issues with back btn.
-        selectedTabName: 'Lunch',
-    };
- 
-    // tabButtons = !this.props.menusList.isLoading && Object.keys(this.props.menusList.data.today).map(meal => {
-    //     return {tabName: meal, function: () => this.setState({selectedTabName: meal, meal: meal})}
-    // })
+        mealArray: undefined
+    }
 
-    setBreakfast = () => this.setState({selectedTabName: 'Breakfast'});
-    setLunch = () => this.setState({selectedTabName: 'Lunch'});
-    setDinner = () => this.setState({selectedTabName: 'Dinner'});
-
-    tabButtons = [
-        {
-          tabName: 'Breakfast',
-          function: this.setBreakfast
-        },
-        {
-          tabName: 'Lunch',
-          function: this.setLunch
-        },
-        {
-          tabName: 'Dinner',
-          function: this.setDinner
+    dynamicTabButtons = () => {
+        const menu = this.props.menusList.data;
+        const mealTypes = Object.keys(menu.today);
+        const formatted = {
+            contBreakfast: "Cont. Breakfast",
+            hotBreakfast: "Hot Breakfast",
+            lunch: "Lunch",
+            dinner: "Dinner"
         }
-    ] 
+
+        let tabButtons = mealTypes.map(mealType => {
+            return {
+                tabName: formatted[mealType],
+                function: () => {
+                    const mealArray = this.props.menusList.data.today[mealType];
+                    this.setState({ mealArray: mealArray })
+                }
+            }
+        })
+
+        return tabButtons;
+    }
 
     render() {
         return (
@@ -54,14 +53,14 @@ class MenuView extends Component {
                 <View>
                     <Header canGoBack title={this.props.menusList.data.location} /> 
                     <ScrollView>
-                        <TopTabs tabButtons={this.tabButtons}/>
-                        <Transition appear="bottom">
+                        <TopTabs tabButtons={this.dynamicTabButtons()}/>
+                        {this.state.mealArray && <Transition appear="bottom">
                             <DV2ScrollView 
                                 style={{flex: 1}}
-                                array={this.getMealArray()}
+                                array={this.state.mealArray}
                                 render={(dish) => this.renderMenu(dish)} 
-                            />  
-                        </Transition>
+                            />
+                        </Transition>}
                     </ScrollView>
                 </View>
             }
@@ -82,27 +81,6 @@ class MenuView extends Component {
             </TouchableOpacity>
         );
     }
-
-    getMealArray() {
-        switch(this.state.selectedTabName) {
-            case 'Dinner':
-                return this.props.menusList.data.today.dinner;
-                break;
-            case 'Lunch':
-                return this.props.menusList.data.today.lunch;
-                break;
-            case 'Breakfast':
-                const keys = Object.keys(this.props.menusList.data.today);
-                if (keys.includes('hotBreakfast')) {
-                    return this.props.menusList.data.today.hotBreakfast;
-                    break;
-                } else {
-                    return this.props.menusList.data.today.contBreakfast;
-                    break;
-                }
-        }
-    }
-  
 }
 
 export default connectToRedux(MenuView, ['menusList']);
