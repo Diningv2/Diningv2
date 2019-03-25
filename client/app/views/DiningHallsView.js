@@ -1,23 +1,23 @@
 // React/React Native imports
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
-
-// Redux imports
-import connectToRedux from '../redux/lib/connectToRedux';
-import sp from '../redux/lib/stateProperties';
+import DiningHallItem from '../components/DiningHallItem';
+import { DV2ScrollView } from '../components/DV2ScrollView';
 
 // Custom component imports
 import Header from '../components/Header';
-import ListItem from '../components/ListItem';
-import BottomTabs from '../components/BottomTabs';
-
 import dHallIDs from '../config/dHallIDs';
 
 // Style library import
-import styles from '../config/styles';
-import DiningHallItem from '../components/DiningHallItem';
-import { DV2ScrollView } from '../components/DV2ScrollView';
+import styles, { colors } from '../config/styles';
+
+// Redux imports
+import connectToRedux from '../redux/lib/connectToRedux';
+
+
+
+
 
 
 class DiningHallsView extends Component {
@@ -56,16 +56,18 @@ class DiningHallsView extends Component {
             <View style={{ flex: 1 }}>
                 <Header title="Dining Halls" />
                 {!this.props.diningHallsList.isLoading &&
-                    <Transition appear="bottom">
+                    <View>
                         <DV2ScrollView style={{flex: 1}}
                             array={this.props.diningHallsList.data}
                             render={(element, index) => this.renderDiningHall(element, index)} 
                         />
-                    </Transition>
+                    </View>
                 }
                 {this.props.diningHallsList.isLoading && 
-                    <Transition appear="top">
-                        <Text>Loading...</Text>
+                    <Transition appear="bottom">
+                    <View style={{...styles.container.center}}>
+                        <Text style={{...styles.font.type.primaryRegular, ...styles.font.color.primary}}>Loading...</Text>
+                    </View>
                     </Transition>
                 }
             </View>

@@ -7,7 +7,7 @@ const fonts = {
             bold: 'Comfortaa Bold'
         },
         secondary: {
-            regular: 'SF Pro Text Bold'
+            regular: 'Comfortaa Regular'
         }
     },
     size: {
@@ -91,6 +91,12 @@ export default styles = {
                 flexWrap: 'wrap',
                 alignItems: 'center',
                 flexDirection: 'row'
+            },
+            center: {
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center', 
+                height: '100%',
             }
         }),
     spacing: {

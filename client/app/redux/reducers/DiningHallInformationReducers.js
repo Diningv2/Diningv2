@@ -10,7 +10,8 @@ import * as types from '../actions/types';
 const initialState = {
     isLoading: true,
     errorMessage: "",
-    data: undefined
+    data: undefined,
+    dataObject: undefined
 }
 
 /* This is our reducer for incrementing values.
@@ -32,6 +33,7 @@ export const diningHallsList = createReducer(initialState, {
         return {
             ...state,
             data: diningHallsArray,
+            dataObject: diningHallsObject,
             isLoading: false // set isLoading to false so our UI knows it can show the data!
         }
     },
@@ -39,6 +41,7 @@ export const diningHallsList = createReducer(initialState, {
         return {
             ...state,
             data: undefined,
+            dataObject: undefined,
             isLoading: false, // set isLoading to false so our UI knows we're not still loading :(
             errorMessage: action.errorMessage // we can also add this to display what went wrong too
         }

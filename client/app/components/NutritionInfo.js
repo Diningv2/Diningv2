@@ -14,11 +14,26 @@ class NutritionInfo extends Component {
         super(props);
     }
 
+    formatted = {
+        servingSize: "Serving Size",
+        calories: "Calories",
+        protein: "Protein",
+        fat: "Fats",
+        saturatedFat: "Saturated Fat",
+        cholesterol: "Cholesterol",
+        carbohydrates: "Carbs",
+        sugar: "Sugar",
+        fiber: "Fiber",
+        vitaminC: "Vitamin C",
+        vitaminA: "Vitamin A",
+        iron: "Iron"
+    }
+
     renderNutritionInfoFields = field => {
         return (
             <NutritionInfoField
                 key={field}
-                field={field}
+                field={this.formatted[field]}
                 value={this.props.menuItem.data.nutrition[field]}
             />
         );

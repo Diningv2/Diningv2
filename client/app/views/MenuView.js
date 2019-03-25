@@ -20,7 +20,19 @@ class MenuView extends Component {
     }
 
     state = {
-        mealArray: undefined
+        mealArray: undefined,
+        hoursMessage: ""
+    }
+
+    generateHoursMessage = (mealType) => {
+        const name = this.props.menusList.data.location;
+        const location = this.props.diningHallsList.dataObject[name];
+        const mealTimes = location.todayHours[mealType];
+
+        const openingTime = mealTimes.openingTime;
+        const closingTime = mealTimes.closingTime;
+
+        return `open from ${openingTime} to ${closingTime}`;
     }
 
     dynamicTabButtons = () => {
@@ -38,7 +50,8 @@ class MenuView extends Component {
                 tabName: formatted[mealType],
                 function: () => {
                     const mealArray = this.props.menusList.data.today[mealType];
-                    this.setState({ mealArray: mealArray })
+                    const hoursMessage = this.generateHoursMessage(mealType);
+                    this.setState({ mealArray, hoursMessage })
                 }
             }
         })
@@ -54,13 +67,14 @@ class MenuView extends Component {
                     <Header canGoBack title={this.props.menusList.data.location} /> 
                     <ScrollView>
                         <TopTabs tabButtons={this.dynamicTabButtons()}/>
-                        {this.state.mealArray && <Transition appear="bottom">
+                        <Text style={{...styles.font.type.primaryRegular, ...styles.font.color.primary, textAlign: 'center'}}>{this.state.hoursMessage}</Text>
+                        {this.state.mealArray && <View>
                             <DV2ScrollView 
                                 style={{flex: 1}}
                                 array={this.state.mealArray}
                                 render={(dish) => this.renderMenu(dish)} 
                             />
-                        </Transition>}
+                            </View>}
                     </ScrollView>
                 </View>
             }
@@ -83,4 +97,4 @@ class MenuView extends Component {
     }
 }
 
-export default connectToRedux(MenuView, ['menusList']);
+export default connectToRedux(MenuView, ['menusList', 'diningHallsList']);

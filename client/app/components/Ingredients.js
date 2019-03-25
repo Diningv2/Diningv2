@@ -13,10 +13,10 @@ class Ingredients extends Component {
         super(props);
     }
 
-    renderIngredients = ingredient => {
+    renderIngredients = (ingredient, i) => {
         return (
             <Ingredient
-                key={ingredient}
+                key={ingredient + i}  // ensuring unique key
                 title={ingredient}
             />
         );
@@ -29,7 +29,7 @@ class Ingredients extends Component {
                     <DV2ScrollView 
                         style={{flex: 1}} 
                         array={this.props.menuItem.data.ingredients}
-                        render={ingredient => this.renderIngredients(ingredient)}
+                        render={(ingredient, i) => this.renderIngredients(ingredient, i)}
                     />
                 </Transition>
             </View>
