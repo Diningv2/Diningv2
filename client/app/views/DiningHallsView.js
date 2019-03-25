@@ -12,11 +12,12 @@ import Header from '../components/Header';
 import ListItem from '../components/ListItem';
 import BottomTabs from '../components/BottomTabs';
 
+import dHallIDs from '../config/dHallIDs';
+
 // Style library import
 import styles from '../config/styles';
 import DiningHallItem from '../components/DiningHallItem';
 import { DV2ScrollView } from '../components/DV2ScrollView';
-
 
 
 class DiningHallsView extends Component {
@@ -32,12 +33,11 @@ class DiningHallsView extends Component {
     }
 
     renderDiningHall = (diningHall, index) => {
-        console.log(diningHall.name);
         return (
             <TouchableOpacity 
                 key={diningHall.name}
                 onPress={() => {
-                    this.props.getMenus(index+1); // Set redux state with menu for this dHall
+                    this.props.getMenus(dHallIDs[diningHall.name]); // Set redux state with menu for this dHall
                     this.props.navigation.navigate('MenuView');
                     console.log("Sanity");
                 }}  
