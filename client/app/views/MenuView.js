@@ -124,22 +124,44 @@ class MenuView extends Component {
 
         if (this.state.selectedTabName == 'Breakfast') {
             //TODO: Different menus for contBreakfast vs hotBreakfast vs Brunch
-            return this.props.menusList.data.today.contBreakfast.map((dish, index) => {
-                return (
-                    <TouchableOpacity 
-                        key={dish.name}
-                        
-                        onPress={() => {
-                           
-                            this.props.getMenuItemInformation(dish.itemID);
-                            this.props.navigation.navigate('MenuItemView');
-
-                        }} 
-                    >
-                        <ListItem title={dish.name} />
-                    </TouchableOpacity>
-                )
-            })
+            const keys = Object.keys(this.props.menusList.data.today);
+            if (keys.includes('hotBreakfast')) {
+                return this.props.menusList.data.today.hotBreakfast.map((dish, index) => {
+                    return (
+                        <TouchableOpacity 
+                            key={dish.name}
+                            
+                            onPress={() => {
+                               
+                                this.props.getMenuItemInformation(dish.itemID);
+                                this.props.navigation.navigate('MenuItemView');
+    
+                            }} 
+                        >
+                            <ListItem title={dish.name} />
+                        </TouchableOpacity>
+                    )
+                })
+            }
+            if (keys.includes('contBreakfast')) {
+                return this.props.menusList.data.today.contBreakfast.map((dish, index) => {
+                    return (
+                        <TouchableOpacity 
+                            key={dish.name}
+                            
+                            onPress={() => {
+                               
+                                this.props.getMenuItemInformation(dish.itemID);
+                                this.props.navigation.navigate('MenuItemView');
+    
+                            }} 
+                        >
+                            <ListItem title={dish.name} />
+                        </TouchableOpacity>
+                    )
+                })
+            }
+            
         }
         
     }
