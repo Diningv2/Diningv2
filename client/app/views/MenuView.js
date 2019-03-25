@@ -96,9 +96,11 @@ class MenuView extends Component {
                 if (keys.includes('hotBreakfast')) {
                     return this.props.menusList.data.today.hotBreakfast;
                     break;
-                } else {
+                } else if (keys.includes('contBreakfast')) {
                     return this.props.menusList.data.today.contBreakfast;
                     break;
+                } else {
+                    return [];
                 }
         }
     }
