@@ -17,7 +17,7 @@ export default function getMenuItemList(columns, data) {
         return !entry || !entry.length
             ? undefined
             : {
-                  name: entry[columns.indexOf("MENUITEM")],
+                  name: entry[columns.indexOf("MENUITEM")].replace("`", "'"),
                   itemID: entry[columns.indexOf("MENUITEMID")]
               };
     });

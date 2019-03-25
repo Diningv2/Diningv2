@@ -16,8 +16,7 @@ class Ingredients extends Component {
     renderIngredients = (ingredient, i) => {
         return (
             <Ingredient
-                // add index to ensure uniqueness
-                key={ingredient + i}
+                key={ingredient}
                 title={ingredient}
             />
         );
