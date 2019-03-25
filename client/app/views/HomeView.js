@@ -18,7 +18,7 @@ class HomeView extends Component {
                 </Transition>
                 <Transition appear="top">
                     <View>
-                        <Text style={styles.subtitle}>Yale Dining, Revamped.</Text>
+                        <Text style={styles.subtitle}>Get notified when your favorite Yale Dishes™ are being served!</Text>
                     </View>
                 </Transition>
                 <Transition appear="bottom">
@@ -51,6 +51,7 @@ const styles =  StyleSheet.create({
     },
     subtitle: {
         color: '#fff',
+        textAlign: 'center',
         fontFamily: 'Comfortaa Regular'
     },
     bigButton: {
