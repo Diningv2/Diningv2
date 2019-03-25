@@ -5,8 +5,7 @@ import { Transition } from 'react-navigation-fluid-transitions';
 import connectToRedux from '../redux/lib/connectToRedux';
 
 import Ingredient from './Ingredient';
-
-import styles from '../config/styles';
+import { DV2ScrollView } from './DV2ScrollView';
 
 class Ingredients extends Component {
 
@@ -14,24 +13,24 @@ class Ingredients extends Component {
         super(props);
     }
 
+    renderIngredients = ingredient => {
+        return (
+            <Ingredient
+                key={ingredient}
+                title={ingredient}
+            />
+        );
+    }
+
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <Transition appear="bottom">
-                    <View style={{ ...styles.container.withPadding, maxHeight: 500 }}>
-                        <ScrollView>
-                            {this.props.menuItem.data.ingredients.map(ingredient => {
-                                    return (
-                                        // TODO: Implement this component
-                                        <Ingredient
-                                            key={ingredient}
-                                            title={ingredient}
-                                        />
-                                    );
-                                })
-                            }
-                        </ScrollView>
-                    </View>
+                    <DV2ScrollView 
+                        style={{flex: 1}} 
+                        array={this.props.menuItem.data.ingredients}
+                        render={ingredient => this.renderIngredients(ingredient)}
+                    />
                 </Transition>
             </View>
         )

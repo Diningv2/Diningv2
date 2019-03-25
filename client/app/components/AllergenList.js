@@ -5,8 +5,7 @@ import { Transition } from 'react-navigation-fluid-transitions';
 import connectToRedux from '../redux/lib/connectToRedux';
 
 import Allergen from './Allergen';
-
-import styles from '../config/styles';
+import { DV2ScrollView } from './DV2ScrollView';
 
 class AllergenList extends Component {
 
@@ -14,43 +13,44 @@ class AllergenList extends Component {
         super(props);
     }
 
+    // render() {
+    //     return (
+    //         <View>
+    //             <ScrollView>
+    //                 {this.props.menuItem.data.filterProperties.map(allergen => {
+    //                     return (
+    //                         <Allergen
+    //                             key={allergen}
+    //                             title={allergen}
+    //                         />
+    //                     );
+    //                 })}
+    //             </ScrollView>
+    //         </View>
+    //     )
+    // }
+
+    renderAllergens = allergen => {
+        return (
+            <Allergen
+                key={allergen}
+                title={allergen}
+            />
+        );
+    }
+
     render() {
         return (
-            <View>
-                <ScrollView>
-                    {this.props.menuItem.data.filterProperties.map(allergen => {
-                        return (
-                            <Allergen
-                                key={allergen}
-                                title={allergen}
-                            />
-                        );
-                    })}
-                </ScrollView>
+            <View style={{flex: 1}}>
+                <Transition appear="bottom">
+                    <DV2ScrollView 
+                        style={{flex: 1}} 
+                        array={this.props.menuItem.data.filterProperties}
+                        render={allergen => this.renderAllergens(allergen)}
+                    />
+                </Transition>
             </View>
-            // <View>
-            //     {/* <Transition appear="bottom"> */}
-            //         {/* <View style={{ ...styles.container.withPadding}}> */}
-            //             {/* <ScrollView> */}
-            //                 {this.props.menuItem.isLoading
-            //                     ? <Text>Loading...</Text>
-            //                     : this.props.menuItem.data.filterProperties.forEach(allergen => {
-            //                         console.log("Wheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + allergen);
-            //                         return (
-            //                             // TODO: Implement this component
-            //                             // <Allergen
-            //                             //     key={allergen}
-            //                             //     title={allergen}
-            //                             // />
-            //                             <Text>testing</Text>
-            //                         );
-            //                     })
-            //                 }
-            //             {/* </ScrollView> */}
-            //         {/* </View> */}
-            //     {/* </Transition> */}
-            // </View>
-        )
+        );
     }
 }
 

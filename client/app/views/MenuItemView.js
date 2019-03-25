@@ -53,7 +53,7 @@ class MenuItemView extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
                 <Header canGoBack title= {this.props.menuItem.isLoading ? 'Loading...' : this.props.menuItem.data.name} />
                 <TopTabs tabButtons={this.tabButtons} />
                 {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Nutrition' && <NutritionInfo/>}

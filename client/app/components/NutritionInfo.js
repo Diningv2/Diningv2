@@ -6,7 +6,7 @@ import connectToRedux from '../redux/lib/connectToRedux';
 
 import NutritionInfoField from '../components/NutritionInfoField';
 
-import styles from '../config/styles';
+import { DV2ScrollView } from './DV2ScrollView';
 
 class NutritionInfo extends Component {
 
@@ -14,25 +14,25 @@ class NutritionInfo extends Component {
         super(props);
     }
 
+    renderNutritionInfoFields = field => {
+        return (
+            <NutritionInfoField
+                key={field}
+                field={field}
+                value={this.props.menuItem.data.nutrition[field]}
+            />
+        );
+    }
+
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
                 <Transition appear="bottom">
-                    <View style={{ ...styles.container.withPadding, maxHeight: 500 }}>
-                        <ScrollView>
-                            {Object.keys(this.props.menuItem.data.nutrition).map(field => {
-                                    return (
-                                        // TODO: Implement this component
-                                        <NutritionInfoField
-                                            key={field}
-                                            field={field}
-                                            value={this.props.menuItem.data.nutrition[field]}
-                                        />
-                                    )
-                                })
-                            }
-                        </ScrollView>
-                    </View>
+                    <DV2ScrollView 
+                        style={{flex: 1}} 
+                        array={Object.keys(this.props.menuItem.data.nutrition)}
+                        render={element => this.renderNutritionInfoFields(element)}
+                    />
                 </Transition>
             </View>
         );
