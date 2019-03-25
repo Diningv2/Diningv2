@@ -19,29 +19,9 @@ class MenuView extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        // TODO: Check which dhall you're in from Redux state and 
-        // pass in appropriate location ID - maybe have global mapping
-        // this.props.getMenus(1); 
-        // Maybe nothing here if taken care of on the onPress before
-    }
+    
 
-    renderMenuItem = (menuItem, index) => {
-        console.log(menuItem.name);
-        return (
-            <TouchableOpacity 
-                key={menuItem.name}
-                onPress={() => {
-                    // this.props.getMenus(index+1); // Set redux state with menu for this dHall
-                    // this.props.navigation.navigate('MenuView');
-                    console.log("Sanity");
-                }}  
-            >
-
-                <ListItem title={menuItem.name}/>
-            </TouchableOpacity>
-        )
-    }
+    
 
     state = {
         selectedTabName: 'Dinner',
@@ -102,6 +82,8 @@ class MenuView extends Component {
 
  
     getItemsList (meal) {
+        //TODO: Clean up reused code
+        //TODO: make sure navigation works here
         if (this.state.selectedTabName == 'Dinner') {
             return this.props.menusList.data.today.dinner.map((dish, index) => {
                 return (
@@ -111,7 +93,7 @@ class MenuView extends Component {
                         onPress={() => {
                            
                             this.props.getMenuItemInformation(dish.itemID);
-                            this.props.navigation.navigate('IngredientsView');
+                            this.props.navigation.navigate('MenuItemView');
     
                         }} 
                     >
@@ -130,7 +112,7 @@ class MenuView extends Component {
                         onPress={() => {
                            
                             this.props.getMenuItemInformation(dish.itemID);
-                            this.props.navigation.navigate('IngredientsView');
+                            this.props.navigation.navigate('MenuItemView');
     
                         }} 
                     >
@@ -150,8 +132,8 @@ class MenuView extends Component {
                         onPress={() => {
                            
                             this.props.getMenuItemInformation(dish.itemID);
-                            this.props.navigation.navigate('IngredientsView');
-    
+                            this.props.navigation.navigate('MenuItemView');
+
                         }} 
                     >
                         <ListItem title={dish.name} />
