@@ -4,13 +4,11 @@ import { Transition } from 'react-navigation-fluid-transitions';
 
 import connectToRedux from '../redux/lib/connectToRedux';
 
-import Header from '../components/Header';
-import Allergen from '../components/Allergen';
-import BottomTabs from '../components/BottomTabs';
+import NutritionInfoField from '../components/NutritionInfoField';
 
 import styles from '../config/styles';
 
-class AllergensView extends Component {
+class NutritionInfo extends Component {
 
     constructor(props) {
         super(props);
@@ -19,18 +17,16 @@ class AllergensView extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Header title={this.props.menuItem.data.name} />
                 <Transition appear="bottom">
                     <View style={{ ...styles.container.withPadding, maxHeight: 500 }}>
                         <ScrollView>
-                            {this.props.menuItem.isLoading
-                                ? <Text>Loading...</Text>
-                                : this.props.menuItem.data.filterProperties.forEach(allergen => {
+                            {Object.keys(this.props.menuItem.data.nutrition).map(field => {
                                     return (
                                         // TODO: Implement this component
-                                        <Allergen
-                                            key={allergen}
-                                            title={allergen}
+                                        <NutritionInfoField
+                                            key={field}
+                                            field={field}
+                                            value={this.props.menuItem.data.nutrition[field]}
                                         />
                                     )
                                 })
@@ -38,10 +34,9 @@ class AllergensView extends Component {
                         </ScrollView>
                     </View>
                 </Transition>
-                <BottomTabs viewName={'MenuItemView'} />
             </View>
-        )
+        );
     }
 }
 
-export default connectToRedux(AllergensView, ['menuItem']);
+export default connectToRedux(NutritionInfo, ['menuItem']);

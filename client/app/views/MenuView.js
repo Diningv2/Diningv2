@@ -59,10 +59,8 @@ class MenuView extends Component {
                     
                     onPress={() => {
                         // TODO: Set redux state that we're viewing dish.index 
-                        //this.props.getMenus(index+1); // Set redux state with menu for this dHall
-                        //this.props.navigation.navigate('MenuView');
                         this.props.getMenuItemInformation(dish.itemID);
-                        this.props.navigation.navigate('IngredientsView');
+                        this.props.navigation.navigate('MenuItemView');
 
                     }} 
                 >

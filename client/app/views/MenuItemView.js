@@ -9,22 +9,27 @@ import sp from '../redux/lib/stateProperties';
 
 // Custom component imports
 import Header from '../components/Header';
+import NutritionInfo from '../components/NutritionInfo';
+import AllergenList from '../components/AllergenList';
+import Ingredients from '../components/Ingredients';
+
 import ListItem from '../components/ListItem';
 import BottomTabs from '../components/BottomTabs';
+import TopTabs from '../components/TopTabs';
 
 // Style library import
 import styles from '../config/styles';
 
 
 
-class DiningHallsView extends Component {
+class MenuItemView extends Component {
 
     constructor(props) {
         super(props);
     }
 
     state = {
-        selectedTabName: 'Nutrition'
+        selectedTabName: 'Allergens'
     };
 
     setNutrition = () => this.setState({selectedTabName: 'Nutrition'});
@@ -49,15 +54,15 @@ class DiningHallsView extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Header title= {this.props.menuItem.isLoading ? 'Loading...' : this.props.menuItem.data.name} />
+                <Header canGoBack title= {this.props.menuItem.isLoading ? 'Loading...' : this.props.menuItem.data.name} />
                 <TopTabs tabButtons={this.tabButtons} />
-                {this.state.selectedTabName == 'Nutrition' && <NutritionInfoView/>}
-                {this.state.selectedTabName == 'Allergens' && <AllergenView/>}
-                {this.state.selectedTabName == 'Ingredients' && <IngredientsView/>}
-                <BottomTabs viewName={'DiningHallsView'} />
+                {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Nutrition' && <NutritionInfo/>}
+                {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Allergens' && <AllergenList/>}
+                {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Ingredients' && <Ingredients/>}
+                {/* <BottomTabs viewName={'DiningHallsView'} /> */}
             </View>
         )
     }
 }
 
-export default connectToRedux(DiningHallsView, ['diningHallsList']);
+export default connectToRedux(MenuItemView, ['menuItem']);

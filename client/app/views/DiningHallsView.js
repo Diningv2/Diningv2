@@ -64,12 +64,12 @@ class DiningHallsView extends Component {
             <View style={{ flex: 1 }}>
                 <Header title="Dining Halls" />
                 {!this.props.diningHallsList.isLoading &&
-                <Transition appear="bottom">
-                    <DV2ScrollView style={{flex: 1}}
-                        array={this.props.diningHallsList.data}
-                        render={(element, index) => this.renderDiningHall(element, index)} 
-                    />
-                </Transition>
+                    <Transition appear="bottom">
+                        <DV2ScrollView style={{flex: 1}}
+                            array={this.props.diningHallsList.data}
+                            render={(element, index) => this.renderDiningHall(element, index)} 
+                        />
+                    </Transition>
                 }
                 {this.props.diningHallsList.isLoading && 
                     <Transition appear="top">
