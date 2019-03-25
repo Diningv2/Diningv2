@@ -19,12 +19,9 @@ class MenuView extends Component {
         super(props);
     }
 
-    
-
-    
-
     state = {
-        selectedTabName: 'Dinner',
+        // TODO: This should be based on time of day. Also, issues with back btn.
+        selectedTabName: 'Lunch',
     };
  
     // tabButtons = !this.props.menusList.isLoading && Object.keys(this.props.menusList.data.today).map(meal => {
@@ -53,120 +50,59 @@ class MenuView extends Component {
     render() {
         return (
             <View style={{flex: 1}}>
-            
-            { !this.props.menusList.isLoading && 
+            {!this.props.menusList.isLoading && 
                 <View>
                     <Header canGoBack title={this.props.menusList.data.location} /> 
-
-                    <Transition appear="bottom">
-                        <ScrollView>
+                    <ScrollView>
                         <TopTabs tabButtons={this.tabButtons}/>
-                        <View style={{...styles.container.withPadding}}>
-                        {this.props.menusList.isLoading  
-                                ? <Text>Loading...</Text>
-                                : this.getItemsList()  
-                            }
-                        </View>
-                        </ScrollView>
-                        {/* <DV2ScrollView style={{flex: 1}}
-                            array={this.props.menusList.data.today.dinner}
-                            render={(element, index) => this.renderMenuItem(element, index)} 
-                        /> */}
-                        
-                    </Transition>
-                     
+                        <Transition appear="bottom">
+                            <DV2ScrollView 
+                                style={{flex: 1}}
+                                array={this.getMealArray()}
+                                render={(dish) => this.renderMenu(dish)} 
+                            />  
+                        </Transition>
+                    </ScrollView>
                 </View>
             }
             </View>
         )
     }
 
-
-  
-    getItemsList () {
-        //TODO: Clean up reused code
-        //TODO: make sure navigation works here
-        if (this.state.selectedTabName == 'Dinner') {
-            return this.props.menusList.data.today.dinner.map((dish, index) => {
-                return (
-                    <TouchableOpacity 
-                        key={dish.name}
-                        
-                        onPress={() => {
-                           
-                            this.props.getMenuItemInformation(dish.itemID);
-                            this.props.navigation.navigate('MenuItemView');
-    
-                        }} 
-                    >
-                        <ListItem title={dish.name} />
-                    </TouchableOpacity>
-                )
-            })
-        }
-
-        if (this.state.selectedTabName == 'Lunch') {
-            return this.props.menusList.data.today.lunch.map((dish, index) => {
-                return (
-                    <TouchableOpacity 
-                        key={dish.name}
-                        
-                        onPress={() => {
-                           
-                            this.props.getMenuItemInformation(dish.itemID);
-                            this.props.navigation.navigate('MenuItemView');
-    
-                        }} 
-                    >
-                        <ListItem title={dish.name} />
-                    </TouchableOpacity>
-                )
-            })
-        }
-
-        if (this.state.selectedTabName == 'Breakfast') {
-            //TODO: Different menus for contBreakfast vs hotBreakfast vs Brunch
-            const keys = Object.keys(this.props.menusList.data.today);
-            if (keys.includes('hotBreakfast')) {
-                return this.props.menusList.data.today.hotBreakfast.map((dish, index) => {
-                    return (
-                        <TouchableOpacity 
-                            key={dish.name}
-                            
-                            onPress={() => {
-                               
-                                this.props.getMenuItemInformation(dish.itemID);
-                                this.props.navigation.navigate('MenuItemView');
-    
-                            }} 
-                        >
-                            <ListItem title={dish.name} />
-                        </TouchableOpacity>
-                    )
-                })
-            }
-            if (keys.includes('contBreakfast')) {
-                return this.props.menusList.data.today.contBreakfast.map((dish, index) => {
-                    return (
-                        <TouchableOpacity 
-                            key={dish.name}
-                            
-                            onPress={() => {
-                               
-                                this.props.getMenuItemInformation(dish.itemID);
-                                this.props.navigation.navigate('MenuItemView');
-    
-                            }} 
-                        >
-                            <ListItem title={dish.name} />
-                        </TouchableOpacity>
-                    )
-                })
-            }
-            
-        }
-        
+    renderMenu = (dish) => {
+        return (
+            <TouchableOpacity 
+                key={dish.name}
+                onPress={() => {
+                    this.props.getMenuItemInformation(dish.itemID);
+                    this.props.navigation.navigate('MenuItemView');
+                }} 
+            >
+                <ListItem title={dish.name} />
+            </TouchableOpacity>
+        );
     }
+
+    getMealArray() {
+        switch(this.state.selectedTabName) {
+            case 'Dinner':
+                return this.props.menusList.data.today.dinner;
+                break;
+            case 'Lunch':
+                return this.props.menusList.data.today.lunch;
+                break;
+            case 'Breakfast':
+                const keys = Object.keys(this.props.menusList.data.today);
+                if (keys.includes('hotBreakfast')) {
+                    return this.props.menusList.data.today.hotBreakfast;
+                    break;
+                } else {
+                    return this.props.menusList.data.today.contBreakfast;
+                    break;
+                }
+        }
+    }
+  
 }
 
 export default connectToRedux(MenuView, ['menusList']);
