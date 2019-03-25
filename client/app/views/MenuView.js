@@ -61,10 +61,12 @@ class MenuView extends Component {
                     <Transition appear="bottom">
                         <ScrollView>
                         <TopTabs tabButtons={this.tabButtons}/>
+                        <View style={{...styles.container.withPadding}}>
                         {this.props.menusList.isLoading  
                                 ? <Text>Loading...</Text>
                                 : this.getItemsList()  
                             }
+                        </View>
                         </ScrollView>
                         {/* <DV2ScrollView style={{flex: 1}}
                             array={this.props.menusList.data.today.dinner}

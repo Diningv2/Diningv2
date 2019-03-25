@@ -26,8 +26,7 @@ class Header extends Component {
                 <View style={{...styles.spacing.above.medium, padding: 20}}>
                     <View style={{...styles.container.flexRow}}>
                         {this.canGoBack() &&
-                            <TouchableOpacity 
-                                style={{...styles.spacing.around.small}}
+                            <TouchableOpacity style={{paddingRight: 10}}
                                 onPress={() => this.goBack()}>
                                 <AntDesign name="arrowleft" size={32} color="white" />
                             </TouchableOpacity>
