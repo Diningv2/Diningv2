@@ -85,7 +85,7 @@ export default class DiningHallItem extends Component {
                         </Text>
                     </View>
                     <View style={{ alignItems: 'flex-end', width: '50%' }}>
-                        <Gauge busyness={this.props.busyness} />
+                        <Gauge busyness={this.props.busyness} isOpen={this.props.isOpen} />
                     </View>
                 </View>
             </View>
