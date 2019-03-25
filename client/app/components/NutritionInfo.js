@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 
 import connectToRedux from '../redux/lib/connectToRedux';
@@ -41,10 +41,10 @@ class NutritionInfo extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <Transition appear="bottom">
-                    <DV2ScrollView 
-                        style={{flex: 1}} 
+                    <DV2ScrollView
+                        style={{ flex: 1 }}
                         array={Object.keys(this.props.menuItem.data.nutrition)}
                         render={element => this.renderNutritionInfoFields(element)}
                     />

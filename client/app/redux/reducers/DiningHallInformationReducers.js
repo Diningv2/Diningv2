@@ -29,7 +29,6 @@ export const diningHallsList = createReducer(initialState, {
     [types.GET_ALL_DINING_HALLS_INFORMATION_SUCCESS](state, action) {
         const diningHallsObject = action.payload.diningHalls;
         const diningHallsArray = Object.values(diningHallsObject);
-
         return {
             ...state,
             data: diningHallsArray,

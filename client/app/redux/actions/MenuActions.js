@@ -17,7 +17,7 @@ export function getMenus(locationID) {
     // Passes in what we got from the API call to the Redux store in payload.
     // Also sets "isLoading" back to false.
     const success = (menus) => {
-        return { 
+        return {
             type: types.GET_MENU_INFORMATION_SUCCESS,
             payload: {
                 menus: menus
@@ -29,10 +29,10 @@ export function getMenus(locationID) {
     // Called in the catch() block so Redux knows error occurred + what to do.
     // Maybe set some stuff back to 'undefined' and "isLoading" back to false
     const failure = (errorMessage) => {
-        return { 
+        return {
             type: types.GET_MENU_INFORMATION_FAILURE,
             errorMessage: errorMessage
-         }
+        }
     }
 
     // -------- The actual THUNK! --------
@@ -41,7 +41,7 @@ export function getMenus(locationID) {
     return async (dispatch) => {
         dispatch(request()); // tell Redux we're about to make that request
         try {
-            const menus = await get("/api/menus?location=" + locationID); 
+            const menus = await get("/api/menus", { location: locationID });
             dispatch(success(menus)); // If successfull, dispatch it to Redux
         } catch (e) {
             dispatch(failure(e.message));

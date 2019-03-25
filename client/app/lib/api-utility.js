@@ -42,21 +42,21 @@ const queryBuilder = (queryObject) => {
     // Return the empty string if no object
     // is passed in
     if (!queryObject) return "";
-  
+
     const keys = Object.keys(queryObject);
-  
+
     // Return the empty string if
     // the object is empty;
     if (keys.length == 0) return "";
-  
+
     let queryString = "?";
     let queryCount = 0;
     for (let key of Object.keys(queryObject)) {
-      if (queryCount > 0) queryString += "&";
-      const value = queryObject[key];
-      queryString = queryString + `${key}=${value}`
-      queryCount++;
+        if (queryCount > 0) queryString += "&";
+        const value = queryObject[key];
+        queryString = queryString + `${key}=${value}`
+        queryCount++;
     }
-  
+
     return queryString;
-  }
+}

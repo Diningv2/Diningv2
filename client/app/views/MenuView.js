@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, ScrollView, Alert, Text } from 'react-native';
-import { Transition } from 'react-navigation-fluid-transitions';
+import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
 
 import connectToRedux from '../redux/lib/connectToRedux';
-import sp from '../redux/lib/stateProperties';
 
 import Header from '../components/Header';
 import ListItem from '../components/ListItem';
-import BottomTabs from '../components/BottomTabs';
 import TopTabs from '../components/TopTabs';
-import {DV2ScrollView} from '../components/DV2ScrollView';
+import { DV2ScrollView } from '../components/DV2ScrollView';
 
 import styles from '../config/styles';
 
@@ -31,8 +28,9 @@ class MenuView extends Component {
 
         const openingTime = mealTimes.openingTime;
         const closingTime = mealTimes.closingTime;
+        const transferTime = mealTimes.transferTime;
 
-        return `open from ${openingTime} to ${closingTime}`;
+        return `open from ${openingTime} to ${closingTime}` + ((transferTime && ` (transfers at ${transferTime})`) || "");
     }
 
     dynamicTabButtons = () => {
@@ -41,6 +39,7 @@ class MenuView extends Component {
         const formatted = {
             contBreakfast: "Cont. Breakfast",
             hotBreakfast: "Hot Breakfast",
+            brunch: "Brunch",
             lunch: "Lunch",
             dinner: "Dinner"
         }
@@ -61,35 +60,35 @@ class MenuView extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
-            {!this.props.menusList.isLoading && 
-                <View>
-                    <Header canGoBack title={this.props.menusList.data.location} /> 
-                    <ScrollView>
-                        <TopTabs tabButtons={this.dynamicTabButtons()}/>
-                        <Text style={{...styles.font.type.primaryRegular, ...styles.font.color.primary, textAlign: 'center'}}>{this.state.hoursMessage}</Text>
-                        {this.state.mealArray && <View>
-                            <DV2ScrollView 
-                                style={{flex: 1}}
-                                array={this.state.mealArray}
-                                render={(dish) => this.renderMenu(dish)} 
-                            />
+            <View style={{ flex: 1 }}>
+                {!this.props.menusList.isLoading &&
+                    <View>
+                        <Header canGoBack title={this.props.menusList.data.location} />
+                        <ScrollView>
+                            <TopTabs tabButtons={this.dynamicTabButtons()} />
+                            <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.color.primary, textAlign: 'center' }}>{this.state.hoursMessage}</Text>
+                            {this.state.mealArray && <View>
+                                <DV2ScrollView
+                                    style={{ flex: 1 }}
+                                    array={this.state.mealArray}
+                                    render={(dish) => this.renderMenu(dish)}
+                                />
                             </View>}
-                    </ScrollView>
-                </View>
-            }
+                        </ScrollView>
+                    </View>
+                }
             </View>
         )
     }
 
     renderMenu = (dish) => {
         return (
-            <TouchableOpacity 
+            <TouchableOpacity
                 key={dish.name}
                 onPress={() => {
                     this.props.getMenuItemInformation(dish.itemID);
                     this.props.navigation.navigate('MenuItemView');
-                }} 
+                }}
             >
                 <ListItem title={dish.name} />
             </TouchableOpacity>

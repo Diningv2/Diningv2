@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import connectToRedux from '../redux/lib/connectToRedux';
@@ -18,22 +18,22 @@ class BottomTabs extends Component {
 
     tabButtons = [
         {
-          viewName: 'FriendsView',
-          IconComponent: SimpleLineIcons,
-          iconName: 'people',
-          opacity: this.props.viewName == 'FriendsView' ? 1 : .3,
+            viewName: 'FriendsView',
+            IconComponent: SimpleLineIcons,
+            iconName: 'people',
+            opacity: this.props.viewName == 'FriendsView' ? 1 : .3,
         },
         {
-          viewName: 'DiningHallsView',
-          IconComponent: MaterialCommunityIcons,
-          iconName: 'food',
-          opacity: this.props.viewName == 'DiningHallsView' ? 1 : .3,
+            viewName: 'DiningHallsView',
+            IconComponent: MaterialCommunityIcons,
+            iconName: 'food',
+            opacity: this.props.viewName == 'DiningHallsView' ? 1 : .3,
         },
         {
-          viewName: 'FavoritesView',
-          IconComponent: MaterialIcons,
-          iconName: 'favorite',
-          opacity: this.props.viewName == 'FavoritesView' ? 1 : .3,
+            viewName: 'FavoritesView',
+            IconComponent: MaterialIcons,
+            iconName: 'favorite',
+            opacity: this.props.viewName == 'FavoritesView' ? 1 : .3,
         }
     ]
 
@@ -41,23 +41,25 @@ class BottomTabs extends Component {
         return (
             <View style={tabStyles.container}>
                 <View style={{
-                    ...styles.container.backgroundColorPrimary, 
+                    ...styles.container.backgroundColorPrimary,
                     ...tabStyles.bottomTabs,
                 }}>
-                    {this.tabButtons.map(tabButton => { return (
-                        <TouchableOpacity 
-                            key={tabButton.viewName} 
-                            activeOpacity={.3}
-                            style={{...tabStyles.touchables, opacity: tabButton.opacity}}
-                            onPress={() => this.props.navigation.navigate(tabButton.viewName)}
-                        >
-                            <tabButton.IconComponent 
-                                name={tabButton.iconName} 
-                                size={25} 
-                                color={colors.secondary} 
-                            />
-                        </TouchableOpacity>
-                    )})}
+                    {this.tabButtons.map(tabButton => {
+                        return (
+                            <TouchableOpacity
+                                key={tabButton.viewName}
+                                activeOpacity={.3}
+                                style={{ ...tabStyles.touchables, opacity: tabButton.opacity }}
+                                onPress={() => this.props.navigation.navigate(tabButton.viewName)}
+                            >
+                                <tabButton.IconComponent
+                                    name={tabButton.iconName}
+                                    size={25}
+                                    color={colors.secondary}
+                                />
+                            </TouchableOpacity>
+                        )
+                    })}
                 </View>
             </View>
         );
@@ -75,9 +77,9 @@ const tabStyles = StyleSheet.create({
         justifyContent: 'space-evenly',
     },
     touchables: {
-        width: '33.3%', 
-        alignItems: 'center', 
-        paddingTop: 10, 
+        width: '33.3%',
+        alignItems: 'center',
+        paddingTop: 10,
         paddingBottom: 10,
     }
 })

@@ -6,7 +6,7 @@ export default class ListItem extends Component {
     render() {
         return (
             <View style={{ ...styles.container.spaceBelow }}>
-                <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.medium }}>
+                <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.size.medium }}>
                     {this.props.title}
                 </Text>
                 <Text style={{ ...styles.font.type.secondaryRegular, opacity: 0.6 }}>

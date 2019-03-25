@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 
 import connectToRedux from '../redux/lib/connectToRedux';
@@ -13,23 +13,6 @@ class AllergenList extends Component {
         super(props);
     }
 
-    // render() {
-    //     return (
-    //         <View>
-    //             <ScrollView>
-    //                 {this.props.menuItem.data.filterProperties.map(allergen => {
-    //                     return (
-    //                         <Allergen
-    //                             key={allergen}
-    //                             title={allergen}
-    //                         />
-    //                     );
-    //                 })}
-    //             </ScrollView>
-    //         </View>
-    //     )
-    // }
-
     renderAllergens = allergen => {
         return (
             <Allergen
@@ -41,10 +24,10 @@ class AllergenList extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <Transition appear="bottom">
-                    <DV2ScrollView 
-                        style={{flex: 1}} 
+                    <DV2ScrollView
+                        style={{ flex: 1 }}
                         array={this.props.menuItem.data.filterProperties}
                         render={allergen => this.renderAllergens(allergen)}
                     />

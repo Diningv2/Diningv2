@@ -22,17 +22,17 @@ class Header extends Component {
 
     render() {
         return (
-            <View style={{...styles.container.backgroundColorPrimary, ...styles.container.dropShadow}}>
-                <View style={{...styles.spacing.above.medium, padding: 20}}>
-                    <View style={{...styles.container.flexRow}}>
+            <View style={{ ...styles.container.backgroundColorPrimary, ...styles.container.dropShadow }}>
+                <View style={{ ...styles.spacing.above.medium, padding: 20 }}>
+                    <View style={{ ...styles.container.flexRow }}>
                         {this.canGoBack() &&
-                            <TouchableOpacity style={{paddingRight: 10}}
+                            <TouchableOpacity style={{ paddingRight: 10 }}
                                 onPress={() => this.goBack()}>
                                 <AntDesign name="arrowleft" size={32} color="white" />
                             </TouchableOpacity>
                         }
                         <View>
-                            <Text style={{...styles.font.type.primaryBold, ...styles.font.size.medium, color: '#fff'}}>{this.props.title}</Text>
+                            <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.medium, color: '#fff' }}>{this.props.title}</Text>
                         </View>
                     </View>
                 </View>

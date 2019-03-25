@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 
 import connectToRedux from '../redux/lib/connectToRedux';
@@ -16,7 +16,8 @@ class Ingredients extends Component {
     renderIngredients = (ingredient, i) => {
         return (
             <Ingredient
-                key={ingredient + i}  // ensuring unique key
+                // add index to ensure uniqueness
+                key={ingredient + i}
                 title={ingredient}
             />
         );
@@ -26,8 +27,8 @@ class Ingredients extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Transition appear="bottom">
-                    <DV2ScrollView 
-                        style={{flex: 1}} 
+                    <DV2ScrollView
+                        style={{ flex: 1 }}
                         array={this.props.menuItem.data.ingredients}
                         render={(ingredient, i) => this.renderIngredients(ingredient, i)}
                     />

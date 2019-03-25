@@ -22,32 +22,32 @@ class HomeView extends Component {
                     </View>
                 </Transition>
                 <Transition appear="bottom">
-                <View>
-                    <TouchableOpacity style={{...styles.bigButton, marginTop: 20}} onPress={() => this.props.navigation.navigate('DiningHallsView')}>
-                        <Text style={styles.bigButtonText}>check out the dhalls</Text>
-                    </TouchableOpacity>
-                </View>
+                    <View>
+                        <TouchableOpacity style={{ ...styles.bigButton, marginTop: 20 }} onPress={() => this.props.navigation.navigate('DiningHallsView')}>
+                            <Text style={styles.bigButtonText}>check out the dhalls</Text>
+                        </TouchableOpacity>
+                    </View>
                 </Transition>
                 <Transition shared="welcome" appear="top">
-                    <View style={{position: 'absolute', backgroundColor: '#4a86e8'}} />
+                    <View style={{ position: 'absolute', backgroundColor: '#4a86e8' }} />
                 </Transition>
             </View>
         )
     }
 }
 
-const styles =  StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center', 
+        alignItems: 'center',
         height: '100%',
         backgroundColor: '#4a86e8'
     },
     title: {
         fontSize: 50,
         color: '#fff',
-        fontFamily: 'Comfortaa Regular' 
+        fontFamily: 'Comfortaa Regular'
     },
     subtitle: {
         color: '#fff',

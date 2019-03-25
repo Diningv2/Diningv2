@@ -32,7 +32,7 @@ export function getAllDiningHallsInformation() {
     // in the payload.
     // OH, also to set "isLoading" back to false.
     const success = (diningHalls) => {
-        return { 
+        return {
             type: types.GET_ALL_DINING_HALLS_INFORMATION_SUCCESS,
             payload: {
                 diningHalls: diningHalls
@@ -46,10 +46,10 @@ export function getAllDiningHallsInformation() {
     // Maybe set some stuff back to 'undefined'
     // and of course, set "isLoading" back to false?
     const failure = (errorMessage) => {
-        return { 
+        return {
             type: types.GET_ALL_DINING_HALLS_INFORMATION_FAILURE,
             errorMessage: errorMessage
-         }
+        }
     }
 
     // -------- The actual THUNK! --------
