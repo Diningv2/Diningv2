@@ -8,6 +8,10 @@ import { createLogger } from 'redux-logger';
 
 // Redux Navigation imports
 import { FluidNavigator } from 'react-navigation-fluid-transitions';
+import { createStackNavigator } from 'react-navigation';
+import { Animated, Easing } from 'react-native';
+
+
 
 import Routes from './app/config/routes'
 import {
@@ -26,7 +30,31 @@ import { Font } from 'expo';
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
 
 // Configuring our navigation middleware
-const Router = FluidNavigator(Routes);
+const transitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 300,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+    },
+    screenInterpolator: sceneProps => {      
+      const { layout, position, scene } = sceneProps
+
+      const thisSceneIndex = scene.index
+      const width = layout.initWidth
+
+      const translateX = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex],
+        outputRange: [width, 0],
+      })
+
+      return { transform: [ { translateX } ] }
+    },
+  }
+}
+
+const Router = createStackNavigator(Routes, { transitionConfig, headerMode: 'none', navigationOptions: { header: { visible: false } } });
 const navigationMiddleware = createReactNavigationReduxMiddleware(
   state => state.nav
 );
