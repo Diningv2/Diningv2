@@ -80,8 +80,8 @@ class MenuView extends Component {
     }
 
 
- 
-    getItemsList (meal) {
+  
+    getItemsList () {
         //TODO: Clean up reused code
         //TODO: make sure navigation works here
         if (this.state.selectedTabName == 'Dinner') {

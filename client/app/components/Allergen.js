@@ -4,6 +4,7 @@ import styles from '../config/styles';
 
 export default class Allergen extends Component {
     render() {
+        console.log("title: " + this.props.title);
         return (
             <View style={{ ...styles.container.spaceBelow }}>
                 <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.medium }}>
