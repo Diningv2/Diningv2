@@ -9,6 +9,7 @@ import TopTabs from '../components/TopTabs';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 
 import styles from '../config/styles';
+import { AnimatedListItem } from '../components/Animatable';
 
 class MenuView extends Component {
 
@@ -71,7 +72,7 @@ class MenuView extends Component {
                                 <DV2ScrollView
                                     style={{ flex: 1 }}
                                     array={this.state.mealArray}
-                                    render={(dish) => this.renderMenu(dish)}
+                                    render={(dish, index) => this.renderMenu(dish, index)}
                                 />
                             </View>}
                         </ScrollView>
@@ -81,17 +82,19 @@ class MenuView extends Component {
         )
     }
 
-    renderMenu = (dish) => {
+    renderMenu = (dish, index) => {
         return (
-            <TouchableOpacity
-                key={dish.name}
-                onPress={() => {
-                    this.props.getMenuItemInformation(dish.itemID);
-                    this.props.navigation.navigate('MenuItemView');
-                }}
-            >
-                <ListItem title={dish.name} />
-            </TouchableOpacity>
+            <AnimatedListItem key={index} index={index}>
+                <TouchableOpacity
+                    key={dish.name}
+                    onPress={() => {
+                        this.props.getMenuItemInformation(dish.itemID);
+                        this.props.navigation.navigate('MenuItemView');
+                    }}
+                >
+                    <ListItem title={dish.name} />
+                </TouchableOpacity>
+            </AnimatedListItem>
         );
     }
 }

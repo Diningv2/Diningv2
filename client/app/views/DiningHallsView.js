@@ -10,6 +10,7 @@ import DiningHallItem from '../components/DiningHallItem';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
 import dHallIDs from '../config/dHallIDs';
+import { AnimatedListItem } from '../components/Animatable';
 
 class DiningHallsView extends Component {
 
@@ -23,21 +24,29 @@ class DiningHallsView extends Component {
         }
     }
 
+    dummy = [
+        {name: "Morse", busyness: 6, isOpen: true},
+        {name: "Berkeley", busyness: 3, isOpen: true},
+        {name: "Davenport", busyness: 5, isOpen: true},
+    ]
+
     renderDiningHall = (diningHall, index) => {
         return (
-            <TouchableOpacity
-                key={diningHall.name}
-                onPress={() => {
-                    this.props.getMenus(dHallIDs[diningHall.name]); // Set redux state with menu for this dHall
-                    this.props.navigation.navigate('MenuView');
-                }}
-            >
-                <DiningHallItem
-                    name={diningHall.name}
-                    isOpen={diningHall.isOpen}
-                    busyness={diningHall.busyness}
-                />
-            </TouchableOpacity>
+            <AnimatedListItem key={index} index={index}>
+                <TouchableOpacity
+                    key={diningHall.name}
+                    onPress={() => {
+                        this.props.getMenus(dHallIDs[diningHall.name]); // Set redux state with menu for this dHall
+                        this.props.navigation.navigate('MenuView');
+                    }}
+                >
+                    <DiningHallItem
+                        name={diningHall.name}
+                        isOpen={diningHall.isOpen}
+                        busyness={diningHall.busyness}
+                    />
+                </TouchableOpacity>          
+            </AnimatedListItem>
         )
     }
 
@@ -48,7 +57,7 @@ class DiningHallsView extends Component {
                 {!this.props.diningHallsList.isLoading &&
                     <View>
                         <DV2ScrollView style={{ flex: 1 }}
-                            array={this.props.diningHallsList.data}
+                            array={this.dummy}
                             render={(element, index) => this.renderDiningHall(element, index)}
                         />
                     </View>
