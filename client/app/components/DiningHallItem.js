@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import styles from '../config/styles';
 import { Transition } from 'react-navigation-fluid-transitions';
 
@@ -71,12 +71,38 @@ export default class DiningHallItem extends Component {
 
     isOpenStyle = () => this.props.isOpen ? { opacity: 1 } : { opacity: 0.9 }
 
+    imageSource = () => {
+        switch (this.props.name) {
+            case "Berkeley": return require("../../assets/images/Berkeley.png");
+            case "Branford": return require("../../assets/images/Branford.png");
+            case "Grace Hopper": return require("../../assets/images/Grace_Hopper.png");
+            case "Davenport": return require("../../assets/images/Davenport.png");
+            case "Jonathan Edwards": return require("../../assets/images/Jonathan_Edwards.png");
+            case "Morse": return require("../../assets/images/Morse.png");
+            case "Pierson": return require("../../assets/images/Pierson.png");
+            case "Saybrook": return require("../../assets/images/Saybrook.png");
+            case "Silliman": return require("../../assets/images/Silliman.png");
+            case "Stiles": return require("../../assets/images/Ezra_Stiles.png");
+            case "Timothy Dwight": return require("../../assets/images/Timothy_Dwight.png");
+            case "Trumbull": return require("../../assets/images/Trumbull.png");
+            case "Pauli Murray": return require("../../assets/images/Pauli_Murray.png");
+            case "Franklin": return require("../../assets/images/Benjamin_Franklin.png");
+            default: return require("../../assets/images/Yale_College.png")
+        }
+    }
+
     render() {
         return (
             <Transition appear="fade">
                 <View style={this.isOpenStyle()}>
                     <View style={{ ...styles.container.flexRow, ...styles.container.spaceBelow }}>
-                        <View style={{ width: '50%' }}>
+                        <View style={{ width: '10%' }}>
+                            <Image style={{ width: 30, height: 37 }} source={this.imageSource()} />
+                        </View>
+                        <View style={{ width: '2.5%' }}>
+                            <Text></Text>
+                        </View>
+                        <View style={{ width: '47.5%' }}>
                             <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.medium }}>
                                 {this.props.name}
                             </Text>
@@ -84,7 +110,10 @@ export default class DiningHallItem extends Component {
                                 {this.props.isOpen ? "Open! 🍽" : "Closed 😞"}
                             </Text>
                         </View>
-                        <View style={{ alignItems: 'flex-end', width: '50%' }}>
+                        <View style={{ width: '5%' }}>
+                            <Text></Text>
+                        </View>
+                        <View style={{ alignItems: 'flex-end', width: '35%' }}>
                             <Gauge busyness={this.props.busyness} isOpen={this.props.isOpen} />
                         </View>
                     </View>

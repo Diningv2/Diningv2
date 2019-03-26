@@ -38,7 +38,7 @@ const transitionConfig = () => {
       timing: Animated.timing,
       useNativeDriver: true,
     },
-    screenInterpolator: sceneProps => {      
+    screenInterpolator: sceneProps => {
       const { layout, position, scene } = sceneProps
 
       const thisSceneIndex = scene.index
@@ -49,7 +49,7 @@ const transitionConfig = () => {
         outputRange: [width, 0],
       })
 
-      return { transform: [ { translateX } ] }
+      return { transform: [{ translateX }] }
     },
   }
 }
@@ -107,14 +107,14 @@ export default class App extends React.Component {
     })
 
     // App is ready to be loaded.
-    this.setState({appHasLoaded: true});
+    this.setState({ appHasLoaded: true });
 
   }
-  
+
   render() {
     return (
       <Provider store={store}>
-        {this.state.appHasLoaded && 
+        {this.state.appHasLoaded &&
           <ReduxRouterWithNavState />
         }
       </Provider>
