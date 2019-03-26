@@ -57,7 +57,7 @@ class DiningHallsView extends Component {
                 {!this.props.diningHallsList.isLoading &&
                     <View>
                         <DV2ScrollView style={{ flex: 1 }}
-                            array={this.dummy}
+                            array={this.props.diningHallsList.data}
                             render={(element, index) => this.renderDiningHall(element, index)}
                         />
                     </View>
