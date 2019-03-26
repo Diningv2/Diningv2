@@ -53,18 +53,12 @@ export default function parseMenuItemData(
         // separates out multi-item ingredients
         ingredient[1]
             .split(",")
-            .map(i => i.strip())
+            .map(i => i.trim())
             .forEach(i => ingredientList.push(i));
     }
     // remove duplicate ingredients
     ingredientList = ingredientList.filter(
-        (entry, index, self) =>
-            index ===
-            self.findIndex(
-                otherEntry =>
-                    otherEntry.name === entry.name &&
-                    otherEntry.itemID === entry.itemID
-            )
+        (entry, index, self) => index === self.findIndex(otherEntry => otherEntry === entry)
     );
 
     // Process filters
