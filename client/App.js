@@ -26,6 +26,10 @@ import reducers from './app/redux/reducers';
 // Expo-related functions, will help us import fonts
 import { Font } from 'expo';
 
+// Push Notifications Utility
+import registerForPushNotificationsAsync from './app/lib/push-utility';
+import { Notifications } from 'expo';
+
 // Configuring logger for the state of our app
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
 
@@ -106,10 +110,21 @@ export default class App extends React.Component {
       'SF Pro Text Bold': require('./assets/fonts/SFProText/SF-Pro-Text-Bold.ttf'),
     })
 
+    registerForPushNotificationsAsync();
+
+    // Push notofications listener
+    this.listener = Notifications.addListener(this.handleNotification);
+
     // App is ready to be loaded.
     this.setState({appHasLoaded: true});
 
   }
+
+  handleNotification = ({ origin, data }) => {
+    console.log(
+      `Push notification ${origin} with data: ${JSON.stringify(data)}`,
+    );
+  };
   
   render() {
     return (
