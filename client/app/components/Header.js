@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 
@@ -19,6 +19,7 @@ class Header extends Component {
     // you're actually able to go back in the navigation stack
     canGoBack = () => this.props.canGoBack
     goBack = () => this.props.navigation.goBack();
+    hasImage = () => this.props.image;
 
     render() {
         return (
@@ -26,13 +27,18 @@ class Header extends Component {
                 <View style={{ ...styles.spacing.above.medium, padding: 20 }}>
                     <View style={{ ...styles.container.flexRow }}>
                         {this.canGoBack() &&
-                            <TouchableOpacity style={{ paddingRight: 10 }}
+                            <TouchableOpacity style={{ paddingRight: 10, width: '15%' }}
                                 onPress={() => this.goBack()}>
                                 <AntDesign name="arrowleft" size={32} color="white" />
                             </TouchableOpacity>
                         }
-                        <View>
-                            <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.medium, color: '#fff' }}>{this.props.title}</Text>
+                        {this.hasImage() &&
+                            <View>
+                                <Image style={{ width: '10%' }} source={this.props.image} />
+                            </View>
+                        }
+                        <View style={{ width: '85%' }}>
+                            <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.large, color: '#fff' }}>{this.props.title}</Text>
                         </View>
                     </View>
                 </View>
