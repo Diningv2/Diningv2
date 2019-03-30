@@ -73,21 +73,21 @@ export default class DiningHallItem extends Component {
 
     imageSource = () => {
         switch (this.props.name) {
-            case "Berkeley": return require("../../assets/images/Berkeley.png");
-            case "Branford": return require("../../assets/images/Branford.png");
-            case "Grace Hopper": return require("../../assets/images/Grace_Hopper.png");
-            case "Davenport": return require("../../assets/images/Davenport.png");
-            case "Jonathan Edwards": return require("../../assets/images/Jonathan_Edwards.png");
-            case "Morse": return require("../../assets/images/Morse.png");
-            case "Pierson": return require("../../assets/images/Pierson.png");
-            case "Saybrook": return require("../../assets/images/Saybrook.png");
-            case "Silliman": return require("../../assets/images/Silliman.png");
-            case "Stiles": return require("../../assets/images/Ezra_Stiles.png");
-            case "Timothy Dwight": return require("../../assets/images/Timothy_Dwight.png");
-            case "Trumbull": return require("../../assets/images/Trumbull.png");
-            case "Pauli Murray": return require("../../assets/images/Pauli_Murray.png");
-            case "Franklin": return require("../../assets/images/Benjamin_Franklin.png");
-            default: return require("../../assets/images/Yale_College.png")
+            case "Berkeley": return require("../../assets/images/crests/Berkeley.png");
+            case "Branford": return require("../../assets/images/crests/Branford.png");
+            case "Grace Hopper": return require("../../assets/images/crests/Grace_Hopper.png");
+            case "Davenport": return require("../../assets/images/crests/Davenport.png");
+            case "Jonathan Edwards": return require("../../assets/images/crests/Jonathan_Edwards.png");
+            case "Morse": return require("../../assets/images/crests/Morse.png");
+            case "Pierson": return require("../../assets/images/crests/Pierson.png");
+            case "Saybrook": return require("../../assets/images/crests/Saybrook.png");
+            case "Silliman": return require("../../assets/images/crests/Silliman.png");
+            case "Stiles": return require("../../assets/images/crests/Ezra_Stiles.png");
+            case "Timothy Dwight": return require("../../assets/images/crests/Timothy_Dwight.png");
+            case "Trumbull": return require("../../assets/images/crests/Trumbull.png");
+            case "Pauli Murray": return require("../../assets/images/crests/Pauli_Murray.png");
+            case "Franklin": return require("../../assets/images/crests/Benjamin_Franklin.png");
+            default: return require("../../assets/images/crests/Yale_College.png")
         }
     }
 
@@ -97,11 +97,12 @@ export default class DiningHallItem extends Component {
                 <View style={this.isOpenStyle()}>
                     <View style={{ ...styles.container.flexRow, ...styles.container.spaceBelow }}>
                         <View style={{ width: '10%' }}>
-                            <Image style={{ width: 30, height: 37 }} source={this.imageSource()} />
+                            <Image resizeMode='contain'
+                                style={{ flex: 1, width: undefined, height: undefined }}
+                                source={this.imageSource()}
+                            />
                         </View>
-                        <View style={{ width: '2.5%' }}>
-                            <Text></Text>
-                        </View>
+                        <View style={{ width: '2.5%' }} />
                         <View style={{ width: '47.5%' }}>
                             <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.medium }}>
                                 {this.props.name}
@@ -110,9 +111,7 @@ export default class DiningHallItem extends Component {
                                 {this.props.isOpen ? "Open! 🍽" : "Closed 😞"}
                             </Text>
                         </View>
-                        <View style={{ width: '5%' }}>
-                            <Text></Text>
-                        </View>
+                        <View style={{ width: '5%' }} />
                         <View style={{ alignItems: 'flex-end', width: '35%' }}>
                             <Gauge busyness={this.props.busyness} isOpen={this.props.isOpen} />
                         </View>

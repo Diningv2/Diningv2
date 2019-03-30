@@ -34,7 +34,7 @@ class Header extends Component {
                         }
                         {this.hasImage() &&
                             <View>
-                                <Image style={{ width: 30, height: 37 }} source={this.props.image} />
+                                <Image style={{ width: '10%' }} source={this.props.image} />
                             </View>
                         }
                         <View style={{ width: '85%' }}>
