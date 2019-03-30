@@ -8,32 +8,26 @@ export default class BoolFilters extends Component {
     }
 	render() {
         return (
-            <View style={{ ...styles.container.flexRow }}>
+            <View style={{ ...styles.container.flexRow, height:'7%' }}>
             	{this.props.veg && 
-	            	<View style={{ ...filterStyles.boolFilters }}>
-				        <Image style={{ width: 30, height: 37 }} source={require("../../assets/images/boolfilters/veg.png")} />
+	            	<View style={{ width: '33.3%' }}>
+				        <Image resizeMode='contain' style={{ flex: 1, width: undefined, height: undefined }}
+				        	source={require("../../assets/images/boolfilters/veg.png")} />
 				    </View>
 				}
 				{this.props.vegan && 
-	            	<View style={{ ...filterStyles.boolFilters }}>
-				        <Image style={{ width: 30, height: 37 }} source={require("../../assets/images/boolfilters/vegan.png")} />
+	            	<View style={{ width: '33.3%' }}>
+				        <Image resizeMode='contain' style={{ flex: 1, width: undefined, height: undefined }}
+				        	source={require("../../assets/images/boolfilters/vegan.png")} />
 				    </View>
 				}
 				{this.props.gf && 
-	            	<View style={{ ...filterStyles.boolFilters }}>
-				        <Image style={{ width: 30, height: 37 }} source={require("../../assets/images/boolfilters/gf.png")} />
+	            	<View style={{ width: '33.3%' }}>
+				        <Image resizeMode='contain' style={{ flex: 1, width: undefined, height: undefined }}
+				        	source={require("../../assets/images/boolfilters/gf.png")} />
 				    </View>
 				}
 			</View>
         )
     }
 }
-
-const filterStyles = StyleSheet.create({
-    boolFilters: {
-        alignItems: 'center',
-        paddingTop: 10,
-        paddingBottom: 10,
-        width: '33.3%'
-    }
-})
