@@ -10,6 +10,7 @@ import DiningHallItem from '../components/DiningHallItem';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
 import dHallIDs from '../config/dHallIDs';
+import { Searchbar } from '../components/Searchbar';
 
 class DiningHallsView extends Component {
 
@@ -45,6 +46,7 @@ class DiningHallsView extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Header title="Dining Halls" />
+                <Searchbar />
                 {!this.props.diningHallsList.isLoading &&
                     <View>
                         <DV2ScrollView style={{ flex: 1 }}
