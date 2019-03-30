@@ -23,7 +23,7 @@ class HomeView extends Component {
                 </Transition>
                 <Transition appear="bottom">
                     <View>
-                        <TouchableOpacity style={{ ...styles.bigButton, marginTop: 20 }} onPress={() => this.props.navigation.navigate('DiningHallsView')}>
+                        <TouchableOpacity style={{ ...styles.bigButton, marginTop: 20 }} onPress={() => this.props.navigation.navigate('AllergensView')}>
                             <Text style={styles.bigButtonText}>check out the dhalls</Text>
                         </TouchableOpacity>
                     </View>
