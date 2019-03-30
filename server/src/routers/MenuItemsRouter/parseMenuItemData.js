@@ -62,10 +62,18 @@ export default function parseMenuItemData(
     );
 
     // Process filters
+    var isVegan = false; 
+    var isVegetarian = false;
+    var isGlutenFree = false;
     var filterList = []; // list of applicable filters
     var boolFilters = filterData.DATA[0].slice(2, filters.length + 2);
     filters.map((filter, i) => {
-        if (boolFilters[i] == 1) filterList.push(filter);
+        if (boolFilters[i] == 1) {
+            if (filter == "Vegan") isVegan = true; 
+            else if (filter == "Vegetarian") isVegetarian = true;
+            else if (filter == "Gluten Free") isVegetarian = true;
+            else filterList.push(filter);
+        }   
     });
 
     return {
@@ -73,6 +81,9 @@ export default function parseMenuItemData(
         nutrition: parseNutritionInfo(nutritionData.DATA[0]),
         ingredients: ingredientList,
         filterProperties: filterList,
+        isVegan: isVegan, 
+        isVegetarian: isVegetarian, 
+        isGlutenFree: isGlutenFree, 
         rating: 5 // TODO : this line is temporarily hard coded
     };
 }
