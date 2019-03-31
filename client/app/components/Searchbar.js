@@ -11,7 +11,10 @@ export class Searchbar extends Component {
     state = { searchTerm: "", height: 0 };
 
     // Sets the local state of text input to be the search term
-    setSearchTerm = (searchTerm) => this.setState({searchTerm});
+    setSearchTerm = (searchTerm) => {
+        this.setState({searchTerm});
+        this.props.autoUpdate && this.onSearch(); // will perform on search on text change if 'autoupdate' is true
+    }
 
     // Autoresizes TextInput height on text change
     setHeight = (event) => this.setState({height: event.nativeEvent.contentSize.height});

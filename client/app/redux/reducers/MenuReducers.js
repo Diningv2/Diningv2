@@ -9,7 +9,8 @@ import * as types from '../actions/types';
  * */
 const initialState = {
     isLoading: true,
-    errorMessage: "",
+    errorMessage: undefined,
+    hasError: false,
     data: undefined,
 }
 
@@ -22,6 +23,7 @@ export const menusList = createReducer(initialState, {
     [types.GET_MENU_INFORMATION_REQUEST](state, action) {
         return {
             ...state,
+            hasError: false,
             isLoading: true // we've initiated the request, set loading to true
         }
     },
@@ -31,6 +33,7 @@ export const menusList = createReducer(initialState, {
         return {
             ...state,
             data: menusArray[0],
+            hasError: false,
             isLoading: false // set isLoading to false so UI shows the data
         }
     },
@@ -38,6 +41,7 @@ export const menusList = createReducer(initialState, {
         return {
             ...state,
             data: undefined,
+            hasError: true,
             isLoading: false, // set isLoading to false - not still loading :(
             errorMessage: action.errorMessage // can add to display error msg
         }
