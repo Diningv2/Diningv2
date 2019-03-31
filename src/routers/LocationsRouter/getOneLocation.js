@@ -6,10 +6,18 @@ export default async function getOneLocation(data, query) {
     );
     if (location.length) {
         const entry = location[0];
+        var todayHours = {};
+        var tomorrowHours = {};
+        try {
+            todayHours = await getHours(query.location, 0)
+            tomorrowHours = await getHours(query.location, 1)
+        } catch(e) {
+            console.log("getHours Failed in LocationsRouter/getOneLocation.js");
+        }
         return {
             name: entry[data.COLUMNS.indexOf("DININGLOCATIONNAME")],
-            todayHours: await getHours(query.location, 0),
-            tomorrowHours: await getHours(query.location, 1),
+            todayHours: todayHours,
+            tomorrowHours: tomorrowHours,
             isOpen: parseFloat(entry[data.COLUMNS.indexOf("ISCLOSED")])
                 ? false
                 : true,

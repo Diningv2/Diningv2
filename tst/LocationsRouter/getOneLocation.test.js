@@ -36,5 +36,5 @@ test("getOneLocation() -- throws when getHours() throws", async () => {
     });
     await expect(
         getOneLocation(responses.locationResponse, { location: 5 })
-    ).rejects.toThrow("Empty object returned from YaleDining API");
+    ).resolves.toEqual(responses.morseExpectedResponseBrokenHours);
 });

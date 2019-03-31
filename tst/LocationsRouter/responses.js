@@ -631,6 +631,15 @@ export const morseExpectedResponse = {
     geolocation: [41.312532, -72.930352]
 };
 
+export const morseExpectedResponseBrokenHours = {
+    name: "Morse",
+    todayHours: {},
+    tomorrowHours: {},
+    isOpen: false,
+    busyness: 0,
+    geolocation: [41.312532, -72.930352]
+};
+
 export const stilesExpectedResponse = {
     name: "Stiles",
     todayHours: singleLocationToday,
