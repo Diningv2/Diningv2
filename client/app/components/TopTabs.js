@@ -49,7 +49,8 @@ class TopTabs extends Component {
                             >
                                 <Text style={{ 
                                     ...styles.font.type.primaryBold, 
-                                    color: this.textColor(tabButton) 
+                                    color: this.textColor(tabButton),
+                                    textAlign: 'center',
                                 }}>{tabButton.tabName}</Text>
                             </TouchableOpacity>
                         )
