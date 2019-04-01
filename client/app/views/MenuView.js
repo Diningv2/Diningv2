@@ -64,17 +64,15 @@ class MenuView extends Component {
                 {!this.props.menusList.isLoading &&
                     <View>
                         <Header canGoBack title={this.props.menusList.data.location} />
-                        <ScrollView>
-                            <TopTabs tabButtons={this.dynamicTabButtons()} />
-                            <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.color.primary, textAlign: 'center' }}>{this.state.hoursMessage}</Text>
-                            {this.state.mealArray && <View>
-                                <DV2ScrollView
-                                    style={{ flex: 1 }}
-                                    array={this.state.mealArray}
-                                    render={(dish) => this.renderMenu(dish)}
-                                />
-                            </View>}
-                        </ScrollView>
+                        <TopTabs tabButtons={this.dynamicTabButtons()} />
+                        <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.color.primary, textAlign: 'center' }}>{this.state.hoursMessage}</Text>
+                        {this.state.mealArray && <View>
+                            <DV2ScrollView
+                                style={{ flex: 1 }}
+                                array={this.state.mealArray}
+                                render={(dish) => this.renderMenu(dish)}
+                            />
+                        </View>}
                     </View>
                 }
             </View>
