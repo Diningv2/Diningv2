@@ -10,6 +10,7 @@ import DiningHallItem from '../components/DiningHallItem';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
 import dHallIDs from '../config/dHallIDs';
+import CenterTextView from '../components/CenterTextView';
 
 class DiningHallsView extends Component {
 
@@ -46,7 +47,7 @@ class DiningHallsView extends Component {
             <View style={{ flex: 1 }}>
                 <Header title="Dining Halls" />
                 {!this.props.diningHallsList.isLoading &&
-                    <View>
+                    <View style={{paddingBottom: 50}}>
                         <DV2ScrollView style={{ flex: 1 }}
                             array={this.props.diningHallsList.data}
                             render={(element, index) => this.renderDiningHall(element, index)}
@@ -54,11 +55,7 @@ class DiningHallsView extends Component {
                     </View>
                 }
                 {this.props.diningHallsList.isLoading &&
-                    <Transition appear="bottom">
-                        <View style={{ ...styles.container.center }}>
-                            <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.color.primary }}>Loading...</Text>
-                        </View>
-                    </Transition>
+                    <CenterTextView message="Loading..." />
                 }
             </View>
         )

@@ -25,6 +25,7 @@ server/node_modules/*
 ###################
 node_modules/
 npm-debug.*
+.expo/
 *.jks
 *.p12
 *.key
