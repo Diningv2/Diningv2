@@ -48,14 +48,7 @@ class DiningHallsView extends Component {
                 <Header title="Dining Halls" />
                 {this.props.diningHallsList.isLoading 
                     ? (
-                        <Transition appear="bottom">
-                            <View style={{ ...styles.container.center }}>
-                                <Text style={{ 
-                                    ...styles.font.type.primaryRegular, 
-                                    ...styles.font.color.primary 
-                                }}>Loading...</Text>
-                            </View>
-                        </Transition>
+                        <CenterTextView message="Loading..." />
                     ) : (
                         <View>
                             <DV2ScrollView style={{ flex: 1 }}
