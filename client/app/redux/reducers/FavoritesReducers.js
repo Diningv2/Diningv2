@@ -22,6 +22,7 @@ export const favoritesList = createReducer(initialState, {
     [types.GET_FAVORITES_REQUEST](state, action) {
         return {
             ...state,
+            hasError: false,
             isLoading: true // we've initiated the request, set loading to true
         }
     },
@@ -30,6 +31,7 @@ export const favoritesList = createReducer(initialState, {
         return {
             ...state,
             data: favoritesArray,
+            hasError: false,
             isLoading: false // set isLoading to false so UI shows the data
         }
     },
@@ -37,6 +39,7 @@ export const favoritesList = createReducer(initialState, {
         return {
             ...state,
             data: undefined,
+            hasError: true,
             isLoading: false, // set isLoading to false - not still loading :(
             errorMessage: action.errorMessage // can add to display error msg
         }
