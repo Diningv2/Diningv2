@@ -32,7 +32,14 @@ class TopTabs extends Component {
                             <TouchableOpacity
                                 key={tabButton.tabName}
                                 activeOpacity={.3}
-                                style={{ ...tabStyles.touchables, borderColor: colors.primary, borderWidth: 0.5, backgroundColor: this.bgColor(tabButton), width: this.relativeWidth, opacity: tabButton.opacity }}
+                                style={{ 
+                                    ...tabStyles.touchables, 
+                                    borderColor: colors.primary, 
+                                    borderWidth: 0.5, 
+                                    backgroundColor: this.bgColor(tabButton), 
+                                    width: this.relativeWidth, 
+                                    opacity: tabButton.opacity 
+                                }}
                                 onPress={() => {
                                     if (this.state.current.tabName != tabButton.tabName) {
                                         tabButton.function();
@@ -40,7 +47,10 @@ class TopTabs extends Component {
                                     }
                                 }}
                             >
-                                <Text style={{ ...styles.font.type.primaryBold, color: this.textColor(tabButton) }}>{tabButton.tabName}</Text>
+                                <Text style={{ 
+                                    ...styles.font.type.primaryBold, 
+                                    color: this.textColor(tabButton) 
+                                }}>{tabButton.tabName}</Text>
                             </TouchableOpacity>
                         )
                     })}
@@ -61,6 +71,7 @@ const tabStyles = StyleSheet.create({
     },
     touchables: {
         alignItems: 'center',
+        justifyContent: 'center',
         paddingTop: 10,
         paddingBottom: 10,
     }
