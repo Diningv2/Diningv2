@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, Animated } from 'react-native';
+import { View, TextInput, TouchableOpacity, Keyboard, Animated } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 
 import connectToRedux from '../redux/lib/connectToRedux';
@@ -59,7 +59,10 @@ export class Searchbar extends Component {
                         </View>
                         <TouchableOpacity 
                             style={{ paddingLeft: 10 }}
-                            onPress={this.onSearch}>
+                            onPress={() => {
+                                Keyboard.dismiss();
+                                this.onSearch();
+                            }}>
                             <Entypo name="magnifying-glass" size={32} color="white" />
                         </TouchableOpacity>
                     </View>
