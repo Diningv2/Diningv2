@@ -22,17 +22,29 @@ class MenuView extends Component {
     state = {
         mealArray: undefined,
         mealArrayFiltered: undefined,
+        searchTerm: "",
         hoursMessage: ""
     }
 
-    performSearch = (searchTerm) => {
-        if (searchTerm === "") {
-            this.setState({mealArrayFiltered: this.state.mealArray});
-            return;
-        }
+    // We need to call performSearch with the new
+    // search term when a top tab is pressed,
+    // so we need to keep a local state of the search term
+    updateSearchTerm = (searchTerm) => {
+        this.setState({ searchTerm: searchTerm });
+    }
 
-        const mealArrayFiltered = search(searchTerm, this.state.mealArray, ['name']);
-        this.setState({mealArrayFiltered});
+    performSearch = (searchTerm) => {
+        // If the search term is empty
+        // just output everything
+        if (searchTerm.trim() == "") {
+            this.setState({
+                mealArrayFiltered: this.state.mealArray
+            })
+        // Otherwise do an actual search on the array
+        } else {
+            const mealArrayFiltered = search(searchTerm, this.state.mealArray, ['name']);
+            this.setState({mealArrayFiltered});
+        }
     }
 
     generateHoursMessage = (mealType) => {
@@ -65,7 +77,9 @@ class MenuView extends Component {
                     const mealArray = this.props.menusList.data.today[mealType];
                     const mealArrayFiltered = mealArray;
                     const hoursMessage = this.generateHoursMessage(mealType);
-                    this.setState({ mealArray, mealArrayFiltered, hoursMessage })
+                    this.setState({ mealArray, mealArrayFiltered, hoursMessage }, () => {
+                        this.performSearch(this.state.searchTerm);
+                    })
                 }
             }
         })
@@ -81,7 +95,7 @@ class MenuView extends Component {
                 {hasLoadedSuccessfully &&
                     <View>
                         <Header canGoBack title={this.props.menusList.data.location} />
-                        <Searchbar autoUpdate onSearch={this.performSearch} />
+                        <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
                         <TopTabs tabButtons={this.dynamicTabButtons()} />
                         <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.color.primary, textAlign: 'center' }}>{this.state.hoursMessage}</Text>
                         {this.state.mealArrayFiltered && <View>
