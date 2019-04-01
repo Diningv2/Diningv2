@@ -9,8 +9,10 @@ import connectToRedux from '../redux/lib/connectToRedux';
 import DiningHallItem from '../components/DiningHallItem';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
+import ListItem from '../components/ListItem';
 import dHallIDs from '../config/dHallIDs';
 import BottomTabs from '../components/BottomTabs';
+import CenterTextView from '../components/CenterTextView';
 
 class FavoritesView extends Component {
 
@@ -19,9 +21,9 @@ class FavoritesView extends Component {
     }
 
     componentDidMount() {
-        // if (this.props.favoritesList.isLoading) {
-        //     this.props.getFavoritesInformation();
-        // }
+        if (this.props.favoritesList.isLoading) {
+            this.props.getFavorites(0);
+        }
     }
 
     render() {
@@ -30,14 +32,7 @@ class FavoritesView extends Component {
                 <Header title="Favorites" />
                 {this.props.favoritesList.isLoading
                     ? (
-                        <Transition appear="bottom">
-                            <View style={{ ...styles.container.center }}>
-                                <Text style={{ 
-                                    ...styles.font.type.primaryRegular, 
-                                    ...styles.font.color.primary 
-                                }}>Loading...</Text>
-                            </View>
-                        </Transition>
+                        <CenterTextView message="Loading..." />
                     ) : (
                         <View>
                             <DV2ScrollView style={{ flex: 1 }}

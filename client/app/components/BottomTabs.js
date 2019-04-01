@@ -39,7 +39,7 @@ class BottomTabs extends Component {
 
     render() {
         return (
-            <View style={tabStyles.container}>
+            <View style={tabStyles.container2}>
                 <View style={{
                     ...styles.container.backgroundColorPrimary,
                     ...tabStyles.bottomTabs,
@@ -68,6 +68,10 @@ class BottomTabs extends Component {
 }
 
 const tabStyles = StyleSheet.create({
+    container2: {
+        position: 'absolute',
+        bottom: 0,
+    },
     container: {
         flex: 1,
         justifyContent: 'flex-end',

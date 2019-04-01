@@ -1,7 +1,7 @@
 import * as types from './types';
 import { get } from '../../lib/api-utility';
 
-export function getMenus(locationID) {
+export function getFavorites(userID) {
 
     // -------- The Request Action --------
     // Usually called to let the Redux reducer
