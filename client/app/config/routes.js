@@ -10,7 +10,7 @@ const Routes = {
     HomeView: { screen: HomeView },
     FriendsView: { screen: TopTabsTemplateView },
     DiningHallsView: { screen: DiningHallsView },
-    FavoritesView: { screen: TemplateView },
+    FavoritesView: { screen: FavoritesView },
     MenuView: { screen: MenuView },
     MenuItemView: { screen: MenuItemView },
 };
