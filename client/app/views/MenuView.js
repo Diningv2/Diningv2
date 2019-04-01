@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
 
 import connectToRedux from '../redux/lib/connectToRedux';
+import { search } from '../lib/search-utility';
 
 import Header from '../components/Header';
 import ListItem from '../components/ListItem';
 import TopTabs from '../components/TopTabs';
+import Searchbar from '../components/Searchbar';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 
 import styles from '../config/styles';
+import CenterTextView from '../components/CenterTextView';
 
 class MenuView extends Component {
 
@@ -18,7 +21,18 @@ class MenuView extends Component {
 
     state = {
         mealArray: undefined,
+        mealArrayFiltered: undefined,
         hoursMessage: ""
+    }
+
+    performSearch = (searchTerm) => {
+        if (searchTerm === "") {
+            this.setState({mealArrayFiltered: this.state.mealArray});
+            return;
+        }
+
+        const mealArrayFiltered = search(searchTerm, this.state.mealArray, ['name']);
+        this.setState({mealArrayFiltered});
     }
 
     generateHoursMessage = (mealType) => {
@@ -49,8 +63,9 @@ class MenuView extends Component {
                 tabName: formatted[mealType],
                 function: () => {
                     const mealArray = this.props.menusList.data.today[mealType];
+                    const mealArrayFiltered = mealArray;
                     const hoursMessage = this.generateHoursMessage(mealType);
-                    this.setState({ mealArray, hoursMessage })
+                    this.setState({ mealArray, mealArrayFiltered, hoursMessage })
                 }
             }
         })
@@ -59,20 +74,29 @@ class MenuView extends Component {
     }
 
     render() {
+        const hasLoadedSuccessfully = !this.props.menusList.isLoading && !this.props.menusList.hasError
+        const hasLoadedFailed = !this.props.menusList.isLoading && this.props.menusList.hasError;
         return (
             <View style={{ flex: 1 }}>
-                {!this.props.menusList.isLoading &&
+                {hasLoadedSuccessfully &&
                     <View>
                         <Header canGoBack title={this.props.menusList.data.location} />
+                        <Searchbar autoUpdate onSearch={this.performSearch} />
                         <TopTabs tabButtons={this.dynamicTabButtons()} />
                         <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.color.primary, textAlign: 'center' }}>{this.state.hoursMessage}</Text>
-                        {this.state.mealArray && <View>
+                        {this.state.mealArrayFiltered && <View>
                             <DV2ScrollView
                                 style={{ flex: 1 }}
-                                array={this.state.mealArray}
+                                array={this.state.mealArrayFiltered}
                                 render={(dish) => this.renderMenu(dish)}
                             />
                         </View>}
+                    </View>
+                }
+                {hasLoadedFailed &&
+                    <View style={{flex: 1}}>
+                        <Header canGoBack title="Server Error" />
+                        <CenterTextView message="No menu data available :(" />
                     </View>
                 }
             </View>
