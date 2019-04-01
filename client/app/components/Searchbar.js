@@ -44,13 +44,14 @@ export class Searchbar extends Component {
     render() {
         return (
             <View style={{...this.searchBarStyles.container}}>
-                <View style={{ padding: 20 }}>
+                <View>
                     <View style={{ ...styles.container.flexRow }}>
                         <View style={{width: '80%'}}>
                             <TextInput 
                                 multiline
-                                style={{...this.searchBarStyles.textInput, 
-                                        height: Math.max(35, this.state.height)
+                                style={{
+                                    ...this.searchBarStyles.textInput, 
+                                    height: Math.max(35, this.state.height)
                                 }}
                                 onChangeText={this.setSearchTerm} 
                                 onContentSizeChange={this.setHeight}
