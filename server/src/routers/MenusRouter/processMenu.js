@@ -47,15 +47,17 @@ export default function processMenu(data, query) {
             for (let mealName in mealNames) {
                 const filteredData = data.DATA.filter(
                     entry =>
-                        mealNames[entry[data.COLUMNS.indexOf("MEALNAME")]] ==
-                            mealName &&
+                        entry[data.COLUMNS.indexOf("MEALNAME")] == mealName &&
                         entry[data.COLUMNS.indexOf("MENUDATE")] == today
                 );
                 const menuItemList = getMenuItemList(
                     data.COLUMNS,
                     filteredData
                 );
-                menuItemList.forEach(item => completeMenuItemList.push(item));
+                menuItemList &&
+                    menuItemList.forEach(item =>
+                        completeMenuItemList.push(item)
+                    );
             }
             return completeMenuItemList;
         } else {
