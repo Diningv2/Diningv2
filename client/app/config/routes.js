@@ -8,7 +8,7 @@ import MenuItemView from '../views/MenuItemView';
 
 const Routes = {
     HomeView: { screen: HomeView },
-    FriendsView: { screen: TopTabsTemplateView },
+    AllergensView: { screen: TopTabsTemplateView },
     DiningHallsView: { screen: DiningHallsView },
     FavoritesView: { screen: TemplateView },
     MenuView: { screen: MenuView },

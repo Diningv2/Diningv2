@@ -6,9 +6,9 @@ import connectToRedux from '../redux/lib/connectToRedux';
 import sp from '../redux/lib/stateProperties';
 
 import styles, { colors } from '../config/styles';
-import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 class BottomTabs extends Component {
 
@@ -18,10 +18,10 @@ class BottomTabs extends Component {
 
     tabButtons = [
         {
-            viewName: 'FriendsView',
-            IconComponent: SimpleLineIcons,
-            iconName: 'people',
-            opacity: this.props.viewName == 'FriendsView' ? 1 : .3,
+            viewName: 'AllergensView',
+            IconComponent: Ionicons,
+            iconName: 'md-person',
+            opacity: this.props.viewName == 'AllergensView' ? 1 : .3,
         },
         {
             viewName: 'DiningHallsView',
