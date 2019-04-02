@@ -26,9 +26,13 @@ class Ingredients extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <BoolFilters vegan={this.props.menuItem.data.isVegan} 
-                    veg={this.props.menuItem.data.isVegetarian}
-                    gf={this.props.menuItem.data.isGlutenFree}/>
+                { (this.props.menuItem.data.isVegan || 
+                    this.props.menuItem.data.isVegetarian || 
+                    this.props.menuItem.data.isGlutenFree) &&
+                    <BoolFilters vegan={this.props.menuItem.data.isVegan} 
+                        veg={this.props.menuItem.data.isVegetarian}
+                        gf={this.props.menuItem.data.isGlutenFree}/>
+                }
                 <Transition appear="bottom">
                     <DV2ScrollView
                         style={{ flex: 1 }}
