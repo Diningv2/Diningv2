@@ -103,6 +103,11 @@ export const lunchMenu = [
 export const dinnerMenu = [
     { itemID: 3579035, name: "Naples Style Beef Chuck" }
 ];
+export const allMealsMenu = [
+    { itemID: 4822535, name: "Multigrain Pancakes" },
+    { itemID: 4883833, name: "Farro Salad with Raisins" },
+    { itemID: 3579035, name: "Naples Style Beef Chuck" }
+];
 
 export const emptyExpectedResponse = [
     {
