@@ -9,7 +9,7 @@ import { createLogger } from 'redux-logger';
 // Redux Navigation imports
 import { FluidNavigator } from 'react-navigation-fluid-transitions';
 import { createStackNavigator } from 'react-navigation';
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, View, Text } from 'react-native';
 
 
 
@@ -94,7 +94,8 @@ const store = configureStore({});
 export default class App extends React.Component {
 
   state = {
-    appHasLoaded: false
+    appHasLoaded: false,
+    notification: undefined
   }
 
   async componentDidMount() {
@@ -110,7 +111,7 @@ export default class App extends React.Component {
       'SF Pro Text Bold': require('./assets/fonts/SFProText/SF-Pro-Text-Bold.ttf'),
     })
 
-    registerForPushNotificationsAsync();
+    await registerForPushNotificationsAsync();
 
     // Push notofications listener
     this.listener = Notifications.addListener(this.handleNotification);
@@ -120,17 +121,18 @@ export default class App extends React.Component {
 
   }
 
-  handleNotification = ({ origin, data }) => {
-    console.log(
-      `Push notification ${origin} with data: ${JSON.stringify(data)}`,
-    );
+  handleNotification = (notification) => {
+    this.setState({ notification });
   };
   
   render() {
     return (
       <Provider store={store}>
         {this.state.appHasLoaded &&
-          <ReduxRouterWithNavState />
+          <View style={{flex: 1}}>
+            <Text style={{position: 'absolute'}}>{this.state.notification && JSON.stringify(this.state.notification.data)}</Text>
+            <ReduxRouterWithNavState />
+          </View>
         }
       </Provider>
     );
