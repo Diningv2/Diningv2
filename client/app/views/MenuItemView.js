@@ -8,6 +8,7 @@ import NutritionInfo from '../components/NutritionInfo';
 import AllergenList from '../components/AllergenList';
 import Ingredients from '../components/Ingredients';
 import TopTabs from '../components/TopTabs';
+import BottomTabs from '../components/BottomTabs';
 
 class MenuItemView extends Component {
 
@@ -42,13 +43,13 @@ class MenuItemView extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Header canGoBack title={this.props.menuItem.isLoading ? 'Loading...' : this.props.menuItem.data.name} />
-                <ScrollView>
-                    <TopTabs tabButtons={this.tabButtons} />
+                <TopTabs tabButtons={this.tabButtons} />
+                <View style={{paddingBottom: 50, flex: 1}}>
                     {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Nutrition' && <NutritionInfo />}
                     {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Allergens' && <AllergenList />}
                     {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Ingredients' && <Ingredients />}
-                </ScrollView>
-                {/* <BottomTabs viewName={'DiningHallsView'} /> */}
+                </View>
+                <BottomTabs viewName={'DiningHallsView'} />
             </View>
         )
     }

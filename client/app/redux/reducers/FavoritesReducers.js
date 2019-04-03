@@ -9,8 +9,7 @@ import * as types from '../actions/types';
  * */
 const initialState = {
     isLoading: true,
-    errorMessage: undefined,
-    hasError: false,
+    errorMessage: "",
     data: undefined,
 }
 
@@ -19,25 +18,24 @@ const initialState = {
  * the action messages it receives (along with the previous state)
  * and then you can modify it accordingly 
  * */
-export const menusList = createReducer(initialState, {
-    [types.GET_MENU_INFORMATION_REQUEST](state, action) {
+export const favoritesList = createReducer(initialState, {
+    [types.GET_FAVORITES_REQUEST](state, action) {
         return {
             ...state,
             hasError: false,
             isLoading: true // we've initiated the request, set loading to true
         }
     },
-    [types.GET_MENU_INFORMATION_SUCCESS](state, action) {
-        const menusObject = action.payload.menus;
-        const menusArray = Object.values(menusObject);
+    [types.GET_FAVORITES_SUCCESS](state, action) {
+        const favoritesArray = action.payload.favorites;
         return {
             ...state,
-            data: menusArray[0],
+            data: favoritesArray,
             hasError: false,
             isLoading: false // set isLoading to false so UI shows the data
         }
     },
-    [types.GET_MENU_INFORMATION_FAILURE](state, action) {
+    [types.GET_FAVORITES_FAILURE](state, action) {
         return {
             ...state,
             data: undefined,

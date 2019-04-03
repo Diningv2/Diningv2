@@ -4,6 +4,8 @@ import * as ApplicationStateReducers from './ApplicationStateReducers'; // TODO:
 import * as DiningHallsInformationReducers from './DiningHallInformationReducers';
 import * as MenuItemInformationReducers from './MenuItemInformationReducers';
 import * as MenuReducers from './MenuReducers';
+import * as FavoritesReducers from './FavoritesReducers';
+import * as AllergenReducers from './AllergenReducers';
 
 // Any new reducers you make...import them above and add them to this list of exports
 export default Object.assign({},
@@ -12,4 +14,6 @@ export default Object.assign({},
     DiningHallsInformationReducers,
     MenuItemInformationReducers,
     MenuReducers,
+    FavoritesReducers,
+    AllergenReducers,
 )

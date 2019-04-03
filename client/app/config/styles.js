@@ -12,6 +12,7 @@ const fonts = {
     },
     size: {
         small: 10,
+        smallMedium: 17,
         medium: 20,
         large: 30
     }
@@ -42,6 +43,9 @@ export default styles = {
             },
         }),
         size: StyleSheet.create({
+            smallMedium: {
+                fontSize: fonts.size.smallMedium
+            },
             medium: {
                 fontSize: fonts.size.medium
             },
@@ -66,6 +70,9 @@ export default styles = {
         StyleSheet.create({
             withPadding: {
                 margin: 20
+            },
+            withPaddingSmall: {
+                margin: spacingSizes.small
             },
             dropShadow: {
                 shadowColor: "#000",

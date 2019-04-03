@@ -6,6 +6,7 @@ import connectToRedux from '../redux/lib/connectToRedux';
 
 import Ingredient from './Ingredient';
 import { DV2ScrollView } from './DV2ScrollView';
+import BoolFilters from './BoolFilters';
 
 class Ingredients extends Component {
 
@@ -25,6 +26,13 @@ class Ingredients extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
+                { (this.props.menuItem.data.isVegan || 
+                    this.props.menuItem.data.isVegetarian || 
+                    this.props.menuItem.data.isGlutenFree) &&
+                    <BoolFilters vegan={this.props.menuItem.data.isVegan} 
+                        veg={this.props.menuItem.data.isVegetarian}
+                        gf={this.props.menuItem.data.isGlutenFree}/>
+                }
                 <Transition appear="bottom">
                     <DV2ScrollView
                         style={{ flex: 1 }}
