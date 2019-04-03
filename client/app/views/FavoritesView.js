@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 
 import styles from '../config/styles';
 
 import connectToRedux from '../redux/lib/connectToRedux';
 
-import DiningHallItem from '../components/DiningHallItem';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
 import ListItem from '../components/ListItem';
-import dHallIDs from '../config/dHallIDs';
 import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
 
