@@ -4,16 +4,15 @@ import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
 import connectToRedux from '../redux/lib/connectToRedux';
 import { search } from '../lib/search-utility';
 
-import Header from '../components/Header';
-import ListItem from '../components/ListItem';
-import TopTabs from '../components/TopTabs';
-import Searchbar from '../components/Searchbar';
 import { DV2ScrollView } from '../components/DV2ScrollView';
-
-import styles from '../config/styles';
+import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
 import Dish from '../components/Dish';
-import BottomTabs from '../components/BottomTabs';
+import Header from '../components/Header';
+import Searchbar from '../components/Searchbar';
+import TopTabs from '../components/TopTabs';
+
+import styles from '../config/styles';
 
 class MenuView extends Component {
 

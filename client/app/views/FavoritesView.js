@@ -7,10 +7,10 @@ import styles from '../config/styles';
 import connectToRedux from '../redux/lib/connectToRedux';
 
 import { DV2ScrollView } from '../components/DV2ScrollView';
-import Header from '../components/Header';
-import ListItem from '../components/ListItem';
 import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
+import Dish from '../components/Dish';
+import Header from '../components/Header';
 
 class FavoritesView extends Component {
 
@@ -47,15 +47,7 @@ class FavoritesView extends Component {
 
     renderFavesList = (dish) => {
         return (
-            <TouchableOpacity
-                key={dish.name}
-                onPress={() => {
-                    this.props.getMenuItemInformation(dish.itemID);
-                    this.props.navigation.navigate('MenuItemView');
-                }}
-            >
-                <ListItem title={dish.name} />
-            </TouchableOpacity>
+            <Dish key={dish.name} dishName={dish.name} dishID={dish.itemID} />
         );
     }
 }
