@@ -1,28 +1,32 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./lib/index.js",
-  "dependencies": {
-    "@babel/polyfill": "^7.2.5",
-    "axios": "^0.18.0",
-    "express": "^4.16.4",
-    "request": "^2.88.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "babel-jest": "^24.1.0",
-    "jest": "^24.1.0",
-    "nodemon": "^1.18.10"
-  },
-  "scripts": {
-    "build": "babel src -d lib",
-    "start": "node ./lib/index",
-    "dev": "nodemon ./lib/index",
-    "test": "jest --coverage"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./lib/index.js",
+    "dependencies": {
+        "@babel/polyfill": "^7.2.5",
+        "axios": "^0.18.0",
+        "body-parser": "^1.18.3",
+        "express": "^4.16.4",
+        "firebase": "^5.9.2",
+        "firebase-admin": "^7.2.0",
+        "firebase-tools": "^6.5.0",
+        "request": "^2.88.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.3.4",
+        "@babel/preset-env": "^7.3.4",
+        "babel-jest": "^24.1.0",
+        "jest": "^24.1.0",
+        "nodemon": "^1.18.10"
+    },
+    "scripts": {
+        "build": "babel src -d lib --copy-files",
+        "start": "node ./lib/index",
+        "dev": "nodemon ./lib/index",
+        "test": "jest --coverage"
+    },
+    "author": "",
+    "license": "ISC"
 }
