@@ -20,7 +20,7 @@ export class Dish extends Component {
 
     componentDidMount() {
         // TODO: Check if this item is a favorite
-        isFaveDish = true;
+        isFaveDish = false; // TODO: remove this line
 
         if (isFaveDish) {
             this.setState({isFave: true});
@@ -59,6 +59,7 @@ export class Dish extends Component {
                     name={this.state.isFave ? 'heart' : 'hearto'} 
                     size={25} 
                     onPress={this.handlePress}
+                    color={'#F98DD8'}
                 />
             </View> 
         );
