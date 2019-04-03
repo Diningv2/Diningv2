@@ -11,6 +11,7 @@ import ListItem from '../components/ListItem';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
 import filters from '../config/allFilters';
+import BottomTabs from '../components/BottomTabs';
 
 
 
@@ -19,23 +20,18 @@ class AllergensView extends Component {
     constructor(props) {
         super(props);
     }
-
-    
-
    
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <Header title="I cannot eat..." />
-               
-                    <View>
-                        <DV2ScrollView style={{ flex: 1 }}
-                            array={filters}
-                            render={(element, index) => this.renderAllergen(element, index)}
-                        />
-                    </View>
-                
-                
+                <View style={{paddingBottom: 50, flex: 1}}>
+                    <DV2ScrollView 
+                        array={filters}
+                        render={(filter) => this.renderAllergen(filter)}
+                    />
+                </View>
+                <BottomTabs viewName={"AllergensView"} />
             </View>
         )
     }
@@ -43,17 +39,33 @@ class AllergensView extends Component {
 
     renderAllergen = (allergen) => {
         return (
-            
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <ListItem title={allergen} />
-                    <Switch value = {this.props.allergensList[allergen]} onValueChange={(value) => this.SwitchChange(value, allergen)}/>
-                </View>
+            <View 
+                key={allergen}
+                style={{
+                    flex: 1, 
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginBottom: 20,
+                }}
+            >
+                <Text style={{ 
+                    ...styles.font.type.primaryRegular, 
+                    ...styles.font.size.medium,
+                    alignSelf: 'center',
+                }}>
+                    {allergen}
+                </Text>
+                <Switch 
+                    value={this.props.allergensList[allergen]} 
+                    onValueChange={(value) => this.SwitchChange(value, allergen)}
+                />
+            </View>
         );
     }
 
     SwitchChange(value, allergen) {
-        console.log("Aaaaaaaaaaaa " + allergen);
-        console.log("AAAAAAAAA " + value);
+        console.log("Aaaaaaaaaaaa " + allergen); // LOL
+        console.log("AAAAAAAAA " + value); // Mmhmm
         this.props.toggleAllergens(value, allergen);
     }
 }

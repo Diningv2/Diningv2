@@ -34,8 +34,8 @@ class FavoritesView extends Component {
                     ? (
                         <CenterTextView message="Loading..." />
                     ) : (
-                        <View>
-                            <DV2ScrollView style={{ flex: 1 }}
+                        <View style={{paddingBottom: 50, flex: 1}}>
+                            <DV2ScrollView 
                                 array={this.props.favoritesList.data}
                                 render={(dish) => this.renderFavesList(dish)}
                             />
