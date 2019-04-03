@@ -23,6 +23,27 @@ test("processMenu() -- normal function with meal query", () => {
     ]);
 });
 
+test("processMenu() -- normal function with all meals query", () => {
+    getMenuItemList
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => responses.hotBreakfastMenu)
+        .mockImplementationOnce(() => undefined)
+        .mockImplementationOnce(() => responses.lunchMenu)
+        .mockImplementationOnce(() => responses.dinnerMenu);
+    expect(processMenu(responses.singleMenu, { meal: "all" })).toEqual(
+        responses.allMealsMenu
+    );
+    expect(getMenuItemList).toHaveBeenCalledWith(responses.columns, [
+        responses.hotBreakfastData
+    ]);
+    expect(getMenuItemList).toHaveBeenCalledWith(responses.columns, [
+        responses.lunchData
+    ]);
+    expect(getMenuItemList).toHaveBeenCalledWith(responses.columns, [
+        responses.dinnerData
+    ]);
+});
+
 test("processMenu() -- normal function without meal query", () => {
     getMenuItemList
         .mockImplementationOnce(() => undefined)
