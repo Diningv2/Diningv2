@@ -4,6 +4,7 @@ import * as DiningHallsInformationActions from './DiningHallInformationActions';
 import * as MenuItemInformationActions from './MenuItemInformationActions';
 import * as MenuActions from './MenuActions';
 import * as FavoritesActions from './FavoritesActions';
+import * as AllergenActions from './AllergenActions';
 
 export const allActions = Object.assign({},
     IncrementingActions,         // TODO: Delete these, just for getting started with Redux
@@ -12,4 +13,5 @@ export const allActions = Object.assign({},
     MenuItemInformationActions,
     MenuActions,
     FavoritesActions,
+    AllergenActions,
 );

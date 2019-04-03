@@ -6,6 +6,7 @@ import TopTabsTemplateView from '../views/TopTabsTemplateView';
 import MenuView from '../views/MenuView';
 import MenuItemView from '../views/MenuItemView';
 import FavoritesView from '../views/FavoritesView';
+import AllergensView from '../views/AllergensView';
 
 const Routes = {
     HomeView: { screen: HomeView },
@@ -14,6 +15,7 @@ const Routes = {
     FavoritesView: { screen: FavoritesView },
     MenuView: { screen: MenuView },
     MenuItemView: { screen: MenuItemView },
+    AllergensView: {screen: AllergensView },
 };
 
 export default Routes;
