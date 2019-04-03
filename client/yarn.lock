@@ -4578,6 +4578,11 @@ react-native-safe-module@^1.1.0:
   dependencies:
     dedent "^0.6.0"
 
+react-native-scalable-image@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-scalable-image/-/react-native-scalable-image-0.5.0.tgz#3af75433f80e8cc29a04b0aee2a8c79317ff5663"
+  integrity sha512-NzHfZxyoY+x+lYy2NvbOvkAzfyCVxbb72gvLmpCUuR9WH3KAxZd9Ogf7bbN1Ltt3QelorcQ2++4MnwHuHYI1BA==
+
 react-native-screens@1.0.0-alpha.22, "react-native-screens@^1.0.0 || ^1.0.0-alpha":
   version "1.0.0-alpha.22"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.22.tgz#7a120377b52aa9bbb94d0b8541a014026be9289b"

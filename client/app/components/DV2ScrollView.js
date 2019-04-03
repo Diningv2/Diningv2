@@ -10,7 +10,7 @@ export class DV2ScrollView extends React.Component {
                     contentContainerStyle={{
                         flexGrow: 1,
                         justifyContent: 'space-between',
-                        paddingBottom: 100 // TODO: fix
+                        paddingBottom: 10,
                     }}
                     showsVerticalScrollIndicator={false}>
                     {this.props.array.map((element, index) => {

@@ -3,6 +3,7 @@ import * as ApplicationStateActions from './ApplicationStateActions';
 import * as DiningHallsInformationActions from './DiningHallInformationActions';
 import * as MenuItemInformationActions from './MenuItemInformationActions';
 import * as MenuActions from './MenuActions';
+import * as FavoritesActions from './FavoritesActions';
 import * as AllergenActions from './AllergenActions';
 
 export const allActions = Object.assign({},
@@ -11,5 +12,6 @@ export const allActions = Object.assign({},
     DiningHallsInformationActions,
     MenuItemInformationActions,
     MenuActions,
-    AllergenActions
+    FavoritesActions,
+    AllergenActions,
 );

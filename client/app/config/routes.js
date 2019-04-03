@@ -5,13 +5,14 @@ import TemplateView from '../views/TemplateView';
 import TopTabsTemplateView from '../views/TopTabsTemplateView';
 import MenuView from '../views/MenuView';
 import MenuItemView from '../views/MenuItemView';
+import FavoritesView from '../views/FavoritesView';
 import AllergensView from '../views/AllergensView';
 
 const Routes = {
     HomeView: { screen: HomeView },
     FriendsView: { screen: TopTabsTemplateView },
     DiningHallsView: { screen: DiningHallsView },
-    FavoritesView: { screen: TemplateView },
+    FavoritesView: { screen: FavoritesView },
     MenuView: { screen: MenuView },
     MenuItemView: { screen: MenuItemView },
     AllergensView: {screen: AllergensView },

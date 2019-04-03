@@ -12,6 +12,7 @@ import { DV2ScrollView } from '../components/DV2ScrollView';
 
 import styles from '../config/styles';
 import CenterTextView from '../components/CenterTextView';
+import BottomTabs from '../components/BottomTabs';
 
 class MenuView extends Component {
 
@@ -93,26 +94,34 @@ class MenuView extends Component {
         return (
             <View style={{ flex: 1 }}>
                 {hasLoadedSuccessfully &&
-                    <View>
+                    <View style={{ flex: 1 }}>
                         <Header canGoBack title={this.props.menusList.data.location} />
                         <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
                         <TopTabs tabButtons={this.dynamicTabButtons()} />
-                        <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.color.primary, textAlign: 'center' }}>{this.state.hoursMessage}</Text>
-                        {this.state.mealArrayFiltered && <View>
-                            <DV2ScrollView
-                                style={{ flex: 1 }}
-                                array={this.state.mealArrayFiltered}
-                                render={(dish) => this.renderMenu(dish)}
-                            />
-                        </View>}
+                        <Text style={{ 
+                            ...styles.font.type.primaryRegular, 
+                            ...styles.font.color.primary, 
+                            textAlign: 'center' 
+                        }}>{this.state.hoursMessage}</Text>
+                        {this.state.mealArrayFiltered && 
+                            <View style={{paddingBottom: 50, flex: 1}}>
+                                <DV2ScrollView
+                                    array={this.state.mealArrayFiltered}
+                                    render={(dish) => this.renderMenu(dish)}
+                                />
+                            </View>
+                        }
                     </View>
                 }
                 {hasLoadedFailed &&
                     <View style={{flex: 1}}>
                         <Header canGoBack title="Server Error" />
-                        <CenterTextView message="No menu data available :(" />
+                        <View style={{paddingBottom: 50, flex: 1}}>
+                            <CenterTextView message="No menu data available :(" />
+                        </View>
                     </View>
                 }
+                <BottomTabs viewName={"MenuView"} />
             </View>
         )
     }
