@@ -10,7 +10,7 @@ import AllergensView from '../views/AllergensView';
 
 const Routes = {
     HomeView: { screen: HomeView },
-    FriendsView: { screen: TopTabsTemplateView },
+    AllergensView: { screen: TopTabsTemplateView },
     DiningHallsView: { screen: DiningHallsView },
     FavoritesView: { screen: FavoritesView },
     MenuView: { screen: MenuView },

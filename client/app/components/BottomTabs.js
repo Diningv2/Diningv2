@@ -6,9 +6,9 @@ import connectToRedux from '../redux/lib/connectToRedux';
 import sp from '../redux/lib/stateProperties';
 
 import styles, { colors } from '../config/styles';
-import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 class BottomTabs extends Component {
 
@@ -18,10 +18,10 @@ class BottomTabs extends Component {
 
     tabButtons = [
         {
-            viewName: 'FriendsView',
-            IconComponent: SimpleLineIcons,
-            iconName: 'people',
-            opacity: this.props.viewName == 'FriendsView' ? 1 : .3,
+            viewName: 'AllergensView',
+            IconComponent: Ionicons,
+            iconName: 'md-person',
+            opacity: this.props.viewName == 'AllergensView' ? 1 : .3,
         },
         {
             viewName: 'DiningHallsView',
@@ -39,7 +39,7 @@ class BottomTabs extends Component {
 
     render() {
         return (
-            <View style={tabStyles.container2}>
+            <View style={tabStyles.container}>
                 <View style={{
                     ...styles.container.backgroundColorPrimary,
                     ...tabStyles.bottomTabs,
@@ -68,20 +68,16 @@ class BottomTabs extends Component {
 }
 
 const tabStyles = StyleSheet.create({
-    container2: {
+    container: {
         position: 'absolute',
         bottom: 0,
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'flex-end',
     },
     bottomTabs: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },
     touchables: {
-        width: '33.3%',
+        width: '33.33333%',
         alignItems: 'center',
         paddingTop: 10,
         paddingBottom: 10,
