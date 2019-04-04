@@ -42,37 +42,22 @@ export default function processMenu(data, query) {
         " 00:00:00";
     // meal query -- return a list of MenuItem objects
     if ("meal" in query) {
-        if (query.meal == "all") {
-            var completeMenuItemList = [];
-            for (let mealName in mealNames) {
-                const filteredData = data.DATA.filter(
-                    entry =>
-                        entry[data.COLUMNS.indexOf("MEALNAME")] == mealName &&
-                        entry[data.COLUMNS.indexOf("MENUDATE")] == today
-                );
-                const menuItemList = getMenuItemList(
-                    data.COLUMNS,
-                    filteredData
-                );
-                menuItemList &&
-                    menuItemList.forEach(item =>
-                        completeMenuItemList.push(item)
-                    );
-            }
-            return completeMenuItemList;
+        const filteredData =
+            query.meal == "all"
+                ? data.DATA.filter(
+                      entry => entry[data.COLUMNS.indexOf("MENUDATE")] == today
+                  )
+                : data.DATA.filter(
+                      entry =>
+                          entry[data.COLUMNS.indexOf("MENUDATE")] == today &&
+                          mealNames[entry[data.COLUMNS.indexOf("MEALNAME")]] ==
+                              query.meal
+                  );
+        const menuItemList = getMenuItemList(data.COLUMNS, filteredData);
+        if (menuItemList == undefined) {
+            throw new Error("Invalid menu request");
         } else {
-            const filteredData = data.DATA.filter(
-                entry =>
-                    mealNames[entry[data.COLUMNS.indexOf("MEALNAME")]] ==
-                        query.meal &&
-                    entry[data.COLUMNS.indexOf("MENUDATE")] == today
-            );
-            const menuItemList = getMenuItemList(data.COLUMNS, filteredData);
-            if (menuItemList == undefined) {
-                throw new Error("Invalid menu request");
-            } else {
-                return menuItemList;
-            }
+            return menuItemList;
         }
     }
     // location query -- return a list of Menus objects
