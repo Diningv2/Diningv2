@@ -59,7 +59,7 @@ export class Dish extends Component {
                     name={this.state.isFave ? 'heart' : 'hearto'} 
                     size={25} 
                     onPress={this.handlePress}
-                    color={'#F98DD8'}
+                    color={'#ff6666'}
                 />
             </View> 
         );
