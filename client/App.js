@@ -1,35 +1,23 @@
+// Expo-related functions, will help us import fonts
+import { Font, Notifications } from 'expo';
 import React from 'react';
+import { Animated, Easing, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import { createNavigationReducer, createReactNavigationReduxMiddleware, createReduxContainer } from 'react-navigation-redux-helpers';
 
 // Basic Redux imports
-import { Provider, connect } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { connect, Provider } from 'react-redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
-
-// Redux Navigation imports
-import { FluidNavigator } from 'react-navigation-fluid-transitions';
-import { createStackNavigator } from 'react-navigation';
-import { Animated, Easing, View, TouchableOpacity } from 'react-native';
-
-
-
-import Routes from './app/config/routes'
-import {
-  createReduxContainer,
-  createNavigationReducer,
-  createReactNavigationReduxMiddleware,
-} from 'react-navigation-redux-helpers';
-
-// Our Redux reducers
-import reducers from './app/redux/reducers';
-
-// Expo-related functions, will help us import fonts
-import { Font } from 'expo';
+import thunkMiddleware from 'redux-thunk';
+import { Toast } from './app/components/Toast';
+import Routes from './app/config/routes';
 
 // Push Notifications Utility
 import registerForPushNotificationsAsync from './app/lib/push-utility';
-import { Notifications } from 'expo';
-import { Toast } from './app/components/Toast';
+
+// Our Redux reducers
+import reducers from './app/redux/reducers';
 
 // Configuring logger for the state of our app
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
