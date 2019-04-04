@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
-import styles, { colors } from '../config/styles';
+import styles from '../config/styles';
 
 export const Toast = (props) => {
 
