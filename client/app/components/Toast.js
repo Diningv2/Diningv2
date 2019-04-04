@@ -1,16 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import styles, { colors } from '../config/styles';
 
 export const Toast = (props) => {
 
     containerStyle = {
-        position: 'absolute',
         flex: 1,
         alignItems: 'center',
         marginTop: 50,
+        position: 'absolute',
+        alignItems: 'center',
+        width: '100%',
+        top: 0
+    }
+
+    touchableStyle = {
+        zIndex: 1,
+        width: '100%',
         height: 200,
-        width: '100%'
     }
 
     notificationStyle = {
@@ -38,10 +45,14 @@ export const Toast = (props) => {
 
     return (
         <View style={containerStyle}>
-            <View style={notificationStyle}>
-                <Text style={textStyles.title}>Hello.</Text>
-                <Text style={textStyles.message}>I am toast!</Text>
-            </View>
+            <TouchableWithoutFeedback style={touchableStyle} onPress={props.onPress}>   
+                <View style={notificationStyle}>
+                    <Text style={textStyles.title}>{props.title}</Text>
+                    <Text style={textStyles.message}>{props.message}</Text>
+                </View>
+            </TouchableWithoutFeedback>
         </View>
     )
 }
+
+export default Toast;

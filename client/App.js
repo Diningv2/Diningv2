@@ -9,7 +9,7 @@ import { createLogger } from 'redux-logger';
 // Redux Navigation imports
 import { FluidNavigator } from 'react-navigation-fluid-transitions';
 import { createStackNavigator } from 'react-navigation';
-import { Animated, Easing, View, Text } from 'react-native';
+import { Animated, Easing, View, TouchableOpacity } from 'react-native';
 
 
 
@@ -114,7 +114,7 @@ export default class App extends React.Component {
 
     await registerForPushNotificationsAsync();
 
-    // Push notofications listener
+    // Push notifications listener <- the observer!
     this.listener = Notifications.addListener(this.handleNotification);
 
     // App is ready to be loaded.
@@ -122,17 +122,34 @@ export default class App extends React.Component {
 
   }
 
+  // Callback to run when we observe a new
+  // push notification
   handleNotification = (notification) => {
     this.setState({ notification });
   };
-  
+
+  // Renders the notification component
+  // with the proper notification data
+  // If no notification data is passed in, render nothing.
+  NotificationContainer = () => {
+    if (!this.state.notification.data) return null;
+    const { title, message } = this.state.notification.data;
+    const dismiss = () => this.setState({notification: undefined});
+
+    return (
+      <Toast title={title || "Dining*v2"} message={message || "New alert."} onPress={dismiss} />
+    )
+  }
+
+
   render() {
+    const { NotificationContainer } = this;
     return (
       <Provider store={store}>
         {this.state.appHasLoaded &&
-          <View style={{ flex: 1}}>
-            <Toast />
+          <View style={{ flex: 1 }}>
             <ReduxRouterWithNavState />
+            {this.state.notification && <NotificationContainer />}
           </View>
         }
       </Provider>
