@@ -4,15 +4,15 @@ import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
 import connectToRedux from '../redux/lib/connectToRedux';
 import { search } from '../lib/search-utility';
 
-import Header from '../components/Header';
-import ListItem from '../components/ListItem';
-import TopTabs from '../components/TopTabs';
-import Searchbar from '../components/Searchbar';
 import { DV2ScrollView } from '../components/DV2ScrollView';
+import BottomTabs from '../components/BottomTabs';
+import CenterTextView from '../components/CenterTextView';
+import Dish from '../components/Dish';
+import Header from '../components/Header';
+import Searchbar from '../components/Searchbar';
+import TopTabs from '../components/TopTabs';
 
 import styles from '../config/styles';
-import CenterTextView from '../components/CenterTextView';
-import BottomTabs from '../components/BottomTabs';
 
 class MenuView extends Component {
 
@@ -128,15 +128,7 @@ class MenuView extends Component {
 
     renderMenu = (dish) => {
         return (
-            <TouchableOpacity
-                key={dish.name}
-                onPress={() => {
-                    this.props.getMenuItemInformation(dish.itemID);
-                    this.props.navigation.navigate('MenuItemView');
-                }}
-            >
-                <ListItem title={dish.name} />
-            </TouchableOpacity>
+            <Dish key={dish.name} dishName={dish.name} dishID={dish.itemID}/>
         );
     }
 }
