@@ -5,7 +5,7 @@ import styles from '../config/styles';
 export default class ListItem extends Component {
     render() {
         return (
-            <View style={{ ...styles.container.spaceBelow }}>
+            <View style={{ ...styles.container.spaceBelow}}>
                 <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.size.medium }}>
                     {this.props.title}
                 </Text>
