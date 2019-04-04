@@ -29,6 +29,7 @@ import { Font } from 'expo';
 // Push Notifications Utility
 import registerForPushNotificationsAsync from './app/lib/push-utility';
 import { Notifications } from 'expo';
+import { Toast } from './app/components/Toast';
 
 // Configuring logger for the state of our app
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
@@ -129,8 +130,8 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         {this.state.appHasLoaded &&
-          <View style={{flex: 1}}>
-            <Text style={{position: 'absolute'}}>{this.state.notification && JSON.stringify(this.state.notification.data)}</Text>
+          <View style={{ flex: 1}}>
+            <Toast />
             <ReduxRouterWithNavState />
           </View>
         }
