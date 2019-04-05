@@ -29,16 +29,59 @@ export default async function getMenuItemsToday() {
             filteredData
         );
         menuItemList &&
-            menuItemList.forEach(item => completeMenuItemList.push(item));
+            menuItemList.forEach(item =>
+                completeMenuItemList.push({
+                    name: item.name,
+                    itemID: item.itemID,
+                    meal: item.meal,
+                    location: locations[location]
+                })
+            );
     }
-    completeMenuItemList = completeMenuItemList.filter(
-        (entry, index, self) =>
-            index ===
-            self.findIndex(
+    // unset location and/or meal for duplicate items
+    completeMenuItemList = completeMenuItemList
+        // set the first occurence of a duplicated item to have undefined location
+        .map((entry, index, self) => {
+            let otherIndex = self.findIndex(
                 otherEntry =>
                     otherEntry.name === entry.name &&
-                    otherEntry.itemID === entry.itemID
-            )
-    );
+                    otherEntry.itemID === entry.itemID &&
+                    otherEntry.meal === entry.meal &&
+                    otherEntry.location != entry.location
+            );
+            return otherIndex == -1 ? entry : { ...entry, location: undefined };
+        })
+        // remove all later duplicated items
+        .filter(
+            (entry, index, self) =>
+                index ===
+                self.findIndex(
+                    otherEntry =>
+                        otherEntry.name === entry.name &&
+                        otherEntry.itemID === entry.itemID &&
+                        otherEntry.meal === entry.meal
+                )
+        )
+        // set the first occurence of a duplicated item to have undefined meal
+        .map((entry, index, self) => {
+            let otherIndex = self.findIndex(
+                otherEntry =>
+                    otherEntry.name === entry.name &&
+                    otherEntry.itemID === entry.itemID &&
+                    otherEntry.meal != entry.meal &&
+                    otherEntry.location === entry.location
+            );
+            return otherIndex == -1 ? entry : { ...entry, meal: undefined };
+        })
+        // remove all later duplicated items
+        .filter(
+            (entry, index, self) =>
+                index ===
+                self.findIndex(
+                    otherEntry =>
+                        otherEntry.name === entry.name &&
+                        otherEntry.itemID === entry.itemID
+                )
+        );
     return completeMenuItemList.length ? completeMenuItemList : undefined;
 }

@@ -18,7 +18,8 @@ export default function getMenuItemList(columns, data) {
             ? undefined
             : {
                   name: entry[columns.indexOf("MENUITEM")].replace("`", "'"),
-                  itemID: entry[columns.indexOf("MENUITEMID")]
+                  itemID: entry[columns.indexOf("MENUITEMID")],
+                  meal: entry[columns.indexOf("MEALNAME")]
               };
     });
     // filter out undefined and duplicate entries
@@ -30,7 +31,8 @@ export default function getMenuItemList(columns, data) {
                 self.findIndex(
                     otherEntry =>
                         otherEntry.name === entry.name &&
-                        otherEntry.itemID === entry.itemID
+                        otherEntry.itemID === entry.itemID &&
+                        otherEntry.meal === entry.meal
                 )
         );
     return filteredMenu.length ? filteredMenu : undefined;

@@ -19,6 +19,7 @@ export default async function getPushTokens(menuItems) {
                 expoTokens.push({
                     name: menuItem.name,
                     meal: menuItem.meal,
+                    location: menuItem.location,
                     token: token
                 })
             );
@@ -30,7 +31,27 @@ export default async function getPushTokens(menuItems) {
     });
     const tokens = expoTokens.map(token => {
         // TODO: add extra information to the body
-        let body = token.name + " is being served today!";
+        let body = undefined;
+        if (token.meal && token.location) {
+            body =
+                token.name +
+                " is being served for " +
+                token.meal +
+                " at " +
+                token.location +
+                " today!";
+        } else if (token.meal) {
+            body =
+                token.name + " is being served for " + token.meal + " today!";
+        } else if (token.location) {
+            body =
+                token.name +
+                " is being served at " +
+                token.location +
+                " today!";
+        } else {
+            body = token.name + " is being served today!";
+        }
         return {
             to: token.token,
             sound: "default",
