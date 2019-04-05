@@ -13,6 +13,6 @@ export default async function addFavorite(token, menuItemID) {
             [token]: firebase.firestore.FieldValue.arrayUnion(menuItemID)
         });
     } catch (e) {
-        console.error("Error writing document: ", e);
+        throw new Error("Could not write document: " + e);
     }
 }

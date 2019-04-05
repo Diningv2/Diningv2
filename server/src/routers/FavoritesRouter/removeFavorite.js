@@ -13,6 +13,6 @@ export default async function removeFavorite(token, menuItemID) {
             [token]: firebase.firestore.FieldValue.arrayRemove(menuItemID)
         });
     } catch (e) {
-        console.error("Error writing document: ", e);
+        throw new Error("Could not write document: " + e);
     }
 }
