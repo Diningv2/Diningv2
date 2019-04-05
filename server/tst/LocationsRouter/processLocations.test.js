@@ -6,9 +6,9 @@ import locations from "../../src/config/locations";
 
 jest.mock("../../src/routers/LocationsRouter/getOneLocation");
 
-beforeEach(() => (console.warn = jest.fn()));
+beforeEach(() => (console.error = jest.fn()));
 afterEach(() => {
-    console.warn.mockClear();
+    console.error.mockClear();
     getOneLocation.mockClear();
 });
 
@@ -39,7 +39,7 @@ test("processLocations() -- normal function without location", async () => {
         processLocations(responses.locationResponse, {})
     ).resolves.toEqual(responses.allLocationsExpectedResponse);
     expect(getOneLocation).toHaveBeenCalledTimes(Object.keys(locations).length);
-    expect(console.warn).toHaveBeenCalledTimes(
+    expect(console.error).toHaveBeenCalledTimes(
         Object.keys(locations).length - 2
     );
 });
@@ -68,5 +68,5 @@ test("processLocations() -- throws on bad response from getOneLocation() without
         processLocations(responses.locationResponse, {})
     ).rejects.toThrow("Empty object returned from YaleDining API");
     expect(getOneLocation).toHaveBeenCalledTimes(Object.keys(locations).length);
-    expect(console.warn).toHaveBeenCalledTimes(Object.keys(locations).length);
+    expect(console.error).toHaveBeenCalledTimes(Object.keys(locations).length);
 });

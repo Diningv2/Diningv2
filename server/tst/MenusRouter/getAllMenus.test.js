@@ -5,8 +5,8 @@ import locations from "../../src/config/locations";
 
 jest.mock("../../src/routers/MenusRouter/getOneMenu");
 
-beforeEach(() => (console.warn = jest.fn()));
-afterEach(() => console.warn.mockClear());
+beforeEach(() => (console.error = jest.fn()));
+afterEach(() => console.error.mockClear());
 
 test("getAllMenus() -- normal function with meal query", async () => {
     getOneMenu.mockImplementation(query => {
@@ -26,7 +26,7 @@ test("getAllMenus() -- normal function with meal query", async () => {
     await expect(getAllMenus({ meal: "dinner" })).resolves.toEqual(
         responses.multiDinnerMenu
     );
-    expect(console.warn).toHaveBeenCalledTimes(
+    expect(console.error).toHaveBeenCalledTimes(
         Object.keys(locations).length - 3
     );
 });
@@ -49,7 +49,7 @@ test("getAllMenus() -- normal function without meal query", async () => {
     await expect(getAllMenus({})).resolves.toEqual(
         responses.multiMenuExpectedResponse
     );
-    expect(console.warn).toHaveBeenCalledTimes(
+    expect(console.error).toHaveBeenCalledTimes(
         Object.keys(locations).length - 3
     );
 });
@@ -72,7 +72,7 @@ test("getAllMenus() -- normal function with meal query with duplicates", async (
     await expect(getAllMenus({ meal: "dinner" })).resolves.toEqual(
         responses.multiDinnerMenu
     );
-    expect(console.warn).toHaveBeenCalledTimes(
+    expect(console.error).toHaveBeenCalledTimes(
         Object.keys(locations).length - 3
     );
 });
@@ -86,5 +86,5 @@ test("getAllMenus() -- bad response from all dinining halls", async () => {
     await expect(getAllMenus({})).rejects.toThrow(
         "Empty object returned for all locations"
     );
-    expect(console.warn).toHaveBeenCalledTimes(Object.keys(locations).length);
+    expect(console.error).toHaveBeenCalledTimes(Object.keys(locations).length);
 });

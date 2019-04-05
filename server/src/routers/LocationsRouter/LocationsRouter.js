@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
         const location = await getLocations(req.query);
         res.send(location);
     } catch (e) {
-        console.warn(e);
+        console.error(e);
         if (e.message == "Invalid location request") {
             res.sendStatus(400);
         } else {

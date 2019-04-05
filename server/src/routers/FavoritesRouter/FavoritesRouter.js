@@ -11,7 +11,7 @@ router
             await addFavorite(req.body.token, req.body.menuitemid);
             res.sendStatus(200);
         } catch (e) {
-            console.warn(e);
+            console.error(e);
             res.sendStatus(500);
         }
     })
@@ -20,7 +20,7 @@ router
             await removeFavorite(req.body.token, req.body.menuitemid);
             res.sendStatus(200);
         } catch (e) {
-            console.warn(e);
+            console.error(e);
             res.sendStatus(500);
         }
     });

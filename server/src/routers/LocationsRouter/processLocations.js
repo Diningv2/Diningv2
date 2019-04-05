@@ -16,10 +16,13 @@ export default async function processLocations(data, query) {
         for (let location in locations) {
             try {
                 query["location"] = location;
-                allLocations[locations[location]] = await getOneLocation(data, query);
+                allLocations[locations[location]] = await getOneLocation(
+                    data,
+                    query
+                );
             } catch (e) {
                 nErrors++;
-                console.warn(
+                console.error(
                     e.message +
                         " for: " +
                         locations[location] +

@@ -27,7 +27,7 @@ export default async function getAllMenus(query) {
             menus.forEach(menu => allMenus.push(menu));
         } catch (e) {
             nErrors++;
-            console.warn(
+            console.error(
                 e.message +
                     ": " +
                     locations[location] +
