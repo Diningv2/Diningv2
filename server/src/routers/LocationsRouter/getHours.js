@@ -6,7 +6,7 @@ import dateBuilder from "../../util/dateBuilder";
 import { MENUS_URI, E_NO_API_RES } from "../../config/constants";
 
 export default async function getHours(location, offset) {
-    const endpoint = MENUS_URI + queryBuilder({ location });
+    const endpoint = MENUS_URI + queryBuilder({ version: 3, location });
     const response = await axios.get(endpoint);
     const data = response.data;
     // throw on bad response from Yale Dining

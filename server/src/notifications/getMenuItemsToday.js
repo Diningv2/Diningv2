@@ -11,7 +11,7 @@ export default async function getMenuItemsToday() {
     const today = dateBuilder(0);
     var completeMenuItemList = [];
     for (let location in locations) {
-        const endpoint = MENUS_URI + queryBuilder({ location });
+        const endpoint = MENUS_URI + queryBuilder({ version: 3, location });
         const response = await axios.get(endpoint);
         const filteredData = response.data.DATA.filter(
             entry => entry[response.data.COLUMNS.indexOf("MENUDATE")] == today

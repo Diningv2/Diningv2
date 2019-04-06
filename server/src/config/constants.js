@@ -1,11 +1,10 @@
-export const MENUS_URI =
-    "http://www.yaledining.org/fasttrack/menus.cfm?version=3";
+export const MENUS_URI = "http://www.yaledining.org/fasttrack/menus.cfm";
 export const NUTRITION_URI =
-    "http://www.yaledining.org/fasttrack/menuitem-nutrition.cfm?version=3";
+    "http://www.yaledining.org/fasttrack/menuitem-nutrition.cfm";
 export const FILTERS_URI =
-    "http://www.yaledining.org/fasttrack/menuitem-codes.cfm?version=3";
+    "http://www.yaledining.org/fasttrack/menuitem-codes.cfm";
 export const INGREDIENTS_URI =
-    "http://www.yaledining.org/fasttrack/menuitem-ingredients.cfm?version=3";
+    "http://www.yaledining.org/fasttrack/menuitem-ingredients.cfm";
 
 export const E_NO_API_RES = "Empty object returned from YaleDining API";
 

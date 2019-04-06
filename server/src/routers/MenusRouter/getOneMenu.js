@@ -18,7 +18,7 @@ import { MENUS_URI } from "../../config/constants";
  */
 export default async function getOneMenu(query) {
     const location = query.location;
-    const endpoint = MENUS_URI + queryBuilder({ location });
+    const endpoint = MENUS_URI + queryBuilder({ version: 3, location });
     const response = await axios.get(endpoint);
     return processMenu(response.data, query);
 }

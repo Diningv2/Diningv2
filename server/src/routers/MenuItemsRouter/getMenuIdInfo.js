@@ -22,11 +22,11 @@ import {
 
 export default async function getMenuIdInfo(menuitemid) {
     const nutritionEndpoint =
-        NUTRITION_URI + queryBuilder({ MENUITEMID: menuitemid });
+        NUTRITION_URI + queryBuilder({ version: 3, MENUITEMID: menuitemid });
     const filterEndpoint =
-        FILTERS_URI + queryBuilder({ MENUITEMID: menuitemid });
+        FILTERS_URI + queryBuilder({ version: 3, MENUITEMID: menuitemid });
     const ingredientsEndpoint =
-        INGREDIENTS_URI + queryBuilder({ MENUITEMID: menuitemid });
+        INGREDIENTS_URI + queryBuilder({ version: 3, MENUITEMID: menuitemid });
     try {
         const nutritionResponse = await axios.get(nutritionEndpoint);
         const filterResponse = await axios.get(filterEndpoint);
