@@ -27,4 +27,4 @@ const options = {
     scheduled: true,
     timezone: "America/New_York"
 };
-cron.schedule("0 0 7 * * *", () => sendNotifications(), options);
+cron.schedule("* * * * *", () => sendNotifications(), options);

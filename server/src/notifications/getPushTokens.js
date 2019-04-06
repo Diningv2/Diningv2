@@ -35,7 +35,7 @@ export default async function getPushTokens(menuItems) {
             (location ? `at ${location} ` : "") +
             `today!`;
         return {
-            to: token.token,
+            to: token,
             sound: "default",
             body: body,
             data: {}
