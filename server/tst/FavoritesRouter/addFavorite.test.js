@@ -1,9 +1,14 @@
+import * as firebase from "firebase-admin";
+
 import addFavorite from "../../src/routers/FavoritesRouter/addFavorite";
 import firestore from "../../src/config/firebase/firebaseConfig";
 
 jest.mock("../../src/config/firebase/firebaseConfig");
+// jest.mock("firebase-admin");
 
 beforeEach(() => {
+    firebase.firestore.FieldValue = jest.fn();
+    firebase.firestore.FieldValue.arrayUnion = jest.fn();
     firestore.doc = jest.fn();
     firestore.doc.update = jest.fn();
     console.error = jest.fn();

@@ -1,5 +1,6 @@
 import parseNutritionInfo from "./parseNutritionInfo";
 import filters from "../../config/filters.js";
+import { E_NO_API_RES } from "../../config/constants";
 
 /**
  * Parses and combines the nutrition (by call to parseNutritionInfo),
@@ -28,7 +29,7 @@ export default function parseMenuItemData(
         !nutritionData.DATA.length ||
         !nutritionData.DATA[0].length
     ) {
-        throw new Error("Empty nutrition object returned from YaleDining API");
+        throw new Error(E_NO_API_RES);
     }
     if (
         !filterData ||
@@ -36,7 +37,7 @@ export default function parseMenuItemData(
         !filterData.DATA.length ||
         !filterData.DATA[0].length
     ) {
-        throw new Error("Empty filter object returned from YaleDining API");
+        throw new Error(E_NO_API_RES);
     }
     if (
         !ingredientData ||
@@ -44,7 +45,7 @@ export default function parseMenuItemData(
         !ingredientData.DATA.length ||
         !ingredientData.DATA[0].length
     ) {
-        throw new Error("Empty ingredient object returned from YaleDining API");
+        throw new Error(E_NO_API_RES);
     }
 
     // Process ingredient list
@@ -58,22 +59,23 @@ export default function parseMenuItemData(
     }
     // remove duplicate ingredients
     ingredientList = ingredientList.filter(
-        (entry, index, self) => index === self.findIndex(otherEntry => otherEntry === entry)
+        (entry, index, self) =>
+            index === self.findIndex(otherEntry => otherEntry === entry)
     );
 
     // Process filters
-    var isVegan = false; 
+    var isVegan = false;
     var isVegetarian = false;
     var isGlutenFree = false;
     var filterList = []; // list of applicable filters
     var boolFilters = filterData.DATA[0].slice(2, filters.length + 2);
     filters.map((filter, i) => {
         if (boolFilters[i] == 1) {
-            if (filter == "Vegan") isVegan = true; 
+            if (filter == "Vegan") isVegan = true;
             else if (filter == "Vegetarian") isVegetarian = true;
             else if (filter == "Gluten Free") isVegetarian = true;
             else filterList.push(filter);
-        }   
+        }
     });
 
     return {
@@ -81,9 +83,9 @@ export default function parseMenuItemData(
         nutrition: parseNutritionInfo(nutritionData.DATA[0]),
         ingredients: ingredientList,
         filterProperties: filterList,
-        isVegan: isVegan, 
-        isVegetarian: isVegetarian, 
-        isGlutenFree: isGlutenFree, 
+        isVegan: isVegan,
+        isVegetarian: isVegetarian,
+        isGlutenFree: isGlutenFree,
         rating: 5 // TODO : this line is temporarily hard coded
     };
 }

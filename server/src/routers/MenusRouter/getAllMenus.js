@@ -1,5 +1,7 @@
 import getOneMenu from "./getOneMenu";
+
 import locations from "../../config/locations";
+import { E_NO_API_RES } from "../../config/constants";
 
 /*
  *   getAllMenus(query)
@@ -27,28 +29,25 @@ export default async function getAllMenus(query) {
             menus.forEach(menu => allMenus.push(menu));
         } catch (e) {
             nErrors++;
-            console.warn(
-                e.message +
-                    ": " +
-                    locations[location] +
-                    " (total: " +
-                    nErrors +
-                    ")"
+            const message = e.message;
+            const readableLocation = locations[location];
+            console.error(
+                `${message}: ${readableLocation} (total: ${nErrors})`
             );
             if (nErrors >= maxErrors) {
-                throw new Error("Empty object returned for all locations");
+                throw new Error(E_NO_API_RES);
             }
         }
     }
-    if ("meal" in query)
-        // filter out duplicate entries from the list of MenuItems
-        return allMenus.filter(
-            (entry, index, self) =>
-                self.findIndex(
-                    otherEntry =>
-                        otherEntry.name === entry.name &&
-                        otherEntry.itemID === entry.itemID
-                ) === index
-        );
-    else return allMenus;
+    return "meal" in query
+        ? allMenus.filter(
+              (entry, index, self) =>
+                  index ===
+                  self.findIndex(
+                      otherEntry =>
+                          otherEntry.name === entry.name &&
+                          otherEntry.itemID === entry.itemID
+                  )
+          )
+        : allMenus;
 }

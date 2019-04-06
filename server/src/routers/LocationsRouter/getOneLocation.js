@@ -1,5 +1,7 @@
 import getHours from "./getHours";
 
+import { E_BAD_LOC_REQ } from "../../config/constants";
+
 export default async function getOneLocation(data, query) {
     const location = data.DATA.filter(
         entry => entry[data.COLUMNS.indexOf("ID_LOCATION")] == query.location
@@ -19,6 +21,6 @@ export default async function getOneLocation(data, query) {
                 .map(v => parseFloat(v))
         };
     } else {
-        throw new Error("Invalid location request");
+        throw new Error(E_BAD_LOC_REQ);
     }
 }

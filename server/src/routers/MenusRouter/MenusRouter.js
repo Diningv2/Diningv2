@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
         const menus = await getMenus(req.query);
         res.send(menus);
     } catch (e) {
-        console.warn(e);
+        console.error(e);
         if (e.message == "Invalid menu request") {
             res.sendStatus(400);
         } else {
