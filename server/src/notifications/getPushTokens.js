@@ -14,12 +14,15 @@ export default async function getPushTokens(menuItems) {
     } else if (!menuItems) {
         throw new Error(E_NO_API_RES);
     }
-    var expoTokens = [];
+    var tokenToMenuItems = {};
     menuItems.forEach(async menuItem => {
         if (menuItemsDoc.data()[menuItem.itemID]) {
             menuItemsDoc.data()[menuItem.itemID].forEach(token => {
                 const { name, meal, location } = menuItem;
-                expoTokens.push({ name, meal, location, token });
+                const item = { name, meal, location };
+                tokenToMenuItems[token]
+                    ? tokenToMenuItems[token].push(item)
+                    : (tokenToMenuItems[token] = [item]);
             });
         } else {
             await firestore
@@ -27,19 +30,31 @@ export default async function getPushTokens(menuItems) {
                 .update({ [menuItem.itemID]: [] });
         }
     });
-    const tokens = expoTokens.map(tokenObject => {
-        const { name, meal, location, token } = tokenObject;
+    const notificationObjects = tokenToMenuItems.map((token, index, self) => {
+        const itemList = self[token];
+        const { name, meal, location } = itemList[0];
         const body =
-            `${name} is being served ` +
-            (meal ? `for ${meal} ` : "") +
-            (location ? `at ${location} ` : "") +
+            `${name} ` +
+            (itemList.length > 1
+                ? `and ${itemList.length - 1} others are `
+                : `is `) +
+            ` being served ` +
+            (meal && itemList.length == 1 ? `for ${meal} ` : "") +
+            (location && itemList.length == 1 ? `at ${location} ` : "") +
             `today!`;
+        const data = {
+            type: "favorite",
+            title: "Favorites being served!",
+            message: body,
+            payload: itemList
+        };
         return {
             to: token,
+            title: "Favorites being served!",
             sound: "default",
-            body: body,
-            data: {}
+            body,
+            data
         };
     });
-    return tokens;
+    return notificationObjects;
 }
