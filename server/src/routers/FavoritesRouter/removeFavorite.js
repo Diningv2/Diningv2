@@ -4,7 +4,7 @@ import { E_BAD_FAVE_REQ, E_DB_WRITE } from "../../config/constants";
 
 export default async function removeFavorite(token, menuItemID) {
     if (!token || !menuItemID) {
-        throw new Error(E_BAD_FAVE_REQ);
+        throw new Error(E_BAD_FAVE_POST_REQ);
     }
     try {
         await firestore.doc("favorites/menuItems").update({
