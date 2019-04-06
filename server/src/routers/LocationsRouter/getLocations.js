@@ -1,9 +1,7 @@
 import axios from "axios";
 
 import processLocations from "./processLocations";
-
-const LOCATIONS_URI =
-    "http://www.yaledining.org/fasttrack/locations.cfm?version=3";
+import { LOCATIONS_URI } from "../../config/constants";
 
 export default async function getLocations(query) {
     const response = await axios.get(LOCATIONS_URI);

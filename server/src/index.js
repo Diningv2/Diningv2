@@ -6,6 +6,7 @@ import LocationsRouter from "./routers/LocationsRouter/LocationsRouter";
 import MenusRouter from "./routers/MenusRouter/MenusRouter";
 import MenuItemsRouter from "./routers/MenuItemsRouter/MenuItemsRouter";
 import FavoritesRouter from "./routers/FavoritesRouter/FavoritesRouter";
+import TestPushRouter from "./routers/TestPushRouter/TestPushRouter";
 
 import sendNotifications from "./notifications/sendNotifications";
 
@@ -20,6 +21,7 @@ server.use("/api/locations", LocationsRouter);
 server.use("/api/menus", MenusRouter);
 server.use("/api/menuItems", MenuItemsRouter);
 server.use("/api/favorites", FavoritesRouter);
+server.use("/api/testPush", TestPushRouter);
 
 server.listen(PORT, e => e && console.error(e));
 
@@ -28,5 +30,5 @@ const options = {
     timezone: "America/New_York"
 };
 
-// Run at 5:00 am every night (time subject to change)
-cron.schedule("0 5 * * *", () => sendNotifications(), options);
+// Run at 7:00 am every day
+cron.schedule("0 7 * * *", () => sendNotifications(), options);
