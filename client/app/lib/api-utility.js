@@ -32,6 +32,40 @@ export const get = async (uri, queryObject) => {
     }
 }
 
+/** Executes an HTTP POST request using the fetch API
+ * Simplifies the normal fetch API post process into a one-liner
+ * Throws an error when the HTTP POST response status is
+ * anything but 200 (OK) and returns the status text as
+ * the error message. */
+export const post = async (uri, requestBody) => {
+    try {
+        const postConfig = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: requestBody || {}
+        }
+
+        // Builds the full url to be called during fetch()
+        const url = API_BASE_URL + uri;
+
+        // Run our HTTP POST using fetch
+        const response = await fetch(url, postConfig);
+
+        // If the response returned a status code that's not 200 (OK)
+        // Throw an error with the status code text.
+        if (!response.ok) throw new Error(response.statusText);
+        const json = await response.json();
+        return json;
+    } catch (e) {
+        // Deal with catching all errors on the
+        // frontend inside your React components
+        throw e;
+    }    
+}
+
 /** Builds a query string from the key-value pairs
  * of an object.
  * 
