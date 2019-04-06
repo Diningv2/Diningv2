@@ -1,4 +1,4 @@
-export const LOCATIONS_URI = "http://www.yaledining.org/fasttrack/locations.cfm?version=3";
+export const LOCATIONS_URI = "http://www.yaledining.org/fasttrack/locations.cfm";
 export const MENUS_URI = "http://www.yaledining.org/fasttrack/menus.cfm";
 export const NUTRITION_URI = "http://www.yaledining.org/fasttrack/menuitem-nutrition.cfm";
 export const FILTERS_URI = "http://www.yaledining.org/fasttrack/menuitem-codes.cfm";
