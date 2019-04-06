@@ -30,31 +30,33 @@ export default async function getPushTokens(menuItems) {
                 .update({ [menuItem.itemID]: [] });
         }
     });
-    const notificationObjects = tokenToMenuItems.map((token, index, self) => {
-        const itemList = self[token];
-        const { name, meal, location } = itemList[0];
-        const body =
-            `${name} ` +
-            (itemList.length > 1
-                ? `and ${itemList.length - 1} others are `
-                : `is `) +
-            ` being served ` +
-            (meal && itemList.length == 1 ? `for ${meal} ` : "") +
-            (location && itemList.length == 1 ? `at ${location} ` : "") +
-            `today!`;
-        const data = {
-            type: "favorite",
-            title: "Favorites being served!",
-            message: body,
-            payload: itemList
-        };
-        return {
-            to: token,
-            title: "Favorites being served!",
-            sound: "default",
-            body,
-            data
-        };
-    });
+    const notificationObjects = Object.keys(tokenToMenuItems).map(
+        (token, index, self) => {
+            const itemList = self[token];
+            const { name, meal, location } = itemList[0];
+            const body =
+                `${name} ` +
+                (itemList.length > 1
+                    ? `and ${itemList.length - 1} others are `
+                    : `is `) +
+                ` being served ` +
+                (meal && itemList.length == 1 ? `for ${meal} ` : "") +
+                (location && itemList.length == 1 ? `at ${location} ` : "") +
+                `today!`;
+            const data = {
+                type: "favorite",
+                title: "Favorites being served!",
+                message: body,
+                payload: itemList
+            };
+            return {
+                to: token,
+                title: "Favorites being served!",
+                sound: "default",
+                body,
+                data
+            };
+        }
+    );
     return notificationObjects;
 }
