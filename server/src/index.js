@@ -27,4 +27,6 @@ const options = {
     scheduled: true,
     timezone: "America/New_York"
 };
-cron.schedule("* * * * *", () => sendNotifications(), options);
+
+// Run at 5:00 am every night (time subject to change)
+cron.schedule("0 5 * * *", () => sendNotifications(), options);
