@@ -1,6 +1,8 @@
 import getMenuItemList from "./getMenuItemList";
+
 import mealNames from "../../config/mealNames";
-import monthName from "../../config/monthName";
+import dateBuilder from "../../util/dateBuilder";
+import { E_NO_API_RES, E_BAD_MENU_REQ } from "../../config/constants";
 
 /*
  *   processMenu(data, query)
@@ -22,28 +24,15 @@ import monthName from "../../config/monthName";
 export default function processMenu(data, query) {
     // throw on bad response from Yale Dining
     if (!data || !data.DATA || !data.DATA.length || !data.DATA[0].length) {
-        throw new Error("Empty object returned from YaleDining API");
+        throw new Error(E_NO_API_RES);
     }
-    // get date for menus -- relies on the fact that server is on EST/EDT
-    const date = new Date();
-    const today =
-        monthName[date.getMonth()] +
-        ", " +
-        date.getDate() +
-        " " +
-        date.getFullYear() +
-        " 00:00:00";
-    const tomorrow =
-        monthName[date.getMonth()] +
-        ", " +
-        (date.getDate() + 1) +
-        " " +
-        date.getFullYear() +
-        " 00:00:00";
+    const today = dateBuilder(0);
+    const tomorrow = dateBuilder(1);
     // meal query -- return a list of MenuItem objects
     if ("meal" in query) {
+        const { meal } = query;
         const filteredData =
-            query.meal == "all"
+            meal == "all"
                 ? data.DATA.filter(
                       entry => entry[data.COLUMNS.indexOf("MENUDATE")] == today
                   )
@@ -51,11 +40,11 @@ export default function processMenu(data, query) {
                       entry =>
                           entry[data.COLUMNS.indexOf("MENUDATE")] == today &&
                           mealNames[entry[data.COLUMNS.indexOf("MEALNAME")]] ==
-                              query.meal
+                              meal
                   );
         const menuItemList = getMenuItemList(data.COLUMNS, filteredData);
         if (menuItemList == undefined) {
-            throw new Error("Invalid menu request");
+            throw new Error(E_BAD_MENU_REQ);
         } else {
             return menuItemList;
         }

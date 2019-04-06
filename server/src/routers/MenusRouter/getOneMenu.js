@@ -1,8 +1,8 @@
 import axios from "axios";
 
 import processMenu from "./processMenu";
-
-const MENUS_URI = "http://www.yaledining.org/fasttrack/menus.cfm?version=3";
+import queryBuilder from "../../util/queryBuilder";
+import { MENUS_URI } from "../../config/constants";
 
 /*
  *   getOneMenu(query)
@@ -17,7 +17,8 @@ const MENUS_URI = "http://www.yaledining.org/fasttrack/menus.cfm?version=3";
  *       an array of [MenuItem | Menus] objects, depending on whether the query object contains the meal key or not (respectively)
  */
 export default async function getOneMenu(query) {
-    const endpoint = MENUS_URI + "&location=" + query.location;
+    const location = query.location;
+    const endpoint = MENUS_URI + queryBuilder({ location });
     const response = await axios.get(endpoint);
     return processMenu(response.data, query);
 }

@@ -89,25 +89,28 @@ export const singleMenuDataWithDuplicates = [
 ];
 
 export const contBreakfastMenu = [
-    { itemID: 3952458.0, name: "Cage-Free Hard-Boiled Eggs" }
+    {
+        itemID: 3952458,
+        meal: "Cont. Breakfast",
+        name: "Cage-Free Hard-Boiled Eggs"
+    }
 ];
 export const hotBreakfastMenu = [
-    { itemID: 4822535, name: "Multigrain Pancakes" }
+    { itemID: 4822535, meal: "Hot Breakfast", name: "Multigrain Pancakes" }
 ];
 export const brunchMenu = [
-    { itemID: 3871561, name: "Greek Salad with Arugula" }
+    { itemID: 3871561, meal: "Brunch", name: "Greek Salad with Arugula" }
 ];
 export const lunchMenu = [
-    { itemID: 4883833, name: "Farro Salad with Raisins" }
+    { itemID: 4883833, meal: "Lunch", name: "Farro Salad with Raisins" }
 ];
 export const dinnerMenu = [
-    { itemID: 3579035, name: "Naples Style Beef Chuck" }
+    { itemID: 3579035, meal: "Dinner", name: "Naples Style Beef Chuck" }
 ];
-export const allMealsMenu = [
-    { itemID: 4822535, name: "Multigrain Pancakes" },
-    { itemID: 4883833, name: "Farro Salad with Raisins" },
-    { itemID: 3579035, name: "Naples Style Beef Chuck" }
+export const dessertMenu = [
+    { itemID: 5366094, meal: "Dinner", name: "Lemon Raspberry Sheet Cake" }
 ];
+export const allMealsMenu = [hotBreakfastMenu[0], lunchMenu[0], dinnerMenu[0]];
 
 export const emptyExpectedResponse = [
     {
@@ -136,8 +139,8 @@ export const morseMenu = [
             brunch: undefined,
             contBreakfast: undefined,
             dinner: undefined,
-            hotBreakfast: [{ itemID: 4822535, name: "Multigrain Pancakes" }],
-            lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
+            hotBreakfast: hotBreakfastMenu,
+            lunch: lunchMenu
         },
         tomorrow: {
             brunch: undefined,
@@ -149,9 +152,7 @@ export const morseMenu = [
     }
 ];
 export const morseDinnerMenu = [];
-export const morseDinnerMenuDuplicate = [
-    { itemID: 3579035, name: "Naples Style Beef Chuck" }
-];
+export const morseDinnerMenuDuplicate = dinnerMenu;
 
 export const hopperMenu = [
     {
@@ -159,9 +160,9 @@ export const hopperMenu = [
         today: {
             brunch: undefined,
             contBreakfast: undefined,
-            dinner: [{ itemID: 3579035, name: "Naples Style Beef Chuck" }],
+            dinner: dinnerMenu,
             hotBreakfast: undefined,
-            lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
+            lunch: lunchMenu
         },
         tomorrow: {
             brunch: undefined,
@@ -172,9 +173,7 @@ export const hopperMenu = [
         }
     }
 ];
-export const hopperDinnerMenu = [
-    { itemID: 3579035, name: "Naples Style Beef Chuck" }
-];
+export const hopperDinnerMenu = dinnerMenu;
 
 export const davenportMenu = [
     {
@@ -182,7 +181,7 @@ export const davenportMenu = [
         today: {
             brunch: undefined,
             contBreakfast: undefined,
-            dinner: [{ itemID: 5366094, name: "Lemon Raspberry Sheet Cake" }],
+            dinner: dessertMenu,
             hotBreakfast: undefined,
             lunch: undefined
         },
@@ -195,21 +194,19 @@ export const davenportMenu = [
         }
     }
 ];
-export const davenportDinnerMenu = [
-    { itemID: 5366094, name: "Lemon Raspberry Sheet Cake" }
-];
+export const davenportDinnerMenu = dessertMenu;
 
 /* Expected Outputs */
 
 export const singleMenuDataExpectedResponse = [
-    { itemID: 4822535, name: "Multigrain Pancakes" },
-    { itemID: 4883833, name: "Farro Salad with Raisins" },
-    { itemID: 3579035, name: "Naples Style Beef Chuck" }
+    hotBreakfastMenu[0],
+    lunchMenu[0],
+    dinnerMenu[0]
 ];
 
 export const singleMenuDataWithEmptyExpectedResponse = [
-    { itemID: 4822535, name: "Multigrain Pancakes" },
-    { itemID: 3579035, name: "Naples Style Beef Chuck" }
+    hotBreakfastMenu[0],
+    dinnerMenu[0]
 ];
 
 export const fullMenuExpectedResponse = [
@@ -218,9 +215,9 @@ export const fullMenuExpectedResponse = [
         today: {
             brunch: undefined,
             contBreakfast: undefined,
-            dinner: [{ itemID: 3579035, name: "Naples Style Beef Chuck" }],
-            hotBreakfast: [{ itemID: 4822535, name: "Multigrain Pancakes" }],
-            lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
+            dinner: dinnerMenu,
+            hotBreakfast: hotBreakfastMenu,
+            lunch: lunchMenu
         },
         tomorrow: {
             brunch: undefined,
@@ -238,9 +235,9 @@ export const multiMenuExpectedResponse = [
         today: {
             brunch: undefined,
             contBreakfast: undefined,
-            dinner: [{ itemID: 3579035, name: "Naples Style Beef Chuck" }],
+            dinner: dinnerMenu,
             hotBreakfast: undefined,
-            lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
+            lunch: lunchMenu
         },
         tomorrow: {
             brunch: undefined,
@@ -255,7 +252,7 @@ export const multiMenuExpectedResponse = [
         today: {
             brunch: undefined,
             contBreakfast: undefined,
-            dinner: [{ itemID: 5366094, name: "Lemon Raspberry Sheet Cake" }],
+            dinner: dessertMenu,
             hotBreakfast: undefined,
             lunch: undefined
         },
@@ -273,8 +270,8 @@ export const multiMenuExpectedResponse = [
             brunch: undefined,
             contBreakfast: undefined,
             dinner: undefined,
-            hotBreakfast: [{ itemID: 4822535, name: "Multigrain Pancakes" }],
-            lunch: [{ itemID: 4883833, name: "Farro Salad with Raisins" }]
+            hotBreakfast: hotBreakfastMenu,
+            lunch: lunchMenu
         },
         tomorrow: {
             brunch: undefined,
@@ -286,7 +283,4 @@ export const multiMenuExpectedResponse = [
     }
 ];
 
-export const multiDinnerMenu = [
-    { itemID: 3579035, name: "Naples Style Beef Chuck" },
-    { itemID: 5366094, name: "Lemon Raspberry Sheet Cake" }
-];
+export const multiDinnerMenu = [dinnerMenu[0], dessertMenu[0]];

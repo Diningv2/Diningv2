@@ -1,29 +1,19 @@
 import axios from "axios";
 
 import mealNames from "../../config/mealNames";
-import monthName from "../../config/monthName";
-import locations from "../../config/locations";
-import diningHallHours from "../../config/diningHallHours";
-
-const MENUS_URI = "http://www.yaledining.org/fasttrack/menus.cfm?version=3";
+import queryBuilder from "../../util/queryBuilder";
+import dateBuilder from "../../util/dateBuilder";
+import { MENUS_URI, E_NO_API_RES } from "../../config/constants";
 
 export default async function getHours(location, offset) {
-    const endpoint = MENUS_URI + "&location=" + location;
+    const endpoint = MENUS_URI + queryBuilder({ location });
     const response = await axios.get(endpoint);
     const data = response.data;
     // throw on bad response from Yale Dining
     if (!data || !data.DATA || !data.DATA.length || !data.DATA[0].length) {
-        throw new Error("Empty object returned from YaleDining API");
+        throw new Error(E_NO_API_RES);
     }
-    // get date for menus -- relies on the fact that server is on EST/EDT
-    const currentDate = new Date();
-    const date =
-        monthName[currentDate.getMonth()] +
-        ", " +
-        (currentDate.getDate() + offset) +
-        " " +
-        currentDate.getFullYear() +
-        " 00:00:00";
+    const date = dateBuilder(offset);
     const dateFilteredData = data.DATA.filter(
         entry => entry[data.COLUMNS.indexOf("MENUDATE")] === date
     );

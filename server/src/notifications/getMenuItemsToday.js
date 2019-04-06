@@ -3,23 +3,15 @@ import axios from "axios";
 import getMenuItemList from "../routers/MenusRouter/getMenuItemList";
 
 import locations from "../config/locations";
-import monthName from "../config/monthName";
-
-const MENUS_URI = "http://www.yaledining.org/fasttrack/menus.cfm?version=3";
+import queryBuilder from "../util/queryBuilder";
+import dateBuilder from "../util/dateBuilder";
+import { MENUS_URI } from "../config/constants";
 
 export default async function getMenuItemsToday() {
-    // get date for menus -- relies on the fact that server is on EST/EDT
-    const date = new Date();
-    const today =
-        monthName[date.getMonth()] +
-        ", " +
-        date.getDate() +
-        " " +
-        date.getFullYear() +
-        " 00:00:00";
+    const today = dateBuilder(0);
     var completeMenuItemList = [];
     for (let location in locations) {
-        const endpoint = MENUS_URI + "&location=" + location;
+        const endpoint = MENUS_URI + queryBuilder({ location });
         const response = await axios.get(endpoint);
         const filteredData = response.data.DATA.filter(
             entry => entry[response.data.COLUMNS.indexOf("MENUDATE")] == today
@@ -29,14 +21,15 @@ export default async function getMenuItemsToday() {
             filteredData
         );
         menuItemList &&
-            menuItemList.forEach(item =>
+            menuItemList.forEach(item => {
+                const { name, itemID, meal } = item;
                 completeMenuItemList.push({
-                    name: item.name,
-                    itemID: item.itemID,
-                    meal: item.meal,
+                    name,
+                    itemID,
+                    meal,
                     location: locations[location]
-                })
-            );
+                });
+            });
     }
     // unset location and/or meal for duplicate items
     completeMenuItemList = completeMenuItemList
