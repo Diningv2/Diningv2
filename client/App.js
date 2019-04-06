@@ -1,30 +1,23 @@
+// Expo-related functions, will help us import fonts
+import { Font, Notifications } from 'expo';
 import React from 'react';
+import { Animated, Easing, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import { createNavigationReducer, createReactNavigationReduxMiddleware, createReduxContainer } from 'react-navigation-redux-helpers';
 
 // Basic Redux imports
-import { Provider, connect } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { connect, Provider } from 'react-redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import { Toast } from './app/components/Toast';
+import Routes from './app/config/routes';
 
-// Redux Navigation imports
-import { FluidNavigator } from 'react-navigation-fluid-transitions';
-import { createStackNavigator } from 'react-navigation';
-import { Animated, Easing } from 'react-native';
-
-
-
-import Routes from './app/config/routes'
-import {
-  createReduxContainer,
-  createNavigationReducer,
-  createReactNavigationReduxMiddleware,
-} from 'react-navigation-redux-helpers';
+// Push Notifications Utility
+import registerForPushNotificationsAsync from './app/lib/push-utility';
 
 // Our Redux reducers
 import reducers from './app/redux/reducers';
-
-// Expo-related functions, will help us import fonts
-import { Font } from 'expo';
 
 // Configuring logger for the state of our app
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
@@ -90,7 +83,8 @@ const store = configureStore({});
 export default class App extends React.Component {
 
   state = {
-    appHasLoaded: false
+    appHasLoaded: false,
+    notification: undefined
   }
 
   async componentDidMount() {
@@ -106,16 +100,45 @@ export default class App extends React.Component {
       'SF Pro Text Bold': require('./assets/fonts/SFProText/SF-Pro-Text-Bold.ttf'),
     })
 
+    await registerForPushNotificationsAsync();
+
+    // Push notifications listener <- the observer!
+    this.listener = Notifications.addListener(this.handleNotification);
+
     // App is ready to be loaded.
     this.setState({ appHasLoaded: true });
 
   }
 
+  // Callback to run when we observe a new
+  // push notification
+  handleNotification = (notification) => {
+    this.setState({ notification });
+  };
+
+  // Renders the notification component
+  // with the proper notification data
+  // If no notification data is passed in, render nothing.
+  NotificationContainer = () => {
+    if (!this.state.notification.data) return null;
+    const { title, message } = this.state.notification.data;
+    const dismiss = () => this.setState({notification: undefined});
+
+    return (
+      <Toast title={title || "Dining*v2"} message={message || "New alert."} onPress={dismiss} />
+    )
+  }
+
+
   render() {
+    const { NotificationContainer } = this;
     return (
       <Provider store={store}>
         {this.state.appHasLoaded &&
-          <ReduxRouterWithNavState />
+          <View style={{ flex: 1 }}>
+            <ReduxRouterWithNavState />
+            {this.state.notification && <NotificationContainer />}
+          </View>
         }
       </Provider>
     );

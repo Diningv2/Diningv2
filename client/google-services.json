@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "347948941313",
+    "firebase_url": "https://diningv2-4a304.firebaseio.com",
+    "project_id": "diningv2-4a304",
+    "storage_bucket": "diningv2-4a304.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347948941313:android:10a373cc09cc89f9",
+        "android_client_info": {
+          "package_name": "com.yale.diningv2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDyYqNGoiFlMOJAXfssPaYDUKO2u1Iq0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347948941313-7a4dcaeto32a34d1jmo81c5kp7f2mfqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
