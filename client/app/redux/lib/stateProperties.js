@@ -8,5 +8,10 @@
 export default stateProperties = {
     incrementingValues: 'incrementingValues', // TODO: Delete, just used for getting started with Redux
     applicationState: 'applicationState',     // TODO: Delete, just used for getting started with Redux
-    nav: 'nav'
+    nav: 'nav',
+    diningHallsList: 'diningHallsList',
+    menusList: 'menusList',
+    favoritesList: 'favoritesList',
+    allergensList: 'allergensList',
+    menuItem: 'menuItem'
 }
