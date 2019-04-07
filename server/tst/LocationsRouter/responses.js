@@ -640,6 +640,15 @@ export const stilesExpectedResponse = {
     geolocation: [41.312492, -72.930647]
 };
 
+export const morseExpectedResponseEmpty = {
+    name: "Morse",
+    todayHours: undefined,
+    tomorrowHours: undefined,
+    isOpen: false,
+    busyness: 0,
+    geolocation: [41.312532, -72.930352]
+};
+
 export const allLocationsExpectedResponse = {
     Morse: morseExpectedResponse,
     Stiles: stilesExpectedResponse

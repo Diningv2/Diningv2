@@ -8,10 +8,18 @@ export default async function getOneLocation(data, query) {
     );
     if (location.length) {
         const entry = location[0];
+        let todayHours = undefined;
+        let tomorrowHours = undefined;
+        try {
+            todayHours = await getHours(query.location, 0);
+            tomorrowHours = await getHours(query.location, 1);
+        } catch (e) {
+            console.error(e);
+        }
         return {
             name: entry[data.COLUMNS.indexOf("DININGLOCATIONNAME")],
-            todayHours: await getHours(query.location, 0),
-            tomorrowHours: await getHours(query.location, 1),
+            todayHours,
+            tomorrowHours,
             isOpen: parseFloat(entry[data.COLUMNS.indexOf("ISCLOSED")])
                 ? false
                 : true,
