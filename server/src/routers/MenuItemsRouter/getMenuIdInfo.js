@@ -3,12 +3,7 @@ import axios from "axios";
 import parseMenuItemData from "./parseMenuItemData";
 
 import queryBuilder from "../../util/queryBuilder";
-import {
-    NUTRITION_URI,
-    FILTERS_URI,
-    INGREDIENTS_URI,
-    E_NO_API_RES
-} from "../../config/constants";
+import * as constants from "../../config/constants";
 
 /**
  * Gets nutrition, filters (allergans, etc), and ingredients data from dining api
@@ -22,11 +17,14 @@ import {
 
 export default async function getMenuIdInfo(menuitemid) {
     const nutritionEndpoint =
-        NUTRITION_URI + queryBuilder({ version: 3, MENUITEMID: menuitemid });
+        constants.NUTRITION_URI +
+        queryBuilder({ version: constants.YD_VERSION, MENUITEMID: menuitemid });
     const filterEndpoint =
-        FILTERS_URI + queryBuilder({ version: 3, MENUITEMID: menuitemid });
+        constants.FILTERS_URI +
+        queryBuilder({ version: constants.YD_VERSION, MENUITEMID: menuitemid });
     const ingredientsEndpoint =
-        INGREDIENTS_URI + queryBuilder({ version: 3, MENUITEMID: menuitemid });
+        constants.INGREDIENTS_URI +
+        queryBuilder({ version: constants.YD_VERSION, MENUITEMID: menuitemid });
     try {
         const nutritionResponse = await axios.get(nutritionEndpoint);
         const filterResponse = await axios.get(filterEndpoint);
@@ -38,6 +36,6 @@ export default async function getMenuIdInfo(menuitemid) {
         );
         return menu;
     } catch (e) {
-        throw new Error(E_NO_API_RES);
+        throw new Error(constants.E_NO_API_RES);
     }
 }
