@@ -39,11 +39,11 @@ export class Dish extends Component {
         // If the heart is empty, do add favorite
         try {
             if (this.state.isFave) {
-                // await post('/api/favorites/delete', postConfig);
+                await post('/api/favorites/delete', postConfig);
                 this.props.removeFavorite(menuItemID);
                 this.setState({isFave: false});
             } else {
-                // await post('/api/favorites', postConfig);
+                await post('/api/favorites', postConfig);
                 this.props.addFavorite(menuItemID);
                 this.setState({isFave: true});
             }

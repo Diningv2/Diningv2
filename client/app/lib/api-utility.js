@@ -45,7 +45,7 @@ export const post = async (uri, requestBody) => {
               Accept: 'application/json',
               'Content-Type': 'application/json',
             },
-            body: requestBody
+            body: JSON.stringify(requestBody)
         }
 
         // Builds the full url to be called during fetch()

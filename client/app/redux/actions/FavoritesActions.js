@@ -2,7 +2,6 @@ import * as types from './types';
 import { get } from '../../lib/api-utility';
 
 export function getFavorites(expoToken) {
-    const tokenID = expoToken.split("[")[1].split("]")[0];
     const request = () => {
         return { type: types.GET_FAVORITES_REQUEST }
     }
@@ -27,7 +26,7 @@ export function getFavorites(expoToken) {
         dispatch(request()); // tell Redux we're about to make that request
         try {
             const favorites = await get("/api/favorites", { 
-                token: tokenID
+                token: expoToken
              });
             dispatch(success(favorites)); // If successful, dispatch it to Redux
         } catch (e) {

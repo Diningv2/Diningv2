@@ -29,8 +29,8 @@ class FavoritesView extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Header title="Favorites" />
-                <CenterTextView message="Will display a list of your favorites once we hook it up to the database!" />
+                <Header title="Favorites 💖" />
+                <CenterTextView message="Under Construction 👷" />
                 {/* {this.props.favoritesList.isLoading
                     ? (
                         <CenterTextView message="Loading..." />

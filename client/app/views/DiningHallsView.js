@@ -46,7 +46,7 @@ class DiningHallsView extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Header title="Dining Halls" />
+                <Header title="Dining Halls 🍽" />
                 <View style={{paddingBottom: 50, flex: 1}}>
                     {this.props.diningHallsList.isLoading 
                         ? (
