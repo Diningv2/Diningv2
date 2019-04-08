@@ -5,6 +5,7 @@ import { Transition } from 'react-navigation-fluid-transitions';
 import styles from '../config/styles';
 
 import connectToRedux from '../redux/lib/connectToRedux';
+import sp from '../redux/lib/stateProperties';
 
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import BottomTabs from '../components/BottomTabs';
@@ -20,7 +21,8 @@ class FavoritesView extends Component {
 
     componentDidMount() {
         if (this.props.favoritesList.isLoading) {
-            this.props.getFavorites(0);
+            const expoToken = this.props.userInformation.notificationID;
+            this.props.getFavorites(expoToken);
         }
     }
 
@@ -28,7 +30,8 @@ class FavoritesView extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Header title="Favorites" />
-                {this.props.favoritesList.isLoading
+                <CenterTextView message="Will display a list of your favorites once we hook it up to the database!" />
+                {/* {this.props.favoritesList.isLoading
                     ? (
                         <CenterTextView message="Loading..." />
                     ) : (
@@ -39,7 +42,7 @@ class FavoritesView extends Component {
                             />
                         </View>
                     )
-                }
+                } */}
                 <BottomTabs viewName={"FavoritesView"} />
             </View>
         );
@@ -52,4 +55,4 @@ class FavoritesView extends Component {
     }
 }
 
-export default connectToRedux(FavoritesView, ['favoritesList']);
+export default connectToRedux(FavoritesView, [sp.favoritesList, sp.userInformation]);
