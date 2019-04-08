@@ -1,22 +1,18 @@
 import firestore from "../../config/firebase/firebaseConfig";
 
-import {
-    E_DB_READ,
-    E_DB_NOENT,
-    E_BAD_FAVE_GET_REQ
-} from "../../config/constants";
+import * as constants from "../../config/constants";
 
 export default async function getFavorites(token) {
     let usersDoc = undefined;
     try {
         usersDoc = await firestore.doc("favorites/users").get();
     } catch (e) {
-        throw new Error(E_DB_READ + e);
+        throw new Error(constants.E_DB_READ + e);
     }
     if (!usersDoc.exists) {
-        throw new Error(E_DB_NOENT + "favorites/users");
+        throw new Error(constants.E_DB_NOENT + "favorites/users");
     } else if (!token) {
-        throw new Error(E_BAD_FAVE_GET_REQ);
+        throw new Error(constants.E_BAD_FAVE_GET_REQ);
     }
     const expoToken = `ExponentPushToken[${token}]`;
     var menuItems = {};
