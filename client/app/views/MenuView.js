@@ -13,6 +13,7 @@ import Searchbar from '../components/Searchbar';
 import TopTabs from '../components/TopTabs';
 
 import styles from '../config/styles';
+import { AnimatedListItem } from '../components/Animatable';
 
 class MenuView extends Component {
 
@@ -93,21 +94,27 @@ class MenuView extends Component {
         const hasLoadedFailed = !this.props.menusList.isLoading && this.props.menusList.hasError;
         return (
             <View style={{ flex: 1 }}>
+                <Header canGoBack title={!hasLoadedSuccessfully ? 'Loading...' : this.props.menusList.data.location} />
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
-                        <Header canGoBack title={this.props.menusList.data.location} />
-                        <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
-                        <TopTabs tabButtons={this.dynamicTabButtons()} />
-                        <Text style={{ 
-                            ...styles.font.type.primaryRegular, 
-                            ...styles.font.color.primary, 
-                            textAlign: 'center' 
-                        }}>{this.state.hoursMessage}</Text>
+                        <AnimatedListItem key="searchbar" index={0}>
+                            <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
+                        </AnimatedListItem>
+                        <AnimatedListItem key="toptabs" index={3}>
+                            <TopTabs tabButtons={this.dynamicTabButtons()} />
+                        </AnimatedListItem>
+                        <AnimatedListItem key="hourstext" index={4}>
+                            <Text style={{ 
+                                ...styles.font.type.primaryRegular, 
+                                ...styles.font.color.primary, 
+                                textAlign: 'center' 
+                            }}>{this.state.hoursMessage}</Text>
+                        </AnimatedListItem>
                         {this.state.mealArrayFiltered && 
                             <View style={{paddingBottom: 50, flex: 1}}>
                                 <DV2ScrollView
                                     array={this.state.mealArrayFiltered}
-                                    render={(dish) => this.renderMenu(dish)}
+                                    render={(dish, index) => this.renderMenu(dish, index)}
                                 />
                             </View>
                         }
@@ -126,9 +133,11 @@ class MenuView extends Component {
         )
     }
 
-    renderMenu = (dish) => {
+    renderMenu = (dish, index) => {
         return (
+            <AnimatedListItem key={dish.name} index={index}>
             <Dish key={dish.name} dishName={dish.name} dishID={dish.itemID}/>
+            </AnimatedListItem>
         );
     }
 }

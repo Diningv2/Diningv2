@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import styles from '../config/styles';
+import { AnimatedListItem } from './Animatable';
 
 const CenterTextView = (props) => {
     const containerStyle = {
@@ -15,10 +16,12 @@ const CenterTextView = (props) => {
     }
     return (
         <View style={containerStyle}>
-            <Text style={textStyle}>
-                {props.message}
-            </Text>
-        </View>
+            <AnimatedListItem key="centertextview"> 
+                <Text style={textStyle}>
+                    {props.message}
+                </Text>
+            </AnimatedListItem>
+            </View>
     )
 }
 

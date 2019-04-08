@@ -12,6 +12,7 @@ import Header from '../components/Header';
 import dHallIDs from '../config/dHallIDs';
 import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
+import { AnimatedListItem } from '../components/Animatable';
 
 class DiningHallsView extends Component {
 
@@ -27,19 +28,21 @@ class DiningHallsView extends Component {
 
     renderDiningHall = (diningHall, index) => {
         return (
-            <TouchableOpacity
-                key={diningHall.name}
-                onPress={() => {
-                    this.props.getMenus(dHallIDs[diningHall.name]); // Set redux state with menu for this dHall
-                    this.props.navigation.navigate('MenuView');
-                }}
-            >
-                <DiningHallItem
-                    name={diningHall.name}
-                    isOpen={diningHall.isOpen}
-                    busyness={diningHall.busyness}
-                />
-            </TouchableOpacity>
+            <AnimatedListItem key={index} index={index}>
+                <TouchableOpacity
+                    key={diningHall.name}
+                    onPress={() => {
+                        this.props.getMenus(dHallIDs[diningHall.name]); // Set redux state with menu for this dHall
+                        this.props.navigation.navigate('MenuView');
+                    }}
+                >
+                    <DiningHallItem
+                        name={diningHall.name}
+                        isOpen={diningHall.isOpen}
+                        busyness={diningHall.busyness}
+                    />
+                </TouchableOpacity>
+            </AnimatedListItem>
         )
     }
 
