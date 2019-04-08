@@ -18,13 +18,13 @@ import * as constants from "../../config/constants";
 export default async function getMenuIdInfo(menuitemid) {
     const nutritionEndpoint =
         constants.NUTRITION_URI +
-        queryBuilder({ version: 3, MENUITEMID: menuitemid });
+        queryBuilder({ version: constants.YD_VERSION, MENUITEMID: menuitemid });
     const filterEndpoint =
         constants.FILTERS_URI +
-        queryBuilder({ version: 3, MENUITEMID: menuitemid });
+        queryBuilder({ version: constants.YD_VERSION, MENUITEMID: menuitemid });
     const ingredientsEndpoint =
         constants.INGREDIENTS_URI +
-        queryBuilder({ version: 3, MENUITEMID: menuitemid });
+        queryBuilder({ version: constants.YD_VERSION, MENUITEMID: menuitemid });
     try {
         const nutritionResponse = await axios.get(nutritionEndpoint);
         const filterResponse = await axios.get(filterEndpoint);

@@ -2,7 +2,7 @@ import axios from "axios";
 
 import processMenu from "./processMenu";
 import queryBuilder from "../../util/queryBuilder";
-import { MENUS_URI } from "../../config/constants";
+import { MENUS_URI, YD_VERSION } from "../../config/constants";
 
 /*
  *   getOneMenu(query)
@@ -18,7 +18,7 @@ import { MENUS_URI } from "../../config/constants";
  */
 export default async function getOneMenu(query) {
     const location = query.location;
-    const endpoint = MENUS_URI + queryBuilder({ version: 3, location });
+    const endpoint = MENUS_URI + queryBuilder({ version: YD_VERSION, location });
     const response = await axios.get(endpoint);
     return processMenu(response.data, query);
 }
