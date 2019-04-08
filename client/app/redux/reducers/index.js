@@ -16,4 +16,5 @@ export default Object.assign({},
     MenuReducers,
     FavoritesReducers,
     AllergenReducers,
+    TokenReducers
 )

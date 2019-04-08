@@ -14,4 +14,5 @@ export const allActions = Object.assign({},
     MenuActions,
     FavoritesActions,
     AllergenActions,
+    TokenActions
 );
