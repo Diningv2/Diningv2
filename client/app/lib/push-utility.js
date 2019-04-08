@@ -16,7 +16,7 @@ export default async function registerForPushNotificationsAsync() {
   console.log('Final Status: '+finalStatus);
   // Stop here if the user did not grant permissions
   if (finalStatus !== 'granted') {
-    return;
+    return undefined;
   }
 
   // Get the token that uniquely identifies this device

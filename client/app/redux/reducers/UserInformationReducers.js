@@ -7,9 +7,10 @@ const initialUserInformationState = {
 
 export const userInformation = createReducer(initialUserInformationState, {
     [types.SAVE_USER_NOTIFICATION_ID](state, action) {
+        const tokenID = action.payload.notificationID.split("[")[1].split("]")[0];
         return {
             ...state,
-            notificationID: action.payload.notificationID
+            notificationID: tokenID
         }
     }
 })

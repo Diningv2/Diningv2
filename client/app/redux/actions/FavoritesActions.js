@@ -2,20 +2,10 @@ import * as types from './types';
 import { get } from '../../lib/api-utility';
 
 export function getFavorites(expoToken) {
-
-    // -------- The Request Action --------
-    // Usually called to let the Redux reducer
-    // containing our state data that we should
-    // flip an isLoading variable to "true"
-    // while we wait to do the async API call
     const request = () => {
         return { type: types.GET_FAVORITES_REQUEST }
     }
 
-    // -------- The Success Action --------
-    // Called if the API call happened successfully 
-    // Passes in what we got from the API call to the Redux store in payload.
-    // Also sets "isLoading" back to false.
     const success = (favorites) => {
         return {
             type: types.GET_FAVORITES_SUCCESS,
@@ -25,9 +15,6 @@ export function getFavorites(expoToken) {
         }
     }
 
-    // -------- The Failure Action --------
-    // Called in the catch() block so Redux knows error occurred + what to do.
-    // Maybe set some stuff back to 'undefined' and "isLoading" back to false
     const failure = (errorMessage) => {
         return {
             type: types.GET_FAVORITES_FAILURE,
@@ -35,19 +22,35 @@ export function getFavorites(expoToken) {
         }
     }
 
-    // -------- The actual THUNK! --------
-    // dispatch() is the function that executes
-    // one of the above Redux actions.
     return async (dispatch) => {
         dispatch(request()); // tell Redux we're about to make that request
         try {
-            // TODO: change this to get favorites
+            console.log("ATTEMPTING TO GET FAVORITES NOW");
             const favorites = await get("/api/favorites", { 
                 token: expoToken
              });
+             console.log("FAVORITES OBJECT RETURNED IS", JSON.stringify(favorites));
             dispatch(success(favorites)); // If successful, dispatch it to Redux
         } catch (e) {
             dispatch(failure(e.message));
+        }
+    }
+}
+
+export function addFavorite(menuItemID) {
+    return {
+        type: types.ADD_FAVORITE,
+        payload: {
+            menuItemID
+        }
+    }
+}
+
+export function removeFavorite(menuItemID) {
+    return {
+        type: types.REMOVE_FAVORITE,
+        payload: {
+            menuItemID
         }
     }
 }

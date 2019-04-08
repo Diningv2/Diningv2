@@ -21,6 +21,7 @@ import reducers from './app/redux/reducers';
 
 // Specific Redux actions we need to call on app startup
 import { saveUserNotificationID } from './app/redux/actions/UserInformationActions';
+import { getFavorites } from './app/redux/actions/FavoritesActions';
 
 // Configuring logger for the state of our app
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
