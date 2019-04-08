@@ -10,7 +10,7 @@ export const E_NO_API_RES = "Empty object returned from YaleDining API";
 
 export const E_BAD_LOC_REQ = "Invalid location request";
 export const E_BAD_MENU_REQ = "Invalid menu request";
-export const E_BAD_FAVE_POST_REQ = "Push token and item ID are required";
+export const E_BAD_FAVE_POST_REQ = "Push token, item ID, and item name are required";
 export const E_BAD_FAVE_GET_REQ = "Expo token is required";
 
 export const E_DB_READ = "Error getting document: ";
