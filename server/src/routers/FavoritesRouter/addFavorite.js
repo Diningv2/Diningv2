@@ -7,9 +7,10 @@ export default async function addFavorite(token, menuItemID) {
     if (!token || !menuItemID) {
         throw new Error(E_BAD_FAVE_POST_REQ);
     }
+    const expoToken = `ExponentPushToken[${token}]`;
     try {
         await firestore.doc("favorites/menuItems").update({
-            [menuItemID]: firebase.firestore.FieldValue.arrayUnion(token)
+            [menuItemID]: firebase.firestore.FieldValue.arrayUnion(expoToken)
         });
         await firestore.doc("favorites/users").update({
             [token]: firebase.firestore.FieldValue.arrayUnion(menuItemID)

@@ -9,7 +9,7 @@ const router = express.Router();
 router
     .get("/", async (req, res) => {
         try {
-            const favorites = await getFavorites(`ExponentPushToken[${req.query.token}]`);
+            const favorites = await getFavorites(req.query.token);
             res.send(favorites);
         } catch (e) {
             console.error(e);
