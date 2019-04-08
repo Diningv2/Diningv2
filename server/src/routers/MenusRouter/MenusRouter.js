@@ -9,13 +9,13 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     try {
         const menus = await getMenus(req.query);
-        res.send(menus);
+        res.send(menus).status(200);
     } catch (e) {
         console.error(e);
         if (e.message == E_BAD_MENU_REQ) {
-            res.sendStatus(400);
+            res.send(e).status(400);
         } else {
-            res.sendStatus(500);
+            res.send(e).status(500);
         }
     }
 });

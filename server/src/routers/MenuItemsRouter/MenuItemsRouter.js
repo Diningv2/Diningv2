@@ -11,10 +11,10 @@ router.get("/", async (req, res) => {
     } else {
         try {
             const menu = await getMenuIdInfo(req.query.menuitemid);
-            res.send(menu);
+            res.send(menu).status(200);
         } catch (e) {
             console.error(e);
-            res.sendStatus(500);
+            res.send(e).status(500);
         }
     }
 });
