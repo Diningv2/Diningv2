@@ -17,9 +17,7 @@ export default async function getFavorites(token) {
     const expoToken = `ExponentPushToken[${token}]`;
     var menuItems = {};
     usersDoc.data()[expoToken]
-        ? usersDoc
-              .data()
-              [expoToken].forEach(menuItem => (menuItems[menuItem] = true))
+        ? usersDoc.data()[expoToken].forEach(item => (menuItems[item] = true))
         : await firestore.doc("favorites/users").update({ [expoToken]: [] });
     return menuItems;
 }
