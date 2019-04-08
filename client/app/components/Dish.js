@@ -34,22 +34,24 @@ export class Dish extends Component {
             token, 
             menuitemid: menuItemID
         }
+        const previousState = this.state.isFave;
 
         // If the heart is full, do remove favorite
         // If the heart is empty, do add favorite
         try {
             if (this.state.isFave) {
+                this.setState({isFave: false});
                 await post('/api/favorites/delete', postConfig);
                 this.props.removeFavorite(menuItemID);
-                this.setState({isFave: false});
             } else {
+                this.setState({isFave: true});
                 await post('/api/favorites', postConfig);
                 this.props.addFavorite(menuItemID);
-                this.setState({isFave: true});
             }
         
         } catch(e) {
             console.error("Favorite add/remove error", e.message);
+            this.setState({isFave: previousState});
         }
     }
 
@@ -71,12 +73,13 @@ export class Dish extends Component {
                         {this.props.dishName}
                     </Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={this.handlePress}>
                 <AntDesign 
                     name={this.state.isFave ? 'heart' : 'hearto'} 
                     size={25} 
-                    onPress={this.handlePress}
                     color={'#ff6666'}
                 />
+                </TouchableOpacity>
             </View> 
         );
     }
