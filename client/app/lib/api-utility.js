@@ -45,7 +45,7 @@ export const post = async (uri, requestBody) => {
               Accept: 'application/json',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestBody)
+            body: requestBody
         }
 
         // Builds the full url to be called during fetch()
@@ -57,8 +57,7 @@ export const post = async (uri, requestBody) => {
         // If the response returned a status code that's not 200 (OK)
         // Throw an error with the status code text.
         if (!response.ok) throw new Error(response.statusText);
-        const json = await response.json();
-        return json;
+        return;
     } catch (e) {
         // Deal with catching all errors on the
         // frontend inside your React components

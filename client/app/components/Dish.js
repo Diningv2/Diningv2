@@ -31,7 +31,8 @@ export class Dish extends Component {
         const token = this.props.userInformation.notificationID;
         const menuItemID = this.props.dishID;
         const postConfig = {
-            token, menuItemID
+            token, 
+            menuitemid: menuItemID
         }
 
         // If the heart is full, do remove favorite
@@ -48,7 +49,7 @@ export class Dish extends Component {
             }
         
         } catch(e) {
-            console.error("Favorite add/remove error", e);
+            console.error("Favorite add/remove error", e.message);
         }
     }
 
