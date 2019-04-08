@@ -1,7 +1,7 @@
 import * as types from './types';
 import { get } from '../../lib/api-utility';
 
-export function getFavorites(userID) {
+export function getFavorites(expoToken) {
 
     // -------- The Request Action --------
     // Usually called to let the Redux reducer
@@ -42,18 +42,10 @@ export function getFavorites(userID) {
         dispatch(request()); // tell Redux we're about to make that request
         try {
             // TODO: change this to get favorites
-            // const favorites = await get("/api/menus", { location: locationID });
-            const favorites = [
-                {
-                    name: 'Grilled Cheese',
-                    itemID: 1,
-                },
-                {
-                    name: 'Cucumber Pizza',
-                    itemID: 2,
-                },
-            ]
-            dispatch(success(favorites)); // If successfull, dispatch it to Redux
+            const favorites = await get("/api/favorites", { 
+                token: expoToken
+             });
+            dispatch(success(favorites)); // If successful, dispatch it to Redux
         } catch (e) {
             dispatch(failure(e.message));
         }
