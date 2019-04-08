@@ -20,10 +20,6 @@ class MenuView extends Component {
         super(props);
     }
 
-    
-
-    
-
     state = {
         mealArray: undefined,
         mealArrayFiltered: undefined,
