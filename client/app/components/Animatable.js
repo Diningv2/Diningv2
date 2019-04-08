@@ -24,7 +24,7 @@ export class AnimatedListItem extends React.Component {
 
     render() {
         return (
-            <Transition animateOnMount>
+            <Transition animateOnMount enterAfterExit>
                 <ListItem key={0} i={this.props.index || 0}>
                     {this.props.children}
                 </ListItem>

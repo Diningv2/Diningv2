@@ -21,7 +21,7 @@ const CenterTextView = (props) => {
                     {props.message}
                 </Text>
             </AnimatedListItem>
-            </View>
+        </View>
     )
 }
 

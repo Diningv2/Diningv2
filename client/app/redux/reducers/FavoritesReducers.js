@@ -47,8 +47,8 @@ export const favoritesList = createReducer(initialState, {
 
     [types.ADD_FAVORITE](state, action) {
         const favoritesObject = state.data || {};
-        const menuItemID = action.payload.menuItemID;
-        favoritesObject[menuItemID] = true;
+        const { menuItemID, menuItemName } = action.payload;
+        favoritesObject[menuItemID] = menuItemName;
 
         return {
             ...state,

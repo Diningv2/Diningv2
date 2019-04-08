@@ -35,11 +35,12 @@ export function getFavorites(expoToken) {
     }
 }
 
-export function addFavorite(menuItemID) {
+export function addFavorite(menuItemID, menuItemName) {
     return {
         type: types.ADD_FAVORITE,
         payload: {
-            menuItemID
+            menuItemID,
+            menuItemName
         }
     }
 }

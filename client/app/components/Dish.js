@@ -22,7 +22,7 @@ export class Dish extends Component {
     componentDidMount() {
         // TODO: Check if this item is a favorite
         const { data } = this.props.favoritesList;
-        const isFave = data ? data[this.props.dishID] : false;
+        const isFave = data && data[this.props.dishID] ? data[this.props.dishID] : false;
         this.setState({ isFave });
     }
 
