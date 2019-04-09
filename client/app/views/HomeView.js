@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Transition } from 'react-navigation-fluid-transitions';
+import sp from '../redux/lib/stateProperties';
 import connectToRedux from '../redux/lib/connectToRedux';
 
 class HomeView extends Component {
@@ -8,29 +8,38 @@ class HomeView extends Component {
         super(props);
     }
 
+    buttonStyle = { ...styles.bigButton, marginTop: 20 };
+    proceed = () => this.props.navigation.navigate('DiningHallsView');
+
+    componentDidMount() {
+        const expoToken = this.props.userInformation.notificationID;
+        this.props.getFavorites(expoToken);
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <Transition appear="top">
                     <View>
-                        <Text style={styles.title}>Dining*v2</Text>
+                        <Text style={styles.title}>
+                            Dining*v2
+                        </Text>
                     </View>
-                </Transition>
-                <Transition appear="top">
                     <View>
-                        <Text style={styles.subtitle}>Get notified when your favorite Yale Dishes™ are being served!</Text>
+                        <Text style={styles.subtitle}>
+                            Get notified when your favorite Yale Dishes™ are being served!
+                        </Text>
                     </View>
-                </Transition>
-                <Transition appear="bottom">
                     <View>
-                        <TouchableOpacity style={{ ...styles.bigButton, marginTop: 20 }} onPress={() => this.props.navigation.navigate('DiningHallsView')}>
-                            <Text style={styles.bigButtonText}>check out the dhalls</Text>
+                        <TouchableOpacity 
+                            style={this.buttonStyle} 
+                            onPress={this.proceed}
+                        >
+                            <Text style={styles.bigButtonText}>
+                                check out the dhalls
+                            </Text>
                         </TouchableOpacity>
                     </View>
-                </Transition>
-                <Transition shared="welcome" appear="top">
                     <View style={{ position: 'absolute', backgroundColor: '#4a86e8' }} />
-                </Transition>
             </View>
         )
     }
@@ -69,4 +78,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connectToRedux(HomeView, []);
+export default connectToRedux(HomeView, [sp.userInformation]);

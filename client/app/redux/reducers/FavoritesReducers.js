@@ -27,12 +27,12 @@ export const favoritesList = createReducer(initialState, {
         }
     },
     [types.GET_FAVORITES_SUCCESS](state, action) {
-        const favoritesArray = action.payload.favorites;
+        const favoritesObject = action.payload.favorites;
         return {
             ...state,
-            data: favoritesArray,
+            data: favoritesObject,
             hasError: false,
-            isLoading: false // set isLoading to false so UI shows the data
+            isLoading: false // set isLoading to false so UI shows the favoritesObject
         }
     },
     [types.GET_FAVORITES_FAILURE](state, action) {
@@ -42,6 +42,28 @@ export const favoritesList = createReducer(initialState, {
             hasError: true,
             isLoading: false, // set isLoading to false - not still loading :(
             errorMessage: action.errorMessage // can add to display error msg
+        }
+    },
+
+    [types.ADD_FAVORITE](state, action) {
+        const favoritesObject = state.data || {};
+        const { menuItemID, menuItemName } = action.payload;
+        favoritesObject[menuItemID] = menuItemName;
+
+        return {
+            ...state,
+            data: favoritesObject
+        }
+    },
+    [types.REMOVE_FAVORITE](state, action) {
+        const favoritesObject = state.data || {};
+        const menuItemID = action.payload.menuItemID;
+        
+        delete favoritesObject[menuItemID];
+        
+        return {
+            ...state,
+            data: favoritesObject
         }
     }
 })

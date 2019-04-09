@@ -19,6 +19,10 @@ import registerForPushNotificationsAsync from './app/lib/push-utility';
 // Our Redux reducers
 import reducers from './app/redux/reducers';
 
+// Specific Redux actions we need to call on app startup
+import { saveUserNotificationID } from './app/redux/actions/UserInformationActions';
+import { getFavorites } from './app/redux/actions/FavoritesActions';
+
 // Configuring logger for the state of our app
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
 
@@ -87,27 +91,39 @@ export default class App extends React.Component {
     notification: undefined
   }
 
-  async componentDidMount() {
+  async handleLoadingFonts() {
+      // Load the necessary fonts
+      await Font.loadAsync({
+        'Comfortaa Regular': require('./assets/fonts/Comfortaa/Comfortaa-Regular.ttf'),
+      })
+      await Font.loadAsync({
+        'Comfortaa Bold': require('./assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
+      })
+      await Font.loadAsync({
+        'SF Pro Text Bold': require('./assets/fonts/SFProText/SF-Pro-Text-Bold.ttf'),
+      })
+  }
 
-    // Load the necessary fonts
-    await Font.loadAsync({
-      'Comfortaa Regular': require('./assets/fonts/Comfortaa/Comfortaa-Regular.ttf'),
-    })
-    await Font.loadAsync({
-      'Comfortaa Bold': require('./assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
-    })
-    await Font.loadAsync({
-      'SF Pro Text Bold': require('./assets/fonts/SFProText/SF-Pro-Text-Bold.ttf'),
-    })
-
-    await registerForPushNotificationsAsync();
+  async handleRegisteringNotificationID() {
+    const expoToken = await registerForPushNotificationsAsync();
+    
+    // Tell Redux to store our notification ID
+    // (also acts as our device identifier for now)
+    store.dispatch(saveUserNotificationID(expoToken));
 
     // Push notifications listener <- the observer!
     this.listener = Notifications.addListener(this.handleNotification);
+  }
+
+  async componentDidMount() {
+
+    // Loading necessary resources
+    // Retrieving data on startup
+    await this.handleLoadingFonts();
+    await this.handleRegisteringNotificationID();
 
     // App is ready to be loaded.
     this.setState({ appHasLoaded: true });
-
   }
 
   // Callback to run when we observe a new
@@ -125,10 +141,9 @@ export default class App extends React.Component {
     const dismiss = () => this.setState({notification: undefined});
 
     return (
-      <Toast title={title || "Dining*v2"} message={message || "New alert."} onPress={dismiss} />
+      <Toast title={title || "Dining*v2"} message={message || "New alert!"} onPress={dismiss} />
     )
   }
-
 
   render() {
     const { NotificationContainer } = this;

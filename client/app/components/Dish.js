@@ -7,6 +7,7 @@ import sp from '../redux/lib/stateProperties';
 
 import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from '../config/styles';
+import { post } from '../lib/api-utility';
 
 export class Dish extends Component {
 
@@ -20,21 +21,39 @@ export class Dish extends Component {
 
     componentDidMount() {
         // TODO: Check if this item is a favorite
-        isFaveDish = false; // TODO: remove this line
-
-        if (isFaveDish) {
-            this.setState({isFave: true});
-        };
+        const { data } = this.props.favoritesList;
+        const isFave = data && data[this.props.dishID] || false;
+        this.setState({ isFave });
     }
 
-    handlePress = () => {
+    handlePress = async () => {
         // TODO: change the favorited status of the dish
+        const token = this.props.userInformation.notificationID;
+        const menuItemID = this.props.dishID;
+        const postConfig = {
+            token, 
+            menuitemid: menuItemID,
+            name: this.props.dishName,
+        }
+        const previousState = this.state.isFave;
 
-        this.setState(state => {
-            return {
-                isFave: !state.isFave,
+        // If the heart is full, do remove favorite
+        // If the heart is empty, do add favorite
+        try {
+            if (this.state.isFave) {
+                this.setState({isFave: false});
+                await post('/api/favorites/delete', postConfig);
+                this.props.removeFavorite(menuItemID);
+            } else {
+                this.setState({isFave: true});
+                await post('/api/favorites', postConfig);
+                this.props.addFavorite(menuItemID, this.props.dishName);
             }
-        })
+        
+        } catch(e) {
+            console.error("Favorite add/remove error", e.message);
+            this.setState({isFave: previousState});
+        }
     }
 
     render() {
@@ -55,15 +74,16 @@ export class Dish extends Component {
                         {this.props.dishName}
                     </Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={this.handlePress}>
                 <AntDesign 
                     name={this.state.isFave ? 'heart' : 'hearto'} 
                     size={25} 
-                    onPress={this.handlePress}
                     color={'#ff6666'}
                 />
+                </TouchableOpacity>
             </View> 
         );
     }
 }
 
-export default connectToRedux(withNavigation(Dish), [sp.nav]);
+export default connectToRedux(withNavigation(Dish), [sp.userInformation, sp.favoritesList]);

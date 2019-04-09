@@ -1,4 +1,5 @@
 import { Permissions, Notifications } from 'expo';
+import { dispatch } from 'redux';
 
 export default async function registerForPushNotificationsAsync() {
   const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -15,12 +16,10 @@ export default async function registerForPushNotificationsAsync() {
   console.log('Final Status: '+finalStatus);
   // Stop here if the user did not grant permissions
   if (finalStatus !== 'granted') {
-    return;
+    return undefined;
   }
 
   // Get the token that uniquely identifies this device
   let token = await Notifications.getExpoPushTokenAsync();
-
-  // TODO: POST the token to your backend server from where you can retrieve it to send push notifications.
-  console.log('Push Token: '+token);
+  return token;
 }
