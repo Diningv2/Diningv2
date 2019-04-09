@@ -12,7 +12,7 @@ export default async function removeFavorite(token, menuItemID) {
             [menuItemID]: firebase.firestore.FieldValue.arrayRemove(token)
         });
         await firestore.doc("favorites/users").update({
-            [token]: firebase.firestore.FieldValue.arrayRemove(menuItemID)
+            [token]: firebase.firestore.FieldValue.arrayRemove(`${menuItemID}`)
         });
     } catch (e) {
         throw new Error(E_DB_WRITE + e);
