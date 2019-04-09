@@ -25,7 +25,9 @@ class MenuView extends Component {
         mealArray: undefined,
         mealArrayFiltered: undefined,
         searchTerm: "",
-        hoursMessage: ""
+        hoursMessage: "",
+        selectedDay: 'Today',
+        meal: ''
     }
 
     // We need to call performSearch with the new
@@ -52,7 +54,7 @@ class MenuView extends Component {
     generateHoursMessage = (mealType) => {
         const name = this.props.menusList.data.location;
         const location = this.props.diningHallsList.dataObject[name];
-        const mealTimes = location.todayHours[mealType];
+        const mealTimes = this.state.selectedDay == 'Today' ? location.todayHours[mealType] : location.tomorrowHours[mealType];
 
         const openingTime = mealTimes.openingTime;
         const closingTime = mealTimes.closingTime;
@@ -61,9 +63,31 @@ class MenuView extends Component {
         return `open from ${openingTime} to ${closingTime}` + ((transferTime && ` (transfers at ${transferTime})`) || "");
     }
 
+    //Functions for day tabs
+    setToday    = () => this.setState({ selectedDay: 'Today', 
+                                        mealArray: this.props.menusList.data.today[this.state.meal],
+                                        mealArrayFiltered: this.props.menusList.data.today[this.state.meal]});
+    setTomorrow = () => this.setState({ selectedDay: 'Tomorrow', 
+                                        mealArray: this.props.menusList.data.tomorrow[this.state.meal],
+                                        mealArrayFiltered: this.props.menusList.data.tomorrow[this.state.meal] });
+    //Definitions for day tabs
+    dayTabButtons = [
+        {
+            tabName: 'Today',
+            function: this.setToday
+        },
+        {
+            tabName: 'Tomorrow',
+            function: this.setTomorrow
+        }
+    ]
+    
+
     dynamicTabButtons = () => {
         const menu = this.props.menusList.data;
-        const mealTypes = Object.keys(menu.today);
+        const day = this.state.selectedDay == 'Today' ? menu.today : menu.tomorrow;
+        const mealTypes = Object.keys(day);
+                
         const formatted = {
             contBreakfast: "Cont. Breakfast",
             hotBreakfast: "Hot Breakfast",
@@ -76,12 +100,14 @@ class MenuView extends Component {
             return {
                 tabName: formatted[mealType],
                 function: () => {
-                    const mealArray = this.props.menusList.data.today[mealType];
+                    const mealArray = this.state.selectedDay == 'Today' ? this.props.menusList.data.today[mealType] : this.props.menusList.data.tomorrow[mealType];
                     const mealArrayFiltered = mealArray;
                     const hoursMessage = this.generateHoursMessage(mealType);
                     this.setState({ mealArray, mealArrayFiltered, hoursMessage }, () => {
                         this.performSearch(this.state.searchTerm);
                     })
+                    this.setState({meal: mealType});
+                    this.state.meal = mealType;
                 }
             }
         })
@@ -128,6 +154,7 @@ class MenuView extends Component {
                         </View>
                     </View>
                 }
+                
                 <BottomTabs viewName={"MenuView"} />
             </View>
         )

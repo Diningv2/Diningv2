@@ -3,10 +3,10 @@ import axios from "axios";
 import mealNames from "../../config/mealNames";
 import queryBuilder from "../../util/queryBuilder";
 import dateBuilder from "../../util/dateBuilder";
-import { MENUS_URI, E_NO_API_RES } from "../../config/constants";
+import { MENUS_URI, E_NO_API_RES, YD_VERSION } from "../../config/constants";
 
 export default async function getHours(location, offset) {
-    const endpoint = MENUS_URI + queryBuilder({ version: 3, location });
+    const endpoint = MENUS_URI + queryBuilder({ version: YD_VERSION, location });
     const response = await axios.get(endpoint);
     const data = response.data;
     // throw on bad response from Yale Dining
@@ -24,15 +24,15 @@ export default async function getHours(location, offset) {
         );
         locationHours[mealNames[mealName]] = mealFilteredData.length
             ? {
-                  // all items have the same opening/closing time
-                  openingTime:
-                      mealFilteredData[0][data.COLUMNS.indexOf("MEALOPENS")],
-                  closingTime:
-                      mealFilteredData[0][data.COLUMNS.indexOf("MEALCLOSES")],
-                  transferTime: undefined
-                  // TODO: Hardcode in transfer times in ../../config/DiningHallHours
-                  // diningHallHours[locations[location]][mealNames[mealName]].transferTime
-              }
+                // all items have the same opening/closing time
+                openingTime:
+                    mealFilteredData[0][data.COLUMNS.indexOf("MEALOPENS")],
+                closingTime:
+                    mealFilteredData[0][data.COLUMNS.indexOf("MEALCLOSES")],
+                transferTime: undefined
+                // TODO: Hardcode in transfer times in ../../config/DiningHallHours
+                // diningHallHours[locations[location]][mealNames[mealName]].transferTime
+            }
             : undefined;
     }
     return locationHours;

@@ -1,25 +1,27 @@
 import firestore from "../../config/firebase/firebaseConfig";
 
-import { E_DB_READ, E_DB_NOENT, E_BAD_FAVE_GET_REQ } from "../../config/constants";
+import * as constants from "../../config/constants";
 
 export default async function getFavorites(token) {
     let usersDoc = undefined;
+    let menusDoc = undefined;
     try {
         usersDoc = await firestore.doc("favorites/users").get();
+        menusDoc = await firestore.doc("menus/menuItems").get();
     } catch (e) {
-        throw new Error(E_DB_READ + e);
+        throw new Error(constants.E_DB_READ + e);
     }
     if (!usersDoc.exists) {
-        throw new Error(E_DB_NOENT + "favorites/users");
+        throw new Error(constants.E_DB_NOENT + "favorites/users");
+    } else if (!menusDoc.exists) {
+        throw new Error(constants.E_DB_NOENT + "menus/menuItems");
     } else if (!token) {
-        throw new Error(E_BAD_FAVE_GET_REQ);
+        throw new Error(constants.E_BAD_FAVE_GET_REQ);
     }
-
+    const expoToken = `ExponentPushToken[${token}]`;
     var menuItems = {};
-    usersDoc.data()[token]
-        ? usersDoc.data()[token].forEach(menuItem => menuItems[menuItem] = true)
-        : await firestore
-            .doc("favorites/users")
-            .update({ [token]: [] });
+    usersDoc.data()[expoToken]
+        ? usersDoc.data()[expoToken].forEach(item => (menuItems[item] = menusDoc.data()[item]))
+        : await firestore.doc("favorites/users").update({ [expoToken]: [] });
     return menuItems;
 }

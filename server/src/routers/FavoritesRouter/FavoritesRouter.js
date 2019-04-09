@@ -9,20 +9,24 @@ const router = express.Router();
 router
     .get("/", async (req, res) => {
         try {
-            const favorites = await getFavorites(`ExponentPushToken[${req.query.token}]`);
-            res.send(favorites);
+            const favorites = await getFavorites(req.query.token);
+            res.send(favorites).status(200);
         } catch (e) {
             console.error(e);
-            res.sendStatus(500);
+            res.send(e).status(500);
         }
     })
     .post("/", async (req, res) => {
         try {
-            await addFavorite(req.body.token, req.body.menuitemid);
+            await addFavorite(
+                req.body.token,
+                req.body.menuitemid,
+                req.body.name
+            );
             res.sendStatus(200);
         } catch (e) {
             console.error(e);
-            res.sendStatus(500);
+            res.send(e).status(500);
         }
     })
     .post("/delete", async (req, res) => {
@@ -31,7 +35,7 @@ router
             res.sendStatus(200);
         } catch (e) {
             console.error(e);
-            res.sendStatus(500);
+            res.send(e).status(500);
         }
     });
 
