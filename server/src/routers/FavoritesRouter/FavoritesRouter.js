@@ -18,11 +18,7 @@ router
     })
     .post("/", async (req, res) => {
         try {
-            await addFavorite(
-                req.body.token,
-                req.body.menuitemid,
-                req.body.name
-            );
+            await addFavorite(req.body.token, req.body.menuitemid, req.body.name);
             res.sendStatus(200);
         } catch (e) {
             console.error(e);

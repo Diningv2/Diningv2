@@ -18,10 +18,9 @@ export default async function getFavorites(token) {
     } else if (!token) {
         throw new Error(constants.E_BAD_FAVE_GET_REQ);
     }
-    const expoToken = `ExponentPushToken[${token}]`;
     var menuItems = {};
-    usersDoc.data()[expoToken]
-        ? usersDoc.data()[expoToken].forEach(item => (menuItems[item] = menusDoc.data()[item]))
-        : await firestore.doc("favorites/users").update({ [expoToken]: [] });
+    usersDoc.data()[token]
+        ? usersDoc.data()[token].forEach(item => (menuItems[item] = menusDoc.data()[item]))
+        : await firestore.doc("favorites/users").update({ [token]: [] });
     return menuItems;
 }
