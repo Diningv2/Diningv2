@@ -4,13 +4,13 @@ import queryBuilder from "../queryBuilder";
 import * as constants from "../../config/constants";
 
 /**
- * Gets nutrition, filters (allergans, etc), and ingredients data from dining api
+ * Gets menu item's correct name from Yale Dining nutrition api
  *
- * thorws if an error caught by one of the dining api calls or by the call to parseMenus
+ * thorws if an error caught
  *
  * @param int menuitemid
  *
- * returns a menu (json format, as specified in spec)
+ * @return (no return value)
  */
 
 export default async function getMenuIdInfo(menuitemid) {
