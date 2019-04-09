@@ -9,6 +9,7 @@ import FavoritesRouter from "./routers/FavoritesRouter/FavoritesRouter";
 import TestPushRouter from "./routers/TestPushRouter/TestPushRouter";
 
 import sendNotifications from "./notifications/sendNotifications";
+import updateMenuItemNames from "./util/cleanup/updateMenuItemNames";
 
 const PORT = process.env.PORT || 5000;
 
@@ -32,3 +33,6 @@ const options = {
 
 // Run at 7:00 am every day
 cron.schedule("0 7 * * *", () => sendNotifications(), options);
+
+// Run clean up at 2:00 am every night
+cron.schedule("0 2 * * *", () => updateMenuItemNames(), options);
