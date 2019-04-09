@@ -12,7 +12,7 @@ export default async function addFavorite(token, menuItemID, menuItemName) {
             [menuItemID]: firebase.firestore.FieldValue.arrayUnion(token)
         });
         await firestore.doc("favorites/users").update({
-            [token]: firebase.firestore.FieldValue.arrayUnion(menuItemID)
+            [token]: firebase.firestore.FieldValue.arrayUnion(`${menuItemID}`)
         });
         await firestore.doc("menus/menuItems").update({
             [menuItemID]: menuItemName
