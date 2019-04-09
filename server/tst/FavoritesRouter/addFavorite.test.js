@@ -13,31 +13,28 @@ beforeEach(() => {
 });
 
 test('addFavorite() -- basic normal function', async () => {
-    await expect(addFavorite(123456789, 987654321, "DummyMenuItem")).resolves.toBeUndefined();
-});
-
-test('addFavorite() -- favorites/menuItems doc', async () => {
+    await expect(
+        addFavorite(123456789, 987654321, "DummyMenuItem")
+    ).resolves.toBeUndefined();
     await expect(firestore.doc).toHaveBeenCalledWith("favorites/menuItems");
-});
-
-test('addFavorite() -- favorites/users doc', async () => {
     await expect(firestore.doc).toHaveBeenCalledWith("favorites/users");
-});
+    await expect(firestore.doc).toHaveBeenCalledWith("menus/menuItems");
+    await expect(firestore.doc("favorites/menuItems").update).toHaveBeenCalledWith({
+        987654321: "ExponentPushToken[123456789]"
+    });
+    await expect(firestore.doc("favorites/users").update).toHaveBeenCalledWith({
+        123456789: 987654321
+    });
+    await expect(firestore.doc("menus/menuItems").update).toHaveBeenCalledWith({
+        987654321: "DummyMenuItem"
+    });
+    await expect(firebase.firestore.FieldValue.arrayUnion).toHaveBeenCalledWith(
+        "ExponentPushToken[123456789]"
+    );
+    await expect(firebase.firestore.FieldValue.arrayUnion).toHaveBeenCalledWith(
+        987654321
+    );
 
-test('addFavorite() -- favorites/menuItems update', async () => {
-    await expect(firestore.doc("favorites/menuItems").update).toHaveBeenCalledWith({987654321: "ExponentPushToken[123456789]"});
-});
-
-test('addFavorite() -- favorites/users update', async () => {
-    await expect(firestore.doc("favorites/users").update).toHaveBeenCalledWith({123456789: 987654321});
-});
-
-test('addFavorite() -- favorites/menuItems arrayUnion', async () => {
-    await expect(firebase.firestore.FieldValue.arrayUnion).toHaveBeenCalledWith("ExponentPushToken[123456789]");
-});
-
-test('addFavorite() -- favorites/users arrayUnion', async () => {
-    await expect(firebase.firestore.FieldValue.arrayUnion).toHaveBeenCalledWith(987654321);
 });
 
 test("addFavorite() -- bad request", async () => {

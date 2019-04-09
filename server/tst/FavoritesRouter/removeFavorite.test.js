@@ -9,35 +9,25 @@ jest.mock("../../src/config/firebase/firebaseConfig");
 beforeEach(() => {
     firebaseTest();
     console.error = jest.fn();
-    removeFavorite(123456789, 987654321);
 });
 
 test("removeFavorite() -- normal function", async () => {
     await expect(removeFavorite(123456789, 987654321)).resolves.toBeUndefined();
-});
-
-test('removeFavorite() -- menuItems', async () => {
     await expect(firestore.doc).toHaveBeenCalledWith("favorites/menuItems");
-});
-
-test('removeFavorite() -- users', async () => {
     await expect(firestore.doc).toHaveBeenCalledWith("favorites/users");
-});
+    await expect(firestore.doc("favorites/menuItems").update).toHaveBeenCalledWith({
+        987654321: "ExponentPushToken[123456789]"
+    });
+    await expect(firestore.doc("favorites/users").update).toHaveBeenCalledWith({
+        123456789: 987654321
+    });
+    await expect(firebase.firestore.FieldValue.arrayRemove).toHaveBeenCalledWith(
+        "ExponentPushToken[123456789]"
+    );
+    await expect(firebase.firestore.FieldValue.arrayRemove).toHaveBeenCalledWith(
+        987654321
+    );
 
-test('removeFavorite() -- menuItems update', async () => {
-    await expect(firestore.doc("favorites/menuItems").update).toHaveBeenCalledWith({987654321: "ExponentPushToken[123456789]"});
-});
-
-test('removeFavorite() -- users update', async () => {
-    await expect(firestore.doc("favorites/users").update).toHaveBeenCalledWith({123456789: 987654321});
-});
-
-test('removeFavorite() -- arrayUnion menuItems', async () => {
-    await expect(firebase.firestore.FieldValue.arrayRemove).toHaveBeenCalledWith("ExponentPushToken[123456789]");
-});
-
-test('removeFavorite() -- arrayUnion users', async () => {
-    await expect(firebase.firestore.FieldValue.arrayRemove).toHaveBeenCalledWith(987654321);
 });
 
 test("removeFavorite() -- bad request", async () => {
