@@ -22,7 +22,7 @@ export class Dish extends Component {
     componentDidMount() {
         // TODO: Check if this item is a favorite
         const { data } = this.props.favoritesList;
-        const isFave = data && data[this.props.dishID] ? data[this.props.dishID] : false;
+        const isFave = data && data[this.props.dishID] || false;
         this.setState({ isFave });
     }
 
@@ -32,7 +32,8 @@ export class Dish extends Component {
         const menuItemID = this.props.dishID;
         const postConfig = {
             token, 
-            menuitemid: menuItemID
+            menuitemid: menuItemID,
+            name: this.props.dishName,
         }
         const previousState = this.state.isFave;
 
@@ -46,7 +47,7 @@ export class Dish extends Component {
             } else {
                 this.setState({isFave: true});
                 await post('/api/favorites', postConfig);
-                this.props.addFavorite(menuItemID);
+                this.props.addFavorite(menuItemID, this.props.dishName);
             }
         
         } catch(e) {

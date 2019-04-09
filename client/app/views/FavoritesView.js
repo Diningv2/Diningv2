@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 
 import styles from '../config/styles';
@@ -19,38 +19,46 @@ class FavoritesView extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        if (this.props.favoritesList.isLoading) {
-            const expoToken = this.props.userInformation.notificationID;
-            this.props.getFavorites(expoToken);
-        }
-    }
-
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Header title="Favorites 💖" />
-                <CenterTextView message="Under Construction 👷" />
-                {/* {this.props.favoritesList.isLoading
-                    ? (
-                        <CenterTextView message="Loading..." />
-                    ) : (
-                        <View style={{paddingBottom: 50, flex: 1}}>
-                            <DV2ScrollView 
-                                array={this.props.favoritesList.data}
-                                render={(dish) => this.renderFavesList(dish)}
-                            />
-                        </View>
-                    )
-                } */}
+                <Header title="Favorites" />
+                {this.renderContent()}
                 <BottomTabs viewName={"FavoritesView"} />
             </View>
         );
     }
 
-    renderFavesList = (dish) => {
+    renderContent() {
+        if (!this.props.userInformation.notificationID) { // No permission for notifications
+            return (
+                <CenterTextView 
+                    message="Enable push notifications to allow you to favorite dishes!" 
+                />
+            );
+        } else if (this.props.favoritesList.isLoading || !this.props.favoritesList.data) {
+            return <CenterTextView message="Loading..." />;
+        } else if (Object.keys(this.props.favoritesList.data).length == 0) { // No faves
+            return (
+                <View style={{paddingBottom: 50, flex: 1}}>
+                    <CenterTextView message="No favorites to show" />
+                </View>
+            );
+        }
         return (
-            <Dish key={dish.name} dishName={dish.name} dishID={dish.itemID} />
+            <View style={{paddingBottom: 50, flex: 1}}>
+                <DV2ScrollView 
+                    array={Object.keys(this.props.favoritesList.data)}
+                    render={(dishID) => this.renderFavesList(dishID)}
+                />
+            </View>
+        );
+    }
+
+    renderFavesList = (dishID) => {
+        const dishName = this.props.favoritesList.data[dishID];
+        return (
+            <Dish key={dishName} dishName={dishName} dishID={dishID} />
         );
     }
 }
