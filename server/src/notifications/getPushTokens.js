@@ -49,7 +49,7 @@ export default async function getPushTokens(menuItems) {
             payload: itemList
         };
         return {
-            to: token,
+            to: `ExponentPushToken[${token}]`,
             title: "Favorites being served!",
             sound: "default",
             body,
