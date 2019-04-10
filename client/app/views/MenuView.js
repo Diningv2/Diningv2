@@ -128,6 +128,7 @@ class MenuView extends Component {
                         </AnimatedListItem>
                         <AnimatedListItem key="toptabs" index={3}>
                             <TopTabs tabButtons={this.dynamicTabButtons()} />
+                            <TopTabs tabButtons={this.dayTabButtons} />
                         </AnimatedListItem>
                         <AnimatedListItem key="hourstext" index={4}>
                             <Text style={{ 
