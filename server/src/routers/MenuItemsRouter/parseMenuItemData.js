@@ -56,9 +56,9 @@ export default function parseMenuItemData(
             // remove any non-ingredient strings
             .replace(/(Contains.+$)|(Manufactured.+$)/, "")
             // remove any "composite" ingredient strings
-            .replace(/^.+(?=\(.+,.+)/, "")
+            .replace(/[^,]+(?=\(.+,.+)/, "")
             // remove any encapsulating parentheses
-            .replace(/^\s*\((.+)\)\s*$/, "$1")
+            .replace(/(?<=,\s|,|^|^\s)\((.+)\)(?=\s*,|\s*$)/, "$1")
             // split along any "and", ",", or "." strings
             .split(/[,\.]|and/)
             // trim the results of whitespace
