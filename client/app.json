@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Dining*v2",
+    "description": "A Yale Dining app that will let you get notification reminders for when and where your favorite Yale foods are being served! Think, 'isitchickentenderthursday.com' but for any food you desire.",
     "slug": "diningv2",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -14,7 +15,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#4a86e8"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
