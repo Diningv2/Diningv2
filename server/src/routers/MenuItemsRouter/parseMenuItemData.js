@@ -55,12 +55,12 @@ export default function parseMenuItemData(
         ingredient[1]
             // remove any non-ingredient strings
             .replace(/(Contains.+$)|(Manufactured.+$)/, "")
-            // split along any "and", ",", or "." strings not in parentheses
-            .split(/([,\.]|and)(?![^(]*\))/)
-            // filter out any "and", ",", or "." strings
-            .filter(i => !/(^\s*and\s*$)|(^\s*,\s*$)|(^\s*\.\s*$)/.test(i))
-            // remove any "." characters
-            .map(i => (i = i.replace(".", "")))
+            // remove any "composite" ingredient strings
+            .replace(/^.+(?=\(.+,.+)/, "")
+            // remove any encapsulating parentheses
+            .replace(/^\s*\((.+)\)\s*$/, "$1")
+            // split along any "and", ",", or "." strings
+            .split(/[,\.]|and/)
             // trim the results of whitespace
             .map(i => i.trim())
             // push all nonempty strings
