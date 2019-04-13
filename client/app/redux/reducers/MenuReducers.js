@@ -32,8 +32,8 @@ export const menusList = createReducer(initialState, {
         let menusArray = Object.values(menusObject);
 
         // Franklin was crashing due to it having two names
-        if (menusArray.location === "Franklin")
-            menusArray.location = "Benjamin Franklin";
+        if (menusArray[0].location === "Franklin")
+            menusArray[0].location = "Benjamin Franklin";
 
         return {
             ...state,
