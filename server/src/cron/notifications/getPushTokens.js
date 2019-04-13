@@ -1,6 +1,6 @@
-import firestore from "../config/firebase/firebaseConfig";
+import firestore from "../../config/firebase/firebaseConfig";
 
-import { E_DB_READ, E_DB_NOENT, E_NO_API_RES } from "../config/constants";
+import { E_DB_READ, E_DB_NOENT, E_NO_API_RES } from "../../config/constants";
 
 export default async function getPushTokens(menuItems) {
     let menuItemsDoc = undefined;
