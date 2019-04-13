@@ -44,10 +44,10 @@ class MenuView extends Component {
             this.setState({
                 mealArrayFiltered: this.state.mealArray
             })
-        // Otherwise do an actual search on the array
+            // Otherwise do an actual search on the array
         } else {
             const mealArrayFiltered = search(searchTerm, this.state.mealArray, ['name']);
-            this.setState({mealArrayFiltered});
+            this.setState({ mealArrayFiltered });
         }
     }
 
@@ -64,30 +64,44 @@ class MenuView extends Component {
     }
 
     //Functions for day tabs
-    setToday    = () => this.setState({ selectedDay: 'Today', 
-                                        mealArray: this.props.menusList.data.today[this.state.meal],
-                                        mealArrayFiltered: this.props.menusList.data.today[this.state.meal]});
-    setTomorrow = () => this.setState({ selectedDay: 'Tomorrow', 
-                                        mealArray: this.props.menusList.data.tomorrow[this.state.meal],
-                                        mealArrayFiltered: this.props.menusList.data.tomorrow[this.state.meal] });
-    //Definitions for day tabs
-    dayTabButtons = [
-        {
-            tabName: 'Today',
-            function: this.setToday
-        },
-        {
-            tabName: 'Tomorrow',
-            function: this.setTomorrow
+    dayTabButtons = () => {
+
+        const dayTypes = ["today", "tomorrow"];
+        const formatted = {
+            today: "Today",
+            tomorrow: "Tomorrow"
         }
-    ]
-    
+
+        const tabs = dayTypes.map(dayType => {
+            return {
+                tabName: formatted[dayType],
+                function: () => {
+                    // Start loading indicator
+                    this.setState({ isLoading: true });
+
+                    // Run after 200ms to let tab change colors immediately
+                    setTimeout(() => {
+                        this.setState({
+                            selectedDay: formatted[dayType],
+                            mealArray: this.props.menusList.data[dayType][this.state.meal],
+                            mealArrayFiltered: this.props.menusList.data[dayType][this.state.meal]
+                        }, () => {
+                            // Stop loading after the new state is ready
+                            this.setState({ isLoading: false })
+                        })
+                    }, 500)
+                }
+            }
+        })
+        return tabs;
+    }
+
 
     dynamicTabButtons = () => {
         const menu = this.props.menusList.data;
         const day = this.state.selectedDay == 'Today' ? menu.today : menu.tomorrow;
         const mealTypes = Object.keys(day);
-                
+
         const formatted = {
             contBreakfast: "Cont. Breakfast",
             hotBreakfast: "Hot Breakfast",
@@ -103,11 +117,22 @@ class MenuView extends Component {
                     const mealArray = this.state.selectedDay == 'Today' ? this.props.menusList.data.today[mealType] : this.props.menusList.data.tomorrow[mealType];
                     const mealArrayFiltered = mealArray;
                     const hoursMessage = this.generateHoursMessage(mealType);
-                    this.setState({ mealArray, mealArrayFiltered, hoursMessage }, () => {
-                        this.performSearch(this.state.searchTerm);
-                    })
-                    this.setState({meal: mealType});
-                    this.state.meal = mealType;
+
+                    // Start loading indicator
+                    this.setState({ isLoading: true })
+
+                    // Run after 200ms to let tabs change color on press
+                    setTimeout(() => {
+                        this.setState({
+                            mealArray,
+                            mealArrayFiltered,
+                            hoursMessage,
+                            meal: mealType
+                        }, () => {
+                            this.performSearch(this.state.searchTerm);
+                            this.setState({ isLoading: false })
+                        })
+                    }, 500);
                 }
             }
         })
@@ -116,7 +141,7 @@ class MenuView extends Component {
     }
 
     render() {
-        const hasLoadedSuccessfully = !this.props.menusList.isLoading && !this.props.menusList.hasError
+        const hasLoadedSuccessfully = !this.props.menusList.isLoading && !this.props.menusList.hasError;
         const hasLoadedFailed = !this.props.menusList.isLoading && this.props.menusList.hasError;
         return (
             <View style={{ flex: 1 }}>
@@ -127,35 +152,46 @@ class MenuView extends Component {
                             <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
                         </AnimatedListItem>
                         <AnimatedListItem key="toptabs" index={3}>
+                            <TopTabs tabButtons={this.dayTabButtons()} />
                             <TopTabs tabButtons={this.dynamicTabButtons()} />
-                            <TopTabs tabButtons={this.dayTabButtons} />
                         </AnimatedListItem>
-                        <AnimatedListItem key="hourstext" index={4}>
-                            <Text style={{ 
-                                ...styles.font.type.primaryRegular, 
-                                ...styles.font.color.primary, 
-                                textAlign: 'center' 
-                            }}>{this.state.hoursMessage}</Text>
-                        </AnimatedListItem>
-                        {this.state.mealArrayFiltered && 
-                            <View style={{paddingBottom: 50, flex: 1}}>
-                                <DV2ScrollView
-                                    array={this.state.mealArrayFiltered}
-                                    render={(dish, index) => this.renderMenu(dish, index)}
-                                />
+                        {!this.state.isLoading &&
+                            <AnimatedListItem key="hourstext" index={4}>
+                                <Text style={{
+                                    ...styles.font.type.primaryRegular,
+                                    ...styles.font.color.primary,
+                                    textAlign: 'center'
+                                }}>{this.state.hoursMessage}</Text>
+                            </AnimatedListItem>
+                        }
+                        {this.state.isLoading
+                            ?
+                            <CenterTextView message="Loading..." />
+                            :
+                            <View style={{ paddingBottom: 50, flex: 1 }}>
+                                {this.state.mealArrayFiltered ?
+                                    <DV2ScrollView
+                                        array={this.state.mealArrayFiltered}
+                                        render={(dish, index) => this.renderMenu(dish, index)}
+                                    />
+                                    :
+                                    <View style={{ paddingBottom: 50, flex: 1 }}>
+                                        <CenterTextView message="No menu items to show." />
+                                    </View>
+                                }
                             </View>
                         }
                     </View>
                 }
                 {hasLoadedFailed &&
-                    <View style={{flex: 1}}>
+                    <View style={{ flex: 1 }}>
                         <Header canGoBack title="Server Error" />
-                        <View style={{paddingBottom: 50, flex: 1}}>
+                        <View style={{ paddingBottom: 50, flex: 1 }}>
                             <CenterTextView message="No menu data available :(" />
                         </View>
                     </View>
                 }
-                
+
                 <BottomTabs viewName={"MenuView"} />
             </View>
         )
@@ -164,7 +200,7 @@ class MenuView extends Component {
     renderMenu = (dish, index) => {
         return (
             <AnimatedListItem key={dish.name} index={index}>
-            <Dish key={dish.name} dishName={dish.name} dishID={dish.itemID}/>
+                <Dish key={dish.name} dishName={dish.name} dishID={dish.itemID} />
             </AnimatedListItem>
         );
     }
