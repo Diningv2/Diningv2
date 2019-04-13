@@ -18,8 +18,8 @@ export class DV2ScrollView extends React.Component {
                         ...styles.font.size.large, 
                         ...styles.font.color.primary}}>
                         {this.props.title}
-                        </Text>
-                    {this.props.array.map((element, index) => {
+                    </Text>
+                    {(this.props.array || []).map((element, index) => {
                         return this.props.render(element, index)
                     })}
                 </ScrollView>
