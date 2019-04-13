@@ -53,9 +53,18 @@ export default function parseMenuItemData(
     for (var ingredient of ingredientData.DATA) {
         // separates out multi-item ingredients
         ingredient[1]
-            .split(",")
+            // remove any non-ingredient strings
+            .replace(/(Contains.+$)|(Manufactured.+$)/, "")
+            // remove any "composite" ingredient strings
+            .replace(/[^,]+(?=\(.+,.+)/, "")
+            // remove any encapsulating parentheses
+            .replace(/(?<=,\s|,|^|^\s)\((.+)\)(?=\s*,|\s*$)/, "$1")
+            // split along any "and", ",", or "." strings
+            .split(/[,\.]|and/)
+            // trim the results of whitespace
             .map(i => i.trim())
-            .forEach(i => ingredientList.push(i));
+            // push all nonempty strings
+            .forEach(i => i.length && ingredientList.push(i));
     }
     // remove duplicate ingredients
     ingredientList = ingredientList.filter(
