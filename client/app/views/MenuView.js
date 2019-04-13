@@ -53,7 +53,7 @@ class MenuView extends Component {
 
     generateHoursMessage = (mealType) => {
         const name = this.props.menusList.data.location;
-        const location = this.props.diningHallsList.dataObject[name];
+        const location = this.props.diningHallsList.dataObject[name];     
         const mealTimes = this.state.selectedDay == 'Today' ? location.todayHours[mealType] : location.tomorrowHours[mealType];
 
         const openingTime = mealTimes.openingTime;
