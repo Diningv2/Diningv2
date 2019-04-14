@@ -168,7 +168,7 @@ class MenuView extends Component {
                             ?
                             <CenterTextView message="Loading..." />
                             :
-                            <View style={{ paddingBottom: 50, flex: 1 }}>
+                            <View style={{ flex: 1 }}>
                                 {this.state.mealArrayFiltered ?
                                     <DV2ScrollView
                                         array={this.state.mealArrayFiltered}
@@ -191,8 +191,6 @@ class MenuView extends Component {
                         </View>
                     </View>
                 }
-
-                <BottomTabs viewName={"MenuView"} />
             </View>
         )
     }

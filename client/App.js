@@ -2,7 +2,6 @@
 import { Font, Notifications } from 'expo';
 import React from 'react';
 import { Animated, Easing, View } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
 import { createNavigationReducer, createReactNavigationReduxMiddleware, createReduxContainer } from 'react-navigation-redux-helpers';
 import transitionConfig from './app/config/transitions';
 
@@ -13,7 +12,7 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import { Toast } from './app/components/Toast';
-import Routes from './app/config/routes';
+import { MasterView } from './app/config/routes';
 
 // Push Notifications Utility
 import registerForPushNotificationsAsync from './app/lib/push-utility';
@@ -30,7 +29,8 @@ import BottomTabs from './app/components/BottomTabs';
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
 
 // Configuring our navigation middleware
-const Router = createStackNavigator(Routes, { transitionConfig, headerMode: 'none', navigationOptions: { header: { visible: false } } });
+const Router = MasterView;
+// const Router = createStackNavigator(Routes, { transitionConfig, headerMode: 'none', navigationOptions: { header: { visible: false } } });
 const navigationMiddleware = createReactNavigationReduxMiddleware(
   state => state.nav
 );

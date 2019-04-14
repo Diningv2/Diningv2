@@ -24,7 +24,6 @@ class FavoritesView extends Component {
             <View style={{ flex: 1 }}>
                 <Header title="Favorites" />
                 {this.renderContent()}
-                <BottomTabs viewName={"FavoritesView"} />
             </View>
         );
     }
@@ -36,9 +35,9 @@ class FavoritesView extends Component {
                     message="Enable push notifications to allow you to favorite dishes!" 
                 />
             );
-        } else if (this.props.favoritesList.isLoading || !this.props.favoritesList.data) {
+        } else if (this.props.favoritesList.isLoading) {
             return <CenterTextView message="Loading..." />;
-        } else if (Object.keys(this.props.favoritesList.data).length == 0) { // No faves
+        } else if (Object.keys(this.props.favoritesList.data).length == 0 || this.props.favoritesList.data == undefined) { // No faves
             return (
                 <View style={{paddingBottom: 50, flex: 1}}>
                     <CenterTextView message="No favorites to show" />
