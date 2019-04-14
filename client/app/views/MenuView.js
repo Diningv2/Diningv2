@@ -8,6 +8,7 @@ import { DV2ScrollView } from '../components/DV2ScrollView';
 import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
 import Dish from '../components/Dish';
+import SearchableHeader from '../components/SearchableHeader';
 import Header from '../components/Header';
 import Searchbar from '../components/Searchbar';
 import TopTabs from '../components/TopTabs';
@@ -145,12 +146,12 @@ class MenuView extends Component {
         const hasLoadedFailed = !this.props.menusList.isLoading && this.props.menusList.hasError;
         return (
             <View style={{ flex: 1 }}>
-                <Header canGoBack title={!hasLoadedSuccessfully ? 'Loading...' : this.props.menusList.data.location} />
+                <SearchableHeader canGoBack title={!hasLoadedSuccessfully ? 'Loading...' : this.props.menusList.data.location} />
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
-                        <AnimatedListItem key="searchbar" index={0}>
+                        {/* <AnimatedListItem key="searchbar" index={0}>
                             <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
-                        </AnimatedListItem>
+                        </AnimatedListItem> */}
                         <AnimatedListItem key="toptabs" index={3}>
                             <TopTabs tabButtons={this.dayTabButtons()} />
                             <TopTabs tabButtons={this.dynamicTabButtons()} />
