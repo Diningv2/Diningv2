@@ -40,5 +40,5 @@ cron.schedule("0 7 * * *", () => sendNotifications(), options);
 // Run clean up at 2:00 am every night
 cron.schedule("0 2 * * *", () => updateMenuItemNames(), options);
 
-// Populate menus every hour at the 1 minute mark
-// cron.schedule("1 * * * *", () => populateMenus(), options);
+// Run every hour at the 1 minute mark
+cron.schedule("1 * * * *", () => populateMenus(), options);
