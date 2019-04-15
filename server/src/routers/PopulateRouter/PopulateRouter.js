@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
     try {
-        populateMenus();
         res.send("Populating Firestore...");
+        await populateMenus();
     } catch (e) {
         console.error(e);
         res.sendStatus(500);

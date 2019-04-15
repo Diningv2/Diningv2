@@ -7,7 +7,7 @@ import MenusRouter from "./routers/MenusRouter/MenusRouter";
 import MenuItemsRouter from "./routers/MenuItemsRouter/MenuItemsRouter";
 import FavoritesRouter from "./routers/FavoritesRouter/FavoritesRouter";
 import TestPushRouter from "./routers/TestPushRouter/TestPushRouter";
-import TestPopulateRouter from "./routers/TestPopulateRouter/TestPopulateRouter";
+import PopulateRouter from "./routers/PopulateRouter/PopulateRouter";
 
 import sendNotifications from "./cron/notifications/sendNotifications";
 import updateMenuItemNames from "./cron/cleanup/updateMenuItemNames";
@@ -25,7 +25,7 @@ server.use("/api/menus", MenusRouter);
 server.use("/api/menuItems", MenuItemsRouter);
 server.use("/api/favorites", FavoritesRouter);
 server.use("/api/testPush", TestPushRouter);
-server.use("/api/populate", TestPopulateRouter);
+server.use("/api/populate", PopulateRouter);
 
 server.listen(PORT, e => e && console.error(e));
 
@@ -41,4 +41,4 @@ cron.schedule("0 7 * * *", () => sendNotifications(), options);
 cron.schedule("0 2 * * *", () => updateMenuItemNames(), options);
 
 // Populate menus every hour at the 1 minute mark
-cron.schedule("1 * * * * *", () => populateMenus(), options);
+// cron.schedule("1 * * * *", () => populateMenus(), options);

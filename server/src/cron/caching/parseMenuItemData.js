@@ -23,14 +23,28 @@ export default function parseMenuItemData(
         !ingredientData.DATA.length ||
         !ingredientData.DATA[0].length
     ) {
-        throw new Error(E_NO_API_RES);
+        console.error(E_NO_API_RES);
+        return {
+            allergens: [],
+            nutrition: {},
+            ingredients: [],
+            isVegan: false,
+            isVegetarian: false,
+            isGlutenFree: false
+        }
     }
 
     // get nutrition info
-    const nutrition = parseNutritionInfo(nutritionData.DATA[0]);
+    const nutrition = parseNutritionInfo(
+        nutritionData.COLUMNS,
+        nutritionData.DATA[0]
+    );
 
     // get ingredient list
-    const ingredients = parseIngredients(ingredientData.DATA);
+    const ingredients = parseIngredients(
+        ingredientData.COLUMNS,
+        ingredientData.DATA
+    );
 
     // get allergens
     var isVegan = false;

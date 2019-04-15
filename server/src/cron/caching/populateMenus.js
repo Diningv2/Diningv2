@@ -7,23 +7,21 @@ import locations from "../../config/locations";
 import { E_DB_WRITE } from "../../config/constants";
 
 export default async function populateMenus() {
-    const menus = await Object.keys(locations).map(
-        async location => await getOneMenu(location)
-    );
-    await menus.forEach(async menu => {
+    for (let location in locations) {
+        const menu = await getOneMenu(location);
         try {
-            await firestore.doc("menus/today").update({
-                [menu.location]: firebase.firestore.FieldValue.arrayUnion(
-                    menu.today
-                )
-            });
-            await firestore.doc("menus/tomorrow").update({
-                [menu.location]: firebase.firestore.FieldValue.arrayUnion(
-                    menu.tomorrow
-                )
-            });
+            menu &&
+                menu.today &&
+                (await firestore.doc("menus/today").update({
+                    [menu.location]: menu.today
+                }));
+            menu &&
+                menu.tomorrow &&
+                (await firestore.doc("menus/tomorrow").update({
+                    [menu.location]: menu.tomorrow
+                }));
         } catch (e) {
             console.error(E_DB_WRITE + e);
         }
-    });
+    }
 }

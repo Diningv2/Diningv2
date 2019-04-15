@@ -6,7 +6,8 @@ import * as constants from "../../config/constants";
 import queryBuilder from "../../util/queryBuilder";
 
 export default async function getMenuItemList(columns, data) {
-    const menu = await data.map(async entry => {
+    var menu = [];
+    for (let entry of data) {
         const menuItemID = entry[columns.indexOf("MENUITEMID")];
         const nutritionEndpoint =
             constants.NUTRITION_URI +
@@ -26,39 +27,46 @@ export default async function getMenuItemList(columns, data) {
                 version: constants.YD_VERSION,
                 MENUITEMID: menuItemID
             });
+        var nutritionResponse = undefined;
+        var filterResponse = undefined;
+        var ingredientsResponse = undefined;
         try {
-            const nutritionResponse = await axios.get(nutritionEndpoint);
-            const filterResponse = await axios.get(filterEndpoint);
-            const ingredientsResponse = await axios.get(ingredientsEndpoint);
-            console.log(nutritionResponse);
-            const {
-                allergens,
-                nutrition,
-                ingredients,
-                isVegan,
-                isVegetarian,
-                isGlutenFree
-            } = parseMenuItemData(
-                nutritionResponse.data,
-                filterResponse.data,
-                ingredientsResponse.data
-            );
-            return {
-                name: entry[columns.indexOf("MENUITEM")].replace("`", "'"),
-                itemID: entry[columns.indexOf("MENUITEMID")],
-                meal: entry[columns.indexOf("MEALNAME")],
-                allergens,
-                ingredients,
-                nutrition,
-                isVegan,
-                isVegetarian,
-                isGlutenFree
-            };
+            nutritionResponse = await axios.get(nutritionEndpoint, {
+                timeout: 10000
+            });
+            filterResponse = await axios.get(filterEndpoint, {
+                timeout: 10000
+            });
+            ingredientsResponse = await axios.get(ingredientsEndpoint, {
+                timeout: 10000
+            });
         } catch (e) {
-            // console.error(e);
-            return undefined;
+            console.error(e);
         }
-    });
+        const {
+            allergens,
+            nutrition,
+            ingredients,
+            isVegan,
+            isVegetarian,
+            isGlutenFree
+        } = parseMenuItemData(
+            nutritionResponse.data,
+            filterResponse.data,
+            ingredientsResponse.data
+        );
+        menu.push({
+            name: entry[columns.indexOf("MENUITEM")].replace("`", "'"),
+            itemID: entry[columns.indexOf("MENUITEMID")],
+            meal: entry[columns.indexOf("MEALNAME")],
+            allergens,
+            ingredients,
+            nutrition,
+            isVegan,
+            isVegetarian,
+            isGlutenFree
+        });
+    }
     // filter out undefined and duplicate entries
     const filteredMenu = menu
         .filter(entry => entry != undefined)
@@ -72,5 +80,5 @@ export default async function getMenuItemList(columns, data) {
                         otherEntry.meal === entry.meal
                 )
         );
-    return filteredMenu.length ? filteredMenu : undefined;
+    return filteredMenu.length ? filteredMenu : [];
 }

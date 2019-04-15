@@ -15,8 +15,10 @@ export default async function getOneMenu(location) {
     const data = response.data;
     // throw on bad response from Yale Dining
     if (!data || !data.DATA || !data.DATA.length || !data.DATA[0].length) {
-        throw new Error(E_NO_API_RES);
+        console.error(`${E_NO_API_RES}: ${locations[location]}`);
+        return undefined;
     }
+    console.log(`Populating ${locations[location]}...`);
     const today = dateBuilder(0);
     const tomorrow = dateBuilder(1);
     var menus = {};
@@ -40,5 +42,6 @@ export default async function getOneMenu(location) {
             )
         );
     }
+    console.log(`Populated ${locations[location]}.`);
     return menus;
 }
