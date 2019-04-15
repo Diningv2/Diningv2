@@ -2,16 +2,17 @@
 import { Font, Notifications } from 'expo';
 import React from 'react';
 import { Animated, Easing, View } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
 import { createNavigationReducer, createReactNavigationReduxMiddleware, createReduxContainer } from 'react-navigation-redux-helpers';
+import transitionConfig from './app/config/transitions';
 
 // Basic Redux imports
 import { connect, Provider } from 'react-redux';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+
 import { Toast } from './app/components/Toast';
-import Routes from './app/config/routes';
+import { MasterView } from './app/config/routes';
 
 // Push Notifications Utility
 import registerForPushNotificationsAsync from './app/lib/push-utility';
@@ -22,36 +23,14 @@ import reducers from './app/redux/reducers';
 // Specific Redux actions we need to call on app startup
 import { saveUserNotificationID } from './app/redux/actions/UserInformationActions';
 import { getFavorites } from './app/redux/actions/FavoritesActions';
+import BottomTabs from './app/components/BottomTabs';
 
 // Configuring logger for the state of our app
 const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ });
 
 // Configuring our navigation middleware
-const transitionConfig = () => {
-  return {
-    transitionSpec: {
-      duration: 300,
-      easing: Easing.out(Easing.poly(4)),
-      timing: Animated.timing,
-      useNativeDriver: true,
-    },
-    screenInterpolator: sceneProps => {
-      const { layout, position, scene } = sceneProps
-
-      const thisSceneIndex = scene.index
-      const width = layout.initWidth
-
-      const translateX = position.interpolate({
-        inputRange: [thisSceneIndex - 1, thisSceneIndex],
-        outputRange: [width, 0],
-      })
-
-      return { transform: [{ translateX }] }
-    },
-  }
-}
-
-const Router = createStackNavigator(Routes, { transitionConfig, headerMode: 'none', navigationOptions: { header: { visible: false } } });
+const Router = MasterView;
+// const Router = createStackNavigator(Routes, { transitionConfig, headerMode: 'none', navigationOptions: { header: { visible: false } } });
 const navigationMiddleware = createReactNavigationReduxMiddleware(
   state => state.nav
 );

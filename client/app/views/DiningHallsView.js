@@ -50,7 +50,7 @@ class DiningHallsView extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Header title="Dining Halls" />
-                <View style={{paddingBottom: 50, flex: 1}}>
+                <View style={{flex: 1}}>
                     {this.props.diningHallsList.isLoading 
                         ? (
                             <CenterTextView message="Loading..." />
@@ -64,7 +64,6 @@ class DiningHallsView extends Component {
                         )
                     }
                 </View>
-                <BottomTabs viewName={"DiningHallsView"}/>
             </View>
         )
     }

@@ -60,8 +60,6 @@ class AllergensView extends Component {
                         render={(allergen) => this.renderAllergen(allergen)}
                     />
                 </View>
-                
-                <BottomTabs viewName={"AllergensView"} />
             </View>
         )
     }

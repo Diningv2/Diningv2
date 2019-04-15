@@ -49,7 +49,6 @@ class MenuItemView extends Component {
                     {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Allergens' && <AllergenList />}
                     {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Ingredients' && <Ingredients />}
                 </View>
-                <BottomTabs viewName={'DiningHallsView'} />
             </View>
         )
     }
