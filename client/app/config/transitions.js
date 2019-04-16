@@ -3,7 +3,7 @@ import { Animated, Easing } from 'react-native';
 const transitionConfig = () => {
     return {
       transitionSpec: {
-        duration: 0, // Transition is "instant"
+        duration: 300, // Transition is "instant"
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing,
         useNativeDriver: true,

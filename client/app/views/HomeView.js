@@ -8,8 +8,16 @@ class HomeView extends Component {
         super(props);
     }
 
+    state = {
+        buttonText: "check out the dhalls",
+        isNavigating: false
+    }
+
     buttonStyle = { ...styles.bigButton, marginTop: 20 };
-    proceed = () => this.props.navigation.navigate('DiningHallsView');
+    proceed = () => {
+        this.setState({isNavigating: true, buttonText: "loading..."})
+        setTimeout(() => this.props.navigation.navigate('DiningHallsView'), 50);
+    }
 
     componentDidMount() {
         const expoToken = this.props.userInformation.notificationID;
@@ -31,11 +39,12 @@ class HomeView extends Component {
                     </View>
                     <View>
                         <TouchableOpacity 
+                            disabled={this.state.isNavigating}
                             style={this.buttonStyle} 
                             onPress={this.proceed}
                         >
                             <Text style={styles.bigButtonText}>
-                                check out the dhalls
+                                {this.state.buttonText}
                             </Text>
                         </TouchableOpacity>
                     </View>
