@@ -62,7 +62,7 @@ class MenuView extends Component {
         return `open from ${openingTime} to ${closingTime}` + ((transferTime && ` (transfers at ${transferTime})`) || "");
     }
 
-    //Functions for day tabs
+    // Functions for day tabs
     dayTabButtons = () => {
 
         const dayTypes = ["today", "tomorrow"];
@@ -95,6 +95,19 @@ class MenuView extends Component {
         return tabs;
     }
 
+    // Dynamically sets the header text based on
+    // the success and fail conditions of this page load
+    setHeaderText = (successCondition, failCondition) => {
+        if (successCondition) {
+            const diningHallName = this.props.menusList.data.location;
+            return diningHallName;
+        }
+        if (failCondition)
+            return "Server Error";
+
+        // Otherwise the text will stay as "Loading..."
+        return "Loading...";
+    }
 
     dynamicTabButtons = () => {
         const menu = this.props.menusList.data;
@@ -140,13 +153,15 @@ class MenuView extends Component {
     }
 
     render() {
-        const hasLoadedSuccessfully = !this.props.menusList.isLoading && !this.props.menusList.hasError;
-        const hasLoadedFailed = !this.props.menusList.isLoading && this.props.menusList.hasError;
+        const { menusList } = this.props;
+        const hasLoadedSuccessfully = !menusList.isLoading && !menusList.hasError;
+        const hasLoadedFailed = !menusList.isLoading && menusList.hasError;
+
         return (
             <View style={{ flex: 1 }}>
+            <Header canGoBack title={this.setHeaderText(hasLoadedSuccessfully, hasLoadedFailed)} />
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
-                        <Header canGoBack title={!hasLoadedSuccessfully ? 'Loading...' : this.props.menusList.data.location} />
                         <AnimatedListItem key="toptabs" index={3}>
                             <TopTabs tabButtons={this.dayTabButtons()} />
                             <TopTabs tabButtons={this.dynamicTabButtons()} />
