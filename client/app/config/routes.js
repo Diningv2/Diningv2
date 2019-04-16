@@ -17,7 +17,8 @@ const AllergensRoutes = {
 }
 
 const FavoritesRoutes = {
-    FavoritesView: { screen: FavoritesView }
+    FavoritesView: { screen: FavoritesView },
+    MenuItemView: { screen: MenuItemView },
 }
 
 const DiningHallRoutes = {
