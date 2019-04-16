@@ -20,6 +20,20 @@ class SearchableHeader extends Component {
 
     state = {
         searching: false,
+        title: this.props.title,
+    }
+
+    dHallNames = {
+        // "Grace Hopper": "Hopper",
+        "Jonathan Edwards": "JE",
+        // "Timothy Dwight": "TD",
+        "Benjamin Franklin": "Franklin",
+    }
+
+    componentDidMount() {
+        this.setState({
+            title: this.dHallNames[this.props.title] || this.props.title
+        })
     }
 
     // Can go back is enabled if you set the canGoBack prop to true AND
@@ -39,30 +53,43 @@ class SearchableHeader extends Component {
     render() {
         return (
             <View style={{ ...styles.container.backgroundColorPrimary, ...styles.container.dropShadow }}>
-                <View style={{ ...styles.spacing.above.medium, padding: 20 }}>
-                    <View style={{ ...styles.container.flexRow }}>
+                <View style={{ 
+                    ...styles.spacing.above.medium, 
+                    paddingVertical: 15, 
+                    paddingHorizontal: 10, 
+                }}>
+                    <View style={{ ...styles.container.flexRow}}>
                         {this.canGoBack() &&
-                            <TouchableOpacity style={{ paddingRight: 10, width: '15%' }}
-                                onPress={() => this.goBack()}>
-                                <AntDesign name="arrowleft" size={32} color="white" />
+                            <TouchableOpacity 
+                                style={{ paddingRight: 10 }}
+                                onPress={() => this.goBack()}
+                            >
+                                <AntDesign name="arrowleft" size={30} color="white" />
                             </TouchableOpacity>
                         }
-                        {this.hasImage() &&
+                        {/* {this.hasImage() &&
                             <View>
                                 <Image style={{ width: '10%' }} source={this.props.image} />
                             </View>
-                        }
-                        <View style={{ width: '85%' }}>
-                            <Text style=
-                                {{...styles.font.type.primaryBold, 
+                        }?????????????????????????????????????? */}
+                        <View>
+                            <Text style={{
+                                ...styles.font.type.primaryBold, 
                                 ...styles.font.size.large, 
                                 color: '#fff',
-                            }}>{this.props.title}</Text>
+                            }}>{this.state.title}</Text>
+                        </View>
+                        <View style={{
+                            flex: 1, 
+                            alignItems: 'flex-end', 
+                            minWidth: 40,
+                        }}>
                             {!this.state.searching && 
                                 <TouchableOpacity 
                                     style={{ paddingLeft: 10 }}
-                                    onPress={this.onPressGlass}>
-                                    <Entypo name="magnifying-glass" size={32} color="white" />
+                                    onPress={this.onPressGlass}
+                                >
+                                    <Entypo name="magnifying-glass" size={30} color="white" />
                                 </TouchableOpacity>
                             }
                         </View>
@@ -70,7 +97,12 @@ class SearchableHeader extends Component {
                     {this.state.searching &&
                         <View>
                             <AnimatedListItem key="searchbar" index={0}>
-                                <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
+                                <Searchbar 
+                                    autoUpdate 
+                                    onPressGlass={this.onPressGlass}
+                                    onSearch={this.props.onSearch} 
+                                    onChangeText={this.props.updateSearchTerm} 
+                                />
                             </AnimatedListItem>
                         </View>
                     }

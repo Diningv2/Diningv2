@@ -14,7 +14,7 @@ const fonts = {
         small: 10,
         smallMedium: 17,
         medium: 20,
-        large: 30
+        large: 28,
     }
 }
 

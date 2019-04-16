@@ -148,7 +148,15 @@ class MenuView extends Component {
             <View style={{ flex: 1 }}>
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
-                        <SearchableHeader canGoBack title={!hasLoadedSuccessfully ? 'Loading...' : this.props.menusList.data.location} />
+                        <SearchableHeader 
+                            onSearch={this.performSearch}
+                            onChangeText={this.updateSearchTerm}
+                            canGoBack 
+                            title={
+                                !hasLoadedSuccessfully 
+                                ? 'Loading...' 
+                                : this.props.menusList.data.location
+                            } />
                         {/* <AnimatedListItem key="searchbar" index={0}>
                             <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
                         </AnimatedListItem> */}
