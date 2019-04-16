@@ -9,7 +9,6 @@ import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
 import Dish from '../components/Dish';
 import Header from '../components/Header';
-import Searchbar from '../components/Searchbar';
 import TopTabs from '../components/TopTabs';
 
 import styles from '../config/styles';
@@ -148,9 +147,6 @@ class MenuView extends Component {
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
                         <Header canGoBack title={!hasLoadedSuccessfully ? 'Loading...' : this.props.menusList.data.location} />
-                        <AnimatedListItem key="searchbar" index={0}>
-                            <Searchbar autoUpdate onSearch={this.performSearch} onChangeText={this.updateSearchTerm} />
-                        </AnimatedListItem>
                         <AnimatedListItem key="toptabs" index={3}>
                             <TopTabs tabButtons={this.dayTabButtons()} />
                             <TopTabs tabButtons={this.dynamicTabButtons()} />
