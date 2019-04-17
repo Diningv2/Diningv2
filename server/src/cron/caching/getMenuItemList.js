@@ -51,9 +51,9 @@ export default async function getMenuItemList(columns, data) {
             isVegetarian,
             isGlutenFree
         } = parseMenuItemData(
-            nutritionResponse.data,
-            filterResponse.data,
-            ingredientsResponse.data
+            nutritionResponse,
+            filterResponse,
+            ingredientsResponse
         );
         menu.push({
             name: entry[columns.indexOf("MENUITEM")].replace("`", "'"),

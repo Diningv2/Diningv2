@@ -10,18 +10,18 @@ export default function parseMenuItemData(
     ingredientData
 ) {
     if (
-        !nutritionData ||
-        !nutritionData.DATA ||
-        !nutritionData.DATA.length ||
-        !nutritionData.DATA[0].length ||
-        !filterData ||
-        !filterData.DATA ||
-        !filterData.DATA.length ||
-        !filterData.DATA[0].length ||
-        !ingredientData ||
-        !ingredientData.DATA ||
-        !ingredientData.DATA.length ||
-        !ingredientData.DATA[0].length
+        !nutritionData.data ||
+        !nutritionData.data.DATA ||
+        !nutritionData.data.DATA.length ||
+        !nutritionData.data.DATA[0].length ||
+        !filterData.data ||
+        !filterData.data.DATA ||
+        !filterData.data.DATA.length ||
+        !filterData.data.DATA[0].length ||
+        !ingredientData.data ||
+        !ingredientData.data.DATA ||
+        !ingredientData.data.DATA.length ||
+        !ingredientData.data.DATA[0].length
     ) {
         console.error(E_NO_API_RES);
         return {
@@ -31,19 +31,19 @@ export default function parseMenuItemData(
             isVegan: false,
             isVegetarian: false,
             isGlutenFree: false
-        }
+        };
     }
 
     // get nutrition info
     const nutrition = parseNutritionInfo(
-        nutritionData.COLUMNS,
-        nutritionData.DATA[0]
+        nutritionData.data.COLUMNS,
+        nutritionData.data.DATA[0]
     );
 
     // get ingredient list
     const ingredients = parseIngredients(
-        ingredientData.COLUMNS,
-        ingredientData.DATA
+        ingredientData.data.COLUMNS,
+        ingredientData.data.DATA
     );
 
     // get allergens
@@ -51,7 +51,7 @@ export default function parseMenuItemData(
     var isVegetarian = false;
     var isGlutenFree = false;
     var allergens = [];
-    var boolFilters = filterData.DATA[0].slice(2, filters.length + 2);
+    var boolFilters = filterData.data.DATA[0].slice(2, filters.length + 2);
     filters.map((filter, i) => {
         if (boolFilters[i]) {
             switch (filter) {
