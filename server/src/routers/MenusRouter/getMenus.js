@@ -14,25 +14,26 @@ export default async function getMenus(query) {
     const maxErrors = queries.length;
     var nErrors = 0;
     var menus = [];
+    var todayDoc = undefined;
+    var tomorrowDoc = undefined;
+    try {
+        todayDoc = await firestore.doc("menus/today").get();
+        tomorrowDoc = await firestore.doc("menus/tomorrow").get();
+    } catch (e) {
+        console.error(`${E_DB_READ}: ${e}`);
+    }
     for (let location of queries) {
-        var todayDoc = undefined;
-        var tomorrowDoc = undefined;
-        try {
-            todayDoc = await firestore.doc("menus/today").get();
-            tomorrowDoc = await firestore.doc("menus/tomorrow").get();
-        } catch (e) {
-            console.error(`${E_DB_READ}: ${e}`);
-        }
+        const readableLocation = locations[location];
         try {
             const cachedMenu = query.cached
-                ? await getCachedMenu(location, todayDoc, tomorrowDoc)
+                ? await getCachedMenu(readableLocation, todayDoc, tomorrowDoc)
                 : undefined;
             const menu = cachedMenu || (await getOneMenu(location));
             menus.push(menu);
         } catch (e) {
             nErrors++;
             console.error(
-                `${e.message}: ${locations[location]} (total: ${nErrors})`
+                `${e.message}: ${readableLocation} (total: ${nErrors})`
             );
             if (nErrors >= maxErrors) {
                 throw new Error(e.message);
