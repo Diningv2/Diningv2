@@ -13,7 +13,7 @@ router
             res.send(favorites).status(200);
         } catch (e) {
             console.error(e);
-            res.send(e.message).status(500);
+            res.send(e).status(500);
         }
     })
     .post("/", async (req, res) => {
@@ -23,7 +23,7 @@ router
             res.sendStatus(200);
         } catch (e) {
             console.error(e);
-            res.send(e.message).status(500);
+            res.send(e).status(500);
         }
     })
     .post("/delete", async (req, res) => {
@@ -33,7 +33,7 @@ router
             res.sendStatus(200);
         } catch (e) {
             console.error(e);
-            res.send(e.message).status(500);
+            res.send(e).status(500);
         }
     });
 
