@@ -42,6 +42,8 @@ export default async function getOneMenu(location) {
             )
         );
     }
+    const date = new Date();
+    menus["timestamp"] = date.toDateString();
     console.log(`Populated ${locations[location]}.`);
     return menus;
 }
