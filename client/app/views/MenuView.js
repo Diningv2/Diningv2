@@ -163,8 +163,12 @@ class MenuView extends Component {
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
                         <AnimatedListItem key="toptabs" index={3}>
-                            <TopTabs tabButtons={this.dayTabButtons()} />
-                            <TopTabs tabButtons={this.dynamicTabButtons()} />
+                            <View style={{paddingTop: 5}}>
+                                <TopTabs tabButtons={this.dayTabButtons()} />
+                            </View>
+                            <View style={{paddingTop: 2, paddingBottom: 5}}>
+                                <TopTabs tabButtons={this.dynamicTabButtons()} />
+                            </View>
                         </AnimatedListItem>
                         {!this.state.isLoading &&
                             <AnimatedListItem key="hourstext" index={4}>
