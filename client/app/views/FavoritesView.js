@@ -39,13 +39,13 @@ class FavoritesView extends Component {
             return <CenterTextView message="Loading..." />;
         } else if (Object.keys(this.props.favoritesList.data).length == 0 || this.props.favoritesList.data == undefined) { // No faves
             return (
-                <View style={{paddingBottom: 50, flex: 1}}>
+                <View style={{flex: 1}}>
                     <CenterTextView message="No favorites to show" />
                 </View>
             );
         }
         return (
-            <View style={{paddingBottom: 50, flex: 1}}>
+            <View style={{flex: 1}}>
                 <DV2ScrollView 
                     array={Object.keys(this.props.favoritesList.data)}
                     render={(dishID) => this.renderFavesList(dishID)}
