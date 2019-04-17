@@ -163,10 +163,13 @@ class MenuView extends Component {
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
                         <AnimatedListItem key="toptabs" index={3}>
-                            <View style={{paddingTop: 5}}>
+                            <View style={{...styles.topTabs.withPaddingTop}}>
                                 <TopTabs tabButtons={this.dayTabButtons()} />
                             </View>
-                            <View style={{paddingTop: 2, paddingBottom: 5}}>
+                            <View style={{
+                                paddingTop: 2, 
+                                ...styles.topTabs.withPaddingBottom
+                            }}>
                                 <TopTabs tabButtons={this.dynamicTabButtons()} />
                             </View>
                         </AnimatedListItem>

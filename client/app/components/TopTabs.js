@@ -73,7 +73,7 @@ const tabStyles = StyleSheet.create({
     touchables: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 8,
+        paddingVertical: 10,
     }
 })
 

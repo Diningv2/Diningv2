@@ -46,7 +46,12 @@ class AllergensView extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Header title="Menu Filters" />
-                <TopTabs tabButtons={this.tabButtons} />
+                <View style={{
+                    ...styles.topTabs.withPaddingTop,
+                    ...styles.topTabs.withPaddingBottom,
+                }}>
+                    <TopTabs tabButtons={this.tabButtons} />
+                </View>
                 <Text style={{ 
                         ...styles.font.type.primaryBold, 
                         ...styles.font.size.large, 
