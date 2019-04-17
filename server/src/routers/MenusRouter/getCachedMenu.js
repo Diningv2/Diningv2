@@ -9,9 +9,11 @@ export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
         return undefined;
     }
     var menu, timestamp;
-    ({ menu, timestamp } = todayDoc.data()[location]);
+    ({ menu, timestamp } =
+        [location] in todayDoc.data() && todayDoc.data()[location]);
     const today = isFresh(timestamp) ? menu : undefined;
-    ({ menu, timestamp } = tomorrowDoc.data()[location]);
+    ({ menu, timestamp } =
+        [location] in tomorrowDoc.data() && tomorrowDoc.data()[location]);
     const tomorrow = isFresh(timestamp) ? menu : undefined;
     return today && tomorrow
         ? {
