@@ -13,9 +13,9 @@ router.get("/", async (req, res) => {
     } catch (e) {
         console.error(e);
         if (e.message == E_BAD_MENU_REQ) {
-            res.send(e).status(400);
+            res.send(e.message).status(400);
         } else {
-            res.send(e).status(500);
+            res.send(e.message).status(500);
         }
     }
 });
