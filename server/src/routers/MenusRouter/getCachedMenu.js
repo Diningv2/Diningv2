@@ -1,4 +1,4 @@
-import { E_DB_NOENT, emptyMenu } from "../../config/constants";
+import { E_DB_NOENT } from "../../config/constants";
 
 export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
     console.log(`Fetching data for ${location} from Firestore cache...`);
