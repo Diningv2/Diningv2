@@ -1,6 +1,7 @@
 import { E_DB_NOENT } from "../../config/constants";
 
 export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
+    console.log(`Fetching data for ${location} from Firestore cache...`);
     if (!todayDoc.exists) {
         console.error(E_DB_NOENT + "menus/today");
         return undefined;
@@ -15,6 +16,9 @@ export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
     ({ menu, timestamp } =
         [location] in tomorrowDoc.data() && tomorrowDoc.data()[location]);
     const tomorrow = isFresh(timestamp) ? menu : undefined;
+    today && tomorrow
+        ? console.log("Fetched menus from Firestore.")
+        : console.error("Failed to fetch menus from Firestore.");
     return today && tomorrow
         ? {
               location,
