@@ -42,5 +42,5 @@ function isFresh(timestamp) {
 }
 
 function isEmpty(menu) {
-    return Object.keys(menu).map(meal => menu[meal].length).length > 0;
+    return Object.keys(menu).length > 0;
 }
