@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import { Transition } from 'react-navigation-fluid-transitions';
-
-import styles from '../config/styles';
-
+import { View } from 'react-native';
 import connectToRedux from '../redux/lib/connectToRedux';
 import sp from '../redux/lib/stateProperties';
-
-import { DV2ScrollView } from '../components/DV2ScrollView';
-import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
 import Dish from '../components/Dish';
+import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
-
+import TopTabs from '../components/TopTabs';
+import ItemCard from '../components/ItemCard';
 class FavoritesView extends Component {
 
     constructor(props) {
         super(props);
     }
 
+    favoritesTabButtons = [
+        {tabName: "Served Today", function: () => console.log("LOL")},
+        {tabName: "All Favorites", function: () => console.log("OKAY LOL")}
+    ]
+
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <Header title="Favorites" />
+                <TopTabs tabButtons={this.favoritesTabButtons} />
+                <View style={{margin: 10}}>
+                    <ItemCard />
+                </View>
                 {this.renderContent()}
             </View>
         );

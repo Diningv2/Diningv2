@@ -7,7 +7,7 @@ const fonts = {
             bold: 'Comfortaa Bold'
         },
         secondary: {
-            regular: 'Comfortaa Regular'
+            regular: 'SF Pro Text Bold'
         }
     },
     size: {

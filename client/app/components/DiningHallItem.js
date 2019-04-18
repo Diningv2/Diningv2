@@ -107,7 +107,7 @@ export default class DiningHallItem extends Component {
                             <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.medium }}>
                                 {this.props.name}
                             </Text>
-                            <Text style={{ ...styles.font.type.secondaryRegular, opacity: 0.6 }}>
+                            <Text style={{ ...styles.font.type.primaryRegular, opacity: 0.6 }}>
                                 {this.props.isOpen ? "Open! 🍽" : "Closed 😞"}
                             </Text>
                         </View>
