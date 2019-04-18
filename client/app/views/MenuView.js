@@ -194,14 +194,6 @@ class MenuView extends Component {
                         }
                     </View>
                 }
-                {hasLoadedFailed &&
-                    <View style={{ flex: 1 }}>
-                        <Header canGoBack title="Server Error" />
-                        <View style={{ paddingBottom: 50, flex: 1 }}>
-                            <CenterTextView message="No menu data available :(" />
-                        </View>
-                    </View>
-                }
             </View>
         )
     }
