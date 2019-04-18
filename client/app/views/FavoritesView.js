@@ -37,7 +37,7 @@ class FavoritesView extends Component {
             );
         } else if (this.props.favoritesList.isLoading) {
             return <CenterTextView message="Loading..." />;
-        } else if (Object.keys(this.props.favoritesList.data).length == 0 || this.props.favoritesList.data == undefined) { // No faves
+        } else if (this.props.favoritesList.data == {} || this.props.favoritesList.data == undefined) { // No faves
             return (
                 <View style={{paddingBottom: 50, flex: 1}}>
                     <CenterTextView message="No favorites to show" />
@@ -53,6 +53,8 @@ class FavoritesView extends Component {
             </View>
         );
     }
+
+
 
     renderFavesList = (dishID) => {
         const dishName = this.props.favoritesList.data[dishID];
