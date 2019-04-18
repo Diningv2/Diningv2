@@ -2,7 +2,8 @@ import axios from "axios";
 
 import processMenu from "./processMenu";
 import queryBuilder from "../../util/queryBuilder";
-import { MENUS_URI, YD_VERSION } from "../../config/constants";
+import { MENUS_URI, YD_VERSION, E_BAD_MENU_REQ } from "../../config/constants";
+import locations from "../../config/locations";
 
 /*
  *   getOneMenu(query)
@@ -16,9 +17,12 @@ import { MENUS_URI, YD_VERSION } from "../../config/constants";
  *   Return Value:
  *       an array of [MenuItem | Menus] objects, depending on whether the query object contains the meal key or not (respectively)
  */
-export default async function getOneMenu(query) {
-    const location = query.location;
-    const endpoint = MENUS_URI + queryBuilder({ version: YD_VERSION, location });
+export default async function getOneMenu(location) {
+    if (!(location in locations)) {
+        throw new Error(E_BAD_MENU_REQ);
+    }
+    const endpoint =
+        MENUS_URI + queryBuilder({ version: YD_VERSION, location });
     const response = await axios.get(endpoint);
-    return processMenu(response.data, query);
+    return processMenu(response.data);
 }
