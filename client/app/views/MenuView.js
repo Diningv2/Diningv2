@@ -186,7 +186,7 @@ class MenuView extends Component {
                                         render={(dish, index) => this.renderMenu(dish, index)}
                                     />
                                     :
-                                    <View style={{ paddingBottom: 50, flex: 1 }}>
+                                    <View style={{ flex: 1 }}>
                                         <CenterTextView message="No menu items to show." />
                                     </View>
                                 }

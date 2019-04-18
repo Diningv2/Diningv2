@@ -18,7 +18,8 @@ router
     })
     .post("/", async (req, res) => {
         try {
-            await addFavorite(req.body.token, req.body.menuitemid, req.body.name);
+            const { token, menuitemid, name } = req.body;
+            await addFavorite(token, menuitemid, name);
             res.sendStatus(200);
         } catch (e) {
             console.error(e);
@@ -27,7 +28,8 @@ router
     })
     .post("/delete", async (req, res) => {
         try {
-            await removeFavorite(req.body.token, req.body.menuitemid);
+            const { token, menuitemid } = req.body;
+            await removeFavorite(token, menuitemid);
             res.sendStatus(200);
         } catch (e) {
             console.error(e);

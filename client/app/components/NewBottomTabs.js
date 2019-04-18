@@ -28,7 +28,6 @@ const tabStyles = StyleSheet.create({
     height: 58,
     elevation: 2,
     alignItems: "center",
-    padding: 10
   },
   button: { flex: 1 },
   highlight: { 
