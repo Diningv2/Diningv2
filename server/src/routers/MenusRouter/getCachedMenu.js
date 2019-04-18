@@ -1,4 +1,4 @@
-import { E_DB_NOENT } from "../../config/constants";
+import { E_DB_NOENT, emptyMenu } from "../../config/constants";
 
 export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
     console.log(`Fetching data for ${location} from Firestore cache...`);
@@ -9,17 +9,25 @@ export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
         console.error(E_DB_NOENT + "menus/tomorrow");
         return undefined;
     }
+
     var menu, timestamp;
     ({ menu, timestamp } =
-        [location] in todayDoc.data() && todayDoc.data()[location]);
-    const today = isFresh(timestamp) ? menu : undefined;
+        location in todayDoc.data() && todayDoc.data()[location]);
+    const today = isFresh(timestamp) ? menu : emptyMenu;
     ({ menu, timestamp } =
-        [location] in tomorrowDoc.data() && tomorrowDoc.data()[location]);
-    const tomorrow = isFresh(timestamp) ? menu : undefined;
-    today && tomorrow
+        location in tomorrowDoc.data() && tomorrowDoc.data()[location]);
+    const tomorrow = isFresh(timestamp) ? menu : emptyMenu;
+
+    !isEmpty(today) && !isEmpty(tomorrow)
         ? console.log("Fetched menus from Firestore.")
-        : console.error("Failed to fetch menus from Firestore.");
-    return today && tomorrow
+        : console.error(
+              `Failed to fetch menus from Firestore. ${
+                  !isEmpty(today) || !isEmpty(tomorrow)
+                      ? "(1 of 2)"
+                      : "(2 of 2)"
+              }`
+          );
+    return !isEmpty(today) || !isEmpty(tomorrow)
         ? {
               location,
               today,
@@ -31,4 +39,8 @@ export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
 function isFresh(timestamp) {
     const date = new Date();
     return date.toDateString() == timestamp;
+}
+
+function isEmpty(menu) {
+    return Object.keys(menu).map(meal => menu[meal].length).length > 0;
 }
