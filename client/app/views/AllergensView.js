@@ -46,7 +46,12 @@ class AllergensView extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Header title="Menu Filters" />
-                <TopTabs tabButtons={this.tabButtons} />
+                <View style={{
+                    ...styles.topTabs.withPaddingTop,
+                    ...styles.topTabs.withPaddingBottom,
+                }}>
+                    <TopTabs tabButtons={this.tabButtons} />
+                </View>
                 <Text style={{ 
                         ...styles.font.type.primaryBold, 
                         ...styles.font.size.large, 
@@ -54,7 +59,7 @@ class AllergensView extends Component {
                         paddingHorizontal: 10}}>
                         {this.state.selectedTabName == 'Dietary Restrictions' ? 'I am...' : 'I cannot eat...'}
                 </Text>
-                <View style={{paddingBottom: 50, flex: 1}}>
+                <View style={{flex: 1}}>
                     <DV2ScrollView 
                         array={this.state.selectedTabName == 'Dietary Restrictions' ? restrictions : allergens}
                         render={(allergen) => this.renderAllergen(allergen)}

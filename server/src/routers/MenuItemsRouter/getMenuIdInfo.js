@@ -16,6 +16,9 @@ import * as constants from "../../config/constants";
  */
 
 export default async function getMenuIdInfo(menuitemid) {
+    if (!menuitemid) {
+        throw new Error(constants.E_BAD_MENU_ITEM_REQ);
+    }
     const nutritionEndpoint =
         constants.NUTRITION_URI +
         queryBuilder({ version: constants.YD_VERSION, MENUITEMID: menuitemid });

@@ -67,46 +67,45 @@ export default styles = {
         
 
     },
-    container:
-        StyleSheet.create({
-            withPadding: {
-                margin: 20
+    container: StyleSheet.create({
+        withPadding: {
+            margin: 20
+        },
+        withPaddingSmall: {
+            margin: spacingSizes.small
+        },
+        dropShadow: {
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 5,
             },
-            withPaddingSmall: {
-                margin: spacingSizes.small
-            },
-            dropShadow: {
-                shadowColor: "#000",
-                shadowOffset: {
-                    width: 0,
-                    height: 5,
-                },
-                shadowOpacity: 0.16,
-                shadowRadius: 6.68,
+            shadowOpacity: 0.16,
+            shadowRadius: 6.68,
 
-                elevation: 11,
-            },
-            backgroundColorPrimary: {
-                backgroundColor: colors.primary
-            },
-            spaceAbove: {
-                marginTop: 20
-            },
-            spaceBelow: {
-                marginBottom: 20
-            },
-            flexRow: {
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                flexDirection: 'row'
-            },
-            center: {
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100%',
-            }
-        }),
+            elevation: 11,
+        },
+        backgroundColorPrimary: {
+            backgroundColor: colors.primary
+        },
+        spaceAbove: {
+            marginTop: 20
+        },
+        spaceBelow: {
+            marginBottom: 20
+        },
+        flexRow: {
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            flexDirection: 'row'
+        },
+        center: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+        }
+    }),
     spacing: {
         around: StyleSheet.create({
             small: {
@@ -126,5 +125,13 @@ export default styles = {
                 marginTop: spacingSizes.medium
             }
         }),
-    }
+    },
+    topTabs: StyleSheet.create({
+        withPaddingTop: {
+            paddingTop: 5,
+        },
+        withPaddingBottom: {
+            paddingBottom: 5,
+        }
+    }),
 }
