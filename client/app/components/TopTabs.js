@@ -64,7 +64,7 @@ class TopTabs extends Component {
 
 const tabStyles = StyleSheet.create({
     container: {
-        padding: 10
+        paddingHorizontal: 5,
     },
     topTabs: {
         flexDirection: 'row',
@@ -73,8 +73,7 @@ const tabStyles = StyleSheet.create({
     touchables: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingVertical: 10,
     }
 })
 

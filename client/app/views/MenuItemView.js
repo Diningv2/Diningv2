@@ -43,7 +43,12 @@ class MenuItemView extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <Header canGoBack title={this.props.menuItem.isLoading ? 'Loading...' : this.props.menuItem.data.name} />
-                <TopTabs tabButtons={this.tabButtons} />
+                <View style={{
+                    ...styles.topTabs.withPaddingTop,
+                    ...styles.topTabs.withPaddingBottom,
+                }}>
+                    <TopTabs tabButtons={this.tabButtons} />
+                </View>
                 <View style={{flex: 1}}>
                     {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Nutrition' && <NutritionInfo />}
                     {!this.props.menuItem.isLoading && this.state.selectedTabName == 'Allergens' && <AllergenList />}
