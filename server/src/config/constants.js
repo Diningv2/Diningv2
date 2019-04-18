@@ -23,11 +23,3 @@ export const E_CODE_IS = "The error code is";
 
 export const STATUS_OK = "ok";
 export const STATUS_ERROR = "error";
-
-export const emptyMenu = {
-    contBreakfast: [],
-    hotBreakfast: [],
-    brunch: [],
-    lunch: [],
-    dinner: []
-}

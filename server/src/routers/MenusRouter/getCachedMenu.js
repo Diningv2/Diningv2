@@ -13,10 +13,10 @@ export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
     var menu, timestamp;
     ({ menu, timestamp } =
         location in todayDoc.data() && todayDoc.data()[location]);
-    const today = isFresh(timestamp) ? menu : emptyMenu;
+    const today = isFresh(timestamp) ? menu : {};
     ({ menu, timestamp } =
         location in tomorrowDoc.data() && tomorrowDoc.data()[location]);
-    const tomorrow = isFresh(timestamp) ? menu : emptyMenu;
+    const tomorrow = isFresh(timestamp) ? menu : {};
 
     !isEmpty(today) && !isEmpty(tomorrow)
         ? console.log("Fetched menus from Firestore.")
