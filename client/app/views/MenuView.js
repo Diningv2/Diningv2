@@ -208,7 +208,7 @@ class MenuView extends Component {
     renderMenu = (dish, index) => {
         return (
             <AnimatedListItem key={dish.name} index={index}>
-                <Dish key={dish.name} dishName={dish.name} dishID={dish.itemID} />
+                <Dish key={dish.name} dish={dish} />
             </AnimatedListItem>
         );
     }

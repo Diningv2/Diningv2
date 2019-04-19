@@ -22,18 +22,19 @@ export class Dish extends Component {
     componentDidMount() {
         // TODO: Check if this item is a favorite
         const { data } = this.props.favoritesList;
-        const isFave = data && data[this.props.dishID] || false;
+        const isFave = data && data[this.props.dish.itemID] || false;
         this.setState({ isFave });
     }
 
     handlePress = async () => {
         // TODO: change the favorited status of the dish
         const token = this.props.userInformation.notificationID;
-        const menuItemID = this.props.dishID;
+        const menuitemid = this.props.dish.itemID;
+        const name = this.props.dish.name;
         const postConfig = {
-            token, 
-            menuitemid: menuItemID,
-            name: this.props.dishName,
+            token,
+            menuitemid,
+            name
         }
         const previousState = this.state.isFave;
 
@@ -41,47 +42,47 @@ export class Dish extends Component {
         // If the heart is empty, do add favorite
         try {
             if (this.state.isFave) {
-                this.setState({isFave: false});
+                this.setState({ isFave: false });
                 await post('/api/favorites/delete', postConfig);
-                this.props.removeFavorite(menuItemID);
+                this.props.removeFavorite(menuitemid);
             } else {
-                this.setState({isFave: true});
+                this.setState({ isFave: true });
                 await post('/api/favorites', postConfig);
-                this.props.addFavorite(menuItemID, this.props.dishName);
+                this.props.addFavorite(menuitemid, name);
             }
-        
-        } catch(e) {
+
+        } catch (e) {
             console.error("Favorite add/remove error", e.message);
-            this.setState({isFave: previousState});
+            this.setState({ isFave: previousState });
         }
     }
 
     render() {
         return (
             <View style={{
-                ...styles.container.spaceBelow, 
+                ...styles.container.spaceBelow,
                 ...styles.container.flexRow,
                 justifyContent: 'space-between',
             }}>
                 <TouchableOpacity
-                    style={{width: '80%'}}
+                    style={{ width: '80%' }}
                     onPress={() => {
-                        this.props.getMenuItemInformation(this.props.dishID);
+                        this.props.getMenuItemInformation(this.props.dish);
                         this.props.navigation.navigate('MenuItemView');
                     }}
                 >
-                    <Text style={{...styles.font.type.primaryRegular, ...styles.font.size.medium}}>
-                        {this.props.dishName}
+                    <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.size.medium }}>
+                        {this.props.dish.name}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.handlePress}>
-                <AntDesign 
-                    name={this.state.isFave ? 'heart' : 'hearto'} 
-                    size={25} 
-                    color={'#ff6666'}
-                />
+                    <AntDesign
+                        name={this.state.isFave ? 'heart' : 'hearto'}
+                        size={25}
+                        color={'#ff6666'}
+                    />
                 </TouchableOpacity>
-            </View> 
+            </View>
         );
     }
 }
