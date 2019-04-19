@@ -9,20 +9,16 @@ export default function parseMenuItemData(
     filterResponse,
     ingredientResponse
 ) {
-    if (
-        !nutritionResponse.data ||
-        !nutritionResponse.data.DATA ||
-        !nutritionResponse.data.DATA.length ||
-        !nutritionResponse.data.DATA[0].length ||
-        !filterResponse.data ||
-        !filterResponse.data.DATA ||
-        !filterResponse.data.DATA.length ||
-        !filterResponse.data.DATA[0].length ||
-        !ingredientResponse.data ||
-        !ingredientResponse.data.DATA ||
-        !ingredientResponse.data.DATA.length ||
-        !ingredientResponse.data.DATA[0].length
-    ) {
+    const responses = [nutritionResponse, filterResponse, ingredientResponse];
+    const hasBadResponse = responses.some(
+        response =>
+            !response ||
+            !response.data ||
+            !response.data.DATA ||
+            !response.data.DATA.length ||
+            !response.data.DATA[0].length
+    );
+    if (hasBadResponse) {
         console.error(E_NO_API_RES);
         return {
             allergens: [],
