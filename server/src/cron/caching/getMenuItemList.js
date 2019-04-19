@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import parseMenuItemData from "./parseMenuItemData";
+import parseMenuItemData from "../../routers/MenuItemsRouter/parseMenuItemData";
 
 import * as constants from "../../config/constants";
 import queryBuilder from "../../util/queryBuilder";
@@ -49,7 +49,8 @@ export default async function getMenuItemList(columns, data) {
             ingredients,
             isVegan,
             isVegetarian,
-            isGlutenFree
+            isGlutenFree,
+            hasInfo
         } = parseMenuItemData(
             nutritionResponse,
             filterResponse,
@@ -64,7 +65,8 @@ export default async function getMenuItemList(columns, data) {
             nutrition,
             isVegan,
             isVegetarian,
-            isGlutenFree
+            isGlutenFree,
+            hasInfo
         });
     }
     // filter out undefined and duplicate entries

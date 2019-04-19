@@ -1,3 +1,5 @@
+import { appendFileSync } from "fs";
+
 /*
  *   getMenuItemList(columns, data)
  *
@@ -19,7 +21,14 @@ export default function getMenuItemList(columns, data) {
             : {
                   name: entry[columns.indexOf("MENUITEM")].replace("`", "'"),
                   itemID: entry[columns.indexOf("MENUITEMID")],
-                  meal: entry[columns.indexOf("MEALNAME")]
+                  meal: entry[columns.indexOf("MEALNAME")],
+                  allergens: [],
+                  ingredients: [],
+                  nutrition: {},
+                  isVegan: false,
+                  isVegetarian: false,
+                  isGlutenFree: false,
+                  hasInfo: false
               };
     });
     // filter out undefined and duplicate entries
