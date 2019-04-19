@@ -1,100 +1,83 @@
 import parseNutritionInfo from "./parseNutritionInfo";
+import parseIngredients from "./parseIngredients";
+
 import filters from "../../config/filters.js";
 import { E_NO_API_RES } from "../../config/constants";
 
-/**
- * Parses and combines the nutrition (by call to parseNutritionInfo),
- * filter, and ingredient data into a single json menu
- *
- * throws an error if any of the inputs are null or empty
- * or missing DATA field or empty DATA field
- *
- * @param {dict} nutritionData
- * @param {dict} filterData
- * @param {dict} ingredientData
- *
- * return {dict} with menu as a single json object
- *
- */
-
 export default function parseMenuItemData(
-    nutritionData,
-    filterData,
-    ingredientData
+    nutritionResponse,
+    filterResponse,
+    ingredientResponse
 ) {
-    // Error checking for invalid/empty data object
     if (
-        !nutritionData ||
-        !nutritionData.DATA ||
-        !nutritionData.DATA.length ||
-        !nutritionData.DATA[0].length
+        !nutritionResponse.data ||
+        !nutritionResponse.data.DATA ||
+        !nutritionResponse.data.DATA.length ||
+        !nutritionResponse.data.DATA[0].length ||
+        !filterResponse.data ||
+        !filterResponse.data.DATA ||
+        !filterResponse.data.DATA.length ||
+        !filterResponse.data.DATA[0].length ||
+        !ingredientResponse.data ||
+        !ingredientResponse.data.DATA ||
+        !ingredientResponse.data.DATA.length ||
+        !ingredientResponse.data.DATA[0].length
     ) {
-        throw new Error(E_NO_API_RES);
-    }
-    if (
-        !filterData ||
-        !filterData.DATA ||
-        !filterData.DATA.length ||
-        !filterData.DATA[0].length
-    ) {
-        throw new Error(E_NO_API_RES);
-    }
-    if (
-        !ingredientData ||
-        !ingredientData.DATA ||
-        !ingredientData.DATA.length ||
-        !ingredientData.DATA[0].length
-    ) {
-        throw new Error(E_NO_API_RES);
+        console.error(E_NO_API_RES);
+        return {
+            allergens: [],
+            nutrition: {},
+            ingredients: [],
+            isVegan: false,
+            isVegetarian: false,
+            isGlutenFree: false,
+            hasInfo: false
+        };
     }
 
-    // Process ingredient list
-    var ingredientList = [];
-    for (var ingredient of ingredientData.DATA) {
-        // separates out multi-item ingredients
-        ingredient[1]
-            // remove any non-ingredient strings
-            .replace(/(Contains.+$)|(Manufactured.+$)/, "")
-            // remove any "composite" ingredient strings
-            .replace(/[^,]+(?=\(.+,.+)/, "")
-            // remove any encapsulating parentheses
-            .replace(/(?<=,\s|,|^|^\s)\((.+)\)(?=\s*,|\s*$)/, "$1")
-            // split along any "and", ",", or "." strings
-            .split(/[,\.]|and/)
-            // trim the results of whitespace
-            .map(i => i.trim())
-            // push all nonempty strings
-            .forEach(i => i.length && ingredientList.push(i));
-    }
-    // remove duplicate ingredients
-    ingredientList = ingredientList.filter(
-        (entry, index, self) =>
-            index === self.findIndex(otherEntry => otherEntry === entry)
+    // get nutrition info
+    const nutrition = parseNutritionInfo(
+        nutritionResponse.data.COLUMNS,
+        nutritionResponse.data.DATA[0]
     );
 
-    // Process filters
+    // get ingredient list
+    const ingredients = parseIngredients(
+        ingredientResponse.data.COLUMNS,
+        ingredientResponse.data.DATA
+    );
+
+    // get allergens
     var isVegan = false;
     var isVegetarian = false;
     var isGlutenFree = false;
-    var filterList = []; // list of applicable filters
-    var boolFilters = filterData.DATA[0].slice(2, filters.length + 2);
+    var allergens = [];
+    var boolFilters = filterResponse.data.DATA[0].slice(2, filters.length + 2);
     filters.map((filter, i) => {
-        if (boolFilters[i] == 1) {
-            if (filter == "Vegan") isVegan = true;
-            else if (filter == "Vegetarian") isVegetarian = true;
-            else if (filter == "Gluten Free") isVegetarian = true;
-            else filterList.push(filter);
+        if (boolFilters[i]) {
+            switch (filter) {
+                case "Vegan":
+                    isVegan = true;
+                    break;
+                case "Vegetarian":
+                    isVegetarian = true;
+                    break;
+                case "Gluten Free":
+                    isGlutenFree = true;
+                    break;
+                default:
+                    allergens.push(filter);
+            }
         }
     });
 
     return {
-        name: nutritionData.DATA[0][1],
-        nutrition: parseNutritionInfo(nutritionData.DATA[0]),
-        ingredients: ingredientList,
-        filterProperties: filterList,
-        isVegan: isVegan,
-        isVegetarian: isVegetarian,
-        isGlutenFree: isGlutenFree,
-        rating: 5 // TODO : this line is temporarily hard coded
+        allergens,
+        nutrition,
+        ingredients,
+        isVegan,
+        isVegetarian,
+        isGlutenFree,
+        hasInfo: true
     };
 }
