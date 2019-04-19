@@ -201,14 +201,6 @@ class MenuView extends Component {
                         }
                     </View>
                 }
-                {hasLoadedFailed &&
-                    <View style={{ flex: 1 }}>
-                        <Header canGoBack title="Server Error" />
-                        <View style={{ flex: 1 }}>
-                            <CenterTextView message="No menu data available :(" />
-                        </View>
-                    </View>
-                }
             </View>
         )
     }
@@ -216,7 +208,7 @@ class MenuView extends Component {
     renderMenu = (dish, index) => {
         return (
             <AnimatedListItem key={dish.name} index={index}>
-                <Dish key={dish.name} dishName={dish.name} dishID={dish.itemID} />
+                <Dish key={dish.name} dish={dish} />
             </AnimatedListItem>
         );
     }

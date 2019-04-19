@@ -1,17 +1,18 @@
 import axios from "axios";
 
-import getMenuItemList from "../routers/MenusRouter/getMenuItemList";
+import getMenuItemList from "../../routers/MenusRouter/getMenuItemList";
 
-import locations from "../config/locations";
-import queryBuilder from "../util/queryBuilder";
-import dateBuilder from "../util/dateBuilder";
-import { MENUS_URI, YD_VERSION } from "../config/constants";
+import locations from "../../config/locations";
+import queryBuilder from "../../util/queryBuilder";
+import dateBuilder from "../../util/dateBuilder";
+import { MENUS_URI, YD_VERSION } from "../../config/constants";
 
 export default async function getMenuItemsToday() {
     const today = dateBuilder(0);
     var completeMenuItemList = [];
     for (let location in locations) {
-        const endpoint = MENUS_URI + queryBuilder({ version: YD_VERSION, location });
+        const endpoint =
+            MENUS_URI + queryBuilder({ version: YD_VERSION, location });
         const response = await axios.get(endpoint);
         const filteredData = response.data.DATA.filter(
             entry => entry[response.data.COLUMNS.indexOf("MENUDATE")] == today

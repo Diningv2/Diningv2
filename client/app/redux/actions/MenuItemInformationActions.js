@@ -1,7 +1,7 @@
 import * as types from './types';
 import { get } from '../../lib/api-utility';
 
-export function getMenuItemInformation(itemID) {
+export function getMenuItemInformation(item) {
 
     const request = () => {
         return { type: types.GET_MENU_ITEM_INFORMATION_REQUEST }
@@ -26,7 +26,11 @@ export function getMenuItemInformation(itemID) {
     return async (dispatch) => {
         dispatch(request());
         try {
-            const menuItem = await get("/api/menuItems", { menuitemid: itemID });
+            const { nutrition, allergens, ingredients } = item;
+            const menuItem =
+                (nutrition && allergens && ingredients)
+                    ? item
+                    : await get("/api/menuItems", { menuitemid: item.itemID })
             dispatch(success(menuItem));
         } catch (e) {
             dispatch(failure(e.message));

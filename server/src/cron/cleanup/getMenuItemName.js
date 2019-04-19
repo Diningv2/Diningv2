@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import queryBuilder from "../queryBuilder";
+import queryBuilder from "../../util/queryBuilder";
 import * as constants from "../../config/constants";
 
 /**
@@ -25,7 +25,7 @@ export default async function getMenuIdInfo(menuitemid) {
             !nutritionResponse.data.DATA.length ||
             !nutritionResponse.data.DATA[0].length
         ) {
-            throw new Error(E_NO_API_RES);
+            throw new Error(constants.E_NO_API_RES);
         }
         return nutritionResponse.data.DATA[0][1];
     } catch (e) {

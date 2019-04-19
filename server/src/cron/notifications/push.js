@@ -1,7 +1,12 @@
-import Expo from 'expo-server-sdk';
-import { E_PUSH_SEND, E_CODE_IS, STATUS_OK, STATUS_ERROR } from '../config/constants';
+import Expo from "expo-server-sdk";
+import {
+    E_PUSH_SEND,
+    E_CODE_IS,
+    STATUS_OK,
+    STATUS_ERROR
+} from "../../config/constants";
 
-export default function push(tokens){
+export default function push(tokens) {
     let expo = new Expo();
     let chunks = expo.chunkPushNotifications(tokens);
     let tickets = [];
@@ -28,7 +33,9 @@ export default function push(tokens){
     (async () => {
         for (let chunk of receiptIdChunks) {
             try {
-                let receipts = await expo.getPushNotificationReceiptsAsync(chunk);
+                let receipts = await expo.getPushNotificationReceiptsAsync(
+                    chunk
+                );
                 console.log(receipts);
                 for (let receipt of receipts) {
                     if (receipt.status === STATUS_OK) {
@@ -36,7 +43,9 @@ export default function push(tokens){
                     } else if (receipt.status === STATUS_ERROR) {
                         console.log(`${E_PUSH_SEND} ${receipt.message}`);
                         if (receipt.details && receipt.details.error) {
-                            console.error(`${E_CODE_IS} ${receipt.details.error}`);
+                            console.error(
+                                `${E_CODE_IS} ${receipt.details.error}`
+                            );
                         }
                     }
                 }
