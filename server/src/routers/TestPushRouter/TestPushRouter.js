@@ -1,6 +1,6 @@
 import express from "express";
 
-import sendNotifications from "../../notifications/sendNotifications";
+import sendNotifications from "../../cron/notifications/sendNotifications";
 
 import { E_BAD_MENU_REQ } from "../../config/constants";
 
