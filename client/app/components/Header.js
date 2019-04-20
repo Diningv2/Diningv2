@@ -12,7 +12,6 @@ class Header extends Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props.navigation);
     }
 
     // Can go back is enabled if you set the canGoBack prop to true AND
@@ -23,7 +22,7 @@ class Header extends Component {
 
     render() {
         return (
-            <View style={{ ...styles.container.backgroundColorPrimary, ...styles.container.dropShadow }}>
+            <View style={{ ...styles.container.backgroundColorPrimary, ...styles.container.dropShadowLarge }}>
                 <View style={{ ...styles.spacing.above.medium, padding: 20 }}>
                     <View style={{ ...styles.container.flexRow }}>
                         {this.canGoBack() &&

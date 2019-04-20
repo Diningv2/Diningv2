@@ -55,7 +55,7 @@ class DiningHallsView extends Component {
                         ? (
                             <CenterTextView message="Loading..." />
                         ) : (
-                            <View>
+                            <View style={{paddingTop: 10}}>
                                 <DV2ScrollView 
                                     array={this.props.diningHallsList.data}
                                     render={(element, index) => this.renderDiningHall(element, index)}
