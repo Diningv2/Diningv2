@@ -27,8 +27,7 @@ export function getMenuItemInformation(item) {
         try {
             const menuItem = item.hasInfo
                 ? item
-                // : await get("/api/menuItems", { menuitemid: item.itemID });
-                : console.log("pinging api D:");
+                : await get("/api/menuItems", { menuitemid: item.itemID });
             dispatch(success(menuItem));
         } catch (e) {
             dispatch(failure(e.message));
