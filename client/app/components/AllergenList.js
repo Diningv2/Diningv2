@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Transition } from 'react-navigation-fluid-transitions';
+import React, { Component } from "react";
+import { View } from "react-native";
+import { Transition } from "react-navigation-fluid-transitions";
 
-import connectToRedux from '../redux/lib/connectToRedux';
+import connectToRedux from "../redux/lib/connectToRedux";
 
-import Allergen from './Allergen';
-import { DV2ScrollView } from './DV2ScrollView';
+import Allergen from "./Allergen";
+import { DV2ScrollView } from "./DV2ScrollView";
 
 class AllergenList extends Component {
-
     constructor(props) {
         super(props);
     }
 
     renderAllergens = allergen => {
-        return (
-            <Allergen
-                key={allergen}
-                title={allergen}
-            />
-        );
-    }
+        return <Allergen key={allergen} title={allergen} />;
+    };
 
     render() {
         return (
@@ -28,7 +22,7 @@ class AllergenList extends Component {
                 <Transition appear="bottom">
                     <DV2ScrollView
                         style={{ flex: 1 }}
-                        array={this.props.menuItem.data.filterProperties}
+                        array={this.props.menuItem.data.allergens}
                         render={allergen => this.renderAllergens(allergen)}
                     />
                 </Transition>
@@ -37,4 +31,4 @@ class AllergenList extends Component {
     }
 }
 
-export default connectToRedux(AllergenList, ['menuItem']);
+export default connectToRedux(AllergenList, ["menuItem"]);
