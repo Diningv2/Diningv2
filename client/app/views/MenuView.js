@@ -112,8 +112,7 @@ class MenuView extends Component {
     dynamicTabButtons = () => {
         const menu = this.props.menusList.data;
         const day = this.state.selectedDay == 'Today' ? menu.today : menu.tomorrow;
-        const mealTypes = Object.keys(day);
-
+        
         const formatted = {
             contBreakfast: "Cont. Breakfast",
             hotBreakfast: "Hot Breakfast",
@@ -121,6 +120,8 @@ class MenuView extends Component {
             lunch: "Lunch",
             dinner: "Dinner"
         }
+        
+        const mealTypes = Object.keys(formatted).filter(mealType => day[mealType] && day[mealType].length);
 
         let tabButtons = mealTypes.map(mealType => {
             return {

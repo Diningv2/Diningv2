@@ -74,7 +74,7 @@ export default styles = {
         withPaddingSmall: {
             margin: spacingSizes.small
         },
-        dropShadow: {
+        dropShadowLarge: {
             shadowColor: "#000",
             shadowOffset: {
                 width: 0,
@@ -84,6 +84,17 @@ export default styles = {
             shadowRadius: 6.68,
 
             elevation: 11,
+        },
+        dropShadowSmall: {
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 3,
+            },
+            shadowOpacity: 0.08,
+            shadowRadius: 1.68,
+
+            elevation: 2
         },
         backgroundColorPrimary: {
             backgroundColor: colors.primary
