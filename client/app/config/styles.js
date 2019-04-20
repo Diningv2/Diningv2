@@ -43,6 +43,9 @@ export default styles = {
             },
         }),
         size: StyleSheet.create({
+            small: {
+                fontSize: fonts.size.small
+            },
             smallMedium: {
                 fontSize: fonts.size.smallMedium
             },
@@ -64,7 +67,7 @@ export default styles = {
                 color: colors.tertiary
             }
         }),
-        
+
 
     },
     container: StyleSheet.create({
