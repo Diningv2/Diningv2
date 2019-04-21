@@ -27,23 +27,19 @@ export default async function getMenuItemsToday() {
             menuItemList.forEach(item => {
                 const { name, itemID, meal } = item;
                 var menuItem = completeMenuItemList[itemID];
-                if (menuItem){
-                    completeMenuItemList[itemID].meal = 
-                        (!menuItem.meal[meal]) 
-                        ? { ...menuItem.meal, [meal]:true}
-                        : menuItem.meal;
-                    completeMenuItemList[itemID].location = 
-                        (!menuItem.location[locations[location]]) 
-                        ? { ...menuItem.location, [locations[location]]:true}
-                        : menuItem.location;
-                } else {
-                    completeMenuItemList[itemID] = {
+                menuItem && 
+                    (menuItem.meal.indexOf(meal) < 0) &&
+                        (completeMenuItemList[itemID].meal.push(meal));
+                menuItem && 
+                    (menuItem.location.indexOf(locations[location]) < 0) &&
+                        (completeMenuItemList[itemID].location.push(locations[location]));
+                !menuItem && 
+                    (completeMenuItemList[itemID] = {
                         name, 
-                        meal: {[meal]:true},
-                        location: {[locations[location]]:true}, 
+                        meal:[meal],
+                        location: [locations[location]], 
                         timestamp
-                    }
-                }
+                    });
             });
     }
 
