@@ -12,9 +12,9 @@ import CacheFavoritesRouter from "./routers/CacheFavoritesRouter/CacheFavoritesR
 
 import sendNotifications from "./cron/notifications/sendNotifications";
 import updateMenuItemNames from "./cron/cleanup/updateMenuItemNames";
-import populateMenus from "./cron/caching/populateMenus";
+import populateMenus from "./cron/caching/Menus/populateMenus";
 import rolloverCache from "./cron/cleanup/rolloverCache";
-import cacheFavorites from "./cron/caching/cacheFavorites";
+import cacheFavorites from "./cron/caching/Favorites/cacheFavorites";
 
 const PORT = process.env.PORT || 5000;
 
@@ -50,5 +50,5 @@ cron.schedule("2 * * * *", async () => populateMenus(), options);
 // Run at 12:01 am every day
 cron.schedule("1 0 * * *", async () => rolloverCache(), options);
 
-// Run at 12:10 am every day
-cron.schedule("10 0 * * *", async () => cacheFavorites(), options);
+// Run every hour at the 5 minute mark
+cron.schedule("5 * * * *", async () => cacheFavorites(), options);

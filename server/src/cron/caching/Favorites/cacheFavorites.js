@@ -1,7 +1,7 @@
-import firestore from "../../config/firebase/firebaseConfig";
+import firestore from "../../../config/firebase/firebaseConfig";
 
 import getMenuItemsToday from "./getMenuItemsToday";
-import { E_DB_WRITE, E_NO_API_RES } from "../../config/constants";
+import { E_DB_WRITE, E_NO_API_RES } from "../../../config/constants";
 
 export default async function cacheFavorites() {
 	var menuItems = undefined;
