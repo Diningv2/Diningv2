@@ -28,6 +28,33 @@ export class Dish extends Component {
         this.setState({ isFave });
     }
 
+    dishStyle = {
+        ...styles.container.spaceBelowSmall,
+        ...styles.container.flexRow,
+        ...styles.container.dropShadowSmall,
+        justifyContent: 'space-between',
+        backgroundColor: colors.secondary,
+        borderWidth: 1,
+        borderColor: colors.primary,
+        borderRadius: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 15
+    }
+
+    filteredDishStyle = {
+        ...styles.container.spaceBelowSmall,
+        ...styles.container.flexRow,
+        ...styles.container.dropShadowSmall,
+        justifyContent: 'space-between',
+        backgroundColor: '#D0D1D8',
+        borderWidth: 1,
+        borderColor: colors.primary,
+        borderRadius: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        opacity: .5
+    }
+
     handlePress = async () => {
         const token = this.props.userInformation.notificationID;
         const menuitemid = this.props.dish.itemID;
@@ -61,7 +88,11 @@ export class Dish extends Component {
     render() {
         return (
             <ScaleInOut pose={this.state.isLoading ? 'exit' : 'enter'}>
+<<<<<<< HEAD
                 <View style={card}>
+=======
+                <View style={this.props.filtered ? this.filteredDishStyle : this.dishStyle}>
+>>>>>>> master
                     <TouchableOpacity
                         style={{ width: '80%' }}
                         onPress={() => {
