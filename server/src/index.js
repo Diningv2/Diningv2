@@ -9,6 +9,7 @@ import FavoritesRouter from "./routers/FavoritesRouter/FavoritesRouter";
 import TestPushRouter from "./routers/TestPushRouter/TestPushRouter";
 import PopulateRouter from "./routers/PopulateRouter/PopulateRouter";
 import CacheFavoritesRouter from "./routers/CacheFavoritesRouter/CacheFavoritesRouter";
+import PreferencesRouter from "./routers/PreferencesRouter/PreferencesRouter";
 
 import sendNotifications from "./cron/notifications/sendNotifications";
 import updateMenuItemNames from "./cron/cleanup/updateMenuItemNames";
@@ -30,6 +31,7 @@ server.use("/api/favorites", FavoritesRouter);
 server.use("/api/testPush", TestPushRouter);
 server.use("/api/populate", PopulateRouter);
 server.use("/api/cacheFavorites", CacheFavoritesRouter);
+server.use("/api/preferences", PreferencesRouter);
 
 server.listen(PORT, e => e && console.error(e));
 
