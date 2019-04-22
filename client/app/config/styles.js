@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import RF from 'react-native-responsive-fontsize';
 
 const fonts = {
     type: {
@@ -11,10 +12,11 @@ const fonts = {
         }
     },
     size: {
-        small: 10,
-        smallMedium: 17,
-        medium: 20,
-        large: 30
+        small: RF(1.5), // 10
+        smallMedium: RF(2), // 17
+        medium: RF(2.5), // 20
+        large: RF(4), // 
+        extraLarge: RF(8) //
     }
 }
 
@@ -51,6 +53,9 @@ export default styles = {
             },
             large: {
                 fontSize: fonts.size.large
+            },
+            extraLarge: {
+                fontSize: fonts.size.extraLarge
             }
         }),
         color: StyleSheet.create({
@@ -101,6 +106,9 @@ export default styles = {
         },
         spaceAbove: {
             marginTop: 20
+        },
+        spaceBelowSmall: {
+            marginBottom: RF(2),
         },
         spaceBelow: {
             marginBottom: 20

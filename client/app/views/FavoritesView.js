@@ -12,6 +12,7 @@ import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
 import Dish from '../components/Dish';
 import Header from '../components/Header';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 
 class FavoritesView extends Component {
 
@@ -36,7 +37,7 @@ class FavoritesView extends Component {
                 />
             );
         } else if (this.props.favoritesList.isLoading) {
-            return <CenterTextView message="Loading..." />;
+            return <LoadingIndicator />
         } else if (Object.keys(this.props.favoritesList.data).length == 0 || this.props.favoritesList.data == undefined) { // No faves
             return (
                 <View style={{flex: 1}}>
