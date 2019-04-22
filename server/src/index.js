@@ -8,11 +8,13 @@ import MenuItemsRouter from "./routers/MenuItemsRouter/MenuItemsRouter";
 import FavoritesRouter from "./routers/FavoritesRouter/FavoritesRouter";
 import TestPushRouter from "./routers/TestPushRouter/TestPushRouter";
 import PopulateRouter from "./routers/PopulateRouter/PopulateRouter";
+import CacheFavoritesRouter from "./routers/CacheFavoritesRouter/CacheFavoritesRouter";
 
 import sendNotifications from "./cron/notifications/sendNotifications";
 import updateMenuItemNames from "./cron/cleanup/updateMenuItemNames";
-import populateMenus from "./cron/caching/populateMenus";
+import populateMenus from "./cron/caching/Menus/populateMenus";
 import rolloverCache from "./cron/cleanup/rolloverCache";
+import cacheFavorites from "./cron/caching/Favorites/cacheFavorites";
 
 const PORT = process.env.PORT || 5000;
 
@@ -27,6 +29,7 @@ server.use("/api/menuItems", MenuItemsRouter);
 server.use("/api/favorites", FavoritesRouter);
 server.use("/api/testPush", TestPushRouter);
 server.use("/api/populate", PopulateRouter);
+server.use("/api/cacheFavorites", CacheFavoritesRouter);
 
 server.listen(PORT, e => e && console.error(e));
 
@@ -46,3 +49,6 @@ cron.schedule("2 * * * *", async () => populateMenus(), options);
 
 // Run at 12:01 am every day
 cron.schedule("1 0 * * *", async () => rolloverCache(), options);
+
+// Run every hour at the 5 minute mark
+cron.schedule("5 * * * *", async () => cacheFavorites(), options);

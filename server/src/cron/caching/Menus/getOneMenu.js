@@ -2,11 +2,11 @@ import axios from "axios";
 
 import getMenuItemList from "./getMenuItemList";
 
-import mealNames from "../../config/mealNames";
-import locations from "../../config/locations";
-import dateBuilder from "../../util/dateBuilder";
-import queryBuilder from "../../util/queryBuilder";
-import { MENUS_URI, YD_VERSION, E_NO_API_RES } from "../../config/constants";
+import mealNames from "../../../config/mealNames";
+import locations from "../../../config/locations";
+import dateBuilder from "../../../util/dateBuilder";
+import queryBuilder from "../../../util/queryBuilder";
+import { MENUS_URI, YD_VERSION, E_NO_API_RES } from "../../../config/constants";
 
 export default async function getOneMenu(location) {
     const endpoint =

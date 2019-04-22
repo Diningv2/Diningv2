@@ -1,9 +1,9 @@
 import axios from "axios";
 
-import parseMenuItemData from "../../routers/MenuItemsRouter/parseMenuItemData";
+import parseMenuItemData from "../../../routers/MenuItemsRouter/parseMenuItemData";
 
-import * as constants from "../../config/constants";
-import queryBuilder from "../../util/queryBuilder";
+import * as constants from "../../../config/constants";
+import queryBuilder from "../../../util/queryBuilder";
 
 export default async function getMenuItemList(columns, data) {
     var menu = [];
