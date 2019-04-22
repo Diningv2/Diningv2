@@ -45,7 +45,7 @@ class NutritionInfo extends Component {
                 <Transition appear="bottom">
                     <DV2ScrollView
                         style={{ flex: 1 }}
-                        array={Object.keys(this.props.menuItem.data.nutrition)}
+                        array={Object.keys(this.formatted)}
                         render={element => this.renderNutritionInfoFields(element)}
                     />
                 </Transition>

@@ -6,8 +6,9 @@ import connectToRedux from '../redux/lib/connectToRedux';
 import sp from '../redux/lib/stateProperties';
 
 import AntDesign from '@expo/vector-icons/AntDesign';
-import styles from '../config/styles';
+import styles, { colors } from '../config/styles';
 import { post } from '../lib/api-utility';
+import { ScaleInOut } from './Animatable';
 
 export class Dish extends Component {
 
@@ -17,6 +18,7 @@ export class Dish extends Component {
 
     state = {
         isFave: false,
+        isLoading: false
     }
 
     componentDidMount() {
@@ -24,6 +26,19 @@ export class Dish extends Component {
         const { data } = this.props.favoritesList;
         const isFave = data && data[this.props.dish.itemID] || false;
         this.setState({ isFave });
+    }
+
+    dishStyle = {
+        ...styles.container.spaceBelowSmall,
+        ...styles.container.flexRow,
+        ...styles.container.dropShadowSmall,
+        justifyContent: 'space-between',
+        backgroundColor: colors.secondary,
+        borderWidth: 1,
+        borderColor: colors.primary,
+        borderRadius: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 15
     }
 
     handlePress = async () => {
@@ -59,30 +74,32 @@ export class Dish extends Component {
 
     render() {
         return (
-            <View style={{
-                ...styles.container.spaceBelow,
-                ...styles.container.flexRow,
-                justifyContent: 'space-between',
-            }}>
-                <TouchableOpacity
-                    style={{ width: '80%' }}
-                    onPress={() => {
-                        this.props.getMenuItemInformation(this.props.dish);
-                        this.props.navigation.navigate('MenuItemView');
-                    }}
-                >
-                    <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.size.medium }}>
-                        {this.props.dish.name}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.handlePress}>
-                    <AntDesign
-                        name={this.state.isFave ? 'heart' : 'hearto'}
-                        size={25}
-                        color={'#ff6666'}
-                    />
-                </TouchableOpacity>
-            </View>
+            <ScaleInOut pose={this.state.isLoading ? 'exit' : 'enter'}>
+                <View style={this.dishStyle}>
+                    <TouchableOpacity
+                        style={{ width: '80%' }}
+                        onPress={() => {
+                            this.props.getMenuItemInformation(this.props.dish);
+                            this.setState({ isLoading: true })
+                            setTimeout(() => {
+                                this.props.navigation.navigate('MenuItemView');
+                                this.setState({ isLoading: false });
+                            }, 100);
+                        }}
+                    >
+                        <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.size.medium }}>
+                            {this.props.dish.name}
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.handlePress}>
+                        <AntDesign
+                            name={this.state.isFave ? 'heart' : 'hearto'}
+                            size={25}
+                            color={'#ff6666'}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </ScaleInOut>
         );
     }
 }

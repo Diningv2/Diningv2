@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import styles from '../config/styles';
+
 import sp from '../redux/lib/stateProperties';
 import connectToRedux from '../redux/lib/connectToRedux';
 
@@ -13,7 +15,7 @@ class HomeView extends Component {
         isNavigating: false
     }
 
-    buttonStyle = { ...styles.bigButton, marginTop: 20 };
+    buttonStyle = { ...splashScreenStyles.bigButton, marginTop: 20 };
     proceed = () => {
         this.setState({isNavigating: true, buttonText: "loading..."})
         setTimeout(() => this.props.navigation.navigate('DiningHallsView'), 50);
@@ -26,14 +28,14 @@ class HomeView extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={splashScreenStyles.container}>
                     <View>
-                        <Text style={styles.title}>
+                        <Text style={{...splashScreenStyles.title, ...styles.font.type.primaryBold, ...styles.font.size.extraLarge}}>
                             Dining*v2
                         </Text>
                     </View>
                     <View>
-                        <Text style={styles.subtitle}>
+                        <Text style={{...splashScreenStyles.subtitle, ...styles.font.size.medium}}>
                             Get notified when your favorite Yale Dishes™ are being served!
                         </Text>
                     </View>
@@ -43,7 +45,7 @@ class HomeView extends Component {
                             style={this.buttonStyle} 
                             onPress={this.proceed}
                         >
-                            <Text style={styles.bigButtonText}>
+                            <Text style={splashScreenStyles.bigButtonText}>
                                 {this.state.buttonText}
                             </Text>
                         </TouchableOpacity>
@@ -54,7 +56,7 @@ class HomeView extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const splashScreenStyles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -63,7 +65,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#4a86e8'
     },
     title: {
-        fontSize: 50,
         color: '#fff',
         fontFamily: 'Comfortaa Regular'
     },
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
     bigButtonText: {
         fontFamily: 'Comfortaa Bold',
         color: '#4a86e8',
-        fontSize: 16
     }
 })
 

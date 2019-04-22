@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { Transition } from 'react-navigation-fluid-transitions';
 
 import styles from '../config/styles';
@@ -13,6 +14,7 @@ import dHallIDs from '../config/dHallIDs';
 import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
 import { AnimatedListItem } from '../components/Animatable';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 
 class DiningHallsView extends Component {
 
@@ -53,9 +55,9 @@ class DiningHallsView extends Component {
                 <View style={{flex: 1}}>
                     {this.props.diningHallsList.isLoading 
                         ? (
-                            <CenterTextView message="Loading..." />
+                            <LoadingIndicator />
                         ) : (
-                            <View>
+                            <View style={{paddingTop: 10}}>
                                 <DV2ScrollView 
                                     array={this.props.diningHallsList.data}
                                     render={(element, index) => this.renderDiningHall(element, index)}

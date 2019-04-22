@@ -9,7 +9,6 @@ export const Toast = (props) => {
         alignItems: 'center',
         marginTop: 50,
         position: 'absolute',
-        alignItems: 'center',
         width: '100%',
         top: 0
     }
@@ -21,7 +20,7 @@ export const Toast = (props) => {
     }
 
     notificationStyle = {
-        ...styles.container.dropShadow,
+        ...styles.container.dropShadowLarge,
         paddingVertical: 20,
         paddingHorizontal: 20,
         width: '90%',

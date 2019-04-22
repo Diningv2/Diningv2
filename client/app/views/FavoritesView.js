@@ -6,8 +6,13 @@ import CenterTextView from '../components/CenterTextView';
 import Dish from '../components/Dish';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
+<<<<<<< HEAD
 import TopTabs from '../components/TopTabs';
 import ItemCard from '../components/ItemCard';
+=======
+import { LoadingIndicator } from '../components/LoadingIndicator';
+
+>>>>>>> master
 class FavoritesView extends Component {
 
     constructor(props) {
@@ -40,8 +45,8 @@ class FavoritesView extends Component {
                 />
             );
         } else if (this.props.favoritesList.isLoading) {
-            return <CenterTextView message="Loading..." />;
-        } else if (this.props.favoritesList.data == {} || this.props.favoritesList.data == undefined) { // No faves
+            return <LoadingIndicator />
+        } else if (Object.keys(this.props.favoritesList.data).length == 0 || this.props.favoritesList.data == undefined) { // No faves
             return (
                 <View style={{flex: 1}}>
                     <CenterTextView message="No favorites to show" />

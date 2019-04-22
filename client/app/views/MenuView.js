@@ -13,6 +13,7 @@ import TopTabs from '../components/TopTabs';
 
 import styles from '../config/styles';
 import { AnimatedListItem } from '../components/Animatable';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 
 class MenuView extends Component {
 
@@ -112,8 +113,7 @@ class MenuView extends Component {
     dynamicTabButtons = () => {
         const menu = this.props.menusList.data;
         const day = this.state.selectedDay == 'Today' ? menu.today : menu.tomorrow;
-        const mealTypes = Object.keys(day);
-
+        
         const formatted = {
             contBreakfast: "Cont. Breakfast",
             hotBreakfast: "Hot Breakfast",
@@ -121,6 +121,8 @@ class MenuView extends Component {
             lunch: "Lunch",
             dinner: "Dinner"
         }
+        
+        const mealTypes = Object.keys(formatted).filter(mealType => day[mealType] && day[mealType].length);
 
         let tabButtons = mealTypes.map(mealType => {
             return {
@@ -184,7 +186,7 @@ class MenuView extends Component {
                         }
                         {this.state.isLoading
                             ?
-                            <CenterTextView message="Loading..." />
+                            <LoadingIndicator />
                             :
                             <View style={{ flex: 1 }}>
                                 {this.state.mealArrayFiltered ?
