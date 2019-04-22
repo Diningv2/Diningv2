@@ -51,7 +51,8 @@ export class Dish extends Component {
         borderColor: colors.primary,
         borderRadius: 20,
         paddingHorizontal: 10,
-        paddingVertical: 15
+        paddingVertical: 15,
+        opacity: .5
     }
 
     handlePress = async () => {
