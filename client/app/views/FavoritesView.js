@@ -32,22 +32,22 @@ class FavoritesView extends Component {
     renderContent() {
         if (!this.props.userInformation.notificationID) { // No permission for notifications
             return (
-                <CenterTextView 
-                    message="Enable push notifications to allow you to favorite dishes!" 
+                <CenterTextView
+                    message="Enable push notifications to allow you to favorite dishes!"
                 />
             );
         } else if (this.props.favoritesList.isLoading) {
             return <LoadingIndicator />
         } else if (Object.keys(this.props.favoritesList.data).length == 0 || this.props.favoritesList.data == undefined) { // No faves
             return (
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                     <CenterTextView message="No favorites to show" />
                 </View>
             );
         }
         return (
-            <View style={{flex: 1}}>
-                <DV2ScrollView 
+            <View style={{ flex: 1 }}>
+                <DV2ScrollView
                     array={Object.keys(this.props.favoritesList.data)}
                     render={(dishID) => this.renderFavesList(dishID)}
                 />
@@ -57,8 +57,13 @@ class FavoritesView extends Component {
 
     renderFavesList = (dishID) => {
         const dishName = this.props.favoritesList.data[dishID];
+        const dish = {
+            name: dishName,
+            itemID: dishID,
+            hasInfo: false
+        };
         return (
-            <Dish key={dishName} dishName={dishName} dishID={dishID} />
+            <Dish key={dishName} dish={dish} />
         );
     }
 }
