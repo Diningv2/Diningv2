@@ -12,4 +12,5 @@ npm install && npm audit fix;
 npm run build;
 git commit -a -m "Heroku deployment for ${READABLE_DATE}";
 # TODO: fix these lines
-git push -f heroku master
+git push -f heroku master;
+git checkout master;
