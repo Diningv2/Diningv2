@@ -41,6 +41,19 @@ export class Dish extends Component {
         paddingVertical: 15
     }
 
+    filteredDishStyle = {
+        ...styles.container.spaceBelowSmall,
+        ...styles.container.flexRow,
+        ...styles.container.dropShadowSmall,
+        justifyContent: 'space-between',
+        backgroundColor: '#D0D1D8',
+        borderWidth: 1,
+        borderColor: colors.primary,
+        borderRadius: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 15
+    }
+
     handlePress = async () => {
         // TODO: change the favorited status of the dish
         const token = this.props.userInformation.notificationID;
@@ -75,7 +88,7 @@ export class Dish extends Component {
     render() {
         return (
             <ScaleInOut pose={this.state.isLoading ? 'exit' : 'enter'}>
-                <View style={this.dishStyle}>
+                <View style={this.props.filtered ? this.filteredDishStyle : this.dishStyle}>
                     <TouchableOpacity
                         style={{ width: '80%' }}
                         onPress={() => {

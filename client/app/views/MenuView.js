@@ -207,13 +207,36 @@ class MenuView extends Component {
         )
     }
 
+    isFiltered = (dish) => {
+        const filters = this.props.allergensList;
+        if (filters.Vegetarian && !dish.isVegetarian) {
+            return true;
+        }
+        if (filters.GlutenFree && !dish.isGlutenFree) {
+            return true;
+        }
+        if (filters.Vegan && !dish.isVegan) {
+            return true;
+        }
+        else {
+            for (index = 0; index < dish.allergens.length; index++) {
+                if (filters[dish.allergens[index]]){
+                    return true;
+                } 
+            }
+        }
+        return false;
+    }
+
     renderMenu = (dish, index) => {
+       
+        const filtered = this.isFiltered(dish);
         return (
             <AnimatedListItem key={dish.name} index={index}>
-                <Dish key={dish.name} dish={dish} />
+                <Dish key={dish.name} dish={dish} filtered={filtered}/>
             </AnimatedListItem>
         );
     }
 }
 
-export default connectToRedux(MenuView, ['menusList', 'diningHallsList']);
+export default connectToRedux(MenuView, ['menusList', 'diningHallsList', 'allergensList']);

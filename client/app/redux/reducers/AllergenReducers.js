@@ -17,7 +17,7 @@ const initialState = {
     Vegan: false, 
     Pork: false, 
     FishSeafood: false, 
-    Soy: false, 
+    Soy: true, 
     Wheat: false, 
     Gluten: false, 
     Vegetarian: false, 

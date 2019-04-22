@@ -50,18 +50,21 @@ class AllergensView extends Component {
                     ...styles.topTabs.withPaddingTop,
                     ...styles.topTabs.withPaddingBottom,
                 }}>
-                    <TopTabs tabButtons={this.tabButtons} />
+                    {/* <TopTabs tabButtons={this.tabButtons} /> */}
                 </View>
                 <Text style={{ 
                         ...styles.font.type.primaryBold, 
                         ...styles.font.size.large, 
                         ...styles.font.color.primary,
                         paddingHorizontal: 10}}>
-                        {this.state.selectedTabName == 'Dietary Restrictions' ? 'I am...' : 'I cannot eat...'}
+                        {/* {this.state.selectedTabName == 'Dietary Restrictions' ? 'I am...' : 'I cannot eat...'} */}
+                        I cannot eat...
                 </Text>
                 <View style={{flex: 1}}>
                     <DV2ScrollView 
-                        array={this.state.selectedTabName == 'Dietary Restrictions' ? restrictions : allergens}
+                        // array={this.state.selectedTabName == 'Dietary Restrictions' ? restrictions : allergens}
+                        array={allergens}
+
                         render={(allergen) => this.renderAllergen(allergen)}
                     />
                 </View>
