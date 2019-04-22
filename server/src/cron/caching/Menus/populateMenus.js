@@ -3,8 +3,8 @@ import firestore from "../../config/firebase/firebaseConfig";
 import getOneMenu from "./getOneMenu";
 import mergeMenu from "./mergeMenu";
 
-import locations from "../../config/locations";
-import { E_DB_WRITE } from "../../config/constants";
+import locations from "../../../config/locations";
+import { E_DB_WRITE } from "../../../config/constants";
 
 export default async function populateMenus() {
     const date = new Date();

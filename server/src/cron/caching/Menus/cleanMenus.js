@@ -1,6 +1,6 @@
-import firestore from "../../config/firebase/firebaseConfig";
+import firestore from "../../../config/firebase/firebaseConfig";
 
-import { E_DB_WRITE } from "../../config/constants";
+import { E_DB_WRITE } from "../../../config/constants";
 
 export default async function cleanMenus() {
     try {

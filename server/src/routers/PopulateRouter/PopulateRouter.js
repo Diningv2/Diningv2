@@ -1,6 +1,6 @@
 import express from "express";
 
-import populateMenus from "../../cron/caching/populateMenus";
+import populateMenus from "../../cron/caching/Menus/populateMenus";
 import cleanMenus from "../../cron/caching/cleanMenus";
 
 const router = express.Router();

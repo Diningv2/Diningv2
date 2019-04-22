@@ -7,12 +7,12 @@ export default class NutritionInfoField extends Component {
         return (
             <View style={{ ...styles.container.flexRow, ...styles.container.spaceBelow }}>
                 <View style={{ width: '50%' }}>
-                    <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.medium }}>
+                    <Text style={{ ...styles.font.type.primaryBold, ...styles.font.size.small }}>
                         {this.props.field}
                     </Text>
                 </View>
                 <View style={{ width: '50%' }}>
-                    <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.size.medium }}>
+                    <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.size.small }}>
                         {this.props.value}
                     </Text>
                 </View>

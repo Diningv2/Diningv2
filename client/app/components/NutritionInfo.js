@@ -17,15 +17,15 @@ class NutritionInfo extends Component {
     formatted = {
         servingSize: "Serving Size",
         calories: "Calories",
-        protein: "Protein",
-        fat: "Fats",
-        saturatedFat: "Saturated Fat",
-        cholesterol: "Cholesterol",
+        fat: "Fat",
         carbohydrates: "Carbs",
+        protein: "Protein",
         sugar: "Sugar",
         fiber: "Fiber",
-        vitaminC: "Vitamin C",
+        saturatedFat: "Saturated Fat",
+        cholesterol: "Cholesterol",
         vitaminA: "Vitamin A",
+        vitaminC: "Vitamin C",
         iron: "Iron"
     }
 
@@ -45,7 +45,7 @@ class NutritionInfo extends Component {
                 <Transition appear="bottom">
                     <DV2ScrollView
                         style={{ flex: 1 }}
-                        array={Object.keys(this.props.menuItem.data.nutrition)}
+                        array={Object.keys(this.formatted)}
                         render={element => this.renderNutritionInfoFields(element)}
                     />
                 </Transition>

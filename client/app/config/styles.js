@@ -1,35 +1,37 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
+import RF from 'react-native-responsive-fontsize';
 
 const fonts = {
     type: {
         primary: {
-            regular: 'Comfortaa Regular',
-            bold: 'Comfortaa Bold'
+            regular: "Comfortaa Regular",
+            bold: "Comfortaa Bold"
         },
         secondary: {
-            regular: 'Comfortaa Regular'
+            regular: "Comfortaa Regular"
         }
     },
     size: {
-        small: 10,
-        smallMedium: 17,
-        medium: 20,
-        large: 30
+        small: RF(1.5), // 10
+        smallMedium: RF(2), // 17
+        medium: RF(2.5), // 20
+        large: RF(4), // 
+        extraLarge: RF(8) //
     }
-}
+};
 
 export const colors = {
-    primary: '#4a86e8',
-    secondary: '#fff',
-    tertiary: '#000'
-}
+    primary: "#4a86e8",
+    secondary: "#fff",
+    tertiary: "#000"
+};
 
 const spacingSizes = {
     small: 10,
     medium: 20
-}
+};
 
-export default styles = {
+export default (styles = {
     font: {
         type: StyleSheet.create({
             primaryRegular: {
@@ -40,17 +42,23 @@ export default styles = {
             },
             secondaryRegular: {
                 fontFamily: fonts.type.secondary.regular
-            },
+            }
         }),
         size: StyleSheet.create({
-            smallMedium: {
-                fontSize: fonts.size.smallMedium
+            small: {
+                fontSize: fonts.size.small
+            },
+            moderate: {
+                fontSize: fonts.size.moderate
             },
             medium: {
                 fontSize: fonts.size.medium
             },
             large: {
                 fontSize: fonts.size.large
+            },
+            extraLarge: {
+                fontSize: fonts.size.extraLarge
             }
         }),
         color: StyleSheet.create({
@@ -63,9 +71,7 @@ export default styles = {
             tertiary: {
                 color: colors.tertiary
             }
-        }),
-        
-
+        })
     },
     container: StyleSheet.create({
         withPadding: {
@@ -74,16 +80,27 @@ export default styles = {
         withPaddingSmall: {
             margin: spacingSizes.small
         },
-        dropShadow: {
+        dropShadowLarge: {
             shadowColor: "#000",
             shadowOffset: {
                 width: 0,
-                height: 5,
+                height: 5
             },
             shadowOpacity: 0.16,
             shadowRadius: 6.68,
 
-            elevation: 11,
+            elevation: 11
+        },
+        dropShadowSmall: {
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 3,
+            },
+            shadowOpacity: 0.08,
+            shadowRadius: 1.68,
+
+            elevation: 2
         },
         backgroundColorPrimary: {
             backgroundColor: colors.primary
@@ -91,19 +108,22 @@ export default styles = {
         spaceAbove: {
             marginTop: 20
         },
+        spaceBelowSmall: {
+            marginBottom: RF(2),
+        },
         spaceBelow: {
             marginBottom: 20
         },
         flexRow: {
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            flexDirection: 'row'
+            flexWrap: "wrap",
+            alignItems: "center",
+            flexDirection: "row"
         },
         center: {
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%"
         }
     }),
     spacing: {
@@ -124,14 +144,14 @@ export default styles = {
             medium: {
                 marginTop: spacingSizes.medium
             }
-        }),
+        })
     },
     topTabs: StyleSheet.create({
         withPaddingTop: {
-            paddingTop: 5,
+            paddingTop: 5
         },
         withPaddingBottom: {
-            paddingBottom: 5,
+            paddingBottom: 5
         }
-    }),
-}
+    })
+});
