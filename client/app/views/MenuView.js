@@ -13,6 +13,7 @@ import TopTabs from '../components/TopTabs';
 
 import styles from '../config/styles';
 import { AnimatedListItem } from '../components/Animatable';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 
 class MenuView extends Component {
 
@@ -185,7 +186,7 @@ class MenuView extends Component {
                         }
                         {this.state.isLoading
                             ?
-                            <CenterTextView message="Loading..." />
+                            <LoadingIndicator />
                             :
                             <View style={{ flex: 1 }}>
                                 {this.state.mealArrayFiltered ?

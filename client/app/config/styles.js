@@ -12,11 +12,11 @@ const fonts = {
         }
     },
     size: {
-        small: RF(1.5),
-        smallMedium: RF(2),
-        medium: RF(2.5),
-        large: RF(4),
-        extraLarge: RF(8)
+        small: RF(1.5), // 10
+        smallMedium: RF(2), // 17
+        medium: RF(2.5), // 20
+        large: RF(4), // 
+        extraLarge: RF(8) //
     }
 }
 
@@ -106,6 +106,9 @@ export default styles = {
         },
         spaceAbove: {
             marginTop: 20
+        },
+        spaceBelowSmall: {
+            marginBottom: RF(2),
         },
         spaceBelow: {
             marginBottom: 20

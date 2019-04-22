@@ -29,16 +29,16 @@ export class Dish extends Component {
     }
 
     dishStyle = {
-        ...styles.container.spaceBelow,
+        ...styles.container.spaceBelowSmall,
         ...styles.container.flexRow,
         ...styles.container.dropShadowSmall,
         justifyContent: 'space-between',
         backgroundColor: colors.secondary,
         borderWidth: 1,
-        borderColor: 'rgba(0,0,0,0.3)',
+        borderColor: colors.primary,
         borderRadius: 20,
         paddingHorizontal: 10,
-        paddingVertical: 5
+        paddingVertical: 15
     }
 
     handlePress = async () => {

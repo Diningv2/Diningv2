@@ -21,7 +21,6 @@ const ListItem = posed.View({
 export const ScaleInOut = posed.View({
     enter: {
         opacity: 1,
-        scale: 1.0,
         transition: ({ i }) => ({
             delay: i * 100,
             duration: 300,
@@ -29,8 +28,7 @@ export const ScaleInOut = posed.View({
         }),
     },
     exit: {
-        opacity: 0,
-        scale: 0.9
+        opacity: 0
     },
     props: { i: 0 }
 });
