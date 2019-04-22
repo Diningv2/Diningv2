@@ -6,13 +6,10 @@ import CenterTextView from '../components/CenterTextView';
 import Dish from '../components/Dish';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
-<<<<<<< HEAD
 import TopTabs from '../components/TopTabs';
 import ItemCard from '../components/ItemCard';
-=======
 import { LoadingIndicator } from '../components/LoadingIndicator';
 
->>>>>>> master
 class FavoritesView extends Component {
 
     constructor(props) {
