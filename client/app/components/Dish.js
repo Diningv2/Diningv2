@@ -88,11 +88,7 @@ export class Dish extends Component {
     render() {
         return (
             <ScaleInOut pose={this.state.isLoading ? 'exit' : 'enter'}>
-<<<<<<< HEAD
-                <View style={card}>
-=======
-                <View style={this.props.filtered ? this.filteredDishStyle : this.dishStyle}>
->>>>>>> master
+                <View style={this.props.filtered ? this.filteredDishStyle : card}>
                     <TouchableOpacity
                         style={{ width: '80%' }}
                         onPress={() => {
