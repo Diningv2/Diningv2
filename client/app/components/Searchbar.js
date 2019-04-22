@@ -36,7 +36,7 @@ export class Searchbar extends Component {
     searchBarStyles = {
         container: {
             ...styles.container.backgroundColorPrimary, 
-            ...styles.container.dropShadow
+            ...styles.container.dropShadowLarge
         },
         textInput: {
             ...styles.font.type.secondaryRegular, 
