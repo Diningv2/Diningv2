@@ -13,6 +13,7 @@ import allergens from '../config/allAllergens';
 import restrictions from '../config/allRestrictions';
 import BottomTabs from '../components/BottomTabs';
 import TopTabs from '../components/TopTabs';
+import { post } from '../lib/api-utility';
 
 
 
@@ -95,6 +96,8 @@ class AllergensView extends Component {
                 </Text>
                 <Switch 
                     value={this.props.allergensList[allergen]} 
+                    // TODO: Below line to be used once /api/filters implemented
+                    // value = {this.props.filtersList.data[allergen]}
                     onValueChange={(value) => this.SwitchChange(value, allergen)}
                 />
             </View>
@@ -104,6 +107,29 @@ class AllergensView extends Component {
     SwitchChange(value, allergen) {
         this.props.toggleAllergens(value, allergen);
     }
+    //OnSwitch to be used once /api/filters is implemented
+    OnSwitch = async (value, allergen) => {
+        const token = this.props.userInformation.notificationID;
+        const postConfig = {
+            token,
+            allergen
+        }
+        try {
+            if (value == true){
+                await post('/api/filters/delete', postConfig);
+                this.props.removeFilter(allergen);
+            }
+            else {
+                await post('api/filters', postConfig);
+                this.props.addFilter(allergen);
+            }
+        } catch (e) {
+            console.error("Filter add/remove error", e.message);
+        }
+
+        
+
+    }
 }
 
-export default connectToRedux(AllergensView, ['allergensList']);
+export default connectToRedux(AllergensView, ['allergensList', 'userInformation', 'filtersList']);

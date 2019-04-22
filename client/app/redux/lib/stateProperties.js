@@ -13,6 +13,7 @@ export default stateProperties = {
     menusList: 'menusList',
     favoritesList: 'favoritesList',
     allergensList: 'allergensList',
+    filtersList: 'filtersList',
     menuItem: 'menuItem',
     userInformation: 'userInformation',
 }
