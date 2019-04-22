@@ -4,6 +4,8 @@ export const formatArrayAsString = (array) => {
     // Our final string
     let resultString = "";
 
+    if (!array) return "";
+
     for (let i = 0; i < array.length; i++) {
         // If one string in array, just return that string
         if (array.length == 1) {

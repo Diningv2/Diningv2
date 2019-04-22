@@ -6,7 +6,7 @@ import connectToRedux from '../redux/lib/connectToRedux';
 import sp from '../redux/lib/stateProperties';
 
 import AntDesign from '@expo/vector-icons/AntDesign';
-import styles, { colors } from '../config/styles';
+import styles, { colors, card } from '../config/styles';
 import { post } from '../lib/api-utility';
 import { ScaleInOut } from './Animatable';
 
@@ -28,21 +28,7 @@ export class Dish extends Component {
         this.setState({ isFave });
     }
 
-    dishStyle = {
-        ...styles.container.spaceBelowSmall,
-        ...styles.container.flexRow,
-        ...styles.container.dropShadowSmall,
-        justifyContent: 'space-between',
-        backgroundColor: colors.secondary,
-        borderWidth: 1,
-        borderColor: colors.primary,
-        borderRadius: 20,
-        paddingHorizontal: 10,
-        paddingVertical: 15
-    }
-
     handlePress = async () => {
-        // TODO: change the favorited status of the dish
         const token = this.props.userInformation.notificationID;
         const menuitemid = this.props.dish.itemID;
         const name = this.props.dish.name;
@@ -75,7 +61,7 @@ export class Dish extends Component {
     render() {
         return (
             <ScaleInOut pose={this.state.isLoading ? 'exit' : 'enter'}>
-                <View style={this.dishStyle}>
+                <View style={card}>
                     <TouchableOpacity
                         style={{ width: '80%' }}
                         onPress={() => {
@@ -95,7 +81,7 @@ export class Dish extends Component {
                         <AntDesign
                             name={this.state.isFave ? 'heart' : 'hearto'}
                             size={25}
-                            color={'#ff6666'}
+                            color={colors.heart}
                         />
                     </TouchableOpacity>
                 </View>

@@ -23,7 +23,8 @@ const fonts = {
 export const colors = {
     primary: "#4a86e8",
     secondary: "#fff",
-    tertiary: "#000"
+    tertiary: "#000",
+    heart: "#ff6666"
 };
 
 const spacingSizes = {
@@ -124,7 +125,7 @@ export default (styles = {
             justifyContent: "center",
             alignItems: "center",
             height: "100%"
-        }
+        },
     }),
     spacing: {
         around: StyleSheet.create({
@@ -155,3 +156,16 @@ export default (styles = {
         }
     })
 });
+
+export const card = {
+        ...styles.container.spaceBelowSmall,
+        ...styles.container.flexRow,
+        ...styles.container.dropShadowSmall,
+        justifyContent: 'space-between',
+        backgroundColor: colors.secondary,
+        borderWidth: 1,
+        borderColor: colors.primary,
+        borderRadius: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 15
+}

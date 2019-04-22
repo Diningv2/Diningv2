@@ -1,17 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import styles, { colors } from '../config/styles';
+import styles, { colors, card } from '../config/styles';
 
 export const ItemCard = (props) => {
-
-    const cardStyle = {
-        backgroundColor: colors.secondary,
-        borderRadius: 10,
-        width: '100%',
-        ...styles.container.dropShadow,
-        shadowRadius: 3,
-        elevation: 3
-    }
 
     const containerStyle = {
         margin: 10
@@ -35,7 +26,7 @@ export const ItemCard = (props) => {
 
 
     return (
-        <View style={cardStyle}>
+        <View style={card}>
             <View style={containerStyle}>
                 <Text style={titleStyle}>{props.title}</Text>
                 <Text style={subTitleStyle}>{props.subTitle}</Text>

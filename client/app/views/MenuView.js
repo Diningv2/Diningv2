@@ -12,6 +12,7 @@ import Header from '../components/Header';
 import TopTabs from '../components/TopTabs';
 
 import styles from '../config/styles';
+import formattedMealTypes from '../config/formattedMealTypes';
 import { AnimatedListItem } from '../components/Animatable';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 
@@ -114,19 +115,11 @@ class MenuView extends Component {
         const menu = this.props.menusList.data;
         const day = this.state.selectedDay == 'Today' ? menu.today : menu.tomorrow;
         
-        const formatted = {
-            contBreakfast: "Cont. Breakfast",
-            hotBreakfast: "Hot Breakfast",
-            brunch: "Brunch",
-            lunch: "Lunch",
-            dinner: "Dinner"
-        }
-        
-        const mealTypes = Object.keys(formatted).filter(mealType => day[mealType] && day[mealType].length);
+        const mealTypes = Object.keys(formattedMealTypes).filter(mealType => day[mealType] && day[mealType].length);
 
         let tabButtons = mealTypes.map(mealType => {
             return {
-                tabName: formatted[mealType],
+                tabName: formattedMealTypes[mealType],
                 function: () => {
                     const mealArray = this.state.selectedDay == 'Today' ? this.props.menusList.data.today[mealType] : this.props.menusList.data.tomorrow[mealType];
                     const mealArrayFiltered = mealArray;
