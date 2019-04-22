@@ -1,6 +1,6 @@
 import express from "express";
 
-import cacheFavorites from "../../cron/caching/cacheFavorites";
+import cacheFavorites from "../../cron/caching/Favorites/cacheFavorites";
 
 import { E_BAD_MENU_REQ } from "../../config/constants";
 

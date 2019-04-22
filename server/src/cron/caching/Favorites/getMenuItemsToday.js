@@ -5,6 +5,7 @@ import getMenuItemList from "../../../routers/MenusRouter/getMenuItemList";
 import locations from "../../../config/locations";
 import queryBuilder from "../../../util/queryBuilder";
 import dateBuilder from "../../../util/dateBuilder";
+import mealStrings from "../../../config/mealStrings";
 import { MENUS_URI, YD_VERSION } from "../../../config/constants";
 
 export default async function getMenuItemsToday() {
@@ -26,17 +27,18 @@ export default async function getMenuItemsToday() {
         menuItemList &&
             menuItemList.forEach(item => {
                 const { name, itemID, meal } = item;
+                const mealName = mealStrings[meal];
                 var menuItem = completeMenuItemList[itemID];
                 menuItem && 
-                    (menuItem.meal.indexOf(meal) < 0) &&
-                        (completeMenuItemList[itemID].meal.push(meal));
+                    (menuItem.meal.indexOf(mealName) < 0) &&
+                        (completeMenuItemList[itemID].meal.push(mealName));
                 menuItem && 
                     (menuItem.location.indexOf(locations[location]) < 0) &&
                         (completeMenuItemList[itemID].location.push(locations[location]));
                 !menuItem && 
                     (completeMenuItemList[itemID] = {
                         name, 
-                        meal:[meal],
+                        meal:[mealName],
                         location: [locations[location]], 
                         timestamp
                     });

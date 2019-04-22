@@ -34,8 +34,8 @@ export default async function getFavorites(query) {
           item in favoritesTodayDoc.data() &&
           ({ name, meal, location, timestamp } = favoritesTodayDoc.data()[item]) &&
           isFresh(timestamp)
-            ? (menuItems[item] = {name, meal, location})
-            : (menuItems[item] = { name: menusDoc.data()[item] });
+            ? (menuItems[item] = {name, meal, location, isBeingServed:true})
+            : (menuItems[item] = { name: menusDoc.data()[item], isBeingServed:false });
         })
       : await firestore
             .doc("favorites/users")
