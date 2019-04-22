@@ -17,15 +17,15 @@ class NutritionInfo extends Component {
     formatted = {
         servingSize: "Serving Size",
         calories: "Calories",
-        protein: "Protein",
-        fat: "Fats",
-        saturatedFat: "Saturated Fat",
-        cholesterol: "Cholesterol",
+        fat: "Fat",
         carbohydrates: "Carbs",
+        protein: "Protein",
         sugar: "Sugar",
         fiber: "Fiber",
-        vitaminC: "Vitamin C",
+        saturatedFat: "Saturated Fat",
+        cholesterol: "Cholesterol",
         vitaminA: "Vitamin A",
+        vitaminC: "Vitamin C",
         iron: "Iron"
     }
 
