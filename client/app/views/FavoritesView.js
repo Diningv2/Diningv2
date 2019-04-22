@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import TopTabs from '../components/TopTabs';
 import ItemCard from '../components/ItemCard';
 import { LoadingIndicator } from '../components/LoadingIndicator';
+import FavoriteServedTodayCard from '../components/FavoriteServedTodayCard';
 
 class FavoritesView extends Component {
 
@@ -27,7 +28,7 @@ class FavoritesView extends Component {
                 <Header title="Favorites" />
                 <TopTabs tabButtons={this.favoritesTabButtons} />
                 <View style={{margin: 10}}>
-                    <ItemCard />
+                    <FavoriteServedTodayCard favoriteDish={Object.keys(this.props.favoritesList.data)[0]} />
                 </View>
                 {this.renderContent()}
             </View>
@@ -37,22 +38,22 @@ class FavoritesView extends Component {
     renderContent() {
         if (!this.props.userInformation.notificationID) { // No permission for notifications
             return (
-                <CenterTextView
-                    message="Enable push notifications to allow you to favorite dishes!"
+                <CenterTextView 
+                    message="Enable push notifications to allow you to favorite dishes!" 
                 />
             );
         } else if (this.props.favoritesList.isLoading) {
             return <LoadingIndicator />
-        } else if (this.props.favoritesList.data == undefined || Object.keys(this.props.favoritesList.data).length == 0) { // No faves
+        } else if (Object.keys(this.props.favoritesList.data).length == 0 || this.props.favoritesList.data == undefined) { // No faves
             return (
-                <View style={{ flex: 1 }}>
+                <View style={{flex: 1}}>
                     <CenterTextView message="No favorites to show" />
                 </View>
             );
         }
         return (
-            <View style={{ flex: 1 }}>
-                <DV2ScrollView
+            <View style={{flex: 1}}>
+                <DV2ScrollView 
                     array={Object.keys(this.props.favoritesList.data)}
                     render={(dishID) => this.renderFavesList(dishID)}
                 />
@@ -64,13 +65,8 @@ class FavoritesView extends Component {
 
     renderFavesList = (dishID) => {
         const dishName = this.props.favoritesList.data[dishID];
-        const dish = {
-            name: dishName,
-            itemID: dishID,
-            hasInfo: false
-        };
         return (
-            <Dish key={dishName} dish={dish} />
+            <Dish key={dishName} dishName={dishName} dishID={dishID} />
         );
     }
 }

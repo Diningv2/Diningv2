@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import styles, { colors } from '../config/styles';
 
-export const ItemCard = () => {
+export const ItemCard = (props) => {
 
     const cardStyle = {
         backgroundColor: colors.secondary,
@@ -37,9 +37,9 @@ export const ItemCard = () => {
     return (
         <View style={cardStyle}>
             <View style={containerStyle}>
-            <Text style={titleStyle}>Yale's Creamy Macaroni and Cheese</Text>
-            <Text style={subTitleStyle}>Dinner</Text>
-            <Text style={captionStyle}>Served at Berkeley, Davenport, Morse, etc.</Text>
+                <Text style={titleStyle}>{props.title}</Text>
+                <Text style={subTitleStyle}>{props.subTitle}</Text>
+                <Text style={captionStyle}>{props.caption}</Text>
             </View>
         </View>
     )
