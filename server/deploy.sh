@@ -8,6 +8,7 @@ rm -rf client/*;
 mv src/* ./*;
 rmdir src;
 rm -f yarn.lock;
+sed -i '/^diningv2-4a304/d' ./.gitignore;
 npm install && npm audit fix;
 npm run build;
 git commit -a -m "Heroku deployment for ${READABLE_DATE}";
