@@ -10,7 +10,7 @@ export default async function getPreferences(token) {
         throw new Error(constants.E_DB_READ + e);
     }
     if (!preferencesDoc.exists) {
-        throw new Error(constants.E_DB_NOENT + "favorites/users");
+        throw new Error(constants.E_DB_NOENT + "preferences/users");
     } else if (!token) {
         throw new Error(constants.E_BAD_PREF_GET_REQ);
     }

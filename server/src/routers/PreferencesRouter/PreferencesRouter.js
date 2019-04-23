@@ -1,5 +1,6 @@
 import express from "express";
 
+import getPreferences from "./getPreferences";
 import addPreference from "./removePreference";
 import removePreference from "./addPreference";
 
