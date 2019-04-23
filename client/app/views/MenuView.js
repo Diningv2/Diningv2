@@ -53,7 +53,8 @@ class MenuView extends Component {
 
     generateHoursMessage = (mealType) => {
         const name = this.props.menusList.data.location;
-        const location = this.props.diningHallsList.dataObject[name];     
+        const location = this.props.diningHallsList.dataObject[name];    
+        // json in redux has info for all meals, get hours for selected day and meal tabs 
         const mealTimes = this.state.selectedDay == 'Today' ? location.todayHours[mealType] : location.tomorrowHours[mealType];
 
         const openingTime = mealTimes.openingTime;
@@ -110,10 +111,12 @@ class MenuView extends Component {
         return "Loading...";
     }
 
+    // Dynamically set the number, size, and title of tab buttons
     dynamicTabButtons = () => {
         const menu = this.props.menusList.data;
         const day = this.state.selectedDay == 'Today' ? menu.today : menu.tomorrow;
         
+        // What is found in json object vs what to display in app
         const formatted = {
             contBreakfast: "Cont. Breakfast",
             hotBreakfast: "Hot Breakfast",
@@ -208,6 +211,7 @@ class MenuView extends Component {
     }
 
     isFiltered = (dish) => {
+        // Check user filter preferences vs dish's allergens
         const filters = this.props.allergensList;
         // TODO: below to be used once /api/filters implemented
         // const filters = this.props.filtersList.data;
@@ -231,7 +235,7 @@ class MenuView extends Component {
     }
 
     renderMenu = (dish, index) => {
-       
+        // render function needed by dv2scrollview
         const filtered = this.isFiltered(dish);
         return (
             <AnimatedListItem key={dish.name} index={index}>

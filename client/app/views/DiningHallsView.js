@@ -23,12 +23,15 @@ class DiningHallsView extends Component {
     }
 
     componentDidMount() {
+        // if not yet loaded, call redux action to get dhalls from yale's api
         if (this.props.diningHallsList.isLoading) {
             this.props.getAllDiningHallsInformation();
         }
     }
 
     renderDiningHall = (diningHall, index) => {
+        // render method needed by dv2scrollview
+        // DiningHallItem includes the name and busyness meter
         return (
             <AnimatedListItem key={index} index={index}>
                 <TouchableOpacity
@@ -57,6 +60,7 @@ class DiningHallsView extends Component {
                         ? (
                             <LoadingIndicator />
                         ) : (
+                            // Loading complete, show list of DiningHallItems
                             <View style={{paddingTop: 10}}>
                                 <DV2ScrollView 
                                     array={this.props.diningHallsList.data}

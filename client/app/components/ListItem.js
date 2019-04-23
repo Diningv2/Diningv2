@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import styles from '../config/styles';
 
 export default class ListItem extends Component {
-    render() {
+    render() { 
         return (
             <View style={{ ...styles.container.spaceBelow}}>
                 <Text style={{ ...styles.font.type.primaryRegular, ...styles.font.size.medium }}>
