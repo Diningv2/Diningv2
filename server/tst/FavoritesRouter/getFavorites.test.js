@@ -10,11 +10,10 @@ jest.mock("../../src/config/firebase/firebaseConfig");
 beforeEach(() => {
     firebaseTest();
     console.error = jest.fn();
-    getFavorites(123456789);
 });
 
 test('getFavorites() -- basic normal function', async () => {
-    await expect(getFavorites(123456789)).resolves.toEqual({});
+    await expect(getFavorites(123456789)).resolves.toEqual({}); 
 });
 
 test("getFavorites() -- bad request", async () => {

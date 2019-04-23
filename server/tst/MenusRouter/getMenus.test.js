@@ -1,26 +1,37 @@
+import firestore from "../../src/config/firebase/firebaseConfig";
+import * as firebase from "firebase-admin";
+
 import getMenus from "../../src/routers/MenusRouter/getMenus";
 import getOneMenu from "../../src/routers/MenusRouter/getOneMenu";
-import getAllMenus from "../../src/routers/MenusRouter/getAllMenus";
+import getCachedMenu from "../../src/routers/MenusRouter/getCachedMenu";
+
+import firebaseTest from "../config/firebaseTest";
+import locations from "../../src/config/locations";
 import * as responses from "./responses";
 
 jest.mock("../../src/routers/MenusRouter/getOneMenu");
-jest.mock("../../src/routers/MenusRouter/getAllMenus");
+jest.mock("../../src/routers/MenusRouter/getCachedMenu");
+
+beforeEach(() => {
+    firebaseTest();
+    console.error = jest.fn();
+});
 
 test("getMenus() -- no location query", async () => {
-    getAllMenus.mockImplementationOnce(
+    getCachedMenu.mockImplementationOnce(
         () => responses.multiMenuExpectedResponse
     );
     await expect(getMenus({})).resolves.toEqual(
         responses.multiMenuExpectedResponse
     );
-    expect(getAllMenus).toHaveBeenCalledWith({});
-    getAllMenus.mockImplementationOnce(
+    expect(getCachedMenu).toHaveBeenCalledWith({});
+    getCachedMenu.mockImplementationOnce(
         () => responses.multiMenuExpectedResponse
     );
     await expect(getMenus({ location: "all" })).resolves.toEqual(
         responses.multiMenuExpectedResponse
     );
-    expect(getAllMenus).toHaveBeenCalledWith({});
+    expect(getCachedMenu).toHaveBeenCalledWith({});
 });
 
 test("getMenus() -- location query", async () => {

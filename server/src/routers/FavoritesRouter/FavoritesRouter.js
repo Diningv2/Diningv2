@@ -9,7 +9,7 @@ const router = express.Router();
 router
     .get("/", async (req, res) => {
         try {
-            const favorites = await getFavorites(req.query);
+            const favorites = await getFavorites(req.query.token);
             res.send(favorites).status(200);
         } catch (e) {
             console.error(e);

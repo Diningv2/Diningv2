@@ -2,9 +2,9 @@ import parseNutritionInfo from '../../src/routers/MenuItemsRouter/parseNutrition
 import * as responses from '../config/menuItemResponses';
 
 test('parseNutritionInfo() -- normal function', () => {
-    expect(parseNutritionInfo(responses.nutritionWaffle)).toEqual(responses.nutritionWaffleResponse);
+    expect(parseNutritionInfo(responses.nutritionCols, responses.nutritionWaffle)).toEqual(responses.nutritionWaffleResponse);
 });
 
 test('parseNutritionInfo() -- empty data array', () => {
-    expect(parseNutritionInfo([])).toBeNull();
+    expect(parseNutritionInfo([],[])).toEqual({});
 });

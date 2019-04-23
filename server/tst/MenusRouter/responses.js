@@ -75,7 +75,7 @@ export const dinnerData = [
 
 export const singleMenuData = [hotBreakfastData, lunchData, dinnerData];
 
-export const singleMenu = { COLUMNS: columns, DATA: singleMenuData };
+export const singleMenu = { data: {COLUMNS: columns, DATA: singleMenuData }};
 
 export const emptyMenu = { COLUMNS: columns, DATA: [] };
 
@@ -196,17 +196,59 @@ export const davenportMenu = [
 ];
 export const davenportDinnerMenu = dessertMenu;
 
+export const hotBreakfastMenuFull = 
+{
+    itemID: 4822535, 
+    meal: "Hot Breakfast", 
+    name: "Multigrain Pancakes", 
+    allergens: [],
+    ingredients: [],
+    nutrition: {},
+    isVegan: false,
+    isVegetarian: false,
+    isGlutenFree: false,
+    hasInfo: false
+};
+
+export const lunchMenuFull = 
+{
+    itemID: 4883833, 
+    meal: "Lunch", 
+    name: "Farro Salad with Raisins", 
+    allergens: [],
+    ingredients: [],
+    nutrition: {},
+    isVegan: false,
+    isVegetarian: false,
+    isGlutenFree: false,
+    hasInfo: false
+};
+
+export const dinnerMenuFull = 
+{
+    itemID: 3579035, 
+    meal: "Dinner", 
+    name: "Naples Style Beef Chuck", 
+    allergens: [],
+    ingredients: [],
+    nutrition: {},
+    isVegan: false,
+    isVegetarian: false,
+    isGlutenFree: false,
+    hasInfo: false
+};
+
 /* Expected Outputs */
 
 export const singleMenuDataExpectedResponse = [
-    hotBreakfastMenu[0],
-    lunchMenu[0],
-    dinnerMenu[0]
+    hotBreakfastMenuFull,
+    lunchMenuFull,
+    dinnerMenuFull
 ];
 
 export const singleMenuDataWithEmptyExpectedResponse = [
-    hotBreakfastMenu[0],
-    dinnerMenu[0]
+    hotBreakfastMenuFull,
+    dinnerMenuFull
 ];
 
 export const fullMenuExpectedResponse = [
@@ -284,3 +326,63 @@ export const multiMenuExpectedResponse = [
 ];
 
 export const multiDinnerMenu = [dinnerMenu[0], dessertMenu[0]];
+
+
+// Fresh date (normal) test for cachedMenus
+const dateMock = new Date(2019, 2, 1);
+const dateString = dateMock.toDateString();
+const todayDocData = {
+    5: {
+        menu: {"menuitem1": "item1"},
+        timestamp: dateString
+    }
+};
+const tomorrowDocData = {
+    5: {
+        menu: {"menuitemtomorrow1": "itemtomorrow1"},
+        timestamp: dateString
+    }
+};
+
+export const resultCachedMenu = {
+    location: 5, 
+    today: todayDocData[5].menu, 
+    tomorrow: tomorrowDocData[5].menu
+};
+
+export const todayDoc = {
+    data: () => todayDocData, 
+    exists: () => true
+};
+
+export const tomorrowDoc = {
+    data: () => tomorrowDocData,
+    exists: () => true
+};
+
+// Stale test for cachedMenus
+const dateMockStale = new Date(2018, 1, 1);
+const dateStringStale = dateMockStale.toDateString();
+const todayDocDataStale = {
+    5: {
+        menu: {"menuitem1": "item1"},
+        timestamp: dateStringStale
+    }
+};
+const tomorrowDocDataStale = {
+    5: {
+        menu: {"menuitemtomorrow1": "itemtomorrow1"},
+        timestamp: dateStringStale
+    }
+};
+
+export const todayDocStale = {
+    data: () => todayDocDataStale, 
+    exists: () => true
+};
+
+export const tomorrowDocStale = {
+    data: () => tomorrowDocDataStale,
+    exists: () => true
+};
+
