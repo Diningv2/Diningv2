@@ -14,12 +14,14 @@ export class DV2ScrollView extends React.Component {
                     }}
                     showsVerticalScrollIndicator={false}>
                     <Text style={{ 
+                        // Display title if provided
                         ...styles.font.type.primaryBold, 
                         ...styles.font.size.large, 
                         ...styles.font.color.primary}}>
                         {this.props.title}
                     </Text>
                     {(this.props.array || []).map((element, index) => {
+                        // perform passed in render function on each member of array
                         return this.props.render(element, index)
                     })}
                 </ScrollView>
