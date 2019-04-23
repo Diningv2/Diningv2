@@ -1,4 +1,4 @@
-import firestore from "../../config/firebase/firebaseConfig";
+import firestore from "../../../config/firebase/firebaseConfig";
 
 import getOneMenu from "./getOneMenu";
 import mergeMenu from "./mergeMenu";
