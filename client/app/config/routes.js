@@ -8,7 +8,7 @@ import HomeView from '../views/HomeView';
 import DiningHallsView from '../views/DiningHallsView';
 import MenuView from '../views/MenuView';
 import MenuItemView from '../views/MenuItemView';
-import FavoritesView from '../views/FavoritesView';
+import FavoritesView from '../views/Favorites/MainView';
 import AllergensView from '../views/AllergensView';
 
 // Create our routes
