@@ -34,6 +34,7 @@ class NutritionInfo extends Component {
             <NutritionInfoField
                 key={field}
                 field={this.formatted[field]}
+                // each category found in json object for selected menu item
                 value={this.props.menuItem.data.nutrition[field]}
             />
         );
@@ -45,6 +46,7 @@ class NutritionInfo extends Component {
                 <Transition appear="bottom">
                     <DV2ScrollView
                         style={{ flex: 1 }}
+                        // One line for each of the nutrition categories in the above table
                         array={Object.keys(this.formatted)}
                         render={element => this.renderNutritionInfoFields(element)}
                     />

@@ -13,9 +13,12 @@ class TopTabs extends Component {
         this.state.current.function();
     }
     state = {
+        // first tab is default selected
         current: this.props.tabButtons[0]
     };
     relativeWidth = (100 / this.props.tabButtons.length) + '%';
+
+    // Background and text colors change depending on if tab is selected
     bgColor = (tabButton) => { return (tabButton.tabName == this.state.current.tabName) ? colors.primary : colors.secondary };
     textColor = (tabButton) => { return (tabButton.tabName == this.state.current.tabName) ? colors.secondary : colors.primary };
 
@@ -41,6 +44,7 @@ class TopTabs extends Component {
                                     opacity: tabButton.opacity 
                                 }}
                                 onPress={() => {
+                                    // Only perform function when a different tab is selected 
                                     if (this.state.current.tabName != tabButton.tabName) {
                                         tabButton.function();
                                         this.setState({ current: tabButton });

@@ -20,10 +20,13 @@ class MenuItemView extends Component {
         selectedTabName: 'Nutrition'
     };
 
+    // functions for toptabs
+    // clicking a tab navigates to its page
     setNutrition = () => this.setState({ selectedTabName: 'Nutrition' });
     setAllergens = () => this.setState({ selectedTabName: 'Allergens' });
     setIngredients = () => this.setState({ selectedTabName: 'Ingredients' });
 
+    // Names of top tabs
     tabButtons = [
         {
             tabName: 'Nutrition',
@@ -40,6 +43,7 @@ class MenuItemView extends Component {
     ]
 
     render() {
+        // Show information associated with selected tab
         return (
             <View style={{ flex: 1 }}>
                 <Header canGoBack title={this.props.menuItem.isLoading ? 'Loading...' : this.props.menuItem.data.name} />
