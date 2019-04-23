@@ -14,6 +14,7 @@ server/.sonarlint/*
 # Node modules #
 ################
 server/node_modules/*
+client/node_modules/*
 
 # Firebase #
 ############
