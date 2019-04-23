@@ -27,9 +27,11 @@ class AllergensView extends Component {
         selectedTabName: 'Dietary Restrictions'
     };
 
+    // functions for top tabs
     setRestrictions = () => this.setState({ selectedTabName: 'Dietary Restrictions' });
     setAllergies = () => this.setState({ selectedTabName: 'Allergies' });
 
+    // Tabs deprecated since Yale's API's vegetarian / vegan classifications are inaccurate
     tabButtons = [
         {
             tabName: 'Dietary Restrictions',
@@ -77,6 +79,7 @@ class AllergensView extends Component {
     renderAllergen = (allergen) => {
         
         return (
+            // One allergen name and one switch per row
             <View 
                 key={allergen}
                 style={{
@@ -97,6 +100,7 @@ class AllergensView extends Component {
                 <Switch 
                     value={this.props.allergensList[allergen]} 
                     // TODO: Below line to be used once /api/filters implemented
+                    // user filters stored in redux
                     // value = {this.props.filtersList.data[allergen]}
                     onValueChange={(value) => this.SwitchChange(value, allergen)}
                 />
@@ -107,7 +111,9 @@ class AllergensView extends Component {
     SwitchChange(value, allergen) {
         this.props.toggleAllergens(value, allergen);
     }
-    //OnSwitch to be used once /api/filters is implemented
+
+    // OnSwitch to be used once /api/filters is implemented
+    // Toggles allergen and updates the database
     OnSwitch = async (value, allergen) => {
         const token = this.props.userInformation.notificationID;
         const postConfig = {
@@ -115,6 +121,7 @@ class AllergensView extends Component {
             allergen
         }
         try {
+            // access backend to update user filters in firebase
             if (value == true){
                 await post('/api/filters/delete', postConfig);
                 this.props.removeFilter(allergen);
