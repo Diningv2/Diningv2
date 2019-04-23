@@ -9,7 +9,7 @@ export default async function removePreference(token, preference) {
     try {
         const preferences = await firestore.doc("preferences/users").get();
         await firestore.doc("preferences/users").update({
-            [token]: { ...preferences[token], [preference]: false }
+            [token]: { ...preferences.data()[token], [preference]: false }
         });
     } catch (e) {
         throw new Error(E_DB_WRITE + e);
