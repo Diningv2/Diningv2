@@ -22,11 +22,13 @@ class HomeView extends Component {
     }
 
     componentDidMount() {
+        // expoToken needed for device specific information (favorites, filtering preferences)
         const expoToken = this.props.userInformation.notificationID;
         this.props.getFavorites(expoToken);
     }
 
     render() {
+        // Splash screen - logo with button to navigate to DiningHallsView
         return (
             <View style={splashScreenStyles.container}>
                     <View>
