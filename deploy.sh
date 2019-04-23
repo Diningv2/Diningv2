@@ -17,5 +17,5 @@ git add --all;
 git commit -m "Heroku deployment for ${READABLE_DATE}";
 heroku login;
 heroku git:remote -a serverv2;
-git push heroku heroku-$DATE:master;
+git push -f heroku heroku-$DATE:master;
 git checkout master;
