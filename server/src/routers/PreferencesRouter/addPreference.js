@@ -3,17 +3,17 @@ import firestore from "../../config/firebase/firebaseConfig";
 import { E_BAD_PREF_POST_REQ, E_DB_WRITE } from "../../config/constants";
 
 export default async function addPreference(token, preference) {
-    if (!token || !preference) {
+    if (!token || !preference || !(preference in emptyPreferences)) {
         throw new Error(E_BAD_PREF_POST_REQ);
     }
     try {
         const preferences = await firestore.doc("preferences/users").get();
         token in preferences.data()
             ? await firestore.doc("preferences/users").update({
-                  [token]: { ...preferences.data()[token], preference: true }
+                  [token]: { ...preferences.data()[token], [preference]: true }
               })
             : await firestore.doc("preferences/users").update({
-                  [token]: { ...emptyPreferences, preference: true }
+                  [token]: { ...emptyPreferences, [preference]: true }
               });
     } catch (e) {
         throw new Error(E_DB_WRITE + e);
