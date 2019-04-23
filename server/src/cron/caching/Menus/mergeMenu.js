@@ -1,6 +1,6 @@
-import firestore from "../../config/firebase/firebaseConfig";
+import firestore from "../../../config/firebase/firebaseConfig";
 
-import { E_NO_API_RES, E_DB_READ, E_DB_NOENT } from "../../config/constants";
+import { E_NO_API_RES, E_DB_READ, E_DB_NOENT } from "../../../config/constants";
 
 export default async function mergeMenu(menu, location) {
     if (!menu.today || !menu.tomorrow) {
