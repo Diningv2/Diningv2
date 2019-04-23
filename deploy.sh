@@ -20,5 +20,5 @@ heroku login;
 heroku create;
 read -p "Change name to serverv2 on heroku, after changing current serverv2. Press [Enter] to continue...";
 heroku git:remote -a serverv2;
-git push heroku heroku-$DATEmaster;
+git push heroku heroku-$DATE:master;
 git checkout master;
