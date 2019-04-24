@@ -15,51 +15,47 @@ class FavoritesListServedToday extends React.Component {
         super(props);
     }
 
+    state = {
+        servedTodayArray: [] // this array should be reflected in state to trigger re-render
+    }
+
     prompts = {
         favoritesNotYetVisible: (
             "It looks like you have some favorites, but you won't see them " 
             + "until our servers figure out where they're being served!"
         ),
         hint: (
-            "Your favorites being served today! Keep in mind, if you favorite "
-            + "something in the middle of the day, you might need to restart "
-            + "the app before it shows up here!"
+            "(Keep in mind, if you favorite something in the middle of the "
+            + "day, you might need to restart the app before it shows up here!)"
         ),
     }
 
-    favoritesServedTodayArray = [];
-
     componentDidMount() {
-        // Get favorites when this view mounts
         const { data } = this.props.favoritesList;
-        this.favoritesServedTodayArray = 
-            Object.keys(data).filter(dishID => data[dishID].isBeingServed);
+        const servedTodayArray = Object.keys(data)
+            .filter(dishID => data[dishID].isBeingServed);
+        this.setState({ servedTodayArray });
     }
 
     renderFavesList = (dishID) => {
         const dish = this.props.favoritesList.data[dishID];
 
         return (
-        <View>
-            {dish && 
-            <AnimatedListItem key={dishID}>
-                <View style={{...styles.container.spaceBelowSmall}}>
-                    <FavoriteServedTodayCard favoriteDish={dish} />
-                </View>
-            </AnimatedListItem>
-        
-        }
-        </View>
-        
-           
+            <View key={dishID}>
+                {dish &&
+                    <AnimatedListItem>
+                        <View style={{ ...styles.container.spaceBelowSmall }}>
+                            <FavoriteServedTodayCard favoriteDish={dish} />
+                        </View>
+                    </AnimatedListItem>
+
+                }
+            </View>
         );
     }
 
-
     render() {
-        // If no favesToday visible, either don't have any or their locations 
-        // haven't been figured out by server yet.
-        if (this.favoritesServedTodayArray.length == 0) { 
+        if (this.state.servedTodayArray.length == 0) {
             return (
                 <CenterTextView message={this.prompts.favoritesNotYetVisible} />
             );
@@ -69,7 +65,7 @@ class FavoritesListServedToday extends React.Component {
                 <Hint message={this.prompts.hint} />
                 <View style={{ flex: 1}}>
                     <DV2ScrollView 
-                        array={this.favoritesServedTodayArray}
+                        array={this.state.servedTodayArray}
                         render={(dishID) => this.renderFavesList(dishID)}
                     />
                 </View>
