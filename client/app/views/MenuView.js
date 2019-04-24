@@ -228,11 +228,11 @@ class MenuView extends Component {
         const tabs = this.dynamicTabButtons();
         return (tabs.length == 0 
             ? (
-                <View style={{...styles.topTabs.withPaddingBottom}}></View>
+                <View style={{...styles.container.withPaddingBottom}}></View>
             ) : (
                 <View style={{
                     paddingTop: 2, 
-                    ...styles.topTabs.withPaddingBottom
+                    ...styles.container.withPaddingBottom
                 }}>
                     <TopTabs tabButtons={this.dynamicTabButtons()} />
                 </View>
