@@ -201,9 +201,24 @@ class MenuView extends Component {
         )
     }
 
+    formatted = {
+        Alcohol: "alcohol",
+        Nuts: "nuts",
+        Shellfish: "shellfish",
+        Peanut: "peanut",
+        Dairy: "dairy",
+        Eggs: "eggs",
+        Pork: "pork",
+        'Fish/Seafood': "fishSeafood",
+        Soy: "soy",
+        Wheat: "wheat",
+        Gluten: "gluten"
+    }
+
     isFiltered = (dish) => {
         // Check user filter preferences vs dish's allergens
         const filters = this.props.filtersList.data;
+        console.log(filters);
         if (filters.Vegetarian && !dish.isVegetarian) {
             return true;
         }
@@ -215,7 +230,7 @@ class MenuView extends Component {
         }
         else {
             for (var index = 0; index < dish.allergens.length; index++) {
-                if (filters[dish.allergens[index]]){
+                if (filters[this.formatted[dish.allergens[index]]]){
                     return true;
                 } 
             }
@@ -226,6 +241,7 @@ class MenuView extends Component {
     renderMenu = (dish, index) => {
         // render function needed by dv2scrollview
         const filtered = this.isFiltered(dish);
+        console.log("TRY1.1 " + dish.name + " filtered? " + filtered);
         return (
             <AnimatedListItem key={dish.name} index={index}>
                 <Dish key={dish.name} dish={dish} filtered={filtered}/>
