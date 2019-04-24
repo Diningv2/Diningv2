@@ -117,12 +117,16 @@ class MenuView extends Component {
         const menu = this.props.menusList.data;
         const day = this.state.selectedDay == 'Today' ? menu.today : menu.tomorrow;
         
-        const mealTypes = Object.keys(formattedMealTypes).filter(mealType => day[mealType] && day[mealType].length);
+        const mealTypes = Object.keys(formattedMealTypes).filter(
+            mealType => day[mealType] && day[mealType].length
+        );
         let tabButtons = mealTypes.map(mealType => {
             return {
                 tabName: formattedMealTypes[mealType],
                 function: () => {
-                    const mealArray = this.state.selectedDay == 'Today' ? this.props.menusList.data.today[mealType] : this.props.menusList.data.tomorrow[mealType];
+                    const mealArray = this.state.selectedDay == 'Today' 
+                        ? this.props.menusList.data.today[mealType] 
+                        : this.props.menusList.data.tomorrow[mealType];
                     const mealArrayFiltered = mealArray;
                     const hoursMessage = this.generateHoursMessage(mealType);
 
@@ -162,12 +166,7 @@ class MenuView extends Component {
                             <View style={{...styles.topTabs.withPaddingTop}}>
                                 <TopTabs tabButtons={this.dayTabButtons()} />
                             </View>
-                            <View style={{
-                                paddingTop: 2, 
-                                ...styles.topTabs.withPaddingBottom
-                            }}>
-                                <TopTabs tabButtons={this.dynamicTabButtons()} />
-                            </View>
+                            {this.renderDynamicTabs()}
                         </AnimatedListItem>
                         {!this.state.isLoading &&
                             <AnimatedListItem key="hourstext" index={4}>
@@ -183,7 +182,8 @@ class MenuView extends Component {
                             <LoadingIndicator />
                             :
                             <View style={{ flex: 1 }}>
-                                {this.state.mealArrayFiltered ?
+                                {this.state.mealArrayFiltered && this.state.mealArrayFiltered.length > 0 
+                                    ?
                                     <DV2ScrollView
                                         array={this.state.mealArrayFiltered}
                                         render={(dish, index) => this.renderMenu(dish, index)}
@@ -223,6 +223,23 @@ class MenuView extends Component {
             }
         }
         return false;
+    }
+
+    // Shows the meal tabs if there are any available, otherwise shows nothing.
+    renderDynamicTabs() {
+        const tabs = this.dynamicTabButtons();
+        return (tabs.length == 0 
+            ? (
+                <View style={{...styles.topTabs.withPaddingBottom}}></View>
+            ) : (
+                <View style={{
+                    paddingTop: 2, 
+                    ...styles.topTabs.withPaddingBottom
+                }}>
+                    <TopTabs tabButtons={this.dynamicTabButtons()} />
+                </View>
+            )
+        );
     }
 
     renderMenu = (dish, index) => {
