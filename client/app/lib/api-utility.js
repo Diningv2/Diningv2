@@ -51,7 +51,6 @@ export const post = async (uri, requestBody) => {
 
         // Builds the full url to be called during fetch()
         const url = API_BASE_URL + uri;
-        console.log("TYT url is " + url);
         // Run our HTTP POST using fetch
         const response = await fetch(url, postConfig);
         
