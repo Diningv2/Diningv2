@@ -6,6 +6,7 @@ import connectToRedux from "../redux/lib/connectToRedux";
 
 import Allergen from "./Allergen";
 import { DV2ScrollView } from "./DV2ScrollView";
+import CenterTextView from "./CenterTextView";
 
 class AllergenList extends Component {
     constructor(props) {
@@ -19,13 +20,18 @@ class AllergenList extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Transition appear="bottom">
-                    <DV2ScrollView
-                        style={{ flex: 1 }}
-                        array={this.props.menuItem.data.allergens}
-                        render={allergen => this.renderAllergens(allergen)}
-                    />
-                </Transition>
+                {this.props.menuItem.data.allergens.length == 0 
+                    ? <CenterTextView message="No allergens" />
+                    : (
+                        <Transition appear="bottom">
+                            <DV2ScrollView
+                                style={{ flex: 1 }}
+                                array={this.props.menuItem.data.allergens}
+                                render={allergen => this.renderAllergens(allergen)}
+                            />
+                        </Transition>
+                    )    
+                }
             </View>
         );
     }
