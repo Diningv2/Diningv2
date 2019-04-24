@@ -49,7 +49,9 @@ class FavoritesListServedToday extends React.Component {
 
 
     render() {
-        if (this.favoritesServedTodayArray.length == 0) { // No faves 
+        // If no favesToday visible, either don't have any or their locations 
+        // haven't been figured out by server yet.
+        if (this.favoritesServedTodayArray.length == 0) { 
             return (
                 <CenterTextView message={this.prompts.favoritesNotYetVisible} />
             );
