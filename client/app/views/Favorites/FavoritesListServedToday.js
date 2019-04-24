@@ -31,14 +31,21 @@ class FavoritesListServedToday extends React.Component {
     }
 
     renderFavesList = (dishID) => {
-        const dish = props.favoritesList.data[dishID];
+        const dish = this.props.favoritesList.data[dishID];
 
         return (
+        <View>
+            {dish && 
             <AnimatedListItem key={dishID}>
                 <View style={{...styles.container.spaceBelowSmall}}>
                     <FavoriteServedTodayCard favoriteDish={dish} />
                 </View>
             </AnimatedListItem>
+        
+        }
+        </View>
+        
+           
         );
     }
 
@@ -54,8 +61,8 @@ class FavoritesListServedToday extends React.Component {
                 <View style={{marginHorizontal: 10}}>
                     <Hint message={this.prompts.hint} />
                     <DV2ScrollView 
-                        array={favoritesServedTodayArray}
-                        render={(dishID) => renderFavesList(dishID)}
+                        array={this.favoritesServedTodayArray}
+                        render={(dishID) => this.renderFavesList(dishID)}
                     />
                 </View>
         )
