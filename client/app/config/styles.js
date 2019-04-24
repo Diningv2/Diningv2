@@ -12,9 +12,9 @@ const fonts = {
         }
     },
     size: {
-        small: RF(2.3), // 10
-        smallMedium: RF(2.4), // 17
-        medium: RF(2.5), // 20
+        small: RF(2.6), // 10
+        smallMedium: RF(2.6), // 17
+        medium: RF(2.8), // 20
         large: RF(4), // 
         extraLarge: RF(8) //
     }
