@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import styles from '../config/styles';
 
 import sp from '../redux/lib/stateProperties';
 import connectToRedux from '../redux/lib/connectToRedux';
+import { LoadingIndicator } from '../components/LoadingIndicator';
+
 
 class HomeView extends Component {
     constructor(props) {
@@ -22,9 +24,18 @@ class HomeView extends Component {
     }
 
     componentDidMount() {
-        // expoToken needed for device specific information (favorites, filtering preferences)
         const expoToken = this.props.userInformation.notificationID;
         this.props.getFavorites(expoToken);
+
+        if (this.props.diningHallsList && this.props.diningHallsList.isLoading) {
+            this.props.getAllDiningHallsInformation();
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.props.diningHallsList && !this.props.diningHallsList.isLoading) {
+            this.props.navigation.navigate('DiningHallsView')
+        }
     }
 
     render() {
@@ -32,6 +43,8 @@ class HomeView extends Component {
         return (
             <View style={splashScreenStyles.container}>
                     <View>
+                        
+
                         <Text style={{...splashScreenStyles.title, ...styles.font.type.primaryBold, ...styles.font.size.extraLarge}}>
                             Dining*v2
                         </Text>
@@ -41,16 +54,8 @@ class HomeView extends Component {
                             Get notified when your favorite Yale Dishes™ are being served!
                         </Text>
                     </View>
-                    <View>
-                        <TouchableOpacity 
-                            disabled={this.state.isNavigating}
-                            style={this.buttonStyle} 
-                            onPress={this.proceed}
-                        >
-                            <Text style={splashScreenStyles.bigButtonText}>
-                                {this.state.buttonText}
-                            </Text>
-                        </TouchableOpacity>
+                    <View paddingTop={20}>
+                        <ActivityIndicator size={'large'} color={'white'} />
                     </View>
                     <View style={{ position: 'absolute', backgroundColor: '#4a86e8' }} />
             </View>
@@ -89,4 +94,4 @@ const splashScreenStyles = StyleSheet.create({
     }
 })
 
-export default connectToRedux(HomeView, [sp.userInformation]);
+export default connectToRedux(HomeView, [sp.userInformation, 'diningHallsList']);
