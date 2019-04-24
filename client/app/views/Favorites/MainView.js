@@ -56,7 +56,7 @@ class MainView extends Component {
         } else {
             return (
             <View style={{ flex: 1}}>
-                <View style={{...styles.topTabs.withPaddingTop}}>
+                <View style={{...styles.container.withPaddingTop}}>
                     <TopTabs tabButtons={this.favoritesTabButtons} />
                 </View>
                 {this.state.selectedTab == this.allFavorites &&
