@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
-import styles from '../config/styles';
+import { LoadingIndicator } from '../components/LoadingIndicator';
+import styles, { colors } from '../config/styles';
 
 import sp from '../redux/lib/stateProperties';
 import connectToRedux from '../redux/lib/connectToRedux';
-import { LoadingIndicator } from '../components/LoadingIndicator';
 
 
 class HomeView extends Component {
@@ -26,6 +26,7 @@ class HomeView extends Component {
     componentDidMount() {
         const expoToken = this.props.userInformation.notificationID;
         this.props.getFavorites(expoToken);
+        this.props.getFilters(expoToken);
 
         if (this.props.diningHallsList && this.props.diningHallsList.isLoading) {
             this.props.getAllDiningHallsInformation();
@@ -42,9 +43,7 @@ class HomeView extends Component {
         // Splash screen - logo with button to navigate to DiningHallsView
         return (
             <View style={splashScreenStyles.container}>
-                    <View>
-                        
-
+                    {/* <View>
                         <Text style={{...splashScreenStyles.title, ...styles.font.type.primaryBold, ...styles.font.size.extraLarge}}>
                             Dining*v2
                         </Text>
@@ -53,11 +52,11 @@ class HomeView extends Component {
                         <Text style={{...splashScreenStyles.subtitle, ...styles.font.size.medium}}>
                             Get notified when your favorite Yale Dishes™ are being served!
                         </Text>
+                    </View> */}
+                    <View>
+                        <LoadingIndicator color={colors.secondary} />
                     </View>
-                    <View paddingTop={20}>
-                        <ActivityIndicator size={'large'} color={'white'} />
-                    </View>
-                    <View style={{ position: 'absolute', backgroundColor: '#4a86e8' }} />
+                    <View style={{ position: 'absolute', backgroundColor: colors.primary }} />
             </View>
         )
     }
@@ -94,4 +93,4 @@ const splashScreenStyles = StyleSheet.create({
     }
 })
 
-export default connectToRedux(HomeView, [sp.userInformation, 'diningHallsList']);
+export default connectToRedux(HomeView, [sp.userInformation, sp.diningHallsList]);

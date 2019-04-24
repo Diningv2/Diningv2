@@ -55,8 +55,8 @@ class MenuItemView extends Component {
                     } 
                 />
                 <View style={{
-                    ...styles.topTabs.withPaddingTop,
-                    ...styles.topTabs.withPaddingBottom,
+                    ...styles.container.withPaddingTop,
+                    ...styles.container.withPaddingBottom,
                 }}>
                     <TopTabs tabButtons={this.tabButtons} />
                 </View>

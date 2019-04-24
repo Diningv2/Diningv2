@@ -22,6 +22,19 @@ class AllergensView extends Component {
     constructor(props) {
         super(props);
     }
+    formatted = {
+        Alcohol: "alcohol",
+        Nuts: "nuts",
+        Shellfish: "shellfish",
+        Peanut: "peanut",
+        Dairy: "dairy",
+        Eggs: "eggs",
+        Pork: "pork",
+        'Fish/Seafood': "fishSeafood",
+        Soy: "soy",
+        Wheat: "wheat",
+        Gluten: "gluten"
+    }
 
     state = {
         selectedTabName: 'Dietary Restrictions'
@@ -50,8 +63,8 @@ class AllergensView extends Component {
             <View style={{ flex: 1 }}>
                 <Header title="Menu Filters" />
                 <View style={{
-                    ...styles.topTabs.withPaddingTop,
-                    ...styles.topTabs.withPaddingBottom,
+                    ...styles.container.withPaddingTop,
+                    ...styles.container.withPaddingBottom,
                 }}>
                     {/* <TopTabs tabButtons={this.tabButtons} /> */}
                 </View>
@@ -98,37 +111,33 @@ class AllergensView extends Component {
                     {allergen}
                 </Text>
                 <Switch 
-                    value={this.props.allergensList[allergen]} 
                     // TODO: Below line to be used once /api/filters implemented
                     // user filters stored in redux
-                    // value = {this.props.filtersList.data[allergen]}
-                    onValueChange={(value) => this.SwitchChange(value, allergen)}
+                    value = {this.props.filtersList.data[this.formatted[allergen]]}
+                    onValueChange={(value) => this.OnSwitch(value, allergen)}
                 />
             </View>
         );
     }
 
-    SwitchChange(value, allergen) {
-        this.props.toggleAllergens(value, allergen);
-    }
 
-    // OnSwitch to be used once /api/filters is implemented
     // Toggles allergen and updates the database
     OnSwitch = async (value, allergen) => {
         const token = this.props.userInformation.notificationID;
+        const preference = this.formatted[allergen];
         const postConfig = {
             token,
-            allergen
+            preference
         }
         try {
             // access backend to update user filters in firebase
-            if (value == true){
-                await post('/api/filters/delete', postConfig);
-                this.props.removeFilter(allergen);
+            if (value == false){
+                await post('/api/preferences/delete', postConfig);
+                this.props.removeFilter(preference);
             }
             else {
-                await post('api/filters', postConfig);
-                this.props.addFilter(allergen);
+                await post('/api/preferences', postConfig);
+                this.props.addFilter(preference);
             }
         } catch (e) {
             console.error("Filter add/remove error", e.message);
@@ -139,4 +148,4 @@ class AllergensView extends Component {
     }
 }
 
-export default connectToRedux(AllergensView, ['allergensList', 'userInformation', 'filtersList']);
+export default connectToRedux(AllergensView, ['userInformation', 'filtersList']);
