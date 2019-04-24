@@ -30,7 +30,7 @@ const FavoritesListAll = (props) => {
 
     return (
             <View style={{ flex: 1}}>
-                <Hint message="These are all the dishes you've favorited." />
+                <Hint message="These are all the dishes you've favorited so far." />
                 <View style={{ flex: 1}}>
                     <DV2ScrollView 
                         array={Object.keys(props.favoritesList.data)}

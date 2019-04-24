@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
+import { colors } from '../config/styles';
 
 export const LoadingIndicator = (props) => {
 
@@ -8,9 +9,11 @@ export const LoadingIndicator = (props) => {
         ...styles.container.withPadding
     }
 
+    const color = props.color || colors.primary;
+
     return (
         <View style={containerStyle}>
-            <ActivityIndicator style={{scaleX: 3, scaleY: 3}} />
+            <ActivityIndicator size="large" color={color} />
         </View>
     )
 }

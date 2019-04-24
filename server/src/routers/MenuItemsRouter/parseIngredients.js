@@ -4,7 +4,7 @@ export default function parseIngredients(columns, data) {
         // separates out multi-item ingredients
         ingredient[columns.indexOf("INGREDIENT")]
             // remove any non-ingredient strings
-            .replace(/([cC]ontains.+$)|([mM]]anufactured.+$)/, "")
+            .replace(/([cC]ontains.+$)|([mM]]anufactured.+$)|([lL]ess than.+$)/, "")
             // remove any "composite" ingredient strings
             .replace(/[^,]+(?=\(.+,.+)/, "")
             // remove any encapsulating parentheses
@@ -12,7 +12,7 @@ export default function parseIngredients(columns, data) {
             // split along any "and", ",", or "." strings
             .split(/[,\.]|and/)
             // trim the results of whitespace
-            .map(i => i.trim().charAt(0).toUpperCase() + i.trim().slice(1))
+            .map(i => i.trim().charAt(0).toUpperCase() + i.trim().slice(1).toLowerCase())
             // push all nonempty strings
             .forEach(i => i.length && ingredients.push(i))
     );

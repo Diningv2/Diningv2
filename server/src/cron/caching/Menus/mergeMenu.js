@@ -1,5 +1,6 @@
 import firestore from "../../../config/firebase/firebaseConfig";
 
+import locations from "../../../config/locations";
 import { E_NO_API_RES, E_DB_READ, E_DB_NOENT } from "../../../config/constants";
 
 export default async function mergeMenu(menu, location) {
@@ -20,8 +21,8 @@ export default async function mergeMenu(menu, location) {
         throw new Error(`${E_DB_NOENT}: menus/tomorrow`);
     }
 
-    const firestoreToday = todayDoc.data()[location].menu;
-    const firestoreTomorrow = tomorrowDoc.data()[location].menu;
+    const firestoreToday = todayDoc.data()[locations[location]].menu;
+    const firestoreTomorrow = tomorrowDoc.data()[locations[location]].menu;
     const { today, tomorrow } = menu;
 
     menu.today = updateMenu(today, firestoreToday);
@@ -45,7 +46,7 @@ function updateMenu(menu, firestoreMenu) {
             menu[meal][index] =
                 firestoreIndex &&
                 firestoreIndex != -1 &&
-                firestoreMenu[firestoreIndex].hasInfo
+                firestoreMenu[meal][firestoreIndex].hasInfo
                     ? firestoreMenu[meal][firestoreIndex]
                     : menu[meal][index];
         }

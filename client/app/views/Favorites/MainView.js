@@ -9,6 +9,7 @@ import CenterTextView from '../../components/CenterTextView';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import FavoritesListAll from './FavoritesListAll';
 import FavoritesListServedToday from './FavoritesListServedToday';
+import styles from '../../config/styles';
 
 class MainView extends Component {
 
