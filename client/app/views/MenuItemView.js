@@ -46,10 +46,17 @@ class MenuItemView extends Component {
         // Show information associated with selected tab
         return (
             <View style={{ flex: 1 }}>
-                <Header canGoBack title={this.props.menuItem.isLoading ? 'Loading...' : this.props.menuItem.data.name} />
+                <Header 
+                    canGoBack 
+                    title={
+                        this.props.menuItem.isLoading 
+                        ? 'Loading...' 
+                        : this.props.menuItem.data.name
+                    } 
+                />
                 <View style={{
-                    ...styles.topTabs.withPaddingTop,
-                    ...styles.topTabs.withPaddingBottom,
+                    ...styles.container.withPaddingTop,
+                    ...styles.container.withPaddingBottom,
                 }}>
                     <TopTabs tabButtons={this.tabButtons} />
                 </View>

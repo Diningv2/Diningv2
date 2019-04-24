@@ -1,7 +1,8 @@
 import express from "express";
 
-import addPreference from "./removePreference";
-import removePreference from "./addPreference";
+import getPreferences from "./getPreferences";
+import addPreference from "./addPreference";
+import removePreference from "./removePreference";
 
 const router = express.Router();
 

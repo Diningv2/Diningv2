@@ -9,6 +9,7 @@ import CenterTextView from '../../components/CenterTextView';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import FavoritesListAll from './FavoritesListAll';
 import FavoritesListServedToday from './FavoritesListServedToday';
+import styles from '../../config/styles';
 
 class MainView extends Component {
 
@@ -47,7 +48,7 @@ class MainView extends Component {
             );
         } else {
             return (
-            <View>
+            <View style={{...styles.container.withPaddingTop}}>
                 <TopTabs tabButtons={this.favoritesTabButtons} />
                 {this.state.selectedTab == this.allFavorites &&
                     <FavoritesListAll />
