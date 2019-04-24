@@ -52,7 +52,7 @@ class FavoritesListServedToday extends React.Component {
 
         return (
                 <View style={{marginHorizontal: 10}}>
-                    <Hint message={prompts.hint} />
+                    <Hint message={this.prompts.hint} />
                     <DV2ScrollView 
                         array={favoritesServedTodayArray}
                         render={(dishID) => renderFavesList(dishID)}
