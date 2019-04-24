@@ -271,6 +271,105 @@ export const fullMenuExpectedResponse = [
     }
 ];
 
+const today = {
+    brunch: undefined,
+    contBreakfast: undefined,
+    dinner: dinnerMenu,
+    hotBreakfast: undefined,
+    lunch: lunchMenu
+};
+const tomorrow = {
+    brunch: undefined,
+    contBreakfast: undefined,
+    dinner: undefined,
+    hotBreakfast: undefined,
+    lunch: undefined
+};
+
+export const allMenusExpectedResponse = [
+    {
+        location: "Berkeley",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Branford",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Grace Hopper",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Commons",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Davenport",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Hall of Graduate Studies",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Jonathan Edwards",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Morse",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Pierson",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Saybrook",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Silliman",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Stiles",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Timothy Dwight",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Trumbull",
+        today, 
+        tomorrow
+    }, 
+    {
+        location: "Pauli Murray",
+        today, 
+        tomorrow
+    },
+     {
+        location: "Benjamin Franklin",
+        today, 
+        tomorrow
+    },
+
+];
+
 export const multiMenuExpectedResponse = [
     {
         location: "Hopper",
@@ -322,7 +421,7 @@ export const multiMenuExpectedResponse = [
             hotBreakfast: undefined,
             lunch: undefined
         }
-    }
+    }, 
 ];
 
 export const multiDinnerMenu = [dinnerMenu[0], dessertMenu[0]];

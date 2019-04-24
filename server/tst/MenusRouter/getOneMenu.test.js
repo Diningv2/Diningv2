@@ -4,7 +4,7 @@ import getOneMenu from "../../src/routers/MenusRouter/getOneMenu";
 import processMenu from "../../src/routers/MenusRouter/processMenu";
 import locations from "../../src/config/locations";
 import * as responses from "./responses";
-import {E_NO_API_RES} from "../../src/config/constants";
+import {E_NO_API_RES, E_BAD_MENU_REQ} from "../../src/config/constants";
 
 jest.mock("axios");
 jest.mock("../../src/routers/MenusRouter/processMenu");
@@ -27,6 +27,12 @@ test("getOneMenu() -- bad response from axios", async () => {
     });
     await expect(getOneMenu(5)).rejects.toThrow(
         E_NO_API_RES
+    );
+});
+
+test("getOneMenu() -- location argument out of range", async () => {
+    await expect(getOneMenu(100)).rejects.toThrow(
+        E_BAD_MENU_REQ
     );
 });
 

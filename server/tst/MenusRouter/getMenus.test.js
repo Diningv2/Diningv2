@@ -16,28 +16,75 @@ beforeEach(() => {
     firebaseTest();
     console.error = jest.fn();
 });
+afterEach(() => console.error.mockClear());
 
 test("getMenus() -- no location query", async () => {
-    getCachedMenu.mockImplementationOnce(
-        () => responses.multiMenuExpectedResponse
-    );
+    getOneMenu
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[0])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[1])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[2])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[3])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[4])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[5])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[6])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[7])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[8])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[9])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[10])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[11])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[12])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[13])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[14])
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[15]);
     await expect(getMenus({})).resolves.toEqual(
-        responses.multiMenuExpectedResponse
+        responses.allMenusExpectedResponse
     );
-    expect(getCachedMenu).toHaveBeenCalledWith({});
-    getCachedMenu.mockImplementationOnce(
-        () => responses.multiMenuExpectedResponse
-    );
-    await expect(getMenus({ location: "all" })).resolves.toEqual(
-        responses.multiMenuExpectedResponse
-    );
-    expect(getCachedMenu).toHaveBeenCalledWith({});
+});
+
+test("getMenus() -- dhalls throw error", async () => {
+    getOneMenu
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => responses.allMenusExpectedResponse[15]);
+    await expect(getMenus({})).resolves.toEqual([responses.allMenusExpectedResponse[15]]);
+
+     getOneMenu
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")})
+        .mockImplementationOnce(() => {throw new Error("error")});
+    await expect(getMenus({})).rejects.toThrow("error");
 });
 
 test("getMenus() -- location query", async () => {
-    getOneMenu.mockImplementationOnce(() => responses.fullMenuExpectedResponse);
+    getOneMenu.mockImplementationOnce(() => responses.fullMenuExpectedResponse[0]);
     await expect(getMenus({ location: 5 })).resolves.toEqual(
         responses.fullMenuExpectedResponse
     );
-    expect(getOneMenu).toHaveBeenCalledWith({ location: 5 });
+    expect(getOneMenu).toHaveBeenCalledWith(5);
 });
