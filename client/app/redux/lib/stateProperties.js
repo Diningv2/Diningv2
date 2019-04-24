@@ -12,7 +12,6 @@ export default stateProperties = {
     diningHallsList: 'diningHallsList',
     menusList: 'menusList',
     favoritesList: 'favoritesList',
-    allergensList: 'allergensList',
     filtersList: 'filtersList',
     menuItem: 'menuItem',
     userInformation: 'userInformation',

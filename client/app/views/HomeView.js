@@ -25,6 +25,7 @@ class HomeView extends Component {
         // expoToken needed for device specific information (favorites, filtering preferences)
         const expoToken = this.props.userInformation.notificationID;
         this.props.getFavorites(expoToken);
+        this.props.getFilters(expoToken);
     }
 
     render() {

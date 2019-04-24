@@ -203,9 +203,7 @@ class MenuView extends Component {
 
     isFiltered = (dish) => {
         // Check user filter preferences vs dish's allergens
-        const filters = this.props.allergensList;
-        // TODO: below to be used once /api/filters implemented
-        // const filters = this.props.filtersList.data;
+        const filters = this.props.filtersList.data;
         if (filters.Vegetarian && !dish.isVegetarian) {
             return true;
         }
@@ -236,4 +234,4 @@ class MenuView extends Component {
     }
 }
 
-export default connectToRedux(MenuView, ['menusList', 'diningHallsList', 'allergensList', 'filtersList']);
+export default connectToRedux(MenuView, ['menusList', 'diningHallsList', 'filtersList']);

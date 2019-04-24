@@ -1,3 +1,4 @@
+
 const API_BASE_URL = "http://serverv2.herokuapp.com"
 
 
@@ -50,13 +51,18 @@ export const post = async (uri, requestBody) => {
 
         // Builds the full url to be called during fetch()
         const url = API_BASE_URL + uri;
-
+        console.log("TYT url is " + url);
         // Run our HTTP POST using fetch
         const response = await fetch(url, postConfig);
-
+        
         // If the response returned a status code that's not 200 (OK)
         // Throw an error with the status code text.
-        if (!response.ok) throw new Error(response.statusText);
+
+        if (!response.ok){
+            
+            throw new Error(response.statusText);
+        }
+        
         return;
     } catch (e) {
         // Deal with catching all errors on the
