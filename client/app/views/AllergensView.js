@@ -136,7 +136,6 @@ class AllergensView extends Component {
                 this.props.removeFilter(preference);
             }
             else {
-                console.log("TYToggling " + preference + " Value " + value);
                 await post('/api/preferences', postConfig);
                 this.props.addFilter(preference);
             }

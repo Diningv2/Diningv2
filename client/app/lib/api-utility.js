@@ -56,12 +56,7 @@ export const post = async (uri, requestBody) => {
         
         // If the response returned a status code that's not 200 (OK)
         // Throw an error with the status code text.
-
-        if (!response.ok){
-            
-            throw new Error(response.statusText);
-        }
-        
+        if (!response.ok) throw new Error(response.statusText);
         return;
     } catch (e) {
         // Deal with catching all errors on the
