@@ -25,7 +25,7 @@ export function getFilters(expoToken) {
     return async (dispatch) => {
         dispatch(request()); // tell Redux we're about to make that request
         try {
-            const filters = await get("/api/filters", { 
+            const filters = await get("/api/preferences", { 
                 token: expoToken
              });
             dispatch(success(filters)); // If successful, dispatch it to Redux
@@ -35,21 +35,20 @@ export function getFilters(expoToken) {
     }
 }
 
-export function addFilter(menuItemID, menuItemName) {
+export function addFilter(allergen) {
     return {
         type: types.ADD_FILTER,
         payload: {
-            menuItemID,
-            menuItemName
+            allergen
         }
     }
 }
 
-export function removeFilter(menuItemID) {
+export function removeFilter(allergen) {
     return {
         type: types.REMOVE_FILTER,
         payload: {
-            menuItemID
+            allergen
         }
     }
 }

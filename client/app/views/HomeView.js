@@ -26,6 +26,7 @@ class HomeView extends Component {
     componentDidMount() {
         const expoToken = this.props.userInformation.notificationID;
         this.props.getFavorites(expoToken);
+        this.props.getFilters(expoToken);
 
         if (this.props.diningHallsList && this.props.diningHallsList.isLoading) {
             this.props.getAllDiningHallsInformation();
