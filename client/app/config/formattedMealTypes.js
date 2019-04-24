@@ -3,7 +3,8 @@ const formatted = {
     hotBreakfast: "Hot Breakfast",
     brunch: "Brunch",
     lunch: "Lunch",
-    dinner: "Dinner"
+    dinner: "Dinner",
+    "Unknown": "Unknown"
 }
 
 export default formatted;

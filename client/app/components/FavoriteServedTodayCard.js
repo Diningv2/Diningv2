@@ -25,7 +25,14 @@ class FavoriteServedTodayCard extends React.Component {
 
     render() {
         const { favoriteDish } = this.props;
-        const { name, meal, location } = favoriteDish;
+
+        // populate variables based on that properties favoriteDish contains
+        // if doesn't contain name field, favoriteDish is just a string
+        const name = favoriteDish.hasOwnProperty('name') ? favoriteDish.name : favDishObject;
+        const meal = favoriteDish.hasOwnProperty('meal') ? favoriteDish.meal : ["UNKNOWN"];
+        const location = favoriteDish.hasOwnProperty('location') ? favoriteDish.location : ["UNKOWN"];
+        
+
         const mealsString = this.formatMealsString(meal);
         const locationsString = this.formatLocationsString(location);
 

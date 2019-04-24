@@ -81,6 +81,12 @@ export default (styles = {
         withPaddingSmall: {
             margin: spacingSizes.small
         },
+        withPaddingTop: {
+            paddingTop: 5
+        },
+        withPaddingBottom: {
+            paddingBottom: 5
+        },
         dropShadowLarge: {
             shadowColor: "#000",
             shadowOffset: {
@@ -146,15 +152,7 @@ export default (styles = {
                 marginTop: spacingSizes.medium
             }
         })
-    },
-    topTabs: StyleSheet.create({
-        withPaddingTop: {
-            paddingTop: 5
-        },
-        withPaddingBottom: {
-            paddingBottom: 5
-        }
-    })
+    }
 });
 
 export const card = {

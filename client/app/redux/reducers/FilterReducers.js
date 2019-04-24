@@ -47,8 +47,8 @@ export const filtersList = createReducer(initialState, {
 
     [types.ADD_FILTER](state, action) {
         const filtersObject = state.data || {};
-        const { menuItemID, menuItemName } = action.payload;
-        filtersObject[menuItemID] = menuItemName;
+        const { allergen } = action.payload;
+        filtersObject[allergen] = true;
 
         return {
             ...state,
@@ -57,9 +57,9 @@ export const filtersList = createReducer(initialState, {
     },
     [types.REMOVE_FILTER](state, action) {
         const filtersObject = state.data || {};
-        const menuItemID = action.payload.menuItemID;
+        const {allergen} = action.payload;
         
-        delete filtersObject[menuItemID];
+        filtersObject[allergen] = false;
         
         return {
             ...state,

@@ -16,7 +16,7 @@ class TopTabs extends Component {
         // first tab is default selected
         current: this.props.tabButtons[0]
     };
-    relativeWidth = (100 / this.props.tabButtons.length) + '%';
+    relativeWidth = () => (100 / this.props.tabButtons.length) + '%';
 
     // Background and text colors change depending on if tab is selected
     bgColor = (tabButton) => { return (tabButton.tabName == this.state.current.tabName) ? colors.primary : colors.secondary };
@@ -40,7 +40,7 @@ class TopTabs extends Component {
                                     borderColor: colors.primary, 
                                     borderWidth: 0.5, 
                                     backgroundColor: this.bgColor(tabButton), 
-                                    width: this.relativeWidth, 
+                                    width: this.relativeWidth(), 
                                     opacity: tabButton.opacity 
                                 }}
                                 onPress={() => {

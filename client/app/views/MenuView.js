@@ -159,12 +159,12 @@ class MenuView extends Component {
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
                         <AnimatedListItem key="toptabs" index={3}>
-                            <View style={{...styles.topTabs.withPaddingTop}}>
+                            <View style={{...styles.container.withPaddingTop}}>
                                 <TopTabs tabButtons={this.dayTabButtons()} />
                             </View>
                             <View style={{
                                 paddingTop: 2, 
-                                ...styles.topTabs.withPaddingBottom
+                                ...styles.container.withPaddingBottom
                             }}>
                                 <TopTabs tabButtons={this.dynamicTabButtons()} />
                             </View>
@@ -203,9 +203,7 @@ class MenuView extends Component {
 
     isFiltered = (dish) => {
         // Check user filter preferences vs dish's allergens
-        const filters = this.props.allergensList;
-        // TODO: below to be used once /api/filters implemented
-        // const filters = this.props.filtersList.data;
+        const filters = this.props.filtersList.data;
         if (filters.Vegetarian && !dish.isVegetarian) {
             return true;
         }
@@ -216,7 +214,7 @@ class MenuView extends Component {
             return true;
         }
         else {
-            for (index = 0; index < dish.allergens.length; index++) {
+            for (var index = 0; index < dish.allergens.length; index++) {
                 if (filters[dish.allergens[index]]){
                     return true;
                 } 
@@ -236,4 +234,4 @@ class MenuView extends Component {
     }
 }
 
-export default connectToRedux(MenuView, ['menusList', 'diningHallsList', 'allergensList', 'filtersList']);
+export default connectToRedux(MenuView, ['menusList', 'diningHallsList', 'filtersList']);
