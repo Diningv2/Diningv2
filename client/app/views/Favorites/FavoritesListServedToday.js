@@ -34,11 +34,18 @@ class FavoritesListServedToday extends React.Component {
         const dish = this.props.favoritesList.data[dishID];
 
         return (
+        <View>
+            {dish && 
             <AnimatedListItem key={dishID}>
                 <View style={{...styles.container.spaceBelowSmall}}>
                     <FavoriteServedTodayCard favoriteDish={dish} />
                 </View>
             </AnimatedListItem>
+        
+        }
+        </View>
+        
+           
         );
     }
 

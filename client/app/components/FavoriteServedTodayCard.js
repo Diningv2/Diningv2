@@ -24,24 +24,37 @@ class FavoriteServedTodayCard extends React.Component {
     }
 
     // Temporary fix: if only a string is passed in, 
-    // Set meal to Lunch and location to Hopper (randomly chosen)
+    // Sets meal and lunch location to Unknown
     getDishObject = (dishName) => {
         const dish = {
-            name: dishName,
-            meal: "Unknown",
-            location: "Unknown"
-             
+            name: "Nothing",
+            meal: "Lunch",
+            location: "Unknown" 
         }
         return dish
     }
     
+    isString = (dish) => {
+        return typeof dish === 'string' || dish instanceof String;
+    }
     
 
     render() {
         const { favoriteDish } = this.props;
         // If favoriteDish is an object, proceed, otherwise put the string in an object
-        const favDishObject = favoriteDish.name ? favoriteDish : getDishObject(favoriteDish);
-        const { name, meal, location } = favDishObject;
+        // const favDishObject = favoriteDish.name ? favoriteDish : getDishObject(favoriteDish);
+        var favDishObject = undefined;
+        
+        favDishObject = favoriteDish;
+           
+        
+        // const { name, meal, location } = favDishObject;
+        // const { name } = favDishObject;
+        const name = favDishObject.hasOwnProperty('name') ? favDishObject.name : favDishObject;
+        const meal = favDishObject.hasOwnProperty('meal') ? favDishObject.meal : ["UNKNOWN"];
+        const location = favDishObject.hasOwnProperty('location') ? favDishObject.location : ["UNKOWN"];
+        
+
         const mealsString = this.formatMealsString(meal);
         const locationsString = this.formatLocationsString(location);
 
