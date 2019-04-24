@@ -159,12 +159,12 @@ class MenuView extends Component {
                 {hasLoadedSuccessfully &&
                     <View style={{ flex: 1 }}>
                         <AnimatedListItem key="toptabs" index={3}>
-                            <View style={{...styles.topTabs.withPaddingTop}}>
+                            <View style={{...styles.container.withPaddingTop}}>
                                 <TopTabs tabButtons={this.dayTabButtons()} />
                             </View>
                             <View style={{
                                 paddingTop: 2, 
-                                ...styles.topTabs.withPaddingBottom
+                                ...styles.container.withPaddingBottom
                             }}>
                                 <TopTabs tabButtons={this.dynamicTabButtons()} />
                             </View>
@@ -216,7 +216,7 @@ class MenuView extends Component {
             return true;
         }
         else {
-            for (index = 0; index < dish.allergens.length; index++) {
+            for (var index = 0; index < dish.allergens.length; index++) {
                 if (filters[dish.allergens[index]]){
                     return true;
                 } 

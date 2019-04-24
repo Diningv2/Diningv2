@@ -26,7 +26,7 @@ import { getFavorites } from './app/redux/actions/FavoritesActions';
 import BottomTabs from './app/components/BottomTabs';
 
 // Configuring logger for the state of our app
-const loggerMiddleware = createLogger({ predicate: (getState, action) => true});
+const loggerMiddleware = createLogger({ predicate: (getState, action) => false});
 
 // Configuring our navigation middleware
 const Router = MasterView;
