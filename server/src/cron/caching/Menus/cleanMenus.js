@@ -7,6 +7,6 @@ export default async function cleanMenus() {
         await firestore.doc("menus/today").set({});
         await firestore.doc("menus/tomorrow").set({});
     } catch (e) {
-        console.error(E_DB_WRITE + e);
+        console.error(`${E_DB_WRITE}: ${e}`);
     }
 }

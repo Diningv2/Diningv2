@@ -4,7 +4,7 @@ import getMenuItemsToday from "./getMenuItemsToday";
 import { E_DB_WRITE, E_NO_API_RES } from "../../../config/constants";
 
 export default async function cacheFavorites() {
-	var menuItems = undefined;
+    var menuItems = undefined;
     try {
         menuItems = await getMenuItemsToday();
     } catch (e) {
@@ -12,11 +12,8 @@ export default async function cacheFavorites() {
     }
 
     try {
-        menuItems &&
-            (await firestore
-                .doc("favorites/today")
-                .set(menuItems));
+        menuItems && (await firestore.doc("favorites/today").set(menuItems));
     } catch (e) {
-        console.error(E_DB_WRITE + e);
+        console.error(`${E_DB_WRITE}: ${e}`);
     }
 }

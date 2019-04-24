@@ -13,15 +13,15 @@ export default async function getFavorites(query) {
     menusDoc = await firestore.doc("menus/menuItems").get();
     favoritesTodayDoc = await firestore.doc("favorites/today").get();
   } catch (e) {
-    throw new Error(constants.E_DB_READ + e);
+    throw new Error(`${constants.E_DB_READ}: ${e}`);
   }
 
   if (!usersDoc.exists) {
-    throw new Error(constants.E_DB_NOENT + "favorites/users");
+    throw new Error(`${constants.E_DB_NOENT}: favorites/users`);
   } else if (!menusDoc.exists) {
-    throw new Error(constants.E_DB_NOENT + "menus/menuItems");
+    throw new Error(`${constants.E_DB_NOENT}: menus/menuItems`);
   } else if (!favoritesTodayDoc.exists) {
-    throw new Error(constants.E_DB_NOENT + "favorites/today");
+    throw new Error(`${constants.E_DB_NOENT}: favorites/today`);
   } else if (!token) {
     throw new Error(constants.E_BAD_FAVE_GET_REQ);
   }
@@ -41,7 +41,7 @@ export default async function getFavorites(query) {
             .doc("favorites/users")
             .update({ [token]: [] });
   } catch (e) {
-    throw new Error(constants.E_DB_WRITE + e);
+    throw new Error(`${constants.E_DB_WRITE}: ${e}`);
   }
 
   return menuItems;

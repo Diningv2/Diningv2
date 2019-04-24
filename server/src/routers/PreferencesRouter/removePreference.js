@@ -12,7 +12,7 @@ export default async function removePreference(token, preference) {
             [token]: { ...preferences.data()[token], [preference]: false }
         });
     } catch (e) {
-        throw new Error(E_DB_WRITE + e);
+        throw new Error(`${E_DB_WRITE}: ${e}`);
     }
 }
 

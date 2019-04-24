@@ -15,6 +15,6 @@ export default async function removeFavorite(token, menuItemID) {
             [token]: firebase.firestore.FieldValue.arrayRemove(`${menuItemID}`)
         });
     } catch (e) {
-        throw new Error(E_DB_WRITE + e);
+        throw new Error(`${E_DB_WRITE}: ${e}`);
     }
 }
