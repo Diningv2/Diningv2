@@ -68,7 +68,7 @@ class TopTabs extends Component {
 
 const tabStyles = StyleSheet.create({
     container: {
-        paddingHorizontal: 0,
+        paddingHorizontal: 5,
     },
     topTabs: {
         flexDirection: 'row',

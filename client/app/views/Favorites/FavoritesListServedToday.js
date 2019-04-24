@@ -10,6 +10,7 @@ import connectToRedux from '../../redux/lib/connectToRedux';
 import sp from '../../redux/lib/stateProperties';
 
 class FavoritesListServedToday extends React.Component {
+
     constructor(props) {
         super(props);
     }
@@ -19,8 +20,14 @@ class FavoritesListServedToday extends React.Component {
     }
 
     prompts = {
-        favoritesNotYetVisible: "It looks like you have some favorites, but you won't see them until our servers figure out where they're being served!",
-        hint: "(Keep in mind, if you favorite something in the middle of the day, you might need to restart the app before it shows up here)"
+        favoritesNotYetVisible: (
+            "It looks like you have some favorites, but you won't see them " 
+            + "until our servers figure out where they're being served!"
+        ),
+        hint: (
+            "(Keep in mind, if you favorite something in the middle of the "
+            + "day, you might need to restart the app before it shows up here!)"
+        ),
     }
 
     componentDidMount() {
@@ -51,18 +58,19 @@ class FavoritesListServedToday extends React.Component {
         if (this.state.servedTodayArray.length == 0) {
             return (
                 <CenterTextView message={this.prompts.favoritesNotYetVisible} />
-            )
+            );
         }
-
         return (
-            <View style={{ marginHorizontal: 10 }}>
+            <View style={{marginHorizontal: 10, flex: 1}}>
                 <Hint message={this.prompts.hint} />
-                <DV2ScrollView
-                    array={this.state.servedTodayArray}
-                    render={(dishID) => this.renderFavesList(dishID)}
-                />
+                <View style={{ flex: 1}}>
+                    <DV2ScrollView 
+                        array={this.state.servedTodayArray}
+                        render={(dishID) => this.renderFavesList(dishID)}
+                    />
+                </View>
             </View>
-        )
+        );
     }
 }
 
