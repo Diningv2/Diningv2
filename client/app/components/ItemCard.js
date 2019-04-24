@@ -15,12 +15,12 @@ export const ItemCard = (props) => {
 
     const subTitleStyle = {
         ...styles.font.type.secondaryRegular,
-        ...styles.font.size.smallMedium
+        ...styles.font.size.small,
     }
 
     const captionStyle = {
         ...styles.font.type.primaryRegular,
-        ...styles.font.size.smallMedium,
+        ...styles.font.size.small,
         opacity: 0.7
     }
 
