@@ -6,7 +6,7 @@ export class DV2ScrollView extends React.Component {
         return (
             <View>
                 <ScrollView
-                    style={{ marginHorizontal: 20 }}
+                    style={{ marginHorizontal: 15 }}
                     contentContainerStyle={{
                         flexGrow: 1,
                         justifyContent: 'space-between',
