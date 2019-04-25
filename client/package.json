@@ -2,6 +2,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject"
@@ -27,7 +29,10 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^5.0.0",
+    "fetch-mock": "^7.3.3",
+    "jest": "^24.7.1",
+    "redux-mock-store": "^1.5.3"
   },
   "private": true
 }
