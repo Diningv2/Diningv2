@@ -9,6 +9,7 @@ import styles from '../../config/styles';
 import connectToRedux from '../../redux/lib/connectToRedux';
 import sp from '../../redux/lib/stateProperties';
 
+// Renders JSX with content for "Served Today" favorites tab
 class FavoritesListServedToday extends React.Component {
 
     constructor(props) {
@@ -30,6 +31,7 @@ class FavoritesListServedToday extends React.Component {
         ),
     }
 
+    // On mount, set state with list of favorites being served today
     componentDidMount() {
         const { data } = this.props.favoritesList;
         const servedTodayArray = Object.keys(data)
@@ -37,9 +39,9 @@ class FavoritesListServedToday extends React.Component {
         this.setState({ servedTodayArray });
     }
 
+    // Returns card for a dish in the ScrollView as identified by dishID
     renderFavesList = (dishID) => {
         const dish = this.props.favoritesList.data[dishID];
-
         return (
             <View key={dishID}>
                 {dish &&

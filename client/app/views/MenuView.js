@@ -16,6 +16,7 @@ import formattedMealTypes from '../config/formattedMealTypes';
 import { AnimatedListItem } from '../components/Animatable';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 
+// Renders the menu for a given DHall, with today/tomorrow and meal top tabs
 class MenuView extends Component {
 
     constructor(props) {
@@ -31,22 +32,19 @@ class MenuView extends Component {
         meal: ''
     }
 
-    // We need to call performSearch with the new
-    // search term when a top tab is pressed,
-    // so we need to keep a local state of the search term
+    // Need to call performSearch with the new search term when a top tab is 
+    // pressed, so we need to keep a local state of the search term
     updateSearchTerm = (searchTerm) => {
         this.setState({ searchTerm: searchTerm });
     }
 
     performSearch = (searchTerm) => {
-        // If the search term is empty
-        // just output everything
+        // If the search term is empty, just output everything
         if (searchTerm.trim() == "") {
             this.setState({
                 mealArrayFiltered: this.state.mealArray
-            })
-            // Otherwise do an actual search on the array
-        } else {
+            });
+        } else { // Otherwise do an actual search on the array
             const mealArrayFiltered = search(searchTerm, this.state.mealArray, ['name']);
             this.setState({ mealArrayFiltered });
         }
@@ -94,7 +92,7 @@ class MenuView extends Component {
                     }, 500)
                 }
             }
-        })
+        });
         return tabs;
     }
 
@@ -147,7 +145,7 @@ class MenuView extends Component {
                     }, 500);
                 }
             }
-        })
+        });
 
         return tabButtons;
     }
@@ -198,7 +196,7 @@ class MenuView extends Component {
                     </View>
                 }
             </View>
-        )
+        );
     }
 
     formatted = {
@@ -215,8 +213,8 @@ class MenuView extends Component {
         Gluten: "gluten"
     }
 
+    // Check user filter preferences vs dish's allergens
     isFiltered = (dish) => {
-        // Check user filter preferences vs dish's allergens
         const filters = this.props.filtersList.data;
         console.log(filters);
         if (filters.Vegetarian && !dish.isVegetarian) {
@@ -255,8 +253,8 @@ class MenuView extends Component {
         );
     }
 
+    // Render's a given dish in the ScrollView
     renderMenu = (dish, index) => {
-        // render function needed by dv2scrollview
         const filtered = this.isFiltered(dish);
         console.log("TRY1.1 " + dish.name + " filtered? " + filtered);
         return (

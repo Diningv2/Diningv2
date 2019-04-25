@@ -11,6 +11,7 @@ import FavoritesListAll from './FavoritesListAll';
 import FavoritesListServedToday from './FavoritesListServedToday';
 import styles from '../../config/styles';
 
+// Controls the top tabs for Favorites bottom tab
 class MainView extends Component {
 
     constructor(props) {
@@ -31,6 +32,7 @@ class MainView extends Component {
         return {tabName: tabName, function: () => this.setState({selectedTab: tabName})}
     })
 
+    // Renders the top tabs and content, otherwise a message that user has no faves
     displayContent = () => {
         if (!this.props.userInformation.notificationID) { // No permission for notifications
             return (
@@ -55,18 +57,18 @@ class MainView extends Component {
             );
         } else {
             return (
-            <View style={{ flex: 1}}>
-                <View style={{...styles.container.withPaddingTop}}>
-                    <TopTabs tabButtons={this.favoritesTabButtons} />
+                <View style={{ flex: 1}}>
+                    <View style={{...styles.container.withPaddingTop}}>
+                        <TopTabs tabButtons={this.favoritesTabButtons} />
+                    </View>
+                    {this.state.selectedTab == this.allFavorites &&
+                        <FavoritesListAll />
+                    }
+                    {this.state.selectedTab == this.servedToday &&
+                        <FavoritesListServedToday /> 
+                    }
                 </View>
-                {this.state.selectedTab == this.allFavorites &&
-                    <FavoritesListAll />
-                }
-                {this.state.selectedTab == this.servedToday &&
-                    <FavoritesListServedToday /> 
-                }
-            </View>
-            )
+            );
         }
     }
 
