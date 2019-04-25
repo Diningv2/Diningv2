@@ -1,7 +1,6 @@
 import { filtersList } from '../../../app/redux/reducers/FilterReducers'
 import * as types from '../../../app/redux/actions/types'
 import { allActions } from '../../../app/redux/actions';
-import stateProperties from '../../../app/redux/lib/stateProperties';
 import { filtersResponse } from '../../config/responseObjects/filtersResponse';
 
 
