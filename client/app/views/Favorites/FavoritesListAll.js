@@ -1,15 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import { AnimatedListItem } from '../../components/Animatable';
-import CenterTextView from '../../components/CenterTextView';
+import Dish from '../../components/Dish';
 import { DV2ScrollView } from '../../components/DV2ScrollView';
-import FavoriteItemCard from '../../components/FavoriteItemCard';
-import styles from '../../config/styles';
+import Hint from '../../components/Hint';
 import connectToRedux from '../../redux/lib/connectToRedux';
 import sp from '../../redux/lib/stateProperties';
-import Hint from '../../components/Hint';
-import Dish from '../../components/Dish';
 
+// Component that renders a complete list of the menu items
+// you've favorited.
 const FavoritesListAll = (props) => {
 
     const renderFavesList = (dishID) => {
