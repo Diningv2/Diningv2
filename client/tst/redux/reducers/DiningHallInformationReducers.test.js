@@ -36,7 +36,7 @@ describe ('DiningHallsInformationReducers', () => {
             ...initialState,
             data: undefined,
             dataObject: undefined,
-            isLoading: false, // set isLoading to false so our UI knows we're not still loading :(
+            isLoading: false, 
             hasError: true,
             errorMessage: failureAction.errorMessage
         });
