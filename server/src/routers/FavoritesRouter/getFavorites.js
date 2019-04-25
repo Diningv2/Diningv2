@@ -2,8 +2,7 @@ import firestore from "../../config/firebase/firebaseConfig";
 
 import * as constants from "../../config/constants";
 
-export default async function getFavorites(query) {
-  const token = query.token;
+export default async function getFavorites(token) {
   let usersDoc = undefined;
   let menusDoc = undefined;
   let favoritesTodayDoc = undefined;

@@ -40,16 +40,25 @@ class MainView extends Component {
             );
         } else if (this.props.favoritesList.isLoading) {
             return <LoadingIndicator />
-        } else if (this.props.favoritesList.data == undefined || Object.keys(this.props.favoritesList.data).length == 0) { // No faves
+        } else if ( // No faves
+            this.props.favoritesList.data == undefined 
+            || Object.keys(this.props.favoritesList.data).length == 0
+        ) { 
             return (
                 <View style={{flex: 1}}>
-                    <CenterTextView message="Looks like you don't have any favorites yet. Go into the dining hall menus and tap on some hearts to favorite dishes!" />
+                    <CenterTextView message={
+                        "Looks like you don't have any favorites yet. "
+                        + "Go into the dining hall menus and tap on some "
+                        + "hearts to favorite dishes!"} 
+                    />
                 </View>
             );
         } else {
             return (
-            <View style={{...styles.container.withPaddingTop}}>
-                <TopTabs tabButtons={this.favoritesTabButtons} />
+            <View style={{ flex: 1}}>
+                <View style={{...styles.container.withPaddingTop}}>
+                    <TopTabs tabButtons={this.favoritesTabButtons} />
+                </View>
                 {this.state.selectedTab == this.allFavorites &&
                     <FavoritesListAll />
                 }
