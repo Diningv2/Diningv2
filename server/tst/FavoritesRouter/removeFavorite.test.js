@@ -16,16 +16,16 @@ test("removeFavorite() -- normal function", async () => {
     await expect(firestore.doc).toHaveBeenCalledWith("favorites/menuItems");
     await expect(firestore.doc).toHaveBeenCalledWith("favorites/users");
     await expect(firestore.doc("favorites/menuItems").update).toHaveBeenCalledWith({
-        987654321: "ExponentPushToken[123456789]"
+        987654321: 123456789
     });
     await expect(firestore.doc("favorites/users").update).toHaveBeenCalledWith({
-        123456789: 987654321
+        123456789: "987654321"
     });
     await expect(firebase.firestore.FieldValue.arrayRemove).toHaveBeenCalledWith(
-        "ExponentPushToken[123456789]"
+        123456789
     );
     await expect(firebase.firestore.FieldValue.arrayRemove).toHaveBeenCalledWith(
-        987654321
+        "987654321"
     );
 
 });

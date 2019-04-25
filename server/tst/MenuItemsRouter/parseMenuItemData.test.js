@@ -1,50 +1,56 @@
 import parseMenuItemData from "../../src/routers/MenuItemsRouter/parseMenuItemData";
 import parseNutritionInfo from "../../src/routers/MenuItemsRouter/parseNutritionInfo";
+import parseIngredients from "../../src/routers/MenuItemsRouter/parseIngredients";
 import * as responses from "../config/menuItemResponses";
 import { E_NO_API_RES } from "../../src/config/constants";
 
 jest.mock("../../src/routers/MenuItemsRouter/parseNutritionInfo");
+jest.mock("../../src/routers/MenuItemsRouter/parseIngredients");
 
 test("parseMenuItemData() -- normal function", () => {
     parseNutritionInfo.mockImplementationOnce(
         () => responses.nutritionWaffleResponse
     );
+    parseIngredients.mockImplementationOnce(
+        () => responses.ingredientWaffleList
+    );
     expect(
         parseMenuItemData(
-            responses.nutritionWaffleData,
-            responses.filterWaffleData,
-            responses.ingredientWaffleData
+            responses.axiosNutritionWaffleData,
+            responses.axiosFilterWaffleData,
+            responses.axiosIngredientWaffleData
         )
     ).toEqual(responses.menuItemDataResponse);
-    expect(parseNutritionInfo).toHaveBeenCalledWith(responses.nutritionWaffle);
+    expect(parseNutritionInfo).toHaveBeenCalledWith(responses.nutritionCols, responses.nutritionWaffle);
+    expect(parseIngredients).toHaveBeenCalledWith(responses.ingredientCols, responses.ingredientWaffle);
 });
 
 test("parseMenuItemData() -- empty nutrition input", () => {
-    expect(() =>
+    expect(
         parseMenuItemData(
             {},
-            responses.filterWaffleData,
-            responses.ingredientWaffleData
+            responses.axiosFilterWaffleData,
+            responses.axiosIngredientWaffleData
         )
-    ).toThrow(E_NO_API_RES);
+    ).toEqual(responses.emptyMenuItemDataResponse); 
 });
 
 test("parseMenuItemData() -- empty filter input", () => {
-    expect(() =>
+    expect(
         parseMenuItemData(
-            responses.nutritionWaffleData,
+            responses.axiosNutritionWaffleData,
             {},
-            responses.ingredientWaffleData
+            responses.axiosIngredientWaffleData
         )
-    ).toThrow(E_NO_API_RES);
+    ).toEqual(responses.emptyMenuItemDataResponse); 
 });
 
 test("parseMenuItemData() -- empty ingredient input", () => {
-    expect(() =>
+    expect(
         parseMenuItemData(
-            responses.nutritionWaffleData,
-            responses.filterWaffleData,
+            responses.axiosNutritionWaffleData,
+            responses.axiosFilterWaffleData,
             {}
         )
-    ).toThrow(E_NO_API_RES);
+    ).toEqual(responses.emptyMenuItemDataResponse); 
 });

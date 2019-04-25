@@ -22,12 +22,12 @@ test("getMenuIdInfo() -- normal function", async () => {
         () => responses.menuItemDataResponse
     );
     await expect(getMenuIdInfo(5908402)).resolves.toEqual(
-        responses.menuItemDataResponse
+        responses.menuIdInfoResponse
     );
     expect(parseMenuItemData).toHaveBeenCalledWith(
-        responses.nutritionWaffleData,
-        responses.filterWaffleData,
-        responses.ingredientWaffleData
+        responses.axiosNutritionWaffleData,
+        responses.axiosFilterWaffleData,
+        responses.axiosIngredientWaffleData
     );
 });
 

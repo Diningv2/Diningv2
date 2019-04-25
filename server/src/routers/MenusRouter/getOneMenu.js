@@ -24,5 +24,5 @@ export default async function getOneMenu(location) {
     const endpoint =
         MENUS_URI + queryBuilder({ version: YD_VERSION, location });
     const response = await axios.get(endpoint);
-    return processMenu(response.data);
+    return processMenu(response);
 }
