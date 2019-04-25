@@ -68,7 +68,7 @@ export default function parseMenuItemData(
     });
 
     return {
-        allergens,
+        allergens, 
         nutrition,
         ingredients,
         isVegan,
