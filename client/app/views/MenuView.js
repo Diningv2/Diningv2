@@ -216,7 +216,6 @@ class MenuView extends Component {
     // Check user filter preferences vs dish's allergens
     isFiltered = (dish) => {
         const filters = this.props.filtersList.data;
-        console.log(filters);
         if (filters.Vegetarian && !dish.isVegetarian) {
             return true;
         }
@@ -256,7 +255,6 @@ class MenuView extends Component {
     // Render's a given dish in the ScrollView
     renderMenu = (dish, index) => {
         const filtered = this.isFiltered(dish);
-        console.log("TRY1.1 " + dish.name + " filtered? " + filtered);
         return (
             <AnimatedListItem key={dish.name} index={index}>
                 <Dish key={dish.name} dish={dish} filtered={filtered}/>
