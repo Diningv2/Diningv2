@@ -11,21 +11,14 @@ import dHallIDs from '../config/dHallIDs';
 import { AnimatedListItem } from '../components/Animatable';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 
-// Shows list of dining halls with busyness bar
+/** Shows list of dining halls with busyness */
 class DiningHallsView extends Component {
 
     constructor(props) {
         super(props);
     }
 
-    componentDidMount() {
-        // If not yet loaded, call redux action to get dhalls from yale's api
-        if (this.props.diningHallsList.isLoading) {
-            this.props.getAllDiningHallsInformation();
-        }
-    }
-
-    // Renders a given dining hall + busyness meter in the ScrollView
+    /** Renders a given dining hall + busyness meter in the ScrollView */
     renderDiningHall = (diningHall, index) => {
         return (
             <AnimatedListItem key={index} index={index}>
@@ -47,6 +40,10 @@ class DiningHallsView extends Component {
         )
     }
 
+    /** Renders a list of dining halls, otherwise it will display
+     * the loading indicator if the dining halls list still happens
+     * to be loading
+     */
     render() {
         return (
             <View style={{ flex: 1 }}>

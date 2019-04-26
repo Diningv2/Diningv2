@@ -1,17 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
 import { AnimatedListItem } from '../../components/Animatable';
+import Dish from '../../components/Dish';
 import { DV2ScrollView } from '../../components/DV2ScrollView';
-import styles from '../../config/styles';
+import Hint from '../../components/Hint';
 import connectToRedux from '../../redux/lib/connectToRedux';
 import sp from '../../redux/lib/stateProperties';
-import Hint from '../../components/Hint';
-import Dish from '../../components/Dish';
 
-// Returns JSX with content for "All Favorites" tab
+/** Returns JSX with content for "All Favorites" tab */
 const FavoritesListAll = (props) => {
 
-    // Returns JSX for a dish in the ScrollView as identified by dishID
+    /** Returns JSX for a dish in the ScrollView as identified by dishID */
     const renderFavesList = (dishID) => {
         // Because the backend response schema for getFavorites is different than the
         // redux store response when you favorite something immediately in the app.

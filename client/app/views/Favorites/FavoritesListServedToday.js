@@ -23,7 +23,7 @@ class FavoritesListServedToday extends React.Component {
     prompts = {
         favoritesNotYetVisible: (
             "It looks like you have some favorites, but you won't see them " 
-            + "until our servers figure out where they're being served!"
+            + "until our servers figure out whether they're being served!"
         ),
         hint: (
             "(Keep in mind, if you favorite something in the middle of the "
@@ -50,12 +50,13 @@ class FavoritesListServedToday extends React.Component {
                             <FavoriteServedTodayCard favoriteDish={dish} />
                         </View>
                     </AnimatedListItem>
-
                 }
             </View>
         );
     }
 
+    // Render list of favorite dishes served today (if any)
+    // Display a "no favorites visible" prompt
     render() {
         if (this.state.servedTodayArray.length == 0) {
             return (

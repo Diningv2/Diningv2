@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import BottomTabs from '../components/BottomTabs';
 import TopTabs from '../components/TopTabs';
 
+/** VIEW USED FOR DEVELOPMENT PURPOSES ONLY */
 class TopTabsTemplateView extends Component {
 
   constructor(props) {

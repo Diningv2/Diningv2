@@ -11,6 +11,9 @@ class FavoriteServedTodayCard extends React.Component {
         super(props);
     }
 
+    /** Meal types need to display their
+     * english-readable (formatted) names
+     */
     formatMealsString = (mealsArray) => {
         const formattedMealTypesArray = (mealsArray || []).map(mealType => {
             return formattedMealTypes[mealType];
@@ -19,20 +22,14 @@ class FavoriteServedTodayCard extends React.Component {
         return formatArrayAsString(formattedMealTypesArray);
     }
 
+    /** Display locations in english-readable format */
     formatLocationsString = (locationsArray) => {
         return "Served at " + formatArrayAsString(locationsArray);
     }
 
+    /** Render a single favorite dish's info on the item card */
     render() {
-        const { favoriteDish } = this.props;
-
-        // populate variables based on that properties favoriteDish contains
-        // if doesn't contain name field, favoriteDish is just a string
-        const name = favoriteDish.hasOwnProperty('name') ? favoriteDish.name : favDishObject;
-        const meal = favoriteDish.hasOwnProperty('meal') ? favoriteDish.meal : ["UNKNOWN"];
-        const location = favoriteDish.hasOwnProperty('location') ? favoriteDish.location : ["UNKOWN"];
-        
-
+        const { meal, name, location } = this.props.favoriteDish; 
         const mealsString = this.formatMealsString(meal);
         const locationsString = this.formatLocationsString(location);
 

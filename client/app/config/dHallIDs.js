@@ -1,3 +1,6 @@
+/** List of dining hall names and their corresponding IDs
+ * Used for constant access-time/indexing of API data
+ */
 const dHallIDs = {
     "Berkeley": 1,
     "Branford": 2,
