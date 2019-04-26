@@ -4,6 +4,16 @@ import getLocations from "./getLocations";
 
 import { E_BAD_LOC_REQ } from "../../config/constants";
 
+/**
+ *
+ * The main location router, which receives the reuests
+ *
+ * Calls the getLocation function, and handles error status
+ *
+ * No params or return value
+ * 
+ */
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {
