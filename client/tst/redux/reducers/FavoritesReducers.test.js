@@ -1,7 +1,7 @@
-import { filtersList } from '../../../app/redux/reducers/FilterReducers'
+import { favoritesList } from '../../../app/redux/reducers/FavoritesReducers'
 import * as types from '../../../app/redux/actions/types'
 import { allActions } from '../../../app/redux/actions';
-import { filtersResponse } from '../../config/responseObjects/filtersResponse';
+import { favoritesResponse } from '../../config/responseObjects/favoritesResponse';
 
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 const loadedState = {
     isLoading: true,
     errorMessage: "",
-    data: filtersResponse,
+    data: favoritesResponse,
 }
 
 function copyObject(src) {
@@ -21,25 +21,25 @@ function copyObject(src) {
   }
 
 
-describe ('FilterReducers', () => {
+describe ('FavoritesReducers', () => {
 
-    it('should handle GET_FILTERS_REQUEST', () => {
+    it('should handle GET_FAVORITES_REQUEST', () => {
         const requestAction = {
-            type: types.GET_FILTERS_REQUEST
+            type: types.GET_FAVORITES_REQUEST
         };
-        expect(filtersList(initialState, requestAction)).toEqual({
+        expect(favoritesList(initialState, requestAction)).toEqual({
             ...initialState, 
             hasError: false, 
             isLoading: true
         });
     });
 
-    it('should handle GET_FILTERS_FAILURE', () => {
+    it('should handle GET_FAVORITES_FAILURE', () => {
         const failureAction = {
-            type: types.GET_FILTERS_FAILURE,
+            type: types.GET_FAVORITES_FAILURE,
             errorMessage: 'errorMessage'
         };
-        expect(filtersList(initialState, failureAction)).toEqual({
+        expect(favoritesList(initialState, failureAction)).toEqual({
             ...initialState,
             data: undefined,
             isLoading: false, 
@@ -48,52 +48,53 @@ describe ('FilterReducers', () => {
         });
     });
 
-    it('should handle GET_FILTERS_SUCCESS', () => {
+    it('should handle GET_FAVORITES_SUCCESS', () => {
         const successAction = {
-            type: types.GET_FILTERS_SUCCESS,
+            type: types.GET_FAVORITES_SUCCESS,
             payload: {
-                filters: filtersResponse
+                favorites: favoritesResponse
             }
         };
-        expect(filtersList(initialState, successAction)).toEqual({
+        expect(favoritesList(initialState, successAction)).toEqual({
             ...initialState,
-            data: successAction.payload.filters,
+            data: successAction.payload.favorites,
             hasError: false,
             isLoading: false
         });
     });
 
-    it('should handle ADD_FILTER', () => {
+    it('should handle ADD_FAVORITE', () => {
         const addAction = {
-            type: types.ADD_FILTER,
+            type: types.ADD_FAVORITE,
             payload: {
-                allergen: 'soy'
+                menuItemID: '1234',
+                menutItemName: 'Yale Creamy Mac and Cheese'
             }
         };
         // Expect new data to be old data with soy set to true
         // Create the expected object here
         const updatedData = copyObject(loadedState.data);
-        updatedData[addAction.payload.allergen] = true;
+        updatedData[addAction.payload.menuItemID] = addAction.payload.menuItemName
 
-        expect(filtersList(loadedState, addAction)).toEqual({
+        expect(favoritesList(loadedState, addAction)).toEqual({
             ...loadedState,
             data: updatedData,
         });
     });
 
-    it('should handle REMOVE_FILTER', () => {
+    it('should handle REMOVE_FAVORITE', () => {
         const removeAction = {
-            type: types.REMOVE_FILTER,
+            type: types.REMOVE_FAVORITE,
             payload: {
-                allergen: 'fishSeafood'
+                menuItemID: '5416409'
             }
         };
         // Expect new data to be old data with fishSeafood set to false
         // Create the expected object here
         const updatedData = copyObject(loadedState.data);
-        updatedData[removeAction.payload.allergen] = false;
+        delete updatedData[removeAction.payload.menuItemID];
 
-        expect(filtersList(loadedState, removeAction)).toEqual({
+        expect(favoritesList(loadedState, removeAction)).toEqual({
             ...loadedState,
             data: updatedData,
         });
