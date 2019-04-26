@@ -3,7 +3,20 @@ import getHours from "./getHours";
 import locations from "../../config/locations";
 import { E_BAD_LOC_REQ } from "../../config/constants";
 
+/**
+ *
+ * Gets one location's info, using cache for hours when possible
+ *
+ * @param  data [The data from the axios call to yale api]
+ * @param  query [The query with location info]
+ * @param  hoursDoc [The firebase doc object for locations/hours]
+ *
+ * @return {JS Object} [locations api info, such as hours, busyness, ...]
+ * 
+ */
+
 export default async function getOneLocation(data, query, hoursDoc) {
+    // Filter by data location
     const location = data.DATA.filter(
         entry => entry[data.COLUMNS.indexOf("ID_LOCATION")] == query.location
     );
@@ -12,6 +25,7 @@ export default async function getOneLocation(data, query, hoursDoc) {
         let todayHours = undefined;
         let tomorrowHours = undefined;
 
+        // Use cache when possible
         try {
             todayHours= hoursDoc && 
                         hoursDoc.data() && 
@@ -30,6 +44,7 @@ export default async function getOneLocation(data, query, hoursDoc) {
             console.error(e);
         }
         
+        // Format output object
         return {
             name: entry[data.COLUMNS.indexOf("DININGLOCATIONNAME")],
             todayHours,
