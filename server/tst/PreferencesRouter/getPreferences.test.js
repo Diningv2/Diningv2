@@ -22,7 +22,7 @@ test('getPreferences() -- basic normal function', async () => {
 test('getPreferences() -- firebase error', async () => {
 	firebaseTest(1);
     await expect(getPreferences(123456789)).rejects
-    	.toThrow(constants.E_DB_NOENT + "preferences/users"); 
+    	.toThrow(constants.E_DB_NOENT + ": preferences/users"); 
 });
 
 test("getPreferences() -- bad request", async () => {
