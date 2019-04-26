@@ -232,7 +232,6 @@ class MenuView extends Component {
     /** Check user filter preferences vs dish's allergens */
     isFiltered = (dish) => {
         const filters = this.props.filtersList.data;
-        console.log(filters);
         if (filters.Vegetarian && !dish.isVegetarian) {
             return true;
         }

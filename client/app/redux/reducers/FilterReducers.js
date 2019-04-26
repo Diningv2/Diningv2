@@ -58,7 +58,6 @@ export const filtersList = createReducer(initialState, {
     [types.REMOVE_FILTER](state, action) {
         const filtersObject = state.data || {};
         const {allergen} = action.payload;
-        
         filtersObject[allergen] = false;
         
         return {
