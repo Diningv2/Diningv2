@@ -6,7 +6,7 @@ export const nutritionWaffle = [5908402, "Vegan Waffles", "1 Each", "278 cal", "
 export const filterWaffle = [5908402.0, "Vegan Waffles", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, "Produced in a facility that contains nuts, peanuts, and gluten"];
 export const ingredientWaffle = [[5908402, "Soy Milk"], [5908402, "All-Purpose Flour"], [5908402, "Powdered Sugar"], [5908402, "Baking Powder"], [5908402, "Earth Balance Vegan Butter Spread"], [5908402, "Vanilla Extract"], [5908402, "Baking Soda"], [5908402, "Kosher Salt"], [5908402, "Yellow Cornmeal"]];
 
-export const ingredientWaffleList = ["Soy Milk","All-Purpose Flour","Powdered Sugar","Baking Powder","Earth Balance Vegan Butter Spread","Vanilla Extract","Baking Soda","Kosher Salt","Yellow Cornmeal"]
+export const ingredientWaffleList = ["Soy milk","All-purpose flour","Powdered sugar","Baking powder","Earth balance vegan butter spread","Vanilla extract","Baking soda","Kosher salt","Yellow cornmeal"]
 export const allergenWaffleList = ["Soy", "Wheat", "Gluten"];
 
 export const nutritionWaffleData = { "COLUMNS": nutritionCols, "DATA": [nutritionWaffle] };

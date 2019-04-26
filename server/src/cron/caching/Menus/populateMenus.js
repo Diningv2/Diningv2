@@ -9,8 +9,8 @@ import { E_DB_WRITE } from "../../../config/constants";
 export default async function populateMenus() {
     const date = new Date();
     const timestamp = date.toDateString();
-    console.log("Populating Firestore...");
     for (let location in locations) {
+        console.log(`Attempting to populate ${locations[location]}...`);
         const menu = await getOneMenu(location);
         try {
             const mergedMenu =
@@ -33,7 +33,8 @@ export default async function populateMenus() {
                 }));
         } catch (e) {
             console.error(`${E_DB_WRITE}: ${e}`);
+            console.log(`Failed to populate ${locations[location]}.`);
         }
+        console.log(`Successfully populated ${locations[location]}.`);
     }
-    console.log("Finished populating Firestore.");
 }

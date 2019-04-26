@@ -12,24 +12,24 @@ beforeEach(() => {
 });
 
 test('getFavorites() -- basic normal function', async () => {
-	firebaseTest();
-    await expect(getFavorites(123456789)).resolves.toEqual({}); 
+    firebaseTest();
+    await expect(getFavorites(123456789)).resolves.toEqual({});
 });
 
 test('getFavorites() -- firebase error', async () => {
-	firebaseTest(2);
+    firebaseTest(2);
     await expect(getFavorites(123456789)).rejects
-    	.toThrow(constants.E_DB_NOENT + "favorites/users"); 
+        .toThrow(`${constants.E_DB_NOENT}: favorites/users`);
     firebaseTest(3);
     await expect(getFavorites(123456789)).rejects
-    	.toThrow(constants.E_DB_NOENT + "menus/menuItems"); 
+        .toThrow(`${constants.E_DB_NOENT}: menus/menuItems`);
     firebaseTest(4);
     await expect(getFavorites(123456789)).rejects
-    	.toThrow(constants.E_DB_NOENT + "favorites/today"); 
+        .toThrow(`${constants.E_DB_NOENT}: favorites/today`);
 });
 
 test("getFavorites() -- bad request", async () => {
-	firebaseTest();
+    firebaseTest();
     await expect(getFavorites(undefined)).rejects.toThrow(
         constants.E_BAD_FAVE_GET_REQ
     );

@@ -18,6 +18,6 @@ export default async function addFavorite(token, menuItemID, menuItemName) {
             [menuItemID]: menuItemName
         });
     } catch (e) {
-        throw new Error(E_DB_WRITE + e);
+        throw new Error(`${E_DB_WRITE}: ${e}`);
     }
 }

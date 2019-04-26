@@ -16,9 +16,9 @@ export const E_BAD_FAVE_GET_REQ = "Expo token is required";
 export const E_BAD_PREF_POST_REQ = "Expo token and preference field are required";
 export const E_BAD_PREF_GET_REQ = "Expo token is required";
 
-export const E_DB_READ = "Error getting document: ";
-export const E_DB_WRITE = "Could not write document: ";
-export const E_DB_NOENT = "Document does not exist: ";
+export const E_DB_READ = "Error getting document";
+export const E_DB_WRITE = "Could not write document";
+export const E_DB_NOENT = "Document does not exist";
 
 export const E_PUSH_SEND = "There was an error sending a notification:";
 export const E_CODE_IS = "The error code is";

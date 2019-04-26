@@ -3,10 +3,10 @@ import { E_DB_NOENT } from "../../config/constants";
 export default async function getCachedMenu(location, todayDoc, tomorrowDoc) {
     console.log(`Fetching data for ${location} from Firestore cache...`);
     if (!todayDoc.exists) {
-        console.error(E_DB_NOENT + "menus/today");
+        console.error(`${E_DB_NOENT}: menus/today`);
         return undefined;
     } else if (!tomorrowDoc.exists) {
-        console.error(E_DB_NOENT + "menus/tomorrow");
+        console.error(`${E_DB_NOENT}: menus/tomorrow`);
         return undefined;
     }
 

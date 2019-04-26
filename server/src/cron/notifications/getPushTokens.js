@@ -7,10 +7,10 @@ export default async function getPushTokens(menuItems) {
     try {
         menuItemsDoc = await firestore.doc("favorites/menuItems").get();
     } catch (e) {
-        throw new Error(E_DB_READ + e);
+        throw new Error(`${E_DB_READ}: ${e}`);
     }
     if (!menuItemsDoc.exists) {
-        throw new Error(E_DB_NOENT + "favorites/menuItems");
+        throw new Error(`${E_DB_NOENT}: favorites/menuItems`);
     } else if (!menuItems) {
         throw new Error(E_NO_API_RES);
     }
