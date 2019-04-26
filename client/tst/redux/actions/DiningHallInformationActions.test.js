@@ -11,7 +11,7 @@ import * as actions from '../../../app/redux/actions/DiningHallInformationAction
 describe("REDUX THUNK ACTION: getAllDiningHallsInformation", () => {
     const endpoint = `${BASE_API_URL}/api/locations`;
 
-    it("tries to fetches all dining halls from our backend API and succeeds", async () => {
+    it("tries to fetch all dining halls from our backend API and succeeds", async () => {
         const store = mockStore();
         
         // Mock our API call to return a successful response
@@ -35,7 +35,7 @@ describe("REDUX THUNK ACTION: getAllDiningHallsInformation", () => {
         fetchMock.restore();
     });
 
-    it("tries to fetches all dining halls from our backend API but fails", async () => {
+    it("tries to fetch all dining halls from our backend API but fails", async () => {
         const store = mockStore();
 
         // Mock our API call to return a failed response
