@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Transition } from 'react-navigation-fluid-transitions';
-
 import connectToRedux from '../redux/lib/connectToRedux';
 
 import Ingredient from './Ingredient';
 import { DV2ScrollView } from './DV2ScrollView';
 import BoolFilters from './BoolFilters';
 
+/** Component that renders a list of Ingredients */
 class Ingredients extends Component {
 
     constructor(props) {
@@ -35,14 +34,12 @@ class Ingredients extends Component {
                         veg={this.props.menuItem.data.isVegetarian}
                         gf={this.props.menuItem.data.isGlutenFree}/>
                 }
-                <Transition appear="bottom">
                     <DV2ScrollView
                         // List of ingredients in menuItem
                         style={{ flex: 1 }}
                         array={this.props.menuItem.data.ingredients}
                         render={(ingredient, i) => this.renderIngredients(ingredient, i)}
                     />
-                </Transition>
             </View>
         )
     }

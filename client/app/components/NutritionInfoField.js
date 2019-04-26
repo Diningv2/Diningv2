@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import styles from '../config/styles';
 
+/**
+ * A two-column text field used for Nutrition Info
+ * TODO: Possible name change to <TwoColumnTextField />
+ * since it could be used for other things besides
+ * just nutrition info
+ */
 export default class NutritionInfoField extends Component {
     render() {
         return (

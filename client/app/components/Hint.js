@@ -2,6 +2,10 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import styles from '../config/styles';
 
+/**
+ * Stylized text component useful for displaying
+ * small helper/tooltip/hint messages on screen
+ */
 const Hint = (props) => {
     const textStyle = {
         textAlign: 'center',

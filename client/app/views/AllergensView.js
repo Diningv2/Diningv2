@@ -13,7 +13,10 @@ import restrictions from '../config/allRestrictions';
 import TopTabs from '../components/TopTabs';
 import { post } from '../lib/api-utility';
 
-// Allows user to filter out allergens. 
+/** 
+ * View that allows users to select their
+ * allergen preferences
+ * */
 class AllergensView extends Component {
 
     constructor(props) {

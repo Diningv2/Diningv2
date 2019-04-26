@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 import connectToRedux from '../redux/lib/connectToRedux';
-import sp from '../redux/lib/stateProperties';
-
 import styles, { colors } from '../config/styles';
 
+/**
+ * General top tab component
+ * Takes in an array of TabBut
+ */
 class TopTabs extends Component {
 
     constructor(props) {
@@ -18,7 +20,9 @@ class TopTabs extends Component {
     };
     relativeWidth = () => (100 / this.props.tabButtons.length) + '%';
 
-    // Background and text colors change depending on if tab is selected
+    /** 
+     * Background and text colors change depending on if tab is selected
+     * */
     bgColor = (tabButton) => { return (tabButton.tabName == this.state.current.tabName) ? colors.primary : colors.secondary };
     textColor = (tabButton) => { return (tabButton.tabName == this.state.current.tabName) ? colors.secondary : colors.primary };
 
@@ -45,6 +49,8 @@ class TopTabs extends Component {
                                 }}
                                 onPress={() => {
                                     // Only perform function when a different tab is selected 
+                                    // (i.e. do not run the function again if that tab is already
+                                    // selected)
                                     if (this.state.current.tabName != tabButton.tabName) {
                                         tabButton.function();
                                         this.setState({ current: tabButton });
@@ -81,4 +87,4 @@ const tabStyles = StyleSheet.create({
     }
 })
 
-export default connectToRedux(TopTabs, [sp.nav]);
+export default connectToRedux(TopTabs, []);

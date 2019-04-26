@@ -9,7 +9,7 @@ import styles from '../../config/styles';
 import connectToRedux from '../../redux/lib/connectToRedux';
 import sp from '../../redux/lib/stateProperties';
 
-// Renders JSX with content for "Served Today" favorites tab
+/** Renders JSX with content for "Served Today" favorites tab */
 class FavoritesListServedToday extends React.Component {
 
     constructor(props) {
@@ -31,7 +31,7 @@ class FavoritesListServedToday extends React.Component {
         ),
     }
 
-    // On mount, set state with list of favorites being served today
+    /** On mount, set state with list of favorites being served today */
     componentDidMount() {
         const { data } = this.props.favoritesList;
         const servedTodayArray = Object.keys(data)
@@ -39,7 +39,7 @@ class FavoritesListServedToday extends React.Component {
         this.setState({ servedTodayArray });
     }
 
-    // Returns card for a dish in the ScrollView as identified by dishID
+    /** Returns card for a dish in the ScrollView as identified by dishID */
     renderFavesList = (dishID) => {
         const dish = this.props.favoritesList.data[dishID];
         return (
@@ -55,8 +55,8 @@ class FavoritesListServedToday extends React.Component {
         );
     }
 
-    // Render list of favorite dishes served today (if any)
-    // Display a "no favorites visible" prompt
+    /** Render list of favorite dishes served today (if any)
+    Display a "no favorites visible" prompt */
     render() {
         if (this.state.servedTodayArray.length == 0) {
             return (

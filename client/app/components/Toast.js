@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import styles from '../config/styles';
 
+/**
+ * Toast component to display notifications
+ * when push notifications arrive while
+ * the app is open
+ */
 export const Toast = (props) => {
 
     containerStyle = {
@@ -39,8 +44,6 @@ export const Toast = (props) => {
             ...styles.font.type.primaryRegular,
         }
     }
-
-
 
     return (
         <View style={containerStyle}>

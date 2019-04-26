@@ -6,8 +6,6 @@
  * so you can use it when you call connectWithRedux()
  * */
 export default stateProperties = {
-    incrementingValues: 'incrementingValues', // TODO: Delete, just used for getting started with Redux
-    applicationState: 'applicationState',     // TODO: Delete, just used for getting started with Redux
     nav: 'nav',
     diningHallsList: 'diningHallsList',
     menusList: 'menusList',

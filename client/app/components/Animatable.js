@@ -1,3 +1,8 @@
+/** 
+ * Library of animated component containers
+ * to wrap around components in our app!
+ */
+
 import React from 'react';
 import posed, { Transition } from 'react-native-pose';
 
@@ -33,6 +38,14 @@ export const ScaleInOut = posed.View({
     props: { i: 0 }
 });
 
+/**
+ * You can wrap this component around
+ * any component in your app to have it
+ * animate in on mount
+ * Its animation delay is specified by
+ * the index prop value passed in
+ * (useful for staggering animations)
+ */
 export class AnimatedListItem extends React.Component {
     constructor(props) {
         super(props);

@@ -5,6 +5,11 @@ import sp from '../redux/lib/stateProperties';
 import { formatArrayAsString } from '../lib/string-utility';
 import formattedMealTypes from '../config/formattedMealTypes';
 
+/**
+ * Takes in a favoriteDish object and displays
+ * the list of meals it is being served for
+ * and at which dining halls/locations
+ */
 class FavoriteServedTodayCard extends React.Component {
 
     constructor(props) {
