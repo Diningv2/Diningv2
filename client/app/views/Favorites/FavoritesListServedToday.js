@@ -9,7 +9,7 @@ import styles from '../../config/styles';
 import connectToRedux from '../../redux/lib/connectToRedux';
 import sp from '../../redux/lib/stateProperties';
 
-// Renders JSX with content for "Served Today" favorites tab
+/** Renders JSX with content for "Served Today" favorites tab */
 class FavoritesListServedToday extends React.Component {
 
     constructor(props) {
@@ -23,7 +23,7 @@ class FavoritesListServedToday extends React.Component {
     prompts = {
         favoritesNotYetVisible: (
             "It looks like you have some favorites, but you won't see them " 
-            + "until our servers figure out where they're being served!"
+            + "until our servers figure out whether they're being served!"
         ),
         hint: (
             "(Keep in mind, if you favorite something in the middle of the "
@@ -31,7 +31,7 @@ class FavoritesListServedToday extends React.Component {
         ),
     }
 
-    // On mount, set state with list of favorites being served today
+    /** On mount, set state with list of favorites being served today */
     componentDidMount() {
         const { data } = this.props.favoritesList;
         const servedTodayArray = Object.keys(data)
@@ -39,7 +39,7 @@ class FavoritesListServedToday extends React.Component {
         this.setState({ servedTodayArray });
     }
 
-    // Returns card for a dish in the ScrollView as identified by dishID
+    /** Returns card for a dish in the ScrollView as identified by dishID */
     renderFavesList = (dishID) => {
         const dish = this.props.favoritesList.data[dishID];
         return (
@@ -50,12 +50,13 @@ class FavoritesListServedToday extends React.Component {
                             <FavoriteServedTodayCard favoriteDish={dish} />
                         </View>
                     </AnimatedListItem>
-
                 }
             </View>
         );
     }
 
+    /** Render list of favorite dishes served today (if any)
+    Display a "no favorites visible" prompt */
     render() {
         if (this.state.servedTodayArray.length == 0) {
             return (

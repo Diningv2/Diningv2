@@ -1,5 +1,5 @@
-// Given an array ["Chris", "Sanat", "Zeb"]
-// will output "Chris, Sanat, and Zeb"
+/** Given an array ["Chris", "Sanat", "Zeb"]
+will output "Chris, Sanat, and Zeb" */
 export const formatArrayAsString = (array) => {
     // Our final string
     let resultString = "";

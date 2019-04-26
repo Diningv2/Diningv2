@@ -25,7 +25,7 @@ class HomeView extends Component {
         setTimeout(() => this.props.navigation.navigate('DiningHallsView'), 50);
     }
 
-    // On mount, set Redux state with user's faves and filters, & get Dhall info
+    // On mount, set Redux state with user's faves and filters, & get dining hall info
     componentDidMount() {
         const expoToken = this.props.userInformation.notificationID;
         this.props.getFavorites(expoToken);
@@ -36,15 +36,16 @@ class HomeView extends Component {
         }
     }
 
-    // When ready with Dhall info, go to DHallView
+    // When Redux is ready with dining hall info, go to DiningHallsView
     componentDidUpdate() {
         if (this.props.diningHallsList && !this.props.diningHallsList.isLoading) {
             this.props.navigation.navigate('DiningHallsView')
         }
     }
 
+    // Render just a loading indicator
+    // TODO: Decide whether we want the old splash screen back
     render() {
-        // Splash screen - logo with button to navigate to DiningHallsView
         return (
             <View style={splashScreenStyles.container}>
                 {/* <View>

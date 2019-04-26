@@ -9,7 +9,7 @@ import AllergenList from '../components/AllergenList';
 import Ingredients from '../components/Ingredients';
 import TopTabs from '../components/TopTabs';
 
-// Shows page with details about a menu item (nutrition, allergens, ingredients)
+/** Shows page with details about a menu item (nutrition, allergens, ingredients) */
 class MenuItemView extends Component {
 
     constructor(props) {
@@ -20,7 +20,7 @@ class MenuItemView extends Component {
         selectedTabName: 'Nutrition'
     };
 
-    // Functions for toptabs. Clicking a tab navigates to its page.
+    /** Functions for toptabs. Clicking a tab navigates to its page. */
     setNutrition = () => this.setState({ selectedTabName: 'Nutrition' });
     setAllergens = () => this.setState({ selectedTabName: 'Allergens' });
     setIngredients = () => this.setState({ selectedTabName: 'Ingredients' });

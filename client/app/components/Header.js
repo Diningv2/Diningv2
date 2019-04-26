@@ -8,6 +8,9 @@ import sp from '../redux/lib/stateProperties';
 
 import styles from '../config/styles';
 
+/**
+ * Custom header component with go-back functionality
+ */
 class Header extends Component {
 
     constructor(props) {

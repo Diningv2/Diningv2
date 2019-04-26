@@ -1,3 +1,13 @@
+/**
+ * Source of truth for styling in Dining*v2
+ * Holds the fonts and colors we use that
+ * theme the app correctly.
+ * 
+ * Almost all components take advantage
+ * of the constants below, so theming
+ * should be uniform throughout the app.
+ */
+
 import { StyleSheet } from "react-native";
 import RF from 'react-native-responsive-fontsize';
 
@@ -20,13 +30,14 @@ const fonts = {
 };
 
 export const colors = {
-    primary: "#4a86e8",
-    secondary: "#fff",
-    tertiary: "#000",
-    heart: "#ff6666"
+    primary: "#4a86e8",  // a nice blue
+    secondary: "#fff",   // white
+    tertiary: "#000",    // black
+    heart: "#ff6666"     // a nice pink ;)
 };
 
 const spacingSizes = {
+    tiny: 5,
     small: 10,
     medium: 20
 };
@@ -75,22 +86,22 @@ export default (styles = {
     },
     container: StyleSheet.create({
         withPadding: {
-            margin: 20
+            margin: spacingSizes.medium
         },
         withPaddingSmall: {
             margin: spacingSizes.small
         },
         withPaddingTop: {
-            paddingTop: 5
+            paddingTop: spacingSizes.tiny,
         },
         withPaddingBottom: {
-            paddingBottom: 5
+            paddingBottom: spacingSizes.tiny,
         },
         dropShadowLarge: {
             shadowColor: "#000",
             shadowOffset: {
                 width: 0,
-                height: 5
+                height: spacingSizes.tiny,
             },
             shadowOpacity: 0.16,
             shadowRadius: 6.68,
@@ -112,13 +123,13 @@ export default (styles = {
             backgroundColor: colors.primary
         },
         spaceAbove: {
-            marginTop: 20
+            marginTop: spacingSizes.medium
         },
         spaceBelowSmall: {
             marginBottom: RF(2),
         },
         spaceBelow: {
-            marginBottom: 20
+            marginBottom: spacingSizes.medium
         },
         flexRow: {
             flexWrap: "wrap",
@@ -162,7 +173,7 @@ export const card = {
         backgroundColor: colors.secondary,
         borderWidth: 1,
         borderColor: colors.primary,
-        borderRadius: 20,
-        paddingHorizontal: 10,
+        borderRadius: spacingSizes.medium,
+        paddingHorizontal: spacingSizes.small,
         paddingVertical: 15
 }

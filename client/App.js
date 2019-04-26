@@ -63,6 +63,12 @@ function configureStore(initialState) {
 
 const store = configureStore({});
 
+/**
+ * Top-level app component will hold our entire navigation stack
+ * and any overlaying components (Toast, Alerts, etc.)
+ * It will also plug in the Redux store for use throughout
+ * the rest of our app!
+ */
 export default class App extends React.Component {
 
   state = {
@@ -77,9 +83,6 @@ export default class App extends React.Component {
       })
       await Font.loadAsync({
         'Comfortaa Bold': require('./assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
-      })
-      await Font.loadAsync({
-        'SF Pro Text Bold': require('./assets/fonts/SFProText/SF-Pro-Text-Bold.ttf'),
       })
   }
 
@@ -105,15 +108,20 @@ export default class App extends React.Component {
     this.setState({ appHasLoaded: true });
   }
 
-  // Callback to run when we observe a new
-  // push notification
+  /** Callback to run when we observe a new
+   * push notification.
+   * - Setting the state of notification will
+   * force the Toast component to become visible
+   * */
   handleNotification = (notification) => {
     this.setState({ notification });
   };
 
-  // Renders the notification component
-  // with the proper notification data
-  // If no notification data is passed in, render nothing.
+  /** 
+   * Renders the notification component
+   * with the proper notification data
+   * If no notification data is passed in, render nothing.
+   * */
   NotificationContainer = () => {
     if (!this.state.notification.data) return null;
     const { title, message } = this.state.notification.data;
@@ -124,6 +132,13 @@ export default class App extends React.Component {
     )
   }
 
+  /**
+   * Renders the entire app.
+   * - Holds a router with our navigation stack
+   * - Contains a Toast component for displaying in-app
+   * notifications above the entire app, no matter where
+   * we are in the app.
+   * */
   render() {
     const { NotificationContainer } = this;
     return (

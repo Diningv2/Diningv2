@@ -11,7 +11,11 @@ import FavoritesListAll from './FavoritesListAll';
 import FavoritesListServedToday from './FavoritesListServedToday';
 import styles from '../../config/styles';
 
-// Controls the top tabs for Favorites bottom tab
+/** Master view for the Favorites View
+ * Displays the "Served Today" favorites view
+ * or the "All Favorites" view based on the
+ * selected top tab
+ */
 class MainView extends Component {
 
     constructor(props) {

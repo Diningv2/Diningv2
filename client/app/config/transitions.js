@@ -1,9 +1,12 @@
 import { Animated, Easing } from 'react-native';
 
+/** Transition configuration for the StackNavigator
+ * Slides the views to the left on page transition
+ */
 const transitionConfig = () => {
     return {
       transitionSpec: {
-        duration: 300, // Transition is "instant"
+        duration: 300,
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing,
         useNativeDriver: true,

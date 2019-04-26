@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity, Animated } from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
-
-import connectToRedux from '../redux/lib/connectToRedux';
-import sp from '../redux/lib/stateProperties';
 
 import styles from '../config/styles';
 
 export class Searchbar extends Component {
     state = { searchTerm: "", height: 0 };
 
-    // Sets the local state of text input to be the search term
+    /** 
+     * Sets the local state of text input to be the search term
+     * */
     setSearchTerm = (searchTerm) => {
         this.setState({searchTerm}, () => { // setState is actually async and needs to run these functions
                                             // only on the new state!
@@ -75,4 +74,4 @@ export class Searchbar extends Component {
     }
 }
 
-export default connectToRedux(Searchbar, []);
+export default Searchbar;
