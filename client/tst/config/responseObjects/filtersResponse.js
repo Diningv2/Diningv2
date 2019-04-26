@@ -1,5 +1,4 @@
 export const filtersResponse =  {
-
       "alcohol": false,
       "dairy": false,
       "eggs": false,
