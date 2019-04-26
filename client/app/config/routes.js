@@ -2,7 +2,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import { colors } from './styles';
 import transitionConfig from './transitions';
-import NewBottomTabs from '../components/BottomTabs';
+import BottomTabs from '../components/BottomTabs';
 
 import HomeView from '../views/HomeView';
 import DiningHallsView from '../views/DiningHallsView';
@@ -54,7 +54,7 @@ const generalConfig = {
  * bottom tabs
  */
 const tabBarConfig = {
-    tabBarComponent: NewBottomTabs,
+    tabBarComponent: BottomTabs,
     tabBarOptions: {
         activeTintColor: colors.secondary,
         inactiveTintColor: 'rgba(255, 255, 255, 0.3)',
