@@ -18,9 +18,7 @@ import { MENUS_URI, E_NO_API_RES, YD_VERSION } from "../../config/constants";
  */
 
 export default async function getHours(location, offset) {
-    // Log output for checking if we missed cache
-    console.log("ENTERED GET_HOURS");
-
+    
     // Make API call to MENUS uri
     const endpoint = MENUS_URI + queryBuilder({ version: YD_VERSION, location });
     const response = await axios.get(endpoint);

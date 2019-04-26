@@ -25,14 +25,10 @@ export default async function processLocations(data, query) {
 
     // Get firebase doc, checking for errors
     let hoursDoc = undefined;
-    try{
+    try {
         hoursDoc = await firestore.doc("locations/hours").get();
     } catch (e) {
         throw new Error(constants.E_DB_READ);
-    }
-
-    if (!hoursDoc.exists) {
-        throw new Error(constants.E_DB_NOENT + "locations/hours");
     }
 
     // Process based on single location, or multi locations in query

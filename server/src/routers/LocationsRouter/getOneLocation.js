@@ -27,18 +27,18 @@ export default async function getOneLocation(data, query, hoursDoc) {
 
         // Use cache when possible
         try {
-            todayHours= hoursDoc && 
+            todayHours = hoursDoc && 
                         hoursDoc.data() && 
                         hoursDoc.data()[locations[query.location]] &&
                         hoursDoc.data()[locations[query.location]]["todayHours"]
                             ? hoursDoc.data()[locations[query.location]]["todayHours"]
                             : await getHours(query.location, 0);
-            tomorrowHours= hoursDoc && 
+            tomorrowHours = hoursDoc && 
                         hoursDoc.data() && 
                         hoursDoc.data()[locations[query.location]] &&
                         hoursDoc.data()[locations[query.location]]["tomorrowHours"]
                             ? hoursDoc.data()[locations[query.location]]["tomorrowHours"]
-                            : await getHours(query.location, 0);
+                            : await getHours(query.location, 1);
 
         } catch (e) {
             console.error(e);

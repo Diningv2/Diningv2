@@ -15,7 +15,7 @@ import { E_DB_WRITE, E_NO_API_RES } from "../../../config/constants";
  */
 
 export default async function cacheHours() {
-	var hours = undefined;
+    var hours = undefined;
     try {
         hours = await getAllHours();
     } catch (e) {
@@ -25,10 +25,10 @@ export default async function cacheHours() {
 
     try {
         hours &&
-            (await firestore
-                .doc("locations/hours")
-                .set(hours));
+        (await firestore
+            .doc("locations/hours")
+            .set(hours));
     } catch (e) {
-        console.error(E_DB_WRITE + e);
+        console.error(`${E_DB_WRITE}: ${e}`);
     }
 }

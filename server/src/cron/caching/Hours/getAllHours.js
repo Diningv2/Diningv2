@@ -23,7 +23,7 @@ export default async function getHoursToday() {
     const today = dateBuilder(0);
     const currentDate = new Date();
     const timestamp = currentDate.toDateString();
-    var completeHoursList ={};
+    var completeHoursList = {};
 
     for (let location in locations) {
         // Make one api call per dhall to MENUS endpoint
@@ -32,7 +32,7 @@ export default async function getHoursToday() {
         const data = response.data;
 
         // The offset specifies the today/tomorrow cases
-        for (let offset of offsets){
+        for (let offset of offsets) {
             
             // Build the date
             const date = dateBuilder(offset);

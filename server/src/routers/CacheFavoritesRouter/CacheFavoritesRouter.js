@@ -12,11 +12,7 @@ router.get("/", async (req, res) => {
         res.send("Caching today's menuitems...").status(200);
     } catch (e) {
         console.error(e);
-        if (e.message == E_BAD_MENU_REQ) {
-            res.send(e).status(400);
-        } else {
-            res.send(e).status(500);
-        }
+        res.send(e).status(500);
     }
 });
 
