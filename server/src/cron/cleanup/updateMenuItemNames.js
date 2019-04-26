@@ -8,20 +8,24 @@ export default async function updateMenuItemNames() {
     try {
         menusDoc = await firestore.doc("menus/menuItems").get();
     } catch (e) {
-        throw new Error(constants.E_DB_READ + e);
+        throw new Error(`${constants.E_DB_READ}: ${e}`);
     }
-    
+
     if (!menusDoc.exists) {
-        throw new Error(constants.E_DB_NOENT + "menus/menuItems");
+        throw new Error(`${constants.E_DB_NOENT}: menus/menuItems`);
     }
 
     Object.keys(menusDoc.data()).map(async menuItemId => {
         var apiName = undefined;
         try {
             apiName = await getMenuItemName(menuItemId);
-            if (apiName && menusDoc.data()[menuItemId] != apiName){
-                console.log(`Cleaned Up: ${menusDoc.data()[menuItemId]} to ${apiName}`);
-                firestore.doc("menus/menuItems").update({[menuItemId]: apiName});
+            if (apiName && menusDoc.data()[menuItemId] != apiName) {
+                console.log(
+                    `Cleaned Up: ${menusDoc.data()[menuItemId]} to ${apiName}`
+                );
+                firestore
+                    .doc("menus/menuItems")
+                    .update({ [menuItemId]: apiName });
             }
         } catch (e) {
             console.log(e);

@@ -8,10 +8,10 @@ export default async function rolloverCache() {
     try {
         tomorrowDoc = await firestore.doc("menus/tomorrow").get();
     } catch (e) {
-        throw new Error(E_DB_READ + e);
+        throw new Error(`${E_DB_READ}: ${e}`);
     }
     if (!tomorrowDoc.exists) {
-        throw new Error(E_DB_NOENT + "menus/tomorrow");
+        throw new Error(`${E_DB_NOENT}: menus/tomorrow`);
     }
     try {
         const date = new Date();

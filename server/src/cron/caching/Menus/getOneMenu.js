@@ -18,7 +18,7 @@ export default async function getOneMenu(location) {
         console.error(`${E_NO_API_RES}: ${locations[location]}`);
         return undefined;
     }
-    console.log(`Populating ${locations[location]}...`);
+    console.log(`Fetching ${locations[location]}...`);
     const today = dateBuilder(0);
     const tomorrow = dateBuilder(1);
     var menus = {};
@@ -42,6 +42,6 @@ export default async function getOneMenu(location) {
             )
         );
     }
-    console.log(`Populated ${locations[location]}.`);
+    console.log(`Fetched ${locations[location]}.`);
     return menus;
 }

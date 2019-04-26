@@ -7,10 +7,10 @@ export default async function getPreferences(token) {
     try {
         preferencesDoc = await firestore.doc("preferences/users").get();
     } catch (e) {
-        throw new Error(constants.E_DB_READ + e);
+        throw new Error(`${constants.E_DB_READ}: ${e}`);
     }
     if (!preferencesDoc.exists) {
-        throw new Error(constants.E_DB_NOENT + "preferences/users");
+        throw new Error(`${constants.E_DB_NOENT}: preferences/users`);
     } else if (!token) {
         throw new Error(constants.E_BAD_PREF_GET_REQ);
     }
