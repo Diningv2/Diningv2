@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
+import { View, Text } from 'react-native';
 
 import connectToRedux from '../redux/lib/connectToRedux';
-import { search } from '../lib/search-utility';
+import sp from '../redux/lib/stateProperties';
+import { search } from '../lib/search-utility'; // We took out the search bar for now due to interesting search results
 
 import { DV2ScrollView } from '../components/DV2ScrollView';
-import BottomTabs from '../components/BottomTabs';
 import CenterTextView from '../components/CenterTextView';
 import Dish from '../components/Dish';
 import Header from '../components/Header';
@@ -16,6 +16,7 @@ import formattedMealTypes from '../config/formattedMealTypes';
 import { AnimatedListItem } from '../components/Animatable';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 
+/** Renders the menu for a given DHall, with today/tomorrow and meal top tabs */
 class MenuView extends Component {
 
     constructor(props) {
@@ -31,27 +32,30 @@ class MenuView extends Component {
         meal: ''
     }
 
-    // We need to call performSearch with the new
-    // search term when a top tab is pressed,
-    // so we need to keep a local state of the search term
+    /** Need to call performSearch with the new search term when a top tab is 
+    pressed, so we need to keep a local state of the search  */
     updateSearchTerm = (searchTerm) => {
         this.setState({ searchTerm: searchTerm });
     }
 
+    /** Calls on the search utility to perform a search of
+     * the meals array and sets a newly-filtered meal array
+     * given the search term
+     */
     performSearch = (searchTerm) => {
-        // If the search term is empty
-        // just output everything
+        // If the search term is empty, just output everything
         if (searchTerm.trim() == "") {
             this.setState({
                 mealArrayFiltered: this.state.mealArray
-            })
-            // Otherwise do an actual search on the array
-        } else {
+            });
+        } else { // Otherwise do an actual search on the array
             const mealArrayFiltered = search(searchTerm, this.state.mealArray, ['name']);
             this.setState({ mealArrayFiltered });
         }
     }
 
+    /** Generates the message for the hours that dining hall
+    is open for the given meal type */
     generateHoursMessage = (mealType) => {
         const name = this.props.menusList.data.location;
         const location = this.props.diningHallsList.dataObject[name];    
@@ -65,7 +69,9 @@ class MenuView extends Component {
         return `open from ${openingTime} to ${closingTime}` + ((transferTime && ` (transfers at ${transferTime})`) || "");
     }
 
-    // Functions for day tabs
+    /** Initializes the buttons on the Today/Tomorrow top tabs
+    and the corresponding functions when you press
+    the buttons on top tabs */
     dayTabButtons = () => {
 
         const dayTypes = ["today", "tomorrow"];
@@ -82,6 +88,8 @@ class MenuView extends Component {
                     this.setState({ isLoading: true });
 
                     // Run after 200ms to let tab change colors immediately
+                    // Introducing async will let the view finish rendering
+                    // before executing this
                     setTimeout(() => {
                         this.setState({
                             selectedDay: formatted[dayType],
@@ -94,12 +102,12 @@ class MenuView extends Component {
                     }, 500)
                 }
             }
-        })
+        });
         return tabs;
     }
 
-    // Dynamically sets the header text based on
-    // the success and fail conditions of this page load
+    /** Dynamically sets the header text based on
+    the success and fail conditions of this page load */
     setHeaderText = (successCondition, failCondition) => {
         if (successCondition) {
             const diningHallName = this.props.menusList.data.location;
@@ -112,7 +120,9 @@ class MenuView extends Component {
         return "Loading...";
     }
 
-    // Dynamically set the number, size, and title of tab buttons
+    /** Dynamically sets the buttons on the Breakfast/Lunch/Dinner top tabs
+    // and the corresponding functions when you press
+    // the tabs' buttons */
     dynamicTabButtons = () => {
         const menu = this.props.menusList.data;
         const day = this.state.selectedDay == 'Today' ? menu.today : menu.tomorrow;
@@ -147,11 +157,15 @@ class MenuView extends Component {
                     }, 500);
                 }
             }
-        })
+        });
 
         return tabButtons;
     }
 
+    /** Renders the menu view with top tabs delineating Today/Tomorrow
+     * Breakfast/Lunch/Dinner and then the corresponding menu items for each
+     * meal and day.
+     */
     render() {
         const { menusList } = this.props;
         const hasLoadedSuccessfully = !menusList.isLoading && !menusList.hasError;
@@ -198,7 +212,7 @@ class MenuView extends Component {
                     </View>
                 }
             </View>
-        )
+        );
     }
 
     formatted = {
@@ -215,10 +229,9 @@ class MenuView extends Component {
         Gluten: "gluten"
     }
 
+    /** Check user filter preferences vs dish's allergens */
     isFiltered = (dish) => {
-        // Check user filter preferences vs dish's allergens
         const filters = this.props.filtersList.data;
-        console.log(filters);
         if (filters.Vegetarian && !dish.isVegetarian) {
             return true;
         }
@@ -238,12 +251,12 @@ class MenuView extends Component {
         return false;
     }
 
-    // Shows the meal tabs if there are any available, otherwise shows nothing.
+    /** Shows the meal tabs if there are any available, otherwise shows nothing. */
     renderDynamicTabs() {
         const tabs = this.dynamicTabButtons();
         return (tabs.length == 0 
             ? (
-                <View style={{...styles.container.withPaddingBottom}}></View>
+                <View style={{...styles.container.withPaddingBottom}} />
             ) : (
                 <View style={{
                     paddingTop: 2, 
@@ -255,10 +268,12 @@ class MenuView extends Component {
         );
     }
 
+    /** Renders a given dish in the ScrollView
+     * (The index variable is used to modulate the
+     * delay time on the AnimatedListItem component)
+     */
     renderMenu = (dish, index) => {
-        // render function needed by dv2scrollview
         const filtered = this.isFiltered(dish);
-        console.log("TRY1.1 " + dish.name + " filtered? " + filtered);
         return (
             <AnimatedListItem key={dish.name} index={index}>
                 <Dish key={dish.name} dish={dish} filtered={filtered}/>
@@ -267,4 +282,4 @@ class MenuView extends Component {
     }
 }
 
-export default connectToRedux(MenuView, ['menusList', 'diningHallsList', 'filtersList']);
+export default connectToRedux(MenuView, [sp.menusList, sp.diningHallsList, sp.filtersList]);

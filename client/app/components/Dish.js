@@ -10,6 +10,10 @@ import styles, { colors, card } from '../config/styles';
 import { post } from '../lib/api-utility';
 import { ScaleInOut } from './Animatable';
 
+/**
+ * Displays a dish's name along with a heart
+ * to favorite the dish on your account.
+ */
 export class Dish extends Component {
 
     constructor(props) {

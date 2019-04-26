@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, Switch } from 'react-native';
-import { Transition } from 'react-navigation-fluid-transitions';
 
 import styles from '../config/styles';
 
@@ -11,17 +10,19 @@ import Header from '../components/Header';
 import filters from '../config/allFilters';
 import allergens from '../config/allAllergens';
 import restrictions from '../config/allRestrictions';
-import BottomTabs from '../components/BottomTabs';
 import TopTabs from '../components/TopTabs';
 import { post } from '../lib/api-utility';
 
-
-
+/** 
+ * View that allows users to select their
+ * allergen preferences
+ * */
 class AllergensView extends Component {
 
     constructor(props) {
         super(props);
     }
+
     formatted = {
         Alcohol: "alcohol",
         Nuts: "nuts",
@@ -36,8 +37,9 @@ class AllergensView extends Component {
         Gluten: "gluten"
     }
 
+    // State keeps track of which tab user is on
     state = {
-        selectedTabName: 'Dietary Restrictions'
+        selectedTabName: 'Dietary Restrictions' // starting tab
     };
 
     // functions for top tabs
@@ -53,9 +55,7 @@ class AllergensView extends Component {
         {
             tabName: 'Allergies',
             function: this.setAllergies
-        }
-        
-        
+        },
     ]
    
     render() {
@@ -88,9 +88,8 @@ class AllergensView extends Component {
         )
     }
 
-
+    // Renders the JSX for a given allergen
     renderAllergen = (allergen) => {
-        
         return (
             // One allergen name and one switch per row
             <View 
@@ -120,7 +119,6 @@ class AllergensView extends Component {
         );
     }
 
-
     // Toggles allergen and updates the database
     OnSwitch = async (value, allergen) => {
         const token = this.props.userInformation.notificationID;
@@ -142,10 +140,8 @@ class AllergensView extends Component {
         } catch (e) {
             console.error("Filter add/remove error", e.message);
         }
-
-        
-
     }
+
 }
 
 export default connectToRedux(AllergensView, ['userInformation', 'filtersList']);

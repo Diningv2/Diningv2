@@ -1,6 +1,9 @@
 import { Permissions, Notifications } from 'expo';
-import { dispatch } from 'redux';
 
+/**
+ * Function taken from Expo's website for push notification
+ * registration. This will prompt the user to allow push notifications!
+ * */
 export default async function registerForPushNotificationsAsync() {
   const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
   let finalStatus = existingStatus;
@@ -13,7 +16,7 @@ export default async function registerForPushNotificationsAsync() {
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     finalStatus = status;
   }
-  console.log('Final Status: '+finalStatus);
+
   // Stop here if the user did not grant permissions
   if (finalStatus !== 'granted') {
     return undefined;

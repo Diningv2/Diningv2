@@ -4,6 +4,7 @@ export const docDataMap = {
 	"menus/menuItems": {"hi": "hello"},
 	"favorites/today": {"hi": "hello"},
 	"locations/hours": {"hi": "hello"},
+	"preferences/users": {"realToken": "real"}, 
 	"default": {"test" : "data"}, 
 };
 
@@ -14,6 +15,7 @@ export const docExistsMap = [
 		"menus/menuItems": true,
 		"favorites/today": true,
 		"locations/hours": true,
+		"preferences/users": true,
 		"default": true, 
 	},
 	{
@@ -22,6 +24,7 @@ export const docExistsMap = [
 		"menus/menuItems": true,
 		"favorites/today": true,
 		"locations/hours": true,
+		"preferences/users": false,
 		"default": true, 
 	},
 	{
@@ -30,6 +33,7 @@ export const docExistsMap = [
 		"menus/menuItems": true,
 		"favorites/today": true,
 		"locations/hours": true,
+		"preferences/users": true,
 		"default": true, 
 	},
 	{
@@ -38,6 +42,7 @@ export const docExistsMap = [
 		"menus/menuItems": false,
 		"favorites/today": true,
 		"locations/hours": true,
+		"preferences/users": true,
 		"default": true, 
 	},
 	{
@@ -46,6 +51,7 @@ export const docExistsMap = [
 		"menus/menuItems": true,
 		"favorites/today": false,
 		"locations/hours": true,
+		"preferences/users": true,
 		"default": true, 
 	},
 ];

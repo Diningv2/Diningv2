@@ -2,6 +2,11 @@ import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { colors } from '../config/styles';
 
+/**
+ * Stylistic activity indicator (loading spinner on Android and iOS)
+ * initialized with the theme colors of Dining*v2
+ * (unless a custom color is specified)
+ */
 export const LoadingIndicator = (props) => {
 
     const containerStyle = {

@@ -16,7 +16,7 @@ export default async function addPreference(token, preference) {
                   [token]: { ...emptyPreferences, [preference]: true }
               });
     } catch (e) {
-        throw new Error(E_DB_WRITE + e);
+        throw new Error(`${E_DB_WRITE}: ${e}`);
     }
 }
 

@@ -1,43 +1,32 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
-import { ActivityIndicator } from 'react-native';
-import { Transition } from 'react-navigation-fluid-transitions';
+import { TouchableOpacity, View } from 'react-native';
 
 import styles from '../config/styles';
-
 import connectToRedux from '../redux/lib/connectToRedux';
 
 import DiningHallItem from '../components/DiningHallItem';
 import { DV2ScrollView } from '../components/DV2ScrollView';
 import Header from '../components/Header';
 import dHallIDs from '../config/dHallIDs';
-import BottomTabs from '../components/BottomTabs';
-import CenterTextView from '../components/CenterTextView';
 import { AnimatedListItem } from '../components/Animatable';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 
+/** Shows list of dining halls with busyness */
 class DiningHallsView extends Component {
 
     constructor(props) {
         super(props);
     }
 
-    componentDidMount() {
-        // if not yet loaded, call redux action to get dhalls from yale's api
-        if (this.props.diningHallsList.isLoading) {
-            this.props.getAllDiningHallsInformation();
-        }
-    }
-
+    /** Renders a given dining hall + busyness meter in the ScrollView */
     renderDiningHall = (diningHall, index) => {
-        // render method needed by dv2scrollview
-        // DiningHallItem includes the name and busyness meter
         return (
             <AnimatedListItem key={index} index={index}>
                 <TouchableOpacity
                     key={diningHall.name}
                     onPress={() => {
-                        this.props.getMenus(dHallIDs[diningHall.name]); // Set redux state with menu for this dHall
+                        // Set redux state with menu for this dHall
+                        this.props.getMenus(dHallIDs[diningHall.name]); 
                         this.props.navigation.navigate('MenuView');
                     }}
                 >
@@ -51,6 +40,10 @@ class DiningHallsView extends Component {
         )
     }
 
+    /** Renders a list of dining halls, otherwise it will display
+     * the loading indicator if the dining halls list still happens
+     * to be loading
+     */
     render() {
         return (
             <View style={{ flex: 1 }}>
@@ -71,7 +64,7 @@ class DiningHallsView extends Component {
                     }
                 </View>
             </View>
-        )
+        );
     }
 }
 

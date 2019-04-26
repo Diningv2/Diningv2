@@ -1,5 +1,5 @@
 import express from "express";
-import getMenuIdInfo from "./getMenuIdInfo";
+import getMenuItemInfo from "./getMenuItemInfo";
 import { E_BAD_MENU_ITEM_REQ } from "../../config/constants";
 
 const router = express.Router();
@@ -7,8 +7,8 @@ export default router;
 
 router.get("/", async (req, res) => {
     try {
-        const menu = await getMenuIdInfo(req.query.menuitemid);
-        res.send(menu).status(200);
+        const menuItem = await getMenuItemInfo(req.query);
+        res.send(menuItem).status(200);
     } catch (e) {
         console.error(e);
         if (e.message == E_BAD_MENU_ITEM_REQ) {

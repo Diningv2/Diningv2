@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import styles, { colors, card } from '../config/styles';
 
+/**
+ * Card component to display title text, subtitle text,
+ * and caption text.
+ * (Primarily used for the favorite dishes component right now)
+ */
 export const ItemCard = (props) => {
 
     const containerStyle = {

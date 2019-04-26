@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 
 import connectToRedux from '../redux/lib/connectToRedux';
 
@@ -8,8 +8,8 @@ import NutritionInfo from '../components/NutritionInfo';
 import AllergenList from '../components/AllergenList';
 import Ingredients from '../components/Ingredients';
 import TopTabs from '../components/TopTabs';
-import BottomTabs from '../components/BottomTabs';
 
+/** Shows page with details about a menu item (nutrition, allergens, ingredients) */
 class MenuItemView extends Component {
 
     constructor(props) {
@@ -20,8 +20,7 @@ class MenuItemView extends Component {
         selectedTabName: 'Nutrition'
     };
 
-    // functions for toptabs
-    // clicking a tab navigates to its page
+    /** Functions for toptabs. Clicking a tab navigates to its page. */
     setNutrition = () => this.setState({ selectedTabName: 'Nutrition' });
     setAllergens = () => this.setState({ selectedTabName: 'Allergens' });
     setIngredients = () => this.setState({ selectedTabName: 'Ingredients' });

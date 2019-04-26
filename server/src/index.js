@@ -17,7 +17,9 @@ import updateMenuItemNames from "./cron/cleanup/updateMenuItemNames";
 import populateMenus from "./cron/caching/Menus/populateMenus";
 import rolloverCache from "./cron/cleanup/rolloverCache";
 import cacheFavorites from "./cron/caching/Favorites/cacheFavorites";
+import populateMenuItems from "./cron/caching/MenuItems/populateMenuItems";
 import cacheHours from "./cron/caching/Hours/cacheHours";
+
 
 
 const PORT = process.env.PORT || 5000;
@@ -53,6 +55,9 @@ cron.schedule("0 2 * * *", async () => updateMenuItemNames(), options);
 // Run every hour at the 2 minute mark
 cron.schedule("2 * * * *", async () => populateMenus(), options);
 
+// Run every hour at the 7 minute mark
+cron.schedule("7 * * * *", async () => populateMenuItems(), options);
+
 // Run at 12:01 am every day
 cron.schedule("1 0 * * *", async () => rolloverCache(), options);
 
@@ -60,4 +65,4 @@ cron.schedule("1 0 * * *", async () => rolloverCache(), options);
 cron.schedule("5 * * * *", async () => cacheFavorites(), options);
 
 // Run every hour at the 10 minute mark
-cron.schedule("5 * * * *", async () => cacheHours(), options);
+cron.schedule("10 * * * *", async () => cacheHours(), options);
